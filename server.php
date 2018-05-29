@@ -4,7 +4,11 @@
  * Laravel - A PHP Framework For Web Artisans
  *
  * @package  Laravel
+<<<<<<< HEAD
  * @author   Taylor Otwell <taylor@laravel.com>
+=======
+ * @author   Taylor Otwell <taylorotwell@gmail.com>
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
  */
 
 $uri = urldecode(

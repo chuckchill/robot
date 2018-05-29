@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "laravel/laravel",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
@@ -11,13 +12,34 @@
         "arcanedev/log-viewer": "4.1.0",
         "dingo/api": "1.0.x@dev",
         "tymon/jwt-auth": "1.0.*@dev"
+=======
+    "name": "gregoryduckworth/laravel-multi-auth",
+    "description": "Multi-Auth Template for Laravel 5.2.",
+    "keywords": ["laravel", "multi", "auth"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "5.2.*",
+        "prettus/l5-repository": "^2.6",
+        "laracasts/flash": "^2.0",
+        "league/fractal": "^0.16.0",
+        "barryvdh/laravel-debugbar": "^2.4"
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
+<<<<<<< HEAD
         "phpunit/phpunit": "~5.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*"
+=======
+        "phpunit/phpunit": "~4.0",
+        "symfony/css-selector": "2.8.*|3.0.*",
+        "symfony/dom-crawler": "2.8.*|3.0.*",
+        "zizaco/entrust": "5.2.x-dev"
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     },
     "autoload": {
         "classmap": [
@@ -34,21 +56,44 @@
     },
     "scripts": {
         "post-root-package-install": [
+<<<<<<< HEAD
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+=======
+            "php -r \"copy('.env.example', '.env');\""
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
         ],
         "post-install-cmd": [
+<<<<<<< HEAD
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+=======
+            "php artisan clear-compiled",
+            "php artisan optimize"
+        ],
+        "pre-update-cmd": [
+            "php artisan clear-compiled"
+        ],
+        "post-update-cmd": [
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
             "php artisan optimize"
         ]
     },
     "config": {
         "preferred-install": "dist"
+<<<<<<< HEAD
+=======
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     }
 }

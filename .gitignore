@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /node_modules
 /public/storage
 /vendor
@@ -5,3 +6,11 @@
 Homestead.json
 Homestead.yaml
 .env
+=======
+/vendor
+/node_modules
+Homestead.yaml
+Homestead.json
+.env
+/.idea
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a

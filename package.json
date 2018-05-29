@@ -1,5 +1,6 @@
 {
   "private": true,
+<<<<<<< HEAD
   "scripts": {
     "prod": "gulp --production",
     "dev": "gulp watch"
@@ -14,5 +15,13 @@
     "lodash": "^4.16.2",
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
+=======
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  },
+  "dependencies": {
+    "laravel-elixir": "^4.0.0",
+    "bootstrap-sass": "^3.0.0"
+>>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
   }
 }
