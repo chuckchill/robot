@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-<<<<<<< HEAD
 use App\Models\Admin\Permission;
 use Illuminate\Http\Request;
 
@@ -22,32 +21,12 @@ class RoleController extends Controller
         'permissions' => [],
     ];
 
-=======
-use Illuminate\Http\Request;
-use App\Http\Requests\RoleRequest;
-use App\Http\Requests\PermissionRequest;
-use App\Http\Controllers\Controller;
-use App\Repositories\Eloquent\RoleRepositoryEloquent as RoleRepository;
-use App\Repositories\Eloquent\PermissionRepositoryEloquent as PermissionRepository;
-
-class RoleController extends Controller
-{
-    public $role;
-    public $permission;
-    public function __construct(RoleRepository $roleRepository,PermissionRepository $permissionRepository)
-    {
-        $this->middleware('CheckPermission:role');
-        $this->role = $roleRepository;
-        $this->permission = $permissionRepository;
-    }
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -80,10 +59,6 @@ class RoleController extends Controller
             }
             return response()->json($data);
         }
-=======
-    public function index()
-    {
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
         return view('admin.role.index');
     }
 
@@ -94,7 +69,6 @@ class RoleController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
         $data = [];
         foreach ($this->fields as $field => $default) {
             $data[$field] = old($field, $default);
@@ -104,15 +78,10 @@ class RoleController extends Controller
             $data['permissionAll'][$v['cid']][] = $v;
         }
         return view('admin.role.create', $data);
-=======
-        $permission = $this->permission->all(['id','display_name']);
-        return view('admin.role.create',compact('permission'));
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     }
 
     /**
      * Store a newly created resource in storage.
-<<<<<<< HEAD
      *
      * @param RoleCreateRequest $request
      * @return \Illuminate\Http\Response
@@ -132,15 +101,6 @@ class RoleController extends Controller
         }
         event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}添加角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('添加成功！');
-=======
-     * @param Request PermissionRequest
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store(RoleRequest $request)
-    {
-        $this->role->createRole($request->all());
-        return redirect('admin/role');
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     }
 
     /**
@@ -162,7 +122,6 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
         $role = Role::find((int)$id);
         if (!$role) return redirect('/admin/role')->withErrors("找不到该角色!");
         $permissions = [];
@@ -181,15 +140,10 @@ class RoleController extends Controller
         }
         $data['id'] = (int)$id;
         return view('admin.role.edit', $data);
-=======
-        $data = $this->role->editViewData($id);
-        return view('admin.role.edit',compact('data'));
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     }
 
     /**
      * Update the specified resource in storage.
-<<<<<<< HEAD
      *
      * @param PermissionUpdateRequest|Request $request
      * @param  int $id
@@ -207,16 +161,6 @@ class RoleController extends Controller
         $role->permissions()->sync($request->get('permissions',[]));
         event(new \App\Events\userActionEvent(\App\Models\Admin\Role::class,$role->id,3,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}编辑角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('修改成功！');
-=======
-     * @param RoleRequest $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function update(RoleRequest $request, $id)
-    {
-        $this->role->updateRole($request->all(),$id);
-        return redirect('admin/role');
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     }
 
     /**
@@ -227,7 +171,6 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
         $role = Role::find((int)$id);
         foreach ($role->users as $v){
             $role->users()->detach($v);
@@ -246,14 +189,5 @@ class RoleController extends Controller
         event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,2,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}删除角色".$role->name."{".$role->id."}"));
         return redirect()->back()
             ->withSuccess("删除成功");
-=======
-
-    }
-
-    public function ajaxIndex(Request $request)
-    {
-        $result = $this->role->ajaxIndex($request);
-        return response()->json($result,JSON_UNESCAPED_UNICODE);
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     }
 }

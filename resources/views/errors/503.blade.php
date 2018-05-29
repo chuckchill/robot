@@ -17,11 +17,7 @@
                 color: #B0BEC5;
                 display: table;
                 font-weight: 100;
-<<<<<<< HEAD
                 font-family: 'Lato', sans-serif;
-=======
-                font-family: 'Lato';
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
             }
 
             .container {

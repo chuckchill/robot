@@ -2,15 +2,10 @@
 
 namespace App\Providers;
 
-<<<<<<< HEAD
 use App\Http\Requests\Request;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use League\Flysystem\Exception;
-=======
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,22 +18,14 @@ class AuthServiceProvider extends ServiceProvider
         'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
-<<<<<<< HEAD
 
     /**
      * Register any authentication / authorization services.
      *
-=======
-    /**
-     * Register any application authentication / authorization services.
-     *
-     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
      * @return void
      */
     public function boot(GateContract $gate)
     {
-<<<<<<< HEAD
         if (!empty($_SERVER['SCRIPT_NAME']) && strtolower($_SERVER['SCRIPT_NAME']) === 'artisan') {
             return false;
         }
@@ -59,10 +46,4 @@ class AuthServiceProvider extends ServiceProvider
     }
 
 
-=======
-        $this->registerPolicies($gate);
-
-        //
-    }
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 }

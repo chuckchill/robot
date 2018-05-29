@@ -29,7 +29,6 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-<<<<<<< HEAD
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
         'admin' => [
@@ -43,12 +42,6 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:60,1',
             'bindings',
-=======
-        ],
-
-        'api' => [
-            'throttle:60,1',
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
         ],
     ];
 
@@ -61,7 +54,6 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-<<<<<<< HEAD
        // 'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -71,22 +63,5 @@ class Kernel extends HttpKernel
 
         'authAdmin' => \App\Http\Middleware\AuthenticateAdmin::class,
         'menu'=>\App\Http\Middleware\GetMenu::class,
-=======
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-
-        /**
-         * RBAC
-         */
-        'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
-        'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
-        'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
-
-        /**
-         * 检查权限
-         */
-        'CheckPermission' => \App\Http\Middleware\CheckPermission::class,
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     ];
 }

@@ -4,7 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-<<<<<<< HEAD
     | Application Name
     |--------------------------------------------------------------------------
     |
@@ -17,8 +16,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-=======
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     | Application Environment
     |--------------------------------------------------------------------------
     |
@@ -26,11 +23,7 @@ return [
     | running in. This may determine how you prefer to configure various
     | services your application utilizes. Set this in your ".env" file.
     |
-<<<<<<< HEAD
     */
-=======
-     */
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     'env' => env('APP_ENV', 'production'),
 
@@ -43,11 +36,7 @@ return [
     | stack traces will be shown on every error that occurs within your
     | application. If disabled, a simple generic error page is shown.
     |
-<<<<<<< HEAD
     */
-=======
-     */
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     'debug' => env('APP_DEBUG', false),
 
@@ -60,15 +49,9 @@ return [
     | the Artisan command line tool. You should set this to the root of
     | your application so that it is used when running Artisan tasks.
     |
-<<<<<<< HEAD
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-=======
-     */
-
-    'url' => 'http://my.zhanghaobao.com/',
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     /*
     |--------------------------------------------------------------------------
@@ -79,15 +62,9 @@ return [
     | will be used by the PHP date and date-time functions. We have gone
     | ahead and set this to a sensible default for you out of the box.
     |
-<<<<<<< HEAD
     */
 
     'timezone' => 'Asia/Shanghai',
-=======
-     */
-
-    'timezone' => 'Asia/ShangHai',
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     /*
     |--------------------------------------------------------------------------
@@ -98,15 +75,9 @@ return [
     | by the translation service provider. You are free to set this value
     | to any of the locales which will be supported by the application.
     |
-<<<<<<< HEAD
     */
 
     'locale' => 'zh_cn',
-=======
-     */
-
-    'locale' => 'zh-CN',
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     /*
     |--------------------------------------------------------------------------
@@ -117,11 +88,7 @@ return [
     | is not available. You may change the value to correspond to any of
     | the language folders that are provided through your application.
     |
-<<<<<<< HEAD
     */
-=======
-     */
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     'fallback_locale' => 'en',
 
@@ -134,11 +101,7 @@ return [
     | to a random, 32 character string, otherwise these encrypted strings
     | will not be safe. Please do this before deploying an application!
     |
-<<<<<<< HEAD
     */
-=======
-     */
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     'key' => env('APP_KEY'),
 
@@ -155,17 +118,11 @@ return [
     |
     | Available Settings: "single", "daily", "syslog", "errorlog"
     |
-<<<<<<< HEAD
     */
 
     'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
-=======
-     */
-
-    'log' => env('APP_LOG', 'single'),
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     /*
     |--------------------------------------------------------------------------
@@ -176,11 +133,7 @@ return [
     | request to your application. Feel free to add your own services to
     | this array to grant expanded functionality to your applications.
     |
-<<<<<<< HEAD
     */
-=======
-     */
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     'providers' => [
 
@@ -199,10 +152,7 @@ return [
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
         Illuminate\Mail\MailServiceProvider::class,
-<<<<<<< HEAD
         Illuminate\Notifications\NotificationServiceProvider::class,
-=======
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
@@ -214,20 +164,16 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-<<<<<<< HEAD
          * Package Service Providers...
          */
 
         //
 
         /*
-=======
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-<<<<<<< HEAD
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
@@ -241,31 +187,6 @@ return [
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class
 
-=======
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        //Barryvdh\Debugbar\ServiceProvider::class,
-
-        /**
-         * 仓库模式包
-         */
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,
-
-        /**
-         * 提示信息
-         */
-        Laracasts\Flash\FlashServiceProvider::class,
-
-        /**
-         * RBAC
-         */
-        Zizaco\Entrust\EntrustServiceProvider::class,
-
-        /**
-         * laravel-debugbar
-         */
-        Barryvdh\Debugbar\ServiceProvider::class,
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     ],
 
     /*
@@ -277,11 +198,7 @@ return [
     | is started. However, feel free to register as many as you wish as
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
-<<<<<<< HEAD
     */
-=======
-     */
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
 
     'aliases' => [
 
@@ -289,10 +206,7 @@ return [
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
-<<<<<<< HEAD
         'Bus' => Illuminate\Support\Facades\Bus::class,
-=======
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
         'Cache' => Illuminate\Support\Facades\Cache::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
@@ -306,10 +220,7 @@ return [
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
-<<<<<<< HEAD
         'Notification' => Illuminate\Support\Facades\Notification::class,
-=======
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
@@ -323,21 +234,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-<<<<<<< HEAD
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
-=======
-
-        /**
-         * RBAC
-         */
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-
-        /**
-         * laravel-debugbar
-         */
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
->>>>>>> 9f6be1fd51e379122e42c5f5be2d6ce8955c112a
     ],
 
 ];
