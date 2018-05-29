@@ -11,15 +11,16 @@ use App\Http\Requests\PermissionUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Permission;
 use Cache, Event;
+use Illuminate\Support\Facades\URL;
 
 class PermissionController extends Controller
 {
     protected $fields = [
-        'name'        => '',
-        'label'       => '',
+        'name' => '',
+        'label' => '',
         'description' => '',
-        'cid'         => 0,
-        'icon'        => '',
+        'cid' => 0,
+        'icon' => '',
     ];
 
 
@@ -79,7 +80,7 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(int $cid)
+    public function create($cid)
     {
         $data = [];
         foreach ($this->fields as $field => $default) {
@@ -99,6 +100,11 @@ class PermissionController extends Controller
     public function store(PermissionCreateRequest $request)
     {
         $permission = new Permission();
+        try {
+            URL::route($request->get('name'));
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors("路由{$request->get('name')}不存在！");
+        }
         foreach (array_keys($this->fields) as $field) {
             $permission->$field = $request->get($field, $this->fields[$field]);
         }

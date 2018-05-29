@@ -184,6 +184,9 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class
+
     ],
 
     /*

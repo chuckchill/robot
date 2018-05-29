@@ -159,7 +159,7 @@ class RoleController extends Controller
         $role->save();
 
         $role->permissions()->sync($request->get('permissions',[]));
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,3,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}编辑角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent(\App\Models\Admin\Role::class,$role->id,3,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}编辑角色".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('修改成功！');
     }
 

@@ -32,7 +32,7 @@
             <li class="header">栏目导航</li>
             <!-- Optionally, you can add icons to the links -->
 
-            <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>控制面板</span></a></li>
+          {{--  <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>控制面板</span></a></li>--}}
             <?php $comData=Request::get('comData_menu'); ?>
             @foreach($comData['top'] as $v)
                 <li class="treeview  @if(in_array($v['id'],$comData['openarr'])) active @endif">
