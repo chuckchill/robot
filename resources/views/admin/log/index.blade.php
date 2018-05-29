@@ -95,7 +95,7 @@
                             ],
                             columnDefs: [
                                 {
-                                    'targets': 3, "render": function (data, type, row) {
+                                    'targets': 2, "render": function (data, type, row) {
                                     }
                                 }
                             ]
