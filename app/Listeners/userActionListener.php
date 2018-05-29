@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Log;
+use App\Models\Admin\AdminLog;
 use App\Events\userActionEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,14 +29,14 @@ class userActionListener implements ShouldQueue
     public function handle(userActionEvent $event)
     {
         $str = '管理员:' . $event->adminName . '(id:' . $event->uid . ')' . $event->content;
-
-        Log::info($str);
-//        $log=new \App\Models\OperatorLog();
-//        $log->uid=$event->uid;
-//        $log->model=$event->model;
-//        $log->aid = $event->aid;
-//        $log->type= $event->type;
-//        $log->content = $event->content;
-//        $log->save();
+        //Log::info($str);
+        $log=new AdminLog();
+        $log->uid=$event->uid;
+        $log->name=$event->adminName;
+        $log->model=$event->model;
+        $log->aid = $event->aid;
+        $log->type= $event->type;
+        $log->remarks = $str;
+        $log->save();
     }
 }

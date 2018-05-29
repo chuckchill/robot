@@ -7,15 +7,9 @@
 @section('pageDesc','DashBoard')
 
 @section('content')
+
     <div class="row page-title-row" style="margin:5px;">
         <div class="col-md-6">
-        </div>
-        <div class="col-md-6 text-right">
-            @if(Gate::forUser(auth('admin')->user())->check('admin.role.create'))
-                <a href="/admin/role/create" class="btn btn-success btn-md">
-                    <i class="fa fa-plus-circle"></i> 添加角色
-                </a>
-            @endif
         </div>
     </div>
     <div class="row page-title-row" style="margin:5px;">
@@ -26,8 +20,9 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-xs-12">
             <div class="box">
+
                 @include('admin.partials.errors')
                 @include('admin.partials.success')
                 <div class="box-body">
@@ -35,11 +30,10 @@
                         <thead>
                         <tr>
                             <th data-sortable="false" class="hidden-sm"></th>
-                            <th class="hidden-sm">角色名称</th>
-                            <th class="hidden-sm">角色描述</th>
-                            <th class="hidden-md">角色创建日期</th>
-                            <th class="hidden-md">角色修改日期</th>
-                            <th data-sortable="false">操作</th>
+                            <th class="hidden-sm">用户名</th>
+                            <th class="hidden-sm">类型</th>
+                            <th class="hidden-md">内容</th>
+                            <th class="hidden-md">时间</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,31 +46,7 @@
     </div>
     </div>
     <div class="modal fade" id="modal-delete" tabIndex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        ×
-                    </button>
-                    <h4 class="modal-title">提示</h4>
-                </div>
-                <div class="modal-body">
-                    <p class="lead">
-                        <i class="fa fa-question-circle fa-lg"></i>
-                        确认要删除这个角色吗?
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <form class="deleteForm" method="POST" action="/admin/role">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fa fa-times-circle"></i>确认
-                        </button>
-                    </form>
-                </div>
-            </div>
+
             @endsection
 
             @section('js')
@@ -110,8 +80,8 @@
                             order: [[1, "desc"]],
                             serverSide: true,
                             ajax: {
-                                url: '/admin/role/index',
-                                type: 'POST',
+                                url: '/admin/log/index',
+                                type: 'GET',
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                                 }
@@ -119,31 +89,14 @@
                             "columns": [
                                 {"data": "id"},
                                 {"data": "name"},
-                                {"data": "description"},
+                                {"data": "type"},
+                                {"data": "remarks"},
                                 {"data": "created_at"},
-                                {"data": "updated_at"},
-                                {"data": "action"}
                             ],
                             columnDefs: [
                                 {
-                                    'targets': -1, "render": function (data, type, row) {
-                                    var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.role.edit') ? 1 : 0}};
-                                    var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.role.destroy') ? 1 :0}};
-                                    var str = '';
-
-                                    //编辑
-                                    if (row_edit) {
-                                        str += '<a style="margin:3px;" href="/admin/role/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                    'targets': 3, "render": function (data, type, row) {
                                     }
-
-                                    //删除
-                                    if (row_delete) {
-                                        str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 删除</a>';
-                                    }
-
-                                    return str;
-
-                                }
                                 }
                             ]
                         });
@@ -162,11 +115,6 @@
                             });
                         }).draw();
 
-                        $("table").delegate('.delBtn', 'click', function () {
-                            var id = $(this).attr('attr');
-                            $('.deleteForm').attr('action', '/admin/role/' + id);
-                            $("#modal-delete").modal();
-                        });
 
                     });
                 </script>

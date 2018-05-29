@@ -51,6 +51,6 @@
     </div>
 
 
-@stop
+@endsection
 
 @section('js')

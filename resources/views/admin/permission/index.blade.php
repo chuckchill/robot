@@ -89,7 +89,7 @@
 
 
     </div>
-    @stop
+    @endsection
 
     @section('js')
         <script>
@@ -193,4 +193,4 @@
 
             });
         </script>
-@stop
+@endsection

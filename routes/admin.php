@@ -41,10 +41,12 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
 
 
     //用户管理路由
-    Route::get('user/index', ['as' => 'admin.user.index', 'uses' => 'UserController@index']);  //用户管理
-    Route::post('user/index', ['as' => 'admin.user.index', 'uses' => 'UserController@index']);
-    Route::resource('user', 'UserController', ['names' => ['update' => 'admin.role.edit', 'store' => 'admin.role.create']]);
-
+    Route::get('user/index', ['as' => 'admin.user.index', 'uses' => 'BackendUserController@index']);  //用户管理
+    Route::post('user/index', ['as' => 'admin.user.index', 'uses' => 'BackendUserController@index']);
+    Route::resource('user', 'BackendUserController', ['names' => ['update' => 'admin.role.edit', 'store' => 'admin.role.create']]);
+    //操作日志查询
+    Route::get('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
+    //Route::post('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
 });
 
 Route::get('/', function () {

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class BackendUserController extends Controller
 {
     protected $fields = [
         'name'  => '',
@@ -131,7 +131,6 @@ class UserController extends Controller
         }
         $data['rolesAll'] = Role::all()->toArray();
         $data['id'] = (int)$id;
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 3, '编辑了用户' . $user->name));
 
         return view('admin.user.edit', $data);
     }
@@ -154,7 +153,7 @@ class UserController extends Controller
             $user->password = bcrypt($request->get('password'));
 
         }
-
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 3, '编辑了用户' . $user->name));
         $user->save();
         $user->giveRoleTo($request->get('roles', []));
 

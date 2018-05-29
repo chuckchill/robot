@@ -32,7 +32,7 @@
     <script type="text/javascript" src="/plugins/bootstrap-iconpicker/bootstrap-iconpicker/js/iconset/iconset-fontawesome-4.3.0.min.js"></script>
     <script type="text/javascript" src="/plugins/bootstrap-iconpicker/bootstrap-iconpicker/js/bootstrap-iconpicker.js"></script>
 
-@stop
+@endsection
 @endif
 <div class="form-group">
     <label for="tag" class="col-md-3 control-label">权限概述</label>
