@@ -83,6 +83,7 @@
                 <script>
                     $(function () {
                         var table = $("#tags-table").DataTable({
+                            ordering:false,
                             language: {
                                 "sProcessing": "处理中...",
                                 "sLengthMenu": "显示 _MENU_ 项结果",
@@ -156,7 +157,7 @@
                             loadFadeOut();
                         });
 
-                        table.on('order.dt search.dt', function () {
+                        table.on('order.dt search.dt', function (e) {
                             table.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
                                 cell.innerHTML = i + 1;
                             });

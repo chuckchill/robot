@@ -86,6 +86,7 @@
                 <script>
                     $(function () {
                         var table = $("#tags-table").DataTable({
+                            ordering:false,
                             language: {
                                 "sProcessing": "处理中...",
                                 "sLengthMenu": "显示 _MENU_ 项结果",

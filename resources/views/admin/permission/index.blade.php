@@ -96,6 +96,7 @@
             $(function () {
                 var cid = $('#cid').attr('attr');
                 var table = $("#tags-table").DataTable({
+                    ordering:false,
                     language: {
                         "sProcessing": "处理中...",
                         "sLengthMenu": "显示 _MENU_ 项结果",
@@ -122,7 +123,6 @@
                     },
                     order: [[5, "asc"]],
                     serverSide: true,
-
                     ajax: {
                         url: '/admin/permission/index',
                         type: 'POST',

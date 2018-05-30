@@ -21,8 +21,6 @@ class LogController
             $data['draw'] = $request->get('draw');
             $start = $request->get('start');
             $length = $request->get('length');
-            $order = $request->get('order');
-            $columns = $request->get('columns');
             $search = $request->get('search');
             $data['recordsTotal'] = AdminLog::count();
             if (strlen($search['value']) > 0) {
@@ -32,15 +30,15 @@ class LogController
                 })->count();
                 $data['data'] = AdminLog::where(function ($query) use ($search) {
                     $query->where('name', 'LIKE', '%' . $search['value'] . '%')
-                        ->orWhere('email', 'like', '%' . $search['value'] . '%');
+                        ->orWhere('remarks', 'like', '%' . $search['value'] . '%');
                 })
                     ->skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             } else {
                 $data['recordsFiltered'] = AdminLog::count();
                 $data['data'] = AdminLog::skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             }
 

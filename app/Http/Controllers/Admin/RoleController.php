@@ -34,8 +34,6 @@ class RoleController extends Controller
             $data['draw'] = $request->get('draw');
             $start = $request->get('start');
             $length = $request->get('length');
-            $order = $request->get('order');
-            $columns = $request->get('columns');
             $search = $request->get('search');
             $data['recordsTotal'] = Role::count();
             if (strlen($search['value']) > 0) {
@@ -48,13 +46,13 @@ class RoleController extends Controller
                         ->orWhere('description', 'like', '%' . $search['value'] . '%');
                 })
                     ->skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             } else {
                 $data['recordsFiltered'] = Role::count();
                 $data['data'] = Role::
                 skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             }
             return response()->json($data);
@@ -99,7 +97,7 @@ class RoleController extends Controller
         if (is_array($request->get('permissions'))) {
             $role->permissions()->sync($request->get('permissions',[]));
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}添加角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,1,"添加角色：".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('添加成功！');
     }
 
@@ -159,7 +157,7 @@ class RoleController extends Controller
         $role->save();
 
         $role->permissions()->sync($request->get('permissions',[]));
-        event(new \App\Events\userActionEvent(\App\Models\Admin\Role::class,$role->id,3,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}编辑角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent(\App\Models\Admin\Role::class,$role->id,3,"编辑角色：".$role->name."{".$role->id."}"));
         return redirect('/admin/role')->withSuccess('修改成功！');
     }
 
@@ -186,7 +184,7 @@ class RoleController extends Controller
             return redirect()->back()
                 ->withErrors("删除失败");
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,2,"用户".auth('admin')->user()->username."{".auth('admin')->user()->id."}删除角色".$role->name."{".$role->id."}"));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Role',$role->id,2,"删除角色：".$role->name."{".$role->id."}"));
         return redirect()->back()
             ->withSuccess("删除成功");
     }

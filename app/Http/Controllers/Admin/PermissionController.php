@@ -37,8 +37,6 @@ class PermissionController extends Controller
             $data['draw'] = $request->get('draw');
             $start = $request->get('start');
             $length = $request->get('length');
-            $order = $request->get('order');
-            $columns = $request->get('columns');
             $search = $request->get('search');
             $cid = $request->get('cid', 0);
             $data['recordsTotal'] = Permission::where('cid', $cid)->count();
@@ -55,13 +53,13 @@ class PermissionController extends Controller
                         ->orWhere('label', 'like', '%' . $search['value'] . '%');
                 })
                     ->skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             } else {
                 $data['recordsFiltered'] = Permission::where('cid', $cid)->count();
                 $data['data'] = Permission::where('cid', $cid)->
                 skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             }
 

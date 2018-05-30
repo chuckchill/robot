@@ -29,8 +29,6 @@ class BackendUserController extends Controller
             $data['draw'] = $request->get('draw');
             $start = $request->get('start');
             $length = $request->get('length');
-            $order = $request->get('order');
-            $columns = $request->get('columns');
             $search = $request->get('search');
             $data['recordsTotal'] = User::count();
             if (strlen($search['value']) > 0) {
@@ -43,13 +41,13 @@ class BackendUserController extends Controller
                         ->orWhere('email', 'like', '%' . $search['value'] . '%');
                 })
                     ->skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             } else {
                 $data['recordsFiltered'] = User::count();
                 $data['data'] = User::
                 skip($start)->take($length)
-                    ->orderBy($columns[$order[0]['column']]['data'], $order[0]['dir'])
+                    ->orderBy('id', SORT_DESC)
                     ->get();
             }
 
@@ -93,7 +91,7 @@ class BackendUserController extends Controller
         if (is_array($request->get('roles'))) {
             $user->giveRoleTo($request->get('roles'));
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 1, '添加了用户' . $user->name));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 1, '添加了用户：' . $user->name));
 
         return redirect('/admin/user')->withSuccess('添加成功！');
     }
@@ -153,7 +151,7 @@ class BackendUserController extends Controller
             $user->password = bcrypt($request->get('password'));
 
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 3, '编辑了用户' . $user->name));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $user->id, 3, '编辑了用户：' . $user->name));
         $user->save();
         $user->giveRoleTo($request->get('roles', []));
 
@@ -178,7 +176,7 @@ class BackendUserController extends Controller
             return redirect()->back()
                 ->withErrors("删除失败");
         }
-
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $tag->id, 3, '删除了用户：' . $tag->name));
         return redirect()->back()
             ->withSuccess("删除成功");
     }

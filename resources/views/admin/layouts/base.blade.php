@@ -201,7 +201,7 @@ desired effect
 <script src="/dist/js/app.min.js"></script>
 
 <!-- dataTables -->
-<script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/plugins/datatables/jquery.dataTables.js"></script>
 <script src="/plugins/datatables/dataTables.bootstrap.js"></script>
 <script src="/plugins/tokenfield/dist/bootstrap-tokenfield.min.js"></script>
 <script src="/dist/js/common.js"></script>

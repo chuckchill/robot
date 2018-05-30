@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::resource('user', 'BackendUserController', ['names' => ['update' => 'admin.role.edit', 'store' => 'admin.role.create']]);
     //操作日志查询
     Route::get('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
-    //Route::post('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
+    Route::post('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
 });
 
 Route::get('/', function () {

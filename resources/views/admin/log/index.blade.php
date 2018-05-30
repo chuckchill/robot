@@ -43,8 +43,6 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
     <div class="modal fade" id="modal-delete" tabIndex="-1">
 
         @endsection
@@ -53,6 +51,7 @@
             <script>
                 $(function () {
                     var table = $("#tags-table").DataTable({
+                        ordering:false,
                         language: {
                             "sProcessing": "处理中...",
                             "sLengthMenu": "显示 _MENU_ 项结果",
@@ -81,7 +80,7 @@
                         serverSide: true,
                         ajax: {
                             url: '/admin/log/index',
-                            type: 'GET',
+                            type: 'POST',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                             }
@@ -118,17 +117,15 @@
                         loadShow();
                     });
 
-                    table.on('draw.dt', function () {console.log(1)
+                    table.on('draw.dt', function () {
                         loadFadeOut();
                     });
 
-                    table.on('order.dt search.dt', function () {console.log(2)
+                    table.on('order.dt search.dt', function () {
                         table.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
                             cell.innerHTML = i + 1;
                         });
                     }).draw();
-
-
                 });
             </script>
 @endsection
