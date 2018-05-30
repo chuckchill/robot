@@ -47,75 +47,88 @@
     </div>
     <div class="modal fade" id="modal-delete" tabIndex="-1">
 
-            @endsection
+        @endsection
 
-            @section('js')
-                <script>
-                    $(function () {
-                        var table = $("#tags-table").DataTable({
-                            language: {
-                                "sProcessing": "处理中...",
-                                "sLengthMenu": "显示 _MENU_ 项结果",
-                                "sZeroRecords": "没有匹配结果",
-                                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                                "sInfoPostFix": "",
-                                "sSearch": "搜索:",
-                                "sUrl": "",
-                                "sEmptyTable": "表中数据为空",
-                                "sLoadingRecords": "载入中...",
-                                "sInfoThousands": ",",
-                                "oPaginate": {
-                                    "sFirst": "首页",
-                                    "sPrevious": "上页",
-                                    "sNext": "下页",
-                                    "sLast": "末页"
-                                },
-                                "oAria": {
-                                    "sSortAscending": ": 以升序排列此列",
-                                    "sSortDescending": ": 以降序排列此列"
-                                }
+        @section('js')
+            <script>
+                $(function () {
+                    var table = $("#tags-table").DataTable({
+                        language: {
+                            "sProcessing": "处理中...",
+                            "sLengthMenu": "显示 _MENU_ 项结果",
+                            "sZeroRecords": "没有匹配结果",
+                            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "sInfoPostFix": "",
+                            "sSearch": "搜索:",
+                            "sUrl": "",
+                            "sEmptyTable": "表中数据为空",
+                            "sLoadingRecords": "载入中...",
+                            "sInfoThousands": ",",
+                            "oPaginate": {
+                                "sFirst": "首页",
+                                "sPrevious": "上页",
+                                "sNext": "下页",
+                                "sLast": "末页"
                             },
-                            order: [[1, "desc"]],
-                            serverSide: true,
-                            ajax: {
-                                url: '/admin/log/index',
-                                type: 'GET',
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                                }
-                            },
-                            "columns": [
-                                {"data": "id"},
-                                {"data": "name"},
-                                {"data": "type"},
-                                {"data": "remarks"},
-                                {"data": "created_at"},
-                            ],
-                            columnDefs: [
-                                {
-                                    'targets': 2, "render": function (data, type, row) {
+                            "oAria": {
+                                "sSortAscending": ": 以升序排列此列",
+                                "sSortDescending": ": 以降序排列此列"
+                            }
+                        },
+                        order: [[1, "desc"]],
+                        serverSide: true,
+                        ajax: {
+                            url: '/admin/log/index',
+                            type: 'GET',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        },
+                        "columns": [
+                            {"data": "id"},
+                            {"data": "name"},
+                            {"data": "type"},
+                            {"data": "remarks"},
+                            {"data": "created_at"},
+                        ],
+                        columnDefs: [
+                            {
+                                'targets': 2, "render": function (data, type, row) {
+                                    switch (data) {
+                                        case '1':
+                                            return "新增";
+                                            break;
+                                        case '2':
+                                            return "删除";
+                                            break;
+                                        case '3':
+                                            return "更新";
+                                            break;
+                                        default:
+                                            return "未知操作";
                                     }
                                 }
-                            ]
-                        });
-
-                        table.on('preXhr.dt', function () {
-                            loadShow();
-                        });
-
-                        table.on('draw.dt', function () {
-                            loadFadeOut();
-                        });
-
-                        table.on('order.dt search.dt', function () {
-                            table.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
-                                cell.innerHTML = i + 1;
-                            });
-                        }).draw();
-
-
+                            }
+                        ]
                     });
-                </script>
+
+                    table.on('preXhr.dt', function () {
+                        loadShow();
+                    });
+
+                    table.on('draw.dt', function () {console.log(1)
+                        loadFadeOut();
+                    });
+
+                    table.on('order.dt search.dt', function () {console.log(2)
+                        table.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                            cell.innerHTML = i + 1;
+                        });
+                    }).draw();
+
+
+                });
+            </script>
 @endsection
