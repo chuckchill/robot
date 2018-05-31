@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AdminLog extends Migration
+class VideoOnDemand extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class AdminLog extends Migration
      */
     public function up()
     {
-        Schema::create('admin_log', function (Blueprint $table) {
+        Schema::table('video_on_demand', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('用户');
+            $table->string('bucket')->comment('用户');
+            $table->string('channel')->comment('渠道')->default('qiniu');
+            $table->string('key')->comment('存储key');
             $table->string('uid')->comment('用户id');
-            $table->string('aid')->comment('对象id');
-            $table->string('type')->comment('类型');
-            $table->string('model')->comment('model');
+            $table->string('filename')->comment('model');
             $table->string('remarks')->comment('描述');
             $table->timestamps();
         });
@@ -32,7 +32,7 @@ class AdminLog extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_log', function (Blueprint $table) {
+        Schema::dropIfExists('video_on_demand', function (Blueprint $table) {
             //
         });
     }

@@ -12,6 +12,8 @@ namespace App\Services;
 use App\Facades\Logger;
 use Illuminate\Support\Facades\Request;
 use Qiniu\Auth;
+use Qiniu\Config;
+use Qiniu\Storage\BucketManager;
 
 class Qiniu
 {
@@ -42,7 +44,14 @@ class Qiniu
         $callbackBody = file_get_contents('php://input');
         $authorization = Request::server("HTTP_AUTHORIZATION");
         $url = route('qiniu.callback');
-        Logger::info("鉴权参数:".json_encode(compact("callbackBody","contentType","authorization","url")),'qiniu');
+        Logger::info("鉴权参数:" . json_encode(compact("callbackBody", "contentType", "authorization", "url")), 'qiniu');
         return $this->Auth->verifyCallback($contentType, $authorization, $url, $callbackBody);
     }
+
+    public function getBucketManager()
+    {
+        $config = new Config();
+        return new BucketManager($this->Auth, $config);
+    }
+
 }

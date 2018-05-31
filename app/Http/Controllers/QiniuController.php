@@ -20,7 +20,7 @@ class QiniuController extends Controller
     public function index()
     {
         $qn = new Qiniu();
-
+        dd($qn->getBucketManager()->listFiles('chuckchill'));
         $returnBody = '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"name":"$(fname)"}';
         $policy = array(
             'callbackUrl' => route('qiniu.callback'),
