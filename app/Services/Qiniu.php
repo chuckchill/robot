@@ -38,7 +38,7 @@ class Qiniu
 
     public function vertifyCallback()
     {
-        $contentType = 'application/x-www-form-urlencoded';
+        $contentType = 'application/json';
         $callbackBody = file_get_contents('php://input');
         $authorization = Request::server("HTTP_AUTHORIZATION");
         $url = route('qiniu.callback');
