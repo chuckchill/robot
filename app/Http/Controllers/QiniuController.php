@@ -12,7 +12,8 @@ namespace App\Http\Controllers;
 use App\Facades\Logger;
 use App\Http\Controllers\Controller;
 use App\Services\Qiniu;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+
 
 class QiniuController extends Controller
 {
@@ -32,12 +33,12 @@ class QiniuController extends Controller
         ]);
     }
 
-    public function callback()
+    public function callback(Request $request)
     {
         $qn = new Qiniu();
         if (!$qn->vertifyCallback()) {
             Logger::info('回调鉴权失败', 'qiniu');
         }
-
+        Logger::info("回调实体:".json_encode($request->all()),'qiniu');
     }
 }
