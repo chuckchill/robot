@@ -18,3 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/qiniu/index', 'QiniuController@index');
+Route::any('/qiniu/callback', ['as' => 'qiniu.callback', 'uses' => 'QiniuController@callback']);

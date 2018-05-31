@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Qiniu\Auth;
 
 class HomeController extends Controller
 {

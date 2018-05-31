@@ -185,7 +185,8 @@ return [
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
         Dingo\Api\Provider\LaravelServiceProvider::class,
-        Tymon\JWTAuth\Providers\LaravelServiceProvider::class
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        \App\Providers\LoggerServiceProvider::class
 
     ],
 
