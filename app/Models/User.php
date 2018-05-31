@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use Arcanedev\Support\Bases\Model;
+use Illuminate\Contracts\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+
+class User extends Model implements JWTSubject, Authenticatable,Authorizable
 {
-    use Notifiable;
+    use \Illuminate\Auth\Authenticatable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +31,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function can($ability, $arguments = [])
+    {
+        // TODO: Implement can() method.
+    }
 }

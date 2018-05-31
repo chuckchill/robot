@@ -20,12 +20,9 @@ class QiniuController extends Controller
     public function index()
     {
         $qn = new Qiniu();
-        dd($qn->getBucketManager()->listFiles('chuckchill'));
-        $returnBody = '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"name":"$(fname)"}';
+        $returnBody = '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"fname":"$(fname)"}';
         $policy = array(
-            'callbackUrl' => route('qiniu.callback'),
-            'callbackBody' => $returnBody,
-            'callbackBodyType' => 'application/json'
+            'returnBody' => $returnBody
         );
         $token = $qn->getToken('chuckchill', $policy);
         return view('qiniu.index')->with([

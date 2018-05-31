@@ -1,8 +1,7 @@
 <?php
 
-$api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', function ($api) {
-    $api->get('login', 'App\Http\Controllers\Api\Auth\LoginController@login');
-    $api->post('register', 'App\Http\Controllers\Api\Auth\RegisterController@register');
+$api->get('login', 'IndexController@login');
+$api->group(['middleware' => ['api.auth']], function ($api) {
+    $api->get('test', ['uses' => 'IndexController@index']);
 });

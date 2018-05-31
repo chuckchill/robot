@@ -54,7 +54,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapAdminRoutes()
     {
         Route::group([
-            'prefix'=>'/admin',
+            'prefix' => '/admin',
             'middleware' => 'admin',
             'namespace' => 'App\Http\Controllers\Admin',
         ], function ($router) {
@@ -88,11 +88,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::group([
-            'middleware' => 'api',
-            'namespace' => $this->namespace,
-            'prefix' => 'api',
-        ], function ($router) {
+        $api = app('Dingo\Api\Routing\Router');
+        $api->version('v1', ['namespace' => 'App\Http\Controllers\Api'], function ($api) {
             require base_path('routes/api.php');
         });
     }
