@@ -73,6 +73,7 @@ class SwooleCommand extends Command
         $this->serv->on('Close', array($handler, 'onClose'));
         $this->serv->on('Finish', array($handler, 'onFinish'));
         $this->serv->on('Task', array($handler, 'onTask'));
+        $this->serv->on('Shutdown', array($handler, 'onShutdown'));
         $this->serv->start();
     }
 

@@ -38,28 +38,31 @@ class SwooleHandler
             //to
             $toLen = hexdec(substr($data, 8, 2));
             echo "toLen:" . $toLen . PHP_EOL;
-            $toAddr = hex2bin(substr($data, 10, $toLen * 2));
-            echo "toAddr:" . $toAddr . PHP_EOL;
+            $toAddrSrc = substr($data, 10, $toLen * 2);
+            echo "toAddr:" . $toAddrSrc . PHP_EOL;
             //from
             $fromLen = hexdec(substr($data, $toLen * 2 + 10, 2));
             echo "fromLen :" . $fromLen . PHP_EOL;
-            $fromAddr = hex2bin(substr($data, $toLen * 2 + 12, $fromLen * 2));
-            echo "fromAddr:" . $fromAddr . PHP_EOL;
+            $fromAddrSrc = substr($data, $toLen * 2 + 12, $fromLen * 2);
+            echo "fromAddr:" . $fromAddrSrc . PHP_EOL;
+            $fromAddr = hex2bin($fromAddrSrc);
             //data
-            $data = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
-            echo "data:" . $data . PHP_EOL;
-            if ($toAddr == "00000000") {
+            $realdata = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
+            echo "data:" . $realdata . PHP_EOL;
+            if ($toAddrSrc == "00000000") {
                 if (strpos($fromAddr, '_') == false) {
                     Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息
                 }
-                $serv->send($fd, $data);
-            } else if ($toAddr == "FFFFFFFF") {
+                echo "心跳";
+                $serv->send($fd, $this->packData($fromAddrSrc, $toAddrSrc, $realdata, $length));
+            } else if ($toAddrSrc == "FFFFFFFF") {
                 foreach ($serv->connections as $fd) {
                     $serv->send($fd, $data);//广播数据
                 }
+                return true;
             } else {
-                $serialNo = Redis::get("addr:{$fd}");
-                $md5Key = md5($serialNo);
+                $toAddr = hex2bin($toAddrSrc);
+                $md5Key = md5($toAddr);
                 $toFd = Redis::get("addr:{$md5Key}");
                 if ($toFd != null) {
                     //转发数据
@@ -69,6 +72,7 @@ class SwooleHandler
             Redis::set("addr:{$fd}", $fromAddr);
             $md5Key = md5($fromAddr);
             Redis::set("fd:{$md5Key}", $fd);
+            return true;
         } catch (\Exception $e) {
             echo $e->getMessage() . PHP_EOL;
         }
@@ -82,13 +86,35 @@ class SwooleHandler
         echo "{$fd}关闭";
     }
 
+    public function onShutdown(\swoole_server $serv)
+    {
+        foreach ($serv->connections as $key => $conn) {
+            $addr = md5(Redis::get("addr:{$conn}"));
+            Redis::del("addr:{$conn}");
+            Redis::del("fd:{$addr}");
+            echo "close {$conn}" . PHP_EOL;
+        }
+    }
+
     public function onFinish()
     {
-
+        echo "finish";
     }
 
     public function onTask()
     {
 
+    }
+
+    public function packData($src, $des, $data, $totalLen)
+    {
+        $srcLen = dechex(strlen($src) / 2);
+        $srcLen = str_pad($srcLen, 2, '0', STR_PAD_LEFT);
+        $desLen = dechex(strlen($des) / 2);
+        $desLen = str_pad($desLen, 2, '0', STR_PAD_LEFT);
+        $totalLen = $totalLen / 2;
+        $totalLen = str_pad(dechex($totalLen), 4, '0', STR_PAD_LEFT);
+        $str = "5252" . $totalLen . $srcLen . $src . $desLen . $des . $data . '00000D0A';
+        return strtoupper($str);
     }
 }
