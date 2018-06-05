@@ -39,6 +39,7 @@ class SwooleCommand extends Command
         'open_eof_split' => true,
         'package_eof' => "0D0A",
         'task_worker_num' => 8,
+        'log_file' => '/logs/swoole/swoole.log',
         //'heartbeat_check_interval' => 10
     ];
 
