@@ -34,20 +34,20 @@ class SwooleHandler
             if ($totalLen != $length * 2) {
                 throw new \Exception("数据解码错误:" . $data);
             }
-            echo "len:" . $length . PHP_EOL;
+            //echo "len:" . $length . PHP_EOL;
             //to
             $toLen = hexdec(substr($data, 8, 2));
-            echo "toLen:" . $toLen . PHP_EOL;
+            //echo "toLen:" . $toLen . PHP_EOL;
             $toAddr = hex2bin(substr($data, 10, $toLen * 2));
-            echo "toAddr:" . $toAddr . PHP_EOL;
+            //echo "toAddr:" . $toAddr . PHP_EOL;
             //from
             $fromLen = hexdec(substr($data, $toLen * 2 + 10, 2));
-            echo "fromLen :" . $fromLen . PHP_EOL;
+            //echo "fromLen :" . $fromLen . PHP_EOL;
             $fromAddr = hex2bin(substr($data, $toLen * 2 + 12, $fromLen * 2));
-            echo "fromAddr:" . $fromAddr . PHP_EOL;
+            //echo "fromAddr:" . $fromAddr . PHP_EOL;
             //data
             $data = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
-            echo "data:" . $data . PHP_EOL;
+            //echo "data:" . $data . PHP_EOL;
             if ($toAddr == "00000000" && strpos($fromAddr, '_') == false) {
                 Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息
             } else if ($toAddr == "FFFFFFFF") {
@@ -76,6 +76,7 @@ class SwooleHandler
         $addr = md5(Redis::get("addr:{$fd}"));
         Redis::del("addr:{$fd}");
         Redis::del("fd:{$addr}");
+        echo "{$fd}关闭";
     }
 
     public function onFinish()
