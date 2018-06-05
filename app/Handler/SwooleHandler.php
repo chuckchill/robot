@@ -80,19 +80,13 @@ class SwooleHandler
 
     public function onClose(\swoole_server $serv, $fd, $reactorId)
     {
-        $addr = md5(Redis::get("addr:{$fd}"));
-        Redis::del("addr:{$fd}");
-        Redis::del("fd:{$addr}");
-        echo "{$fd}关闭";
+        $this->clearStorage($fd);
     }
 
     public function onShutdown(\swoole_server $serv)
     {
-        foreach ($serv->connections as $key => $conn) {
-            $addr = md5(Redis::get("addr:{$conn}"));
-            Redis::del("addr:{$conn}");
-            Redis::del("fd:{$addr}");
-            echo "close {$conn}" . PHP_EOL;
+        foreach ($serv->connections as $key => $fd) {
+            $this->clearStorage($fd);
         }
     }
 
@@ -106,13 +100,22 @@ class SwooleHandler
 
     }
 
+    public function clearStorage($fd)
+    {
+        $addr = md5(Redis::get("addr:{$fd}"));
+        Redis::del("addr:{$fd}");
+        Redis::del("fd:{$addr}");
+        echo "close {$fd}" . PHP_EOL;
+
+    }
+
     public function packData($src, $des, $data, $totalLen)
     {
         $srcLen = dechex(strlen($src) / 2);
         $srcLen = str_pad($srcLen, 2, '0', STR_PAD_LEFT);
         $desLen = dechex(strlen($des) / 2);
         $desLen = str_pad($desLen, 2, '0', STR_PAD_LEFT);
-        $totalLen = $totalLen / 2;
+        $totalLen = $totalLen;
         $totalLen = str_pad(dechex($totalLen), 4, '0', STR_PAD_LEFT);
         $str = "5252" . $totalLen . $srcLen . $src . $desLen . $des . $data . '00000D0A';
         return strtoupper($str);
