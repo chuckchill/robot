@@ -30,16 +30,16 @@ class SwooleCommand extends Command
 
     protected $serv;
     protected $config = [
-        'heartbeat_check_interval ' => 10,
         'worker_num' => 8,
-        'daemonize' => false,
+        'daemonize' => true,
         'max_request' => 10000,
         'dispatch_mode' => 2,
         'package_max_length' => 8192,
         'open_eof_check' => true,
         'open_eof_split' => true,
         'package_eof' => "0D0A",
-        'tcp_fastopen' => true
+        'task_worker_num' => 8,
+        //'heartbeat_check_interval' => 10
     ];
 
     public function __construct()
@@ -70,6 +70,7 @@ class SwooleCommand extends Command
         $this->serv->on('Connect', array($handler, 'onConnect'));
         $this->serv->on('Receive', array($handler, 'onReceive'));
         $this->serv->on('Close', array($handler, 'onClose'));
+        $this->serv->on('Finish', array($handler, 'onFinish'));
         $this->serv->on('Task', array($handler, 'onTask'));
         $this->serv->start();
     }
