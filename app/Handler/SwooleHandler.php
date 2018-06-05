@@ -48,8 +48,11 @@ class SwooleHandler
             //data
             $data = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
             echo "data:" . $data . PHP_EOL;
-            if ($toAddr == "00000000" && strpos($fromAddr, '_') == false) {
-                Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息
+            if ($toAddr == "00000000") {
+                if (strpos($fromAddr, '_') == false) {
+                    Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息
+                }
+                $serv->send($fd, $data);
             } else if ($toAddr == "FFFFFFFF") {
                 foreach ($serv->connections as $fd) {
                     $serv->send($fd, $data);//广播数据
