@@ -57,7 +57,7 @@ class SwooleHandler
                 $serv->send($fd, $this->packData($fromAddrSrc, $toAddrSrc, $realdata, $length));
             } else if ($toAddrSrc == "FFFFFFFF") {
                 foreach ($serv->connections as $fd) {
-                    $serv->send($fd, $data);//广播数据
+                    $serv->send($fd, hex2bin($data));//广播数据
                 }
                 return true;
             } else {
@@ -66,7 +66,7 @@ class SwooleHandler
                 $toFd = Redis::get("addr:{$md5Key}");
                 if ($toFd != null) {
                     //转发数据
-                    $serv->send($toFd, $data);
+                    $serv->send($toFd, hex2bin($data));
                 }
             }
             Redis::set("addr:{$fd}", $fromAddr);
