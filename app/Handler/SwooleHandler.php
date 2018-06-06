@@ -40,12 +40,12 @@ class SwooleHandler
             $toLen = hexdec(substr($data, 8, 2));
             //echo "toLen:" . $toLen . PHP_EOL;
             $toAddrSrc = substr($data, 10, $toLen * 2);
-            //echo "toAddr:" . $toAddrSrc . PHP_EOL;
+            echo "toAddr:" . $toAddrSrc . PHP_EOL;
             //from
             $fromLen = hexdec(substr($data, $toLen * 2 + 10, 2));
             //echo "fromLen :" . $fromLen . PHP_EOL;
             $fromAddrSrc = substr($data, $toLen * 2 + 12, $fromLen * 2);
-            //echo "fromAddr:" . $fromAddrSrc . PHP_EOL;
+            echo "fromAddr:" . $fromAddrSrc . PHP_EOL;
             $fromAddr = hex2bin($fromAddrSrc);
             //data
             $realdata = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
@@ -57,15 +57,17 @@ class SwooleHandler
                 $serv->send($fd, $this->packData($fromAddrSrc, $toAddrSrc, $realdata, $length));
             } else if ($toAddrSrc == "FFFFFFFF") {
                 foreach ($serv->connections as $fd) {
+                    echo "广播".PHP_EOL;
                     $serv->send($fd, hex2bin($data));//广播数据
                 }
                 return true;
             } else {
                 $toAddr = hex2bin($toAddrSrc);
                 $md5Key = md5($toAddr);
-                $toFd = Redis::get("addr:{$md5Key}");
+                $toFd = Redis::get("fd:{$md5Key}");
                 if ($toFd != null) {
                     //转发数据
+                    echo "心跳包".PHP_EOL;
                     $serv->send($toFd, hex2bin($data));
                 }
             }
