@@ -41,7 +41,8 @@ class SwooleCommand extends Command
         'task_worker_num' => 8,
         'pid_file' => '/var/run/swoole.pid',
         'log_file' => '/logs/swoole/swoole.log',
-        'heartbeat_check_interval' => 2*60
+        'heartbeat_check_interval' => 2 * 60,
+        'log_level' => 5
     ];
 
     public function __construct()

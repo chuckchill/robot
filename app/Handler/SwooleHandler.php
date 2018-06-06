@@ -37,23 +37,22 @@ class SwooleHandler
             //echo "len:" . $length . PHP_EOL;
             //to
             $toLen = hexdec(substr($data, 8, 2));
-            echo "toLen:" . $toLen . PHP_EOL;
+            //echo "toLen:" . $toLen . PHP_EOL;
             $toAddrSrc = substr($data, 10, $toLen * 2);
-            echo "toAddr:" . $toAddrSrc . PHP_EOL;
+            //echo "toAddr:" . $toAddrSrc . PHP_EOL;
             //from
             $fromLen = hexdec(substr($data, $toLen * 2 + 10, 2));
-            echo "fromLen :" . $fromLen . PHP_EOL;
+            //echo "fromLen :" . $fromLen . PHP_EOL;
             $fromAddrSrc = substr($data, $toLen * 2 + 12, $fromLen * 2);
-            echo "fromAddr:" . $fromAddrSrc . PHP_EOL;
+            //echo "fromAddr:" . $fromAddrSrc . PHP_EOL;
             $fromAddr = hex2bin($fromAddrSrc);
             //data
             $realdata = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
-            echo "data:" . $realdata . PHP_EOL;
+            //echo "data:" . $realdata . PHP_EOL;
             if ($toAddrSrc == "00000000") {
                 if (strpos($fromAddr, '_') == false) {
                     Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息
                 }
-                echo "心跳";
                 $serv->send($fd, $this->packData($fromAddrSrc, $toAddrSrc, $realdata, $length));
             } else if ($toAddrSrc == "FFFFFFFF") {
                 foreach ($serv->connections as $fd) {
@@ -115,7 +114,6 @@ class SwooleHandler
         $srcLen = str_pad($srcLen, 2, '0', STR_PAD_LEFT);
         $desLen = dechex(strlen($des) / 2);
         $desLen = str_pad($desLen, 2, '0', STR_PAD_LEFT);
-        $totalLen = $totalLen;
         $totalLen = str_pad(dechex($totalLen), 4, '0', STR_PAD_LEFT);
         $str = "5252" . $totalLen . $srcLen . $src . $desLen . $des . $data . '00000D0A';
         return strtoupper($str);
