@@ -49,7 +49,7 @@ class SwooleHandler
             $fromAddr = hex2bin($fromAddrSrc);
             //data
             $realdata = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
-            echo "data:" . $realdata . PHP_EOL;
+            //echo "data:" . $realdata . PHP_EOL;
             if ($toAddrSrc == "00000000") {
                 if (strpos($fromAddr, '_') == false) {
                     Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息
@@ -117,6 +117,6 @@ class SwooleHandler
         $desLen = str_pad($desLen, 2, '0', STR_PAD_LEFT);
         $totalLen = str_pad(dechex($totalLen), 4, '0', STR_PAD_LEFT);
         $str = "5252" . $totalLen . $srcLen . $src . $desLen . $des . $data . '00000D0A';
-        return strtoupper($str);
+        return strtoupper(hex2bin($str));
     }
 }
