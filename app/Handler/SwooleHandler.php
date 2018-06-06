@@ -117,6 +117,6 @@ class SwooleHandler
         $desLen = str_pad($desLen, 2, '0', STR_PAD_LEFT);
         $totalLen = str_pad(dechex($totalLen), 4, '0', STR_PAD_LEFT);
         $str = "5252" . $totalLen . $srcLen . $src . $desLen . $des . $data . '00000D0A';
-        return strtoupper(hex2bin($str));
+        return hex2bin(strtoupper($str));
     }
 }
