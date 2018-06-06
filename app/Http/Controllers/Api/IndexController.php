@@ -13,6 +13,16 @@ use App\Models\User;
 
 class IndexController
 {
+    public function startupPpage()
+    {
+        dd(123);
+    }
+
+    public function linkPage()
+    {
+
+    }
+
     public function login()
     {
         $user = User::first();
