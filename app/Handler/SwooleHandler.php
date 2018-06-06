@@ -24,6 +24,7 @@ class SwooleHandler
 
     public function onReceive(\swoole_server $serv, $fd, $from_id, $data)
     {
+        $data=bin2hex($data);
         try {
             $start = substr($data, 0, 4);
             if ($start !== '5252') {
@@ -48,7 +49,7 @@ class SwooleHandler
             $fromAddr = hex2bin($fromAddrSrc);
             //data
             $realdata = substr($data, $toLen * 2 + 12 + $fromLen * 2, -8);
-            //echo "data:" . $realdata . PHP_EOL;
+            echo "data:" . $realdata . PHP_EOL;
             if ($toAddrSrc == "00000000") {
                 if (strpos($fromAddr, '_') == false) {
                     Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息

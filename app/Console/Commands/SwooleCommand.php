@@ -37,7 +37,7 @@ class SwooleCommand extends Command
         'package_max_length' => 8192,
         'open_eof_check' => true,
         'open_eof_split' => true,
-        'package_eof' => "0D0A",
+        'package_eof' => "\r\n",
         'task_worker_num' => 8,
         'pid_file' => '/var/run/swoole.pid',
         'log_file' => '/logs/swoole/swoole.log',
