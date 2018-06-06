@@ -7,9 +7,9 @@ use App\Models\Admin\AdminUser as User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\BaseController;
 
-class BackendUserController extends Controller
+class BackendUserController extends BaseController
 {
     protected $fields = [
         'name'  => '',

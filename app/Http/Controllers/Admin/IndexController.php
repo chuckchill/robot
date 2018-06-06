@@ -13,7 +13,7 @@ use App\Models\AppAndroid as Android;
 use App\Models\AppIos as Ios;
 use QrCode;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     /**
      * Create a new controller instance.

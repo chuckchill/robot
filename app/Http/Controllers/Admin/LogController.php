@@ -12,7 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin\AdminLog;
 use Illuminate\Http\Request;
 
-class LogController
+class LogController extends BaseController
 {
     public function index(Request $request)
     {

@@ -13,7 +13,7 @@ use App\Models\Admin\Permission;
 use Cache, Event;
 use Illuminate\Support\Facades\URL;
 
-class PermissionController extends Controller
+class PermissionController extends BaseController
 {
     protected $fields = [
         'name' => '',
@@ -99,7 +99,9 @@ class PermissionController extends Controller
     {
         $permission = new Permission();
         try {
-            URL::route($request->get('name'));
+            if ($request->get('cid') != 0) {
+                URL::route($request->get('name'));
+            }
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors("路由{$request->get('name')}不存在！");
         }

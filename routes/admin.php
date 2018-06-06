@@ -47,6 +47,10 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     //操作日志查询
     Route::get('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
     Route::post('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
+    //App配置
+    Route::get('startup-page/index', ['as' => 'admin.startup-page.index', 'uses' => 'StartupPageController@index']);  //用户管理
+    Route::post('startup-page/index', ['as' => 'admin.log.startup-page', 'uses' => 'StartupPageController@index']);  //
+    Route::resource('startup-page', 'StartupPageController', ['names' => ['update' => 'startup-page', 'store' => 'startup-page']]);
 });
 
 Route::get('/', function () {

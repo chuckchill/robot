@@ -13,7 +13,7 @@ use App\Models\Admin\Role;
 use Log;
 use Auth;
 
-class RoleController extends Controller
+class RoleController extends BaseController
 {
     protected $fields = [
         'name' => '',

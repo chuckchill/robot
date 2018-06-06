@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class VideoOnDemand extends Migration
+class StartupPage extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class VideoOnDemand extends Migration
      */
     public function up()
     {
-        Schema::create('video_on_demand', function (Blueprint $table) {
+        Schema::create('startup_page', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('bucket')->comment('用户');
-            $table->string('channel')->comment('渠道')->default('qiniu');
-            $table->string('key')->comment('存储key');
-            $table->string('uid')->comment('用户id');
-            $table->string('filename')->comment('model');
+            $table->string('imgsrc')->comment('图片地址');
+            $table->integer('status')->comment('状态')->default(1);
             $table->string('remarks')->comment('描述');
             $table->timestamps();
         });
@@ -32,7 +29,7 @@ class VideoOnDemand extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('video_on_demand', function (Blueprint $table) {
+        Schema::table('startup_page', function (Blueprint $table) {
             //
         });
     }
