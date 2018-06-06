@@ -24,7 +24,7 @@ class SwooleHandler
 
     public function onReceive(\swoole_server $serv, $fd, $from_id, $data)
     {
-        $data=bin2hex($data);
+        $data = bin2hex($data);
         try {
             $start = substr($data, 0, 4);
             if ($start !== '5252') {
@@ -52,12 +52,13 @@ class SwooleHandler
             //echo "data:" . $realdata . PHP_EOL;
             if ($toAddrSrc == "00000000") {
                 if (strpos($fromAddr, '_') == false) {
+                    echo "robot:" . $realdata.PHP_EOL;
                     Redis::set("robot:info:{$fromAddr}", $data);//s上传机器人设备信息
                 }
                 $serv->send($fd, $this->packData($fromAddrSrc, $toAddrSrc, $realdata, $length));
             } else if ($toAddrSrc == "FFFFFFFF") {
                 foreach ($serv->connections as $fd) {
-                    echo "广播".PHP_EOL;
+                    echo "广播" . PHP_EOL;
                     $serv->send($fd, hex2bin($data));//广播数据
                 }
                 return true;
@@ -67,7 +68,7 @@ class SwooleHandler
                 $toFd = Redis::get("fd:{$md5Key}");
                 if ($toFd != null) {
                     //转发数据
-                    echo "心跳包".PHP_EOL;
+                    echo "心跳包" . PHP_EOL;
                     $serv->send($toFd, hex2bin($data));
                 }
             }
