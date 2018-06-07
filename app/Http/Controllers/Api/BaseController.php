@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use Dingo\Api\Exception\ValidationHttpException;
 use Dingo\Api\Routing\Helpers;
 
 class BaseController extends Controller
