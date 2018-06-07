@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $table='admin_roles';
+    protected $dateFormat = "Y-m-d H:i:s";
     //
     public function permissions()
     {

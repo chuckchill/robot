@@ -8,6 +8,7 @@ class AdminUser extends Authenticatable
 {
     use Notifiable;
     protected $table='admin_users';
+    protected $dateFormat = "Y-m-d H:i:s";
 
     /**
      * The attributes that are mass assignable.

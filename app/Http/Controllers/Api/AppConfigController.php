@@ -9,17 +9,36 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Http\Controllers\Controller;
+use App\Models\Common\BootPage;
+use App\Models\Common\StartupPage;
+use DeepCopy\f006\B;
+use function PHPSTORM_META\map;
 
-class AppConfigController extends Controller
+class AppConfigController extends BaseController
 {
     public function startupPpage()
     {
-        return [];
+        $startup = StartupPage::where(['status' => 1])
+            ->orderBy('id', SORT_DESC)
+            ->first();
+        $url = $startup ? $startup->imgsrc : "";
+        return $this->response
+            ->array([
+                'url' => startup_img($url)
+            ]);
     }
 
     public function linkPage()
     {
-
+        $boot = BootPage::where(['status' => 1])
+            ->orderBy('id', SORT_DESC)
+            ->first();
+        $url = $boot ? $boot->imgsrc : "";
+        $urls = explode("@", $url);
+        $urls = array_map(function ($url) {
+            return link_img($url);
+        }, $urls);
+        return $this->response
+            ->array($urls);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Api;
 
 use Arcanedev\Support\Bases\Model;
 use Illuminate\Contracts\Auth\Access\Authorizable;
@@ -13,7 +13,8 @@ class User extends Model implements JWTSubject, Authenticatable,Authorizable
 {
     use \Illuminate\Auth\Authenticatable;
 
-
+    protected $table='app_users';
+    protected $dateFormat = "Y-m-d H:i:s";
     /**
      * The attributes that are mass assignable.
      *
