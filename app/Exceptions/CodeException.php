@@ -15,6 +15,6 @@ class CodeException extends \Exception
 {
     public function __construct($source = [], Throwable $previous = null)
     {
-        parent::__construct(array_get($source, 'mssage'), array_get($source, 'code'), $previous);
+        parent::__construct(array_get($source, 'message'), array_get($source, 'code'), $previous);
     }
 }

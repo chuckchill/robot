@@ -6,5 +6,7 @@
  * Time: 17:03
  */
 return [
-    'identity_type'=>['sys','qq','weixin','weibo','mobile','email']
+    'identity_type' => ['sys', 'qq', 'weixin', 'weibo', 'mobile', 'email'],
+    'email_action' => env('EMAIL_ACTION', false),
+    'mobile_action' => env('MOBILE_ACTION', false)
 ];

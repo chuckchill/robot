@@ -36,4 +36,14 @@ class Helper
             return false;
         }
     }
+
+    public static function mustSendSms()
+    {
+        return config('other.email_action');
+    }
+
+    public static function mustSendEmail()
+    {
+        return config('other.mobile_action');
+    }
 }

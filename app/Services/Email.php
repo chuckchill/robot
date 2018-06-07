@@ -10,51 +10,71 @@ namespace App\Services;
 
 
 use App\Exceptions\CodeException;
-use Dingo\Api\Console\Command\Cache;
+use App\Facades\Logger;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Mockery\Exception;
 
 class Email
 {
-    public static function sendMsg($email, $msg, $isText = true)
+    /**
+     * @var string
+     */
+    public $emailLoginKey = '_email_login';
+    /**
+     * @var string
+     */
+    public $email;
+
+    /**
+     * Sms constructor.
+     * @param string $phone
+     */
+    public function __construct($email)
+    {
+        $this->email = $email;
+    }
+
+    public function sendMsg($email, $msg, $isText = true)
     {
         try {
             if ($isText) {
                 Mail::raw($msg, function ($message) use ($email) {
                     $message->from("admin@robot.com", 'robot');
-                    $message->to('$email');
+                    $message->to($email);
                 });
             } else {
                 Mail::send("welcome", [], function () {
 
                 });
             }
-            return true;
         } catch (\Exception $e) {
-            return false;
+            Logger::info($e->getMessage(), "email");
+            throw new CodeException(config('code.reg.email_send_error'));
         }
     }
 
-    public static function SendRandCode($email)
+    public function sendRandCode()
     {
         $code = rand(1000, 9999);
-        $cacheKey = "mailCode_" . md5($email);
+        $cacheKey = md5($this->email) . $this->emailLoginKey;
         if (Cache::get($cacheKey)) {
             throw new CodeException(config('code.reg.code_30_valid'));
         }
-        if (self::sendMsg($email, $code)) {
-            Cache::put("mailCode_" . md5($email), $code, 60 * 30);
+        if (!Helper::mustSendEmail()) {
+            Cache::put($cacheKey, "123456", 30);
+            return true;
         }
-        throw new CodeException(config('code.reg.email_send_error'));
-        return true;
+        self::sendMsg($this->email, $code);
+        Cache::put($cacheKey, $code, 30);
+        Logger::info("往{$this->email}发送验证码：" . $code);
     }
 
-    public static function validateCode($email, $code)
+    public function validateCode($code)
     {
-        $cacheKey = "mailCode_" . md5($email);
-        if (Cache::get($cacheKey) != $code) {
+        $cacheKey = md5($this->email) . $this->emailLoginKey;
+        if ($code == "" || Cache::get($cacheKey) != $code) {
             throw new CodeException(config('code.reg.emailcode_error'));
         }
-        return true;
     }
 }
