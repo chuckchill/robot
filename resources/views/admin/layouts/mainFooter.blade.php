@@ -4,5 +4,5 @@
       Designed by AdminLTE
     </div>
     <!-- Default to the left -->
-      <strong>Copyright &copy; 2017 <a href="https://github.com/big-pang">BigPang</a>.</strong>
+      <strong>Copyright &copy; 2018 <a href="#">robot</a>.</strong>
   </footer>

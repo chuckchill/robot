@@ -100,7 +100,7 @@ class PermissionController extends BaseController
         $permission = new Permission();
         try {
             if ($request->get('cid') != 0) {
-                URL::route($request->get('name'));
+                //URL::route($request->get('name'));
             }
         } catch (\Exception $exception) {
             return redirect()->back()->withErrors("路由{$request->get('name')}不存在！");

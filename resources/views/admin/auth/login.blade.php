@@ -29,11 +29,11 @@
 @include('admin.partials.success')
 <div class="login-box">
     <div class="login-logo">
-        <a><b>Big</b>Pang</a>
+        <a><b>后台管理系统</b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">万事登录难</p>
+        <p class="login-box-msg"></p>
 
         <form action="{{ url('/admin/login') }}" method="post">
             {!! csrf_field() !!}

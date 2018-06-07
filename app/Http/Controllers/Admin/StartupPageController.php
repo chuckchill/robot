@@ -29,7 +29,7 @@ class StartupPageController extends BaseController
             $start = $request->get('start');
             $length = $request->get('length');
             $data['recordsTotal'] = StartupPage::count();
-            $data['recordsFiltered'] = StartupPage::count();
+            $data['recordsFiltered'] = $data['recordsTotal'];
             $data['data'] = StartupPage::skip($start)->take($length)
                 ->orderBy('id', SORT_DESC)
                 ->get();
@@ -65,28 +65,77 @@ class StartupPageController extends BaseController
         foreach (array_keys($this->fields) as $field) {
             $startup->$field = $request->get($field, $this->fields[$field]);
         }
-        $img = $request->file('imgsrc');
-        if ($img->isValid()) {
+        $file = $request->file('imgsrc');
+        if (!$file) {
+            return redirect()->back()
+                ->withErrors("图片不能为空");
+        }
+        $startup->status = (int)$startup->status;
+        $startup->imgsrc = $this->uploadFile($file);
+        $startup->save();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\StartupPage', $startup->id, 1, '添加了启动页:' . $startup->name . '(' . $startup->id . ')'));
+        return redirect('/admin/startup-page/')->withSuccess('添加成功！');
+    }
+
+    public function edit($id)
+    {
+        $StartupPage = StartupPage::find((int)$id);
+        if (!$StartupPage) return redirect()->back()->withErrors("找不到该项目!");
+        foreach (array_keys($this->fields) as $field) {
+            $data[$field] = old($field, $StartupPage->$field);
+        }
+        $data['id'] = $id;
+        return view('admin.startup.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $startup = StartupPage::find((int)$id);
+        foreach (array_keys($this->fields) as $field) {
+            $startup->$field = $request->get($field);
+        }
+        $file = $request->file('imgsrc');
+        if (!$file) {
+            return redirect()->back()
+                ->withErrors("图片不能为空");
+        }
+        $startup->status = (int)$startup->status;
+        $startup->imgsrc = $this->uploadFile($file);
+        $startup->save();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\StartupPage', $startup->id, 3, '编辑了启动页：' . $startup->name));
+        return redirect('/admin/startup-page')->withSuccess('修改成功！');
+    }
+
+    public function destroy($id)
+    {
+        $StartupPage = StartupPage::find((int)$id);
+        $StartupPage->delete();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\StartupPage', $StartupPage->id, 3, '删除了启动页：' . $StartupPage->id));
+        return redirect()->back()
+            ->withSuccess("删除成功");
+    }
+
+
+    public function uploadFile($file)
+    {
+        if ($file->isValid()) {
             //获取文件的原文件名 包括扩展名
-            $yuanname = $img->getClientOriginalName();
+            $yuanname = $file->getClientOriginalName();
             //获取文件的扩展名
-            $kuoname = $img->getClientOriginalExtension();
+            $kuoname = $file->getClientOriginalExtension();
 
             //获取文件的类型
-            $type = $img->getClientMimeType();
+            $type = $file->getClientMimeType();
 
             //获取文件的绝对路径，但是获取到的在本地不能打开
-            $path = $img->getRealPath();
+            $path = $file->getRealPath();
 
             //要保存的文件名 时间+扩展名
             $filename = date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $kuoname;
             //保存文件          配置文件存放文件的名字  ，文件名，路径
-            $bool = $img->move(public_path("/upload/startup"), $filename);
+            $bool = $file->move(public_path("/upload/startup"), $filename);
         }
-        $startup->imgsrc = $filename;
-        $startup->save();
-        event(new \App\Events\userActionEvent('\App\Models\Admin\StartupPage', $startup->id, 1, '添加了启动页:' . $startup->name . '(' . $startup->id . ')'));
-        return redirect('/admin/permission/' . $startup->cid)->withSuccess('添加成功！');
+        return $filename;
     }
 
 }

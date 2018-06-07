@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class StartupPage extends Migration
+class Bootpage extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class StartupPage extends Migration
      */
     public function up()
     {
-        Schema::create('startup_page', function (Blueprint $table) {
+        Schema::create('boot_page', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('imgsrc')->comment('图片地址');
+            $table->string('imgsrc',200)->comment('图片地址');
             $table->integer('status')->comment('状态')->default(1);
-            $table->string('remarks')->comment('描述')->nullable();
+            $table->string('remarks')->comment('描述');
             $table->timestamps();
         });
     }
@@ -29,7 +29,7 @@ class StartupPage extends Migration
      */
     public function down()
     {
-        Schema::table('startup_page', function (Blueprint $table) {
+        Schema::table('boot_page', function (Blueprint $table) {
             //
         });
     }

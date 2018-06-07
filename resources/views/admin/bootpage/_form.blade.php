@@ -25,7 +25,7 @@
     <div class="col-md-10">
         <div class="kv-avatar">
             <div class="file-loading">
-                <input type="file" id="file" class="file" name="imgsrc">
+                <input type="file" multiple id="file" class="file" name="imgsrc[]">
             </div>
         </div>
     </div>
