@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+}
+
+.item {
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+}
+
+.item1 img {
+    width: 100%;
+}
+
+.item1 .remarks {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    color: #fff;
+}
+
+.item2 {
+    margin-top: 100px;
+}
+
+.item2 img {
+    width: 200px;
+}
+
+.item2 .remarks {
+    max-width: 1000px;
+    min-width: 500px;
+    margin: auto;
+    display: flex;
+}
+
+.item2 .text {
+    margin: 50px 0;
+    width: 1000px;
+}
+
+.item2 .img-left {
+    flex-direction: row-reverse;
+}
+
+.item3  {
+    height: 180px;
+    display: flex;
+    justify-content:center;
+    margin-top: 20px;
+    background: #0c0c0c;
+    color: #fff;
+}
