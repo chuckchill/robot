@@ -106,8 +106,5 @@
         @endforeach
     </div>
 </div>
-<script>
-    window.location.hash = "#jump_9";
-</script>
 </body>
 </html>
