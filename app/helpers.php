@@ -162,7 +162,7 @@ if (!function_exists('build_api_url')) {
 
     function build_api_url($url)
     {
-        return str_replace("{{BaseURL}}", "", $url);
+        return str_replace("{{BaseURL}}", "http://" . request()->getHttpHost()."/api", $url);
     }
 }
 if (!function_exists('build_api_query')) {

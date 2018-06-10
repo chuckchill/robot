@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>深圳华泰思安信息技术有限公司</title>
+    <title>接口文档</title>
     <link rel="stylesheet" href="/css/apidoc.css">
 </head>
 <body>
@@ -49,7 +49,7 @@
                             <span class="pm-method-color-post">
                                 {{$item["request"]["method"]}}
                             </span>{{$item["name"]}}</h2>
-                        <div class="docs-desc-title__url">BaseURL/account-reg</div>
+                        <div class="docs-desc-title__url">{{build_api_url($item["request"]["url"])}}</div>
                     </div>
                     <div class="docs-desc-body">
                         <div class="pm-markdown"></div>
