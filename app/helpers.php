@@ -158,3 +158,26 @@ if (!function_exists('link_img')) {
         return url("/upload/boot/" . $path);
     }
 }
+if (!function_exists('build_api_url')) {
+
+    function build_api_url($url)
+    {
+        return str_replace("{{BaseURL}}", "", $url);
+    }
+}
+if (!function_exists('build_api_query')) {
+
+    function build_api_query($data)
+    {
+        return http_build_query(collect($data)->pluck("value", "key")->toArray());
+    }
+}
+
+if (!function_exists('get_api_body')) {
+
+    function get_api_body($item)
+    {
+        $mode = array_get($item, "request.body.mode");
+        return array_get($item, "request.body." . $mode, []);
+    }
+}

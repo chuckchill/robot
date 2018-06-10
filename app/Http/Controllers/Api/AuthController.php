@@ -113,19 +113,16 @@ class AuthController extends BaseController
         $userService = new UserInfo();
         $account = $userService->getAllAccount($uid);
         return [
-            'code' => 0,
-            'message' => '登录成功',
-            'data' => [
-                'token' => $token,
-                'account' => array_get($account, 'sys.identifier', ""),
-                'mobile' => array_get($account, 'mobile.identifier', ""),
-                'email' => array_get($account, 'email.identifier', ""),
-                'nike' => array_get($account, 'email.identifier', ""),
-                'nick_name' => array_get($user, "nick_name", ""),
-                'gender' => array_get($user, "gender", ""),
-                'birthday' => array_get($user, "birthday", ""),
-                'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
-            ]
+            'token' => $token,
+            'account' => array_get($account, 'sys.identifier', ""),
+            'mobile' => array_get($account, 'mobile.identifier', ""),
+            'email' => array_get($account, 'email.identifier', ""),
+            'nike' => array_get($account, 'email.identifier', ""),
+            'nick_name' => array_get($user, "nick_name", ""),
+            'gender' => array_get($user, "gender", ""),
+            'birthday' => array_get($user, "birthday", ""),
+            'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
+
         ];
     }
 }

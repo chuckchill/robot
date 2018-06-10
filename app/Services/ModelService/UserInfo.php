@@ -2,6 +2,7 @@
 
 namespace App\Services\ModelService;
 
+use App\Models\Api\User;
 use App\Models\Api\UsersAuth;
 
 /**
@@ -20,5 +21,21 @@ class UserInfo
             ->keyBy('identity_type')
             ->toArray();
         return $account;
+    }
+
+    /**
+     * @param $identityType
+     * @param $identifier
+     * @param string $credential
+     */
+    public function registerData($identityType, $identifier, $credential = "", $uid)
+    {
+        $userAuth = new UsersAuth();
+        $userAuth->uid = $uid;
+        $userAuth->identity_type = $identityType;
+        $userAuth->identifier = $identifier;
+        $userAuth->credential = $credential;
+        $userAuth->ifverified = "YES";
+        $userAuth->save();
     }
 }

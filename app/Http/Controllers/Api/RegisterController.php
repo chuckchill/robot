@@ -14,6 +14,7 @@ use App\Models\Api\User;
 use App\Models\Api\UsersAuth;
 use App\Services\Email;
 use App\Services\Helper;
+use App\Services\ModelService\UserInfo;
 use App\Services\Sms;
 use App\Services\Validator;
 use Dingo\Api\Exception\ValidationHttpException;
@@ -24,6 +25,12 @@ use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends BaseController
 {
+    public $userInfo;
+
+    public function __construct(UserInfo $userInfo)
+    {
+        $this->userInfo = $userInfo;
+    }
 
     /**
      * @param Request $request
@@ -40,11 +47,14 @@ class RegisterController extends BaseController
             if (!Helper::isPassword($password)) {
                 throw new CodeException(config("code.reg.password_invalid"));
             }
+
             $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
             if ($userAuth) {
                 throw new CodeException(config("code.reg.acount_exist"));
             }
-            $this->registerData("sys", $account, Hash::make($password));
+            $user = new User();
+            $user->save();
+            $this->userInfo->registerData("sys", $account, Hash::make($password), $user->id);
             return $this->response->array(['code' => 0, 'message' => '注册成功']);
         } catch (CodeException $e) {
             return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
@@ -68,7 +78,10 @@ class RegisterController extends BaseController
             if ($userAuth) {
                 throw new CodeException(config("code.reg.mobile_exist"));
             }
-            $this->registerData("mobile", $mobile);
+
+            $user = new User();
+            $user->save();
+            $this->userInfo->registerData("mobile", $mobile, "", $user->id);
             return $this->response->array(['code' => 0, 'message' => '注册成功']);
         } catch (\Exception $e) {
             return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
@@ -91,7 +104,9 @@ class RegisterController extends BaseController
             if ($userAuth) {
                 throw new CodeException(config("code.reg.email_exist"));
             }
-            $this->registerData("email", $email);
+            $user = new User();
+            $user->save();
+            $this->userInfo->registerData("email", $email, "", $user->id);
             return $this->response->array(['code' => 0, 'message' => '注册成功']);
         } catch (CodeException $e) {
             return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
@@ -144,21 +159,4 @@ class RegisterController extends BaseController
         }
     }
 
-    /**
-     * @param $identityType
-     * @param $identifier
-     * @param string $credential
-     */
-    public function registerData($identityType, $identifier, $credential = "")
-    {
-        $user = new User();
-        $user->save();
-        $userAuth = new UsersAuth();
-        $userAuth->uid = $user->id;
-        $userAuth->identity_type = $identityType;
-        $userAuth->identifier = $identifier;
-        $userAuth->credential = $credential;
-        $userAuth->ifverified = "YES";
-        $userAuth->save();
-    }
 }

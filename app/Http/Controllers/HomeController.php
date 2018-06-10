@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -25,5 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function apiDoc()
+    {
+        $content = file_get_contents(storage_path("/system/apidoc.json"));
+        $doc = json_decode($content, true);
+        return view('apidoc', compact("doc"));
     }
 }

@@ -24,7 +24,11 @@ class AppConfigController extends BaseController
         $url = $startup ? $startup->imgsrc : "";
         return $this->response
             ->array([
-                'url' => startup_img($url)
+                'code' => 0,
+                'message' => "获取成功",
+                "data" => [
+                    'url' => startup_img($url)
+                ]
             ]);
     }
 
@@ -39,6 +43,12 @@ class AppConfigController extends BaseController
             return link_img($url);
         }, $urls);
         return $this->response
-            ->array($urls);
+            ->array([
+                'code' => 0,
+                'message' => "获取成功",
+                "data" => [
+                    'url' => $urls
+                ]
+            ]);
     }
 }

@@ -9,14 +9,21 @@
 namespace App\Services;
 
 
+use App\Facades\Logger;
+
 class Helper
 {
-    public static function mkDir($dir)
+    public static function mkDir($dirpath)
     {
-        if (!is_dir($dir)) {
-            mkdir($dir);
+        if (!file_exists($dirpath)) {
+            $old_mask = umask(0);
+            if (!mkdir($dirpath, 0777, true)) {
+                Logger::info("创建" . date('Y-m-d', time()) . "日志目录失败", "other");
+                return false;
+            }
+            umask($old_mask);
         }
-        return $dir;
+        return $dirpath;
     }
 
     public static function isUserName($user)
@@ -46,4 +53,5 @@ class Helper
     {
         return config('other.mobile_action');
     }
+
 }
