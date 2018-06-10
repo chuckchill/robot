@@ -330,7 +330,7 @@
 					]
 				},
 				"url": "{{BaseURL}}/bind-device",
-				"description": null
+				"description": " Code    Message\r\n    0         注册成功\r\n    1        注册用户名不合法\r\n    2       注册用户名已存在\r\n    3      手机号码不合法\r\n    4      地址不合法\r\n    5      密码不合法\r\n   6      邮箱验证码输入不合法\r\n  7      验证邮箱不一致                \r\n   8  邮箱验证码不一致\r\n  9    邮箱验证码超时          "
 			},
 			"response": []
 		},
@@ -488,6 +488,36 @@
 				},
 				"url": "{{BaseURL}}/get-device-binder",
 				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取用户绑定设备",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-user-device",
+				"description": ""
 			},
 			"response": []
 		}
