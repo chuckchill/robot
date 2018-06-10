@@ -326,18 +326,21 @@ class UserController extends BaseController
                 throw new CodeException(config('code.login.device_sno_notexist'));
             }
             $deviceBind = DeviceBind::where(['device_id' => $device->id])
-                -leftJoin("app_users_auth")->get();
+                ->leftJoin("app_users_auth", 'app_users_auth.uid', '=', 'devices_bind.uid')
+                ->where(['app_users_auth.identity_type' => "sys"])
+                ->get();
+
             $data = $deviceBind->map(function ($item, $key) use ($device) {
                 return [
-                    'account' => $item->is_master,
+                    'account' => $item->identifier,
                     'is_master' => (boolean)$item->is_master,
                     'is_enable' => (boolean)$item->is_enable,
                     'bind_time' => $item->created_at->toDateTimeString(),
-                    'role' => $item->role,
+                    'role' => (string)$item->role,
                     'name' => $device->name,
                 ];
             });
-            return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => Storage::get($path)]);
+            return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => $data]);
         } catch (CodeException $e) {
             return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
         }
@@ -350,15 +353,31 @@ class UserController extends BaseController
     public function getUserDevice(Request $request)
     {
         try {
-            $sno = $request->get("sno");
             $user = \JWTAuth::authenticate();
-            $device = Devices::where(["sno" => $sno])->first();
-            if (!$device) {
-                throw new CodeException(config('code.login.device_sno_notexist'));
-            }
-            $path = "alarmclock/" . ($user->id % 20) . "/" . $user->id . "/";
-            $path = Helper::mkDir($path) . md5($sno) . ".pb";
-            return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => Storage::get($path)]);
+            $deviceBind = DeviceBind::select([
+                "app_users_auth.identifier", "devices_bind.is_master",
+                "devices_bind.is_enable", "devices_bind.created_at",
+                "devices_bind.role", "devices.name",
+            ])
+                ->leftJoin("app_users_auth", 'app_users_auth.uid', '=', 'devices_bind.uid')
+                ->leftJoin("devices", 'devices.id', '=', 'devices_bind.device_id')
+                ->where([
+                    'app_users_auth.identity_type' => "sys",
+                    'devices_bind.uid' => $user->id
+                ])
+                ->get();
+
+            $data = $deviceBind->map(function ($item, $key) {
+                return [
+                    'account' => $item->identifier,
+                    'is_master' => (boolean)$item->is_master,
+                    'is_enable' => (boolean)$item->is_enable,
+                    'bind_time' => $item->created_at->toDateTimeString(),
+                    'role' => (string)$item->role,
+                    'name' => $item->name,
+                ];
+            });
+            return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => $data]);
         } catch (CodeException $e) {
             return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
         }
