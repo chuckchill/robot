@@ -42,8 +42,8 @@
         </ul>
     </div>
     <div class="docs-body docs-body--double-col">
-        @foreach(array_get($doc,"item",[]) as $item)
-            <div class="docs-item" id="#jump_{{$key}}">
+        @foreach(array_get($doc,"item",[]) as $key=>$item)
+            <div class="docs-item" id="jump_{{$key}}">
                 <div class="docs-desc">
                     <div><h2 class="pm-h2 docs-desc-title docs-desc-title--request">
                             <span class="pm-method-color-post">
@@ -106,5 +106,8 @@
         @endforeach
     </div>
 </div>
+<script>
+    window.location.hash = "#jump_9";
+</script>
 </body>
 </html>
