@@ -148,21 +148,26 @@ if (!function_exists('startup_img')) {
 
     function startup_img($path)
     {
-        return url("/upload/startup/" . $path);
+        if (is_file(public_path("/upload/startup/" . $path))) {
+            return url("/upload/startup/" . $path);
+        }
+        return "";
     }
 }
 if (!function_exists('link_img')) {
 
     function link_img($path)
     {
-        return url("/upload/boot/" . $path);
+        if (is_file(public_path("/upload/boot/" . $path))) {
+            return url("/upload/boot/" . $path);
+        }
     }
 }
 if (!function_exists('build_api_url')) {
 
     function build_api_url($url)
     {
-        return str_replace("{{BaseURL}}", "http://" . request()->getHttpHost()."/api", $url);
+        return str_replace("{{BaseURL}}", "http://" . request()->getHttpHost() . "/api", $url);
     }
 }
 if (!function_exists('build_api_query')) {

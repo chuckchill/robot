@@ -19,9 +19,11 @@ Route::post('logout', 'LoginController@logout');
 Route::get('/', 'IndexController@index');
 
 
-Route::get('index', ['as' => 'admin.index', 'uses' => function () {
-    return redirect('/admin/log-viewer');
-}]);
+Route::get('index', [
+    'as' => 'admin.index', 'uses' => function () {
+        return redirect('/admin/log-viewer');
+    }
+]);
 
 
 Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () {
@@ -57,6 +59,11 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::get('boot-page/index', ['as' => 'admin.boot-page.index', 'uses' => 'BootPageController@index']);  //用户管理
     Route::post('boot-page/index', ['as' => 'admin.boot-page.index', 'uses' => 'BootPageController@index']);  //
     Route::resource('boot-page', 'BootPageController', ['names' => ['update' => 'admin.boot-page.edit', 'store' => 'admin.boot-page.create']]);
+
+    //视频管理
+    Route::get('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //用户管理
+    Route::post('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //
+    Route::resource('videos', 'VideosController', ['names' => ['update' => 'admin.videos.edit', 'store' => 'admin.videos.create']]);
 });
 
 Route::get('/', function () {

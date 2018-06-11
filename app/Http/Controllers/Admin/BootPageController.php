@@ -71,7 +71,7 @@ class BootPageController extends BaseController
         $startup->status = (int)$startup->status;
         $startup->imgsrc = $this->uploadFile($file);
         $startup->save();
-        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $startup->id, 1, '添加了启动页:' . $startup->name . '(' . $startup->id . ')'));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $startup->id, 1, '添加了引导页:' . $startup->name . '(' . $startup->id . ')'));
         return redirect('/admin/boot-page/')->withSuccess('添加成功！');
     }
 
@@ -100,7 +100,7 @@ class BootPageController extends BaseController
         $startup->status = (int)$startup->status;
         $startup->imgsrc = $this->uploadFile($file);
         $startup->save();
-        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $startup->id, 3, '编辑了启动页：' . $startup->name));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $startup->id, 3, '编辑了引导页：' . $startup->name));
         return redirect('/admin/boot-page')->withSuccess('修改成功！');
     }
 
@@ -108,7 +108,7 @@ class BootPageController extends BaseController
     {
         $BootPage = BootPage::find((int)$id);
         $BootPage->delete();
-        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $BootPage->id, 3, '删除了启动页：' . $BootPage->id));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $BootPage->id, 3, '删除了引导页：' . $BootPage->id));
         return redirect()->back()
             ->withSuccess("删除成功");
     }

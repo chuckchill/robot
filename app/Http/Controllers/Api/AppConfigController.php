@@ -47,7 +47,7 @@ class AppConfigController extends BaseController
                 'code' => 0,
                 'message' => "获取成功",
                 "data" => [
-                    'url' => $urls
+                    'url' => array_filter($urls)
                 ]
             ]);
     }

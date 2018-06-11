@@ -10,7 +10,7 @@
     <div class="row page-title-row" id="dangqian" style="margin:5px;">
         <div class="col-md-12 text-right">
             @if(Gate::forUser(auth('admin')->user())->check('admin.startup-page.create'))
-                <a href="/admin/boot-page/create" class="btn btn-success btn-md"><i
+                <a href="/admin/videos/create" class="btn btn-success btn-md"><i
                             class="fa fa-plus-circle"></i> 添加启动页 </a>
             @endif
         </div>
@@ -38,9 +38,9 @@
                         <tr>
                             <th data-sortable="false" class="hidden-sm"></th>
                             <th class="hidden-sm">状态</th>
-                            <th class="hidden-sm">地址</th>
-                            <th class="hidden-md">新增时间</th>
-                            <th class="hidden-md">更新时间</th>
+                            <th class="hidden-sm">key值</th>
+                            <th class="hidden-md">名称</th>
+                            <th class="hidden-md">创建时间</th>
                             <th class="hidden-md">操作</th>
                         </tr>
                         </thead>
@@ -67,7 +67,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <form class="deleteForm" method="POST" action="/boot-page/list">
+                    <form class="deleteForm" method="POST" action="/videos/list">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -114,7 +114,7 @@
                 order: [[1, "desc"]],
                 serverSide: true,
                 ajax: {
-                    url: '/admin/boot-page/index',
+                    url: '/admin/videos/index',
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -123,9 +123,9 @@
                 "columns": [
                     {"data": "id"},
                     {"data": "status"},
-                    {"data": "imgsrc"},
+                    {"data": "key"},
+                    {"data": "name"},
                     {"data": "created_at"},
-                    {"data": "updated_at"},
                     {"data": "action"},
                 ],
                 columnDefs: [
@@ -145,24 +145,13 @@
                         }
                     },
                     {
-                        'targets': 2,
-                        "render": function (data, type, row) {
-                            imgs = data.split("@");
-                            str = "";
-                            for (i = 0; i < imgs.length; i++) {
-                                str += "<img style='width:30px;float: left;margin: 2px' src='/upload/boot/" + imgs[i] + "'>"
-                            }
-                            return str;
-                        }
-                    },
-                    {
                         'targets': -1, "render": function (data, type, row) {
                             var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.edit') ? 1 : 0}};
                             var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.destroy') ? 1 :0}};
                             var str = '';
                             //编辑
                             if (row_edit) {
-                                str += '<a style="margin:3px;" href="/admin/boot-page/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                str += '<a style="margin:3px;" href="/admin/videos/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
                             }
                             //删除
                             if (row_delete) {
