@@ -64,6 +64,9 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::get('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //用户管理
     Route::post('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //
     Route::resource('videos', 'VideosController', ['names' => ['update' => 'admin.videos.edit', 'store' => 'admin.videos.create']]);
+    //其他配置
+    Route::get('other/index', ['as' => 'admin.videos.index', 'uses' => 'OtherController@index']);  //用户管理
+    Route::post('other/keyword', ['as' => 'admin.other.keywork', 'uses' => 'OtherController@keyword']);  //
 });
 
 Route::get('/', function () {
