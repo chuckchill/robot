@@ -29,7 +29,7 @@ class Bootpage extends Migration
      */
     public function down()
     {
-        Schema::table('boot_page', function (Blueprint $table) {
+        Schema::dropIfExists('boot_page', function (Blueprint $table) {
             //
         });
     }

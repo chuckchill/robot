@@ -29,7 +29,7 @@ class StartupPage extends Migration
      */
     public function down()
     {
-        Schema::table('startup_page', function (Blueprint $table) {
+        Schema::dropIfExists('startup_page', function (Blueprint $table) {
             //
         });
     }
