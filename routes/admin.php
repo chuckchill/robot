@@ -47,14 +47,15 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     //操作日志查询
     Route::get('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
     Route::post('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
+
     //App启动页配置
     Route::get('startup-page/index', ['as' => 'admin.startup-page.index', 'uses' => 'StartupPageController@index']);  //用户管理
-    Route::post('startup-page/index', ['as' => 'dmin.startup-page.index', 'uses' => 'StartupPageController@index']);  //
+    Route::post('startup-page/index', ['as' => 'admin.startup-page.index', 'uses' => 'StartupPageController@index']);  //
     Route::resource('startup-page', 'StartupPageController', ['names' => ['update' => 'admin.startup-page.edit', 'store' => 'admin.startup-page.create']]);
 
     //App引导页配置
     Route::get('boot-page/index', ['as' => 'admin.boot-page.index', 'uses' => 'BootPageController@index']);  //用户管理
-    Route::post('boot-page/index', ['as' => 'dmin.boot-page.index', 'uses' => 'BootPageController@index']);  //
+    Route::post('boot-page/index', ['as' => 'admin.boot-page.index', 'uses' => 'BootPageController@index']);  //
     Route::resource('boot-page', 'BootPageController', ['names' => ['update' => 'admin.boot-page.edit', 'store' => 'admin.boot-page.create']]);
 });
 

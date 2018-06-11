@@ -18,7 +18,7 @@ class CreateAdminPermissionsTable extends Migration
             $table->string('name')->comment('权限名');
             $table->string('label')->comment('权限解释名称');
             $table->string('description')->comment('描述与备注');
-            $table->tinyInteger('cid')->comment('级别');
+            $table->integer('cid')->comment('级别');
             $table->string('icon')->comment('图标');
             $table->timestamps();
         });
