@@ -75,7 +75,7 @@
                 var putExtra = {
                     fname: "",
                     params: {name:fileName},
-                    mimeType: ["video/quicktime","video/x-mpeg2","video/x-msvideo"]
+                    //mimeType: ["video/quicktime","video/x-mpeg2","video/x-msvideo"]
                 };
                 var fileObj = document.getElementById("videoFile");
                 var fileName = document.getElementById("fileName").value;

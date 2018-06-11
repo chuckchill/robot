@@ -21,17 +21,19 @@
     <div class="row">
         <div class="col-xs-12">
             @if(Gate::forUser(auth('admin')->user())->check('admin.other.edit'))
-                <div class="box">
-                    <div class="title col-xs-12">
-                        关键词配置
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        热门关键词设置:
                     </div>
-                    <div class="content">
-                        <textarea class="form-control" rows="3" id="keyword">{{$keyword}}</textarea>
-                        <p>每个关键词用,分开例如(a,b,c)</p>
-                        <button type="button" id="submitKeyword" class="btn btn-primary btn-md">
-                            <i class="fa fa-plus-circle"></i>
-                            提交
-                        </button>
+                    <div class="table-responsive">
+                        <div class="content col-xs-6">
+                            <textarea class="form-control" rows="3" id="keyword">{{$keyword}}</textarea>
+                            <p>每个关键词用,分开例如(a,b,c)</p>
+                            <button type="button" id="submitKeyword" class="btn btn-primary btn-md">
+                                <i class="fa fa-plus-circle"></i>
+                                提交
+                            </button>
+                        </div>
                     </div>
                 </div>
             @endif

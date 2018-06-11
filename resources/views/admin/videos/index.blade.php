@@ -11,7 +11,7 @@
         <div class="col-md-12 text-right">
             @if(Gate::forUser(auth('admin')->user())->check('admin.startup-page.create'))
                 <a href="/admin/videos/create" class="btn btn-success btn-md"><i
-                            class="fa fa-plus-circle"></i> 添加启动页 </a>
+                            class="fa fa-plus-circle"></i> 添加视频 </a>
             @endif
         </div>
     </div>

@@ -43,6 +43,11 @@ return [
                 ["label" => "admin.boot-page.edit", "name" => "修改引导页"],
                 ["label" => "admin.boot-page.create", "name" => "添加引导页"],
                 ["label" => "admin.boot-page.destroy", "name" => "删除引导页"],
+                ["label" => "admin.videos.index", "name" => "视频管理"],
+                ["label" => "admin.videos.create", "name" => "添加视频"],
+                ["label" => "admin.videos.edit", "name" => "修改视频"],
+                ["label" => "admin.other.index", "name" => "其他设置"],
+                ["label" => "admin.other.keyword", "name" => "热门关键词"],
             ],
         ],
         /* [
