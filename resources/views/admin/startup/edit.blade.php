@@ -9,9 +9,8 @@
 @section('content')
     <div class="main animsition">
         <div class="container-fluid">
-
             <div class="row">
-                <div class="">
+                <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">编辑引导页</h3>

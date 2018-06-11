@@ -11,7 +11,7 @@
         <div class="container-fluid">
 
             <div class="row">
-                <div class="">
+                <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">编辑用户(修改密码则填写密码)</h3>

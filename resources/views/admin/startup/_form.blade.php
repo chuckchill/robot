@@ -22,7 +22,7 @@
 @endsection
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">图片</label>
-    <div class="col-md-10">
+    <div class="col-md-6">
         <div class="kv-avatar">
             <div class="file-loading">
                 <input type="file" id="file" class="file" name="imgsrc">
@@ -32,7 +32,7 @@
 </div>
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">状态</label>
-    <div class="col-md-10">
+    <div class="col-md-6">
         <select name="status">
             <option value="1" @if($status==1) selected @endif>激活</option>
             <option value="0" @if($status==0) selected @endif>不激活</option>
@@ -42,7 +42,7 @@
 
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">描述</label>
-    <div class="col-md-10">
+    <div class="col-md-6">
         <input type="text" class="form-control" name="remakr" id="tag" value="{{ $remarks }}" autofocus>
     </div>
 </div>
