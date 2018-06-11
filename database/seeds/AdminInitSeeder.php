@@ -26,8 +26,7 @@ class AdminInitSeeder extends Seeder
         }
         \DB::select(substr($str, 0, -1));
         $admin = new \App\Models\Admin\AdminUser();
-        $admin->
-        id = 1;
+        $admin->id = 1;
         $admin->name = 'root';
         $admin->email = 'root@admin.com';
         $admin->password = bcrypt('root');
