@@ -102,6 +102,11 @@ class AuthController extends BaseController
         }
     }
 
+    public function wxLogin(Request $request)
+    {
+        $code = $request->get("code");
+    }
+
     /**
      * @param $uid
      * @return array
@@ -125,4 +130,5 @@ class AuthController extends BaseController
 
         ];
     }
+
 }

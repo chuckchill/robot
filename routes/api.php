@@ -16,6 +16,8 @@ $api->post('account-login', ['uses' => 'AuthController@account']);//账号登录
 $api->post('sms-login', ['uses' => 'AuthController@mobile']);//手机号码登录
 $api->post('login-send-sms', ['uses' => 'AuthController@sendSms']);//账号注册
 
+$api->post('wx-login', ['uses' => 'AuthController@wxLogin']);//微信登录
+
 $api->group(['middleware' => ['api.auth']], function ($api) {
     $api->get('test', ['uses' => 'IndexController@index']);
 
