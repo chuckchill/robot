@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Auth;
 
 class VideosController extends BaseController
 {
+    protected $fields = [
+        'type' => '',
+        'status' => '',
+        'name' => '',
+    ];
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -63,5 +69,44 @@ class VideosController extends BaseController
         return view('admin.videos.create', [
             'token' => $token
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $video = Videos::find($id);
+        if (!$video) return redirect()->back()->withErrors("找不到该视频!");
+        foreach (array_keys($this->fields) as $field) {
+            $data[$field] = old($field, $video->$field);
+        }
+        $data['id'] = $id;
+        return view('admin.videos.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $video = Videos::find((int)$id);
+        foreach (array_keys($this->fields) as $field) {
+            if ($request->get($field)!="") {
+                $video->$field = $request->get($field);
+            }
+        }
+        $video->save();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Videos', $video->id, 3, '编辑了视频：' . $video->name));
+        return redirect('/admin/videos')->withSuccess('修改成功！');
+    }
+
+    public function destroy($id)
+    {
+        $video = Videos::find((int)$id);
+        if (!$video) return redirect()->back()->withErrors("找不到该视频!");
+        $video->delete();
+        event(new \App\Events\userActionEvent('\App\Models\Admin\Videos', $video->id, 2, '删除了视频：' . $video->id . "({$video->key})"));
+        return redirect()->back()
+            ->withSuccess("删除成功");
     }
 }

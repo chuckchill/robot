@@ -176,7 +176,7 @@ class BackendUserController extends BaseController
             return redirect()->back()
                 ->withErrors("删除失败");
         }
-        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $tag->id, 3, '删除了用户：' . $tag->name));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\AdminUser', $tag->id, 2, '删除了用户：' . $tag->name));
         return redirect()->back()
             ->withSuccess("删除成功");
     }

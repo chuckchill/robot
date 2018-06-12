@@ -180,7 +180,7 @@
             }).draw();
             $("table").delegate('.delBtn', 'click', function () {
                 var id = $(this).attr('attr');
-                $('.deleteForm').attr('action', '/admin/startup-page/' + id);
+                $('.deleteForm').attr('action', '/admin/videos/' + id);
                 $("#modal-delete").modal();
             });
         });

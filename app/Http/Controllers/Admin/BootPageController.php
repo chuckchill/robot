@@ -78,7 +78,7 @@ class BootPageController extends BaseController
     public function edit($id)
     {
         $BootPage = BootPage::find((int)$id);
-        if (!$BootPage) return redirect()->back()->withErrors("找不到该项目!");
+        if (!$BootPage) return redirect()->back()->withErrors("找不到引导页!");
         foreach (array_keys($this->fields) as $field) {
             $data[$field] = old($field, $BootPage->$field);
         }
@@ -107,8 +107,9 @@ class BootPageController extends BaseController
     public function destroy($id)
     {
         $BootPage = BootPage::find((int)$id);
+        if (!$BootPage) return redirect()->back()->withErrors("找不到引导页!");
         $BootPage->delete();
-        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $BootPage->id, 3, '删除了引导页：' . $BootPage->id));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\BootPage', $BootPage->id, 2, '删除了引导页：' . $BootPage->id));
         return redirect()->back()
             ->withSuccess("删除成功");
     }

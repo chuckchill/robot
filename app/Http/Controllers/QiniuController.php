@@ -47,9 +47,11 @@ class QiniuController extends Controller
         $buid = array_get($body, 'buid');
         $status = array_get($body, 'status');
         $type = array_get($body, 'type');
+        $name = $name ? pathinfo($name) : pathinfo($fname);
+
         $video = new Videos();
         $video->key = $key;
-        $video->name = $name ? $name : $fname;
+        $video->name = array_get($name, 'filename', time());
         $video->buid = $buid;
         $video->key = $key;
         $video->status = (int)$status;

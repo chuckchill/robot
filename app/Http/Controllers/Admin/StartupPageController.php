@@ -109,6 +109,7 @@ class StartupPageController extends BaseController
     public function destroy($id)
     {
         $StartupPage = StartupPage::find((int)$id);
+        if (!$StartupPage) return redirect()->back()->withErrors("找不到启动页!");
         $StartupPage->delete();
         event(new \App\Events\userActionEvent('\App\Models\Admin\StartupPage', $StartupPage->id, 3, '删除了启动页：' . $StartupPage->id));
         return redirect()->back()
