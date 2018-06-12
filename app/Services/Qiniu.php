@@ -31,11 +31,11 @@ class Qiniu
         return $this->Auth->uploadToken($bucket, null, 3600, $policy, true);
     }
 
-    public function getDownloadUrl()
+    public function getDownloadUrl($key, $expires = 3600)
     {
-        $baseUrl = 'http://if-pri.qiniudn.com/qiniu.png?imageView2/1/h/500';
-        $signedUrl = $this->Auth->privateDownloadUrl($baseUrl);
-        echo $signedUrl;
+        $baseUrl = config('qiniu.bucket.videos.private_url') . '/' . $key;
+        $signedUrl = $this->Auth->privateDownloadUrl($baseUrl, $expires);
+        return $signedUrl;
     }
 
     public function vertifyCallback($url)

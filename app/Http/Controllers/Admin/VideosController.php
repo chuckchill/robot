@@ -65,7 +65,7 @@ class VideosController extends BaseController
             'callbackBody' => json_encode($returnBody),
             'callbackBodyType' => 'application/json'
         );
-        $token = $qn->getToken(config('qiniu.bucket.videos'), $policy);
+        $token = $qn->getToken(config('qiniu.bucket.videos.bucket'), $policy);
         return view('admin.videos.create', [
             'token' => $token
         ]);
@@ -91,7 +91,7 @@ class VideosController extends BaseController
     {
         $video = Videos::find((int)$id);
         foreach (array_keys($this->fields) as $field) {
-            if ($request->get($field)!="") {
+            if ($request->get($field) != "") {
                 $video->$field = $request->get($field);
             }
         }
@@ -108,5 +108,13 @@ class VideosController extends BaseController
         event(new \App\Events\userActionEvent('\App\Models\Admin\Videos', $video->id, 2, '删除了视频：' . $video->id . "({$video->key})"));
         return redirect()->back()
             ->withSuccess("删除成功");
+    }
+
+    public function show($key)
+    {
+        $qn=new Qiniu();
+        return view('admin.videos.show', [
+            'video_url'=>$qn->getDownloadUrl($key)
+        ]);
     }
 }

@@ -122,7 +122,7 @@
                         "x:status": videoStatus,
                         "x:type": videoType
                     },
-                     mimeType: ["video/*"]
+                    mimeType: ["video/x-flv", "video/quicktime", "video/3gpp", "video/x-msvideo", "video/x-ms-wmv", "video/mp4"]
                 };
                 setProgressRate(0)
                 $(".progress").removeClass("hidden")

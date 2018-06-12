@@ -63,7 +63,14 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     //视频管理
     Route::get('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //用户管理
     Route::post('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //
-    Route::resource('videos', 'VideosController', ['names' => ['update' => 'admin.videos.edit', 'store' => 'admin.videos.create']]);
+    Route::resource('videos', 'VideosController', [
+        'names' =>
+            [
+                'update' => 'admin.videos.edit',
+                'store' => 'admin.videos.create',
+                'show' => 'admin.videos.show',
+            ]
+    ]);
 
     //其他配置
     Route::get('other/index', ['as' => 'admin.other.index', 'uses' => 'OtherController@index']);  //用户管理

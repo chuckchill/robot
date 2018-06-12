@@ -8,8 +8,14 @@
 return [
     'accessKey' => env('QINIU_ACCESS_KEY', 'RvHinMYEkzrAkFsxZf5k_xaC4zs0LykUrgBRWdOL'),
     'secretKey' => env('QINIU_SECRET_KEY', 'BPyyroKdKjvh-agWvBgmBVsJ2Fh-l6w14JzgidSD'),
-    'bucket'=>[
-        'videos'=>env('QINIU_VIDEO_BUCKET', 'videos'),
-        'app'=>env('QINIU_APP_BUCKET', 'app'),
+    'bucket' => [
+        'videos' => [
+            'bucket' => env('QINIU_VIDEO_BUCKET', 'chuckchill'),
+            'private_url' => env('QINIU_VIDEO_URL', 'http://7xlb8s.com1.z0.glb.clouddn.com'),
+        ],
+        'app' => [
+            'bucket' => env('QINIU_APP_BUCKET', 'app'),
+            'private_url' => env('QINIU_APP_URL', '')
+        ]
     ]
 ];
