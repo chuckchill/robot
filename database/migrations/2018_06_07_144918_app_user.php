@@ -31,6 +31,6 @@ class AppUser extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('app_user');
+        Schema::dropIfExists('app_users');
     }
 }

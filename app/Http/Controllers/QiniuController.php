@@ -35,8 +35,9 @@ class QiniuController extends Controller
         $qn = new Qiniu();
         if (!$qn->vertifyCallback()) {
             Logger::info('回调鉴权失败', 'qiniu');
-            return false;
+            return ['ret' => 'failed'];
         }
         Logger::info("回调实体:" . json_encode($request->all()), 'qiniu');
+        return ['ret' => 'success'];
     }
 }

@@ -23,16 +23,15 @@
                                     <div class="col-md-6">
                                         <div class="kv-avatar">
                                             <div class="file-loading">
-                                                <input type="file" id="videoFile" class="file">
+                                                <input type="file" id="videoFile" class="file" />
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="tag" class="col-md-2 control-label">名称</label>
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" id="fileName">
+                                        <input placeholder="前端显示的名称" type="text" class="form-control" id="fileName">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -46,7 +45,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <div class="col-md-4 col-md-offset-3">
                                         <button type="button" id="uploadBtn" class="btn btn-primary btn-md">
@@ -55,7 +53,6 @@
                                         </button>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -71,13 +68,12 @@
             var observer = {
                 next: function (res) {
                     console.log(res)
-                    var rate =res.total.percent.toFixed(2)
+                    var rate = res.total.percent.toFixed(2)
                     $("div[role='progressbar']").css("width", rate + "%");
                     $(".process-remarks").html(rate + "%");
                 },
                 error: function (err) {
-                    console.log(err)
-                    $("div[role='progressbar']").removeClass("progress-bar-success").addClass("progress-bar-danger")
+                    $(".progress").addClass("hidden")
                 },
                 complete: function (res) {
                     $(".progress").addClass("hidden")
@@ -90,12 +86,14 @@
             $("#uploadBtn").on("click", function () {
                 var fileObj = document.getElementById("videoFile");
                 var fileName = document.getElementById("fileName").value;
+                if (fileObj.files.length != 1) {
+                    alert("请选择上传文件");
+                }
                 var putExtra = {
                     fname: fileObj.files[0].name,
                     params: {name: fileName},
-                    //mimeType: ["video/quicktime","video/x-mpeg2","video/x-msvideo"]
+                    // mimeType: ["video/quicktime", "video/x-mpeg2", "video/x-msvideo"]
                 };
-                console.log(putExtra)
                 $(".progress").removeClass("hidden")
                 var observable = qiniu.upload(fileObj.files[0], null, "{{$token}}", putExtra, config)
                 var subscription = observable.subscribe(observer) // 上传开始
