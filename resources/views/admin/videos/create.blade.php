@@ -23,15 +23,34 @@
                                     <div class="col-md-6">
                                         <div class="kv-avatar">
                                             <div class="file-loading">
-                                                <input type="file" id="videoFile" class="file" />
+                                                <input type="file" id="videoFile" class="file"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tag" class="col-md-2 control-label">名称</label>
+                                    <label for="tag" class="col-md-2 control-label">名称(前端显示的名称)</label>
                                     <div class="col-md-4">
-                                        <input placeholder="前端显示的名称" type="text" class="form-control" id="fileName">
+                                        <input type="text" class="form-control" id="fileName">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tag" class="col-md-2 control-label">状态</label>
+                                    <div class="col-md-4">
+                                        <select id="videoStatus" class="form-control" name="status">
+                                            <option value="1">激活</option>
+                                            <option value="0">不激活</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tag" class="col-md-2 control-label">类型</label>
+                                    <div class="col-md-4">
+                                        <select id="videoType" class="form-control" name="type">
+                                            @foreach(config('admin.videos.type') as $key=>$type)
+                                                <option value="{{$key}}">{{$type}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -62,17 +81,22 @@
     </div>
 @endsection
 @section("js")
+    <script src="/js/backend.js"></script>
     <script src="https://unpkg.com/qiniu-js@2.3.0/dist/qiniu.min.js"></script>
     <script>
         $(function () {
+            var setProgressRate = function (rate) {
+                $("div[role='progressbar']").css("width", rate + "%");
+                $(".process-remarks").html(rate + "%");
+            }
             var observer = {
                 next: function (res) {
                     console.log(res)
                     var rate = res.total.percent.toFixed(2)
-                    $("div[role='progressbar']").css("width", rate + "%");
-                    $(".process-remarks").html(rate + "%");
+                    setProgressRate(rate)
                 },
                 error: function (err) {
+                    qiniuError(err.code)
                     $(".progress").addClass("hidden")
                 },
                 complete: function (res) {
@@ -86,14 +110,21 @@
             $("#uploadBtn").on("click", function () {
                 var fileObj = document.getElementById("videoFile");
                 var fileName = document.getElementById("fileName").value;
+                var videoStatus = document.getElementById("videoStatus").value;
+                var videoType = document.getElementById("videoType").value;
                 if (fileObj.files.length != 1) {
                     alert("请选择上传文件");
                 }
                 var putExtra = {
                     fname: fileObj.files[0].name,
-                    params: {name: fileName},
+                    params: {
+                        "x:name": fileName,
+                        "x:status": videoStatus,
+                        "x:type": videoType
+                    },
                     // mimeType: ["video/quicktime", "video/x-mpeg2", "video/x-msvideo"]
                 };
+                setProgressRate(0)
                 $(".progress").removeClass("hidden")
                 var observable = qiniu.upload(fileObj.files[0], null, "{{$token}}", putExtra, config)
                 var subscription = observable.subscribe(observer) // 上传开始

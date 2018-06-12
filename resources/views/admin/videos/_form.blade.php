@@ -33,7 +33,7 @@
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">状态</label>
     <div class="col-md-10">
-        <select name="status">
+        <select class="form-control" name="status">
             <option value="1" @if($status==1) selected @endif>激活</option>
             <option value="0" @if($status==0) selected @endif>不激活</option>
         </select>

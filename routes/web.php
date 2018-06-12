@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/apidoc', 'HomeController@apiDoc');
 Route::get('/qiniu/index', 'QiniuController@index');
-Route::any('/qiniu/callback', ['as' => 'qiniu.callback', 'uses' => 'QiniuController@callback']);
+Route::any('/qiniu/backend-video-callback', ['as' => 'qiniu.backend_video_callback', 'uses' => 'QiniuController@backendVideoCallback']);
