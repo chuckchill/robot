@@ -40,11 +40,13 @@ class Qiniu
 
     public function vertifyCallback()
     {
-        $contentType = 'application/json';
+
+        $contentType = array_get(Request::header(), "content-type.0");
         $callbackBody = file_get_contents('php://input');
         $authorization = Request::server("HTTP_AUTHORIZATION");
         $url = route('qiniu.callback');
-        Logger::info("鉴权参数:" . json_encode(compact("callbackBody", "contentType", "authorization", "url")), 'qiniu');
+        $signRequest = $this->Auth->signRequest($url, $callbackBody, $contentType);
+        Logger::info("鉴权参数:" . json_encode(compact("callbackBody", "contentType", "authorization", "url", "signRequest")), 'qiniu');
         return $this->Auth->verifyCallback($contentType, $authorization, $url, $callbackBody);
     }
 

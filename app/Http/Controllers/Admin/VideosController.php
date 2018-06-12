@@ -46,7 +46,9 @@ class VideosController extends BaseController
         $uid= auth('admin')->user()->id;
         $returnBody = '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"name":"$(x:name)","buid":"'.$uid.'"}';
         $policy = array(
-            'returnBody' => $returnBody
+            'callbackUrl' => 'http://www.villstore.cn/qiniu/callback',
+            'callbackBody' => $returnBody,
+            'callbackBodyType' => 'application/json'
         );
         $token = $qn->getToken(config('qiniu.bucket.videos'), $policy);
         return view('admin.videos.create', [
