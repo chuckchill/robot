@@ -22,7 +22,7 @@ class Video extends Migration
             $table->string('refer_id')->nullable()->comment('相关id');
             $table->string('type')->nullable()->comment('分类');
             $table->string('channel')->comment('渠道')->default('qiniu');
-            $table->string('remarks')->comment('描述');
+            $table->string('remarks')->comment('描述')->default('');
             $table->timestamps();
         });
     }
