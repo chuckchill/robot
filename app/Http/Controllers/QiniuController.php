@@ -40,7 +40,7 @@ class QiniuController extends Controller
             return ['ret' => 'failed'];
         }
         Logger::info("回调实体:" . json_encode($request->all()), 'qiniu');
-        $body = json_decode($request->all());
+        $body = $request->all();
         $key = array_get($body, 'key');
         $name = array_get($body, 'name');
         $fname = array_get($body, 'fname');
