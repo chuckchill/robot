@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title','控制面板')
+@section('title','修改引导页')
 
 @section('pageHeader','控制面板')
 
