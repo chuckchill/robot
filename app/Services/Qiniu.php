@@ -40,7 +40,6 @@ class Qiniu
 
     public function vertifyCallback($url)
     {
-
         $contentType = array_get(Request::header(), "content-type.0");
         $callbackBody = file_get_contents('php://input');
         $authorization = Request::server("HTTP_AUTHORIZATION");

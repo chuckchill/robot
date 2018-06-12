@@ -55,6 +55,6 @@ class QiniuController extends Controller
         $video->status = (int)$status;
         $video->type = $type;
         $video->save();
-        return ['ret' => 'failed'];
+        return ['ret' => 'success'];
     }
 }
