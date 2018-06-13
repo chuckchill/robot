@@ -18,6 +18,7 @@ $api->post('login-send-sms', ['uses' => 'AuthController@sendSms']);//账号注�
 
 $api->post('wx-login', ['uses' => 'AuthController@wxLogin']);//微信登录
 
+
 $api->group(['middleware' => ['api.auth']], function ($api) {
     $api->get('test', ['uses' => 'IndexController@index']);
 
@@ -27,7 +28,12 @@ $api->group(['middleware' => ['api.auth']], function ($api) {
     $api->post('bind-device', ['uses' => 'UserController@BindDevice']);//绑定
     $api->post('auth-device', ['uses' => 'UserController@authDevice']);//授权
     $api->post('unbind-device', ['uses' => 'UserController@unBindDevice']);//解绑
-    $api->post('get-device-binder', ['uses' => 'UserController@getDeviceBinder']);//解绑
-    $api->post('get-user-device', ['uses' => 'UserController@getUserDevice']);//解绑
+    $api->post('get-device-binder', ['uses' => 'UserController@getDeviceBinder']);//获取设备绑定用户
+    $api->post('get-user-device', ['uses' => 'UserController@getUserDevice']);//获取用户绑定设备
+
+    $api->post('get-video-type', ['uses' => 'VideosController@getVideosType']);//获取视频分类
+    $api->post('get-videos', ['uses' => 'VideosController@getVideos']);//查询视频
+    $api->post('get-video-src', ['uses' => 'VideosController@getVideoSrc']);//获取视频地址
+    $api->post('get-video-upload-token', ['uses' => 'VideosController@getUploadToken']);//获取视频地址
 
 });

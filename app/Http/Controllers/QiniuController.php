@@ -59,4 +59,16 @@ class QiniuController extends Controller
         $video->save();
         return ['ret' => 'success'];
     }
+
+    public function userUploadCallback(Request $request)
+    {
+        $qn = new Qiniu();
+        $url = route('qiniu.backend_video_callback');
+        if (!$qn->vertifyCallback($url)) {
+            Logger::info('回调鉴权失败', 'qiniu');
+            return ['ret' => 'failed'];
+        }
+        Logger::info("回调实体:" . json_encode($request->all()), 'qiniu');
+        $body = $request->all();
+    }
 }

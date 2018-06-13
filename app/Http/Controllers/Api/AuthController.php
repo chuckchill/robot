@@ -14,6 +14,7 @@ use App\Models\Api\User;
 use App\Models\Api\UsersAuth;
 use App\Services\ModelService\UserInfo;
 use App\Services\Sms;
+use App\Services\Wechat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -104,7 +105,36 @@ class AuthController extends BaseController
 
     public function wxLogin(Request $request)
     {
-        $code = $request->get("code");
+        try {
+            $code = $request->get("code");
+            $wx = new Wechat();
+            $userInfo = $wx->getUserInfo($code);
+            $unionId = array_get($userInfo, "unionid");
+
+            $userAuth = UsersAuth::where(["identifier" => $unionId, "identity_type" => "wx"])->first();
+            if (!$userAuth) {
+                $userAuth = new UsersAuth();
+                $user = new User();
+            } else {
+                $user = User::where(["id" => $userAuth->uid])->first();
+            }
+            $user->nick_name = array_get($userInfo, "nickname");
+            $user->gender = array_get($userInfo, "sex") == 1 ? "男" : "女";
+            $user->profile_img = $user->profile_img ? $user->profile_img : $wx->storeImage(array_get($userInfo, "unionid"));
+            $user->save();
+            $userAuth->identifier = $unionId;
+            $userAuth->identity_type = "wx";
+            $userAuth->ifverified = "YES";
+            $userAuth->uid = $user->id;
+            $userAuth->save();
+            return $this->response->array([
+                'code' => 0,
+                'message' => '登录成功',
+                'data' => $this->getLoginData($userAuth->uid)
+            ]);
+        } catch (CodeException $e) {
+            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+        }
     }
 
     /**

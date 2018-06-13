@@ -50,5 +50,6 @@ return [
         'device_unbind' => ['code' => 10033, 'message' => '你没有绑定该设备'],
         'device_master_connot_change' => ['code' => 10034, 'message' => '主监护人的状态不允许被修改'],
         'device_require_account' => ['code' => 10035, 'message' => '绑定设备前请设置账号'],
+        'wechat_auth_error' => ['code' => 10036, 'message' => '微信授权登录失败'],
     ],
 ];

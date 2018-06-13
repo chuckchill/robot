@@ -12,7 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        '/qiniu/callback',
-        '/qiniu/backend-video-callback',
+        '/qiniu/*',
     ];
 }

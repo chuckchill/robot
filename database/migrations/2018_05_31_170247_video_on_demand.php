@@ -15,11 +15,10 @@ class VideoOnDemand extends Migration
     {
         Schema::create('videos_on_demand', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('bucket')->comment('用户');
             $table->string('channel')->comment('渠道')->default('qiniu');
             $table->string('key')->comment('存储key');
             $table->string('uid')->comment('用户id');
-            $table->string('filename')->comment('model');
+            $table->string('name')->comment('name');
             $table->string('remarks')->comment('描述');
             $table->timestamps();
         });
