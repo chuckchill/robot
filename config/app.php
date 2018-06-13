@@ -186,7 +186,8 @@ return [
 
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-        \App\Providers\LoggerServiceProvider::class
+        \App\Providers\LoggerServiceProvider::class,
+        \App\Providers\ExceptionServiceProvider::class,
 
     ],
 

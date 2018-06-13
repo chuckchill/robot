@@ -23,118 +23,107 @@ class AuthController extends BaseController
     /**
      * @param Request $request
      * @return mixed
+     * @throws CodeException
      */
     public function account(Request $request)
     {
-        try {
-            $account = $request->get('account');
-            $password = $request->get('password');
-            $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
-            if (!$account) {
-                throw new CodeException(config("code.login.account_notnull"));
-            }
-            if (!$password) {
-                throw new CodeException(config("code.login.password_notnull"));
-            }
-            if (!$userAuth) {
-                throw new CodeException(config("code.login.account_notexist"));
-            }
-            if (!Hash::check($password, $userAuth->credential)) {
-                throw new CodeException(config("code.login.password_invalid"));
-            }
-            return $this->response->array([
-                'code' => 0,
-                'message' => '登录成功',
-                'data' => $this->getLoginData($userAuth->uid)
-            ]);
-        } catch (CodeException $e) {
-            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+
+        $account = $request->get('account');
+        $password = $request->get('password');
+        $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
+        if (!$account) {
+            $this->codeException("code.login.account_notnull");
         }
+        if (!$password) {
+            $this->codeException("code.login.password_notnull");
+        }
+        if (!$userAuth) {
+            $this->codeException("code.login.account_notexist");
+        }
+        if (!Hash::check($password, $userAuth->credential)) {
+            $this->codeException("code.login.password_invalid");
+        }
+        return $this->response->array([
+            'code' => 0,
+            'message' => '登录成功',
+            'data' => $this->getLoginData($userAuth->uid)
+        ]);
     }
 
     /**
      * @param Request $request
      * @return mixed
+     * @throws CodeException
      */
     public function mobile(Request $request)
     {
         $mobile = $request->get('mobile');
         $code = $request->get('code');
-        try {
-            if (!$mobile) {
-                throw new CodeException(config('code.login.mobile_notnull'));
-            }
-            $sms = new Sms($mobile);
-            $sms->checkLoginSms($code);
-            $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
-            if (!$userAuth) {
-                throw new CodeException(config("code.login.mobile_notexist"));
-            }
-            return $this->response->array([
-                'code' => 0,
-                'message' => '登录成功',
-                'data' => $this->getLoginData($userAuth->uid)
-            ]);
-        } catch (\Exception $e) {
-            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+
+        if (!$mobile) {
+            $this->codeException('code.login.mobile_notnull');
         }
+        $sms = new Sms($mobile);
+        $sms->checkLoginSms($code);
+        $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
+        if (!$userAuth) {
+            $this->codeException("code.login.mobile_notexist");
+        }
+        return $this->response->array([
+            'code' => 0,
+            'message' => '登录成功',
+            'data' => $this->getLoginData($userAuth->uid)
+        ]);
     }
 
     /**
      * @param Request $request
      * @return mixed
+     * @throws CodeException
      */
     public function sendSms(Request $request)
     {
-        try {
-            $mobile = $request->get('mobile');
-            if (!$mobile) {
-                throw new CodeException(config('code.login.mobile_notnull'));
-            }
-            $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
-            if (!$userAuth) {
-                throw new CodeException(config("code.login.mobile_notexist"));
-            }
-            $sms = new Sms($mobile);
-            $sms->sendLoginSms();
-            return $this->response->array(['code' => 0, 'message' => '发送成功']);
-        } catch (CodeException $e) {
-            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+        $mobile = $request->get('mobile');
+        if (!$mobile) {
+            $this->codeException('code.login.mobile_notnull');
         }
+        $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
+        if (!$userAuth) {
+            $this->codeException("code.login.mobile_notexist");
+        }
+        $sms = new Sms($mobile);
+        $sms->sendLoginSms();
+        return $this->response->array(['code' => 0, 'message' => '发送成功']);
     }
 
     public function wxLogin(Request $request)
     {
-        try {
-            $code = $request->get("code");
-            $wx = new Wechat();
-            $userInfo = $wx->getUserInfo($code);
-            $unionId = array_get($userInfo, "unionid");
+        $code = $request->get("code");
+        $wx = new Wechat();
+        $userInfo = $wx->getUserInfo($code);
+        $unionId = array_get($userInfo, "unionid");
 
-            $userAuth = UsersAuth::where(["identifier" => $unionId, "identity_type" => "wx"])->first();
-            if (!$userAuth) {
-                $userAuth = new UsersAuth();
-                $user = new User();
-            } else {
-                $user = User::where(["id" => $userAuth->uid])->first();
-            }
-            $user->nick_name = array_get($userInfo, "nickname");
-            $user->gender = array_get($userInfo, "sex") == 1 ? "男" : "女";
-            $user->profile_img = $user->profile_img ? $user->profile_img : $wx->storeImage(array_get($userInfo, "unionid"));
-            $user->save();
-            $userAuth->identifier = $unionId;
-            $userAuth->identity_type = "wx";
-            $userAuth->ifverified = "YES";
-            $userAuth->uid = $user->id;
-            $userAuth->save();
-            return $this->response->array([
-                'code' => 0,
-                'message' => '登录成功',
-                'data' => $this->getLoginData($userAuth->uid)
-            ]);
-        } catch (CodeException $e) {
-            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+        $userAuth = UsersAuth::where(["identifier" => $unionId, "identity_type" => "wx"])->first();
+        if (!$userAuth) {
+            $userAuth = new UsersAuth();
+            $user = new User();
+        } else {
+            $user = User::where(["id" => $userAuth->uid])->first();
         }
+        $user->nick_name = array_get($userInfo, "nickname");
+        $user->gender = array_get($userInfo, "sex") == 1 ? "男" : "女";
+        $user->profile_img = $user->profile_img ? $user->profile_img : $wx->storeImage(array_get($userInfo, "unionid"));
+        $user->save();
+        $userAuth->identifier = $unionId;
+        $userAuth->identity_type = "wx";
+        $userAuth->ifverified = "YES";
+        $userAuth->uid = $user->id;
+        $userAuth->save();
+        return $this->response->array([
+            'code' => 0,
+            'message' => '登录成功',
+            'data' => $this->getLoginData($userAuth->uid)
+        ]);
     }
 
     /**
@@ -157,7 +146,6 @@ class AuthController extends BaseController
             'gender' => array_get($user, "gender", ""),
             'birthday' => array_get($user, "birthday", ""),
             'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
-
         ];
     }
 

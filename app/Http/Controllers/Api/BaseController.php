@@ -9,10 +9,15 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Exceptions\CodeException;
 use App\Http\Controllers\Controller;
 use Dingo\Api\Exception\ValidationHttpException;
 use Dingo\Api\Routing\Helpers;
 
+/**
+ * Class BaseController
+ * @package App\Http\Controllers\Api
+ */
 class BaseController extends Controller
 {
     use Helpers;
@@ -49,6 +54,15 @@ class BaseController extends Controller
      */
     protected function firstError($validator)
     {
-        return $this->response->errorBadRequest( $validator->errors()->first());
+        $this->response->errorBadRequest($validator->errors()->first());
+    }
+
+    /**
+     * @param $codes
+     * @throws CodeException
+     */
+    protected function codeException($codes)
+    {
+        throw new CodeException(config($codes));
     }
 }
