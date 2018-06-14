@@ -1,0 +1,11 @@
+.skin-purple .treeview.active .mh {
+    background: #605ca8;
+}
+
+.skin-purple .treeview-menu {
+    background: #000c17 !important;
+}
+
+.skin-purple .main-sidebar, .skin-purple .sidebar-menu > li.header {
+    background-color: #00142a;
+}

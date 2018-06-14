@@ -28,7 +28,10 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    用户管理:
+                </div>
 
                 @include('admin.partials.errors')
                 @include('admin.partials.success')
@@ -50,8 +53,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <div class="modal fade" id="modal-delete" tabIndex="-1">
         <div class="modal-dialog">
@@ -86,7 +87,7 @@
                 <script>
                     $(function () {
                         var table = $("#tags-table").DataTable({
-                            ordering:false,
+                            ordering: false,
                             language: {
                                 "sProcessing": "处理中...",
                                 "sLengthMenu": "显示 _MENU_ 项结果",

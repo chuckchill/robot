@@ -28,8 +28,10 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    视频管理:
+                </div>
                 @include('admin.partials.errors')
                 @include('admin.partials.success')
                 <div class="box-body">

@@ -28,7 +28,10 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    启动页:
+                </div>
 
                 @include('admin.partials.errors')
                 @include('admin.partials.success')
@@ -50,6 +53,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="modal fade" id="modal-delete" tabIndex="-1">
         <div class="modal-dialog modal-warning">
@@ -157,21 +161,21 @@
                     },
                     {
                         'targets': -1, "render": function (data, type, row) {
-                            var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.edit') ? 1 : 0}};
-                            var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.destroy') ? 1 :0}};
-                            var str = '';
-                            //编辑
-                            if (row_edit) {
-                                str += '<a style="margin:3px;" href="/admin/boot-page/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
-                            }
-                            //删除
-                            if (row_delete) {
-                                str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 删除</a>';
-                            }
-
-                            return str;
-
+                        var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.edit') ? 1 : 0}};
+                        var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.destroy') ? 1 :0}};
+                        var str = '';
+                        //编辑
+                        if (row_edit) {
+                            str += '<a style="margin:3px;" href="/admin/boot-page/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
                         }
+                        //删除
+                        if (row_delete) {
+                            str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 删除</a>';
+                        }
+
+                        return str;
+
+                    }
                     }
                 ]
             });
