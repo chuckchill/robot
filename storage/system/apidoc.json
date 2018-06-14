@@ -1,525 +1,609 @@
 {
-	"info": {
-		"name": "robot",
-		"_postman_id": "ac5efbb8-683c-1816-1ea6-496a12b99d11",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "启动页",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {},
-				"url": "{{BaseURL}}/startup-page",
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "引导页",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {},
-				"url": "{{BaseURL}}/link-page",
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "账号注册",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "account",
-							"value": "ab3456",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "123456",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/account-reg",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "发送注册邮件",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "email",
-							"value": "260381980@qq.com",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/reg-send-email",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "验证注册邮箱",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "email",
-							"value": "260381980@qq.com",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "code",
-							"value": "123456",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/email-reg",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "发送注册验证码",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "mobile",
-							"value": "13025447440",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/reg-send-sms",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "手机号码注册",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "mobile",
-							"value": "13025447440",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "code",
-							"value": "123456",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/mobile-reg",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "账号登录",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ed51ee6f-b11b-429d-b99e-2c7ff34eb8b6",
-						"type": "text/javascript",
-						"exec": [
-							"jsonData =JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "account",
-							"value": "ab3456",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "123456",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/account-login",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "发送登录短信",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "mobile",
-							"value": "13025447441",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/login-send-sms",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "手机验证码登录",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "5f60717c-66fb-4967-9a34-6527a9458df0",
-						"type": "text/javascript",
-						"exec": [
-							"jsonData =JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "mobile",
-							"value": "13025447441",
-							"type": "text"
-						},
-						{
-							"key": "code",
-							"value": "123456",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/sms-login",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "设置账号",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "account",
-							"value": "a123123",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "password",
-							"value": "123456",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/set-account",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "绑定设备",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "sno",
-							"value": "sQdL1WoqMY",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "name",
-							"value": "1234",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/bind-device",
-				"description": " Code    Message\r\n    0         注册成功\r\n    1        注册用户名不合法\r\n    2       注册用户名已存在\r\n    3      手机号码不合法\r\n    4      地址不合法\r\n    5      密码不合法\r\n   6      邮箱验证码输入不合法\r\n  7      验证邮箱不一致                \r\n   8  邮箱验证码不一致\r\n  9    邮箱验证码超时          "
-			},
-			"response": []
-		},
-		{
-			"name": "授权设备",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "sno",
-							"value": "sQdL1WoqMY",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "account",
-							"value": "ab3456",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "enable",
-							"value": "1",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/auth-device",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "解绑设备",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "sno",
-							"value": "sQdL1WoqMY",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "account",
-							"value": "ab3456",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/unbind-device",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "设置日常提醒",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "data",
-							"value": "{\"SHX520AlarmClock\":[\n       {\n          \"H\":12,\n          \"S\":30,\n          \"Index\":1,\n          \"Mode\":1,\n          \"Remark\":\"中午吃饭了\"\n      }\n]}",
-							"description": "",
-							"type": "text"
-						},
-						{
-							"key": "sno",
-							"value": "sQdL1WoqMY",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/set-alarmclock",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "获取日常提醒",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "sno",
-							"value": "sQdL1WoqMY",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/get-alarmclock",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "获取设备绑定用户",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "sno",
-							"value": "sQdL1WoqMY",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/get-device-binder",
-				"description": null
-			},
-			"response": []
-		},
-		{
-			"name": "获取用户绑定设备",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "authorization",
-						"value": "bearer{{auth_token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "sno",
-							"value": "sQdL1WoqMY",
-							"description": "",
-							"type": "text"
-						}
-					]
-				},
-				"url": "{{BaseURL}}/get-user-device",
-				"description": ""
-			},
-			"response": []
-		}
-	]
+  "info": {
+    "name": "robot",
+    "_postman_id": "ac5efbb8-683c-1816-1ea6-496a12b99d11",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "启动页",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {},
+        "url": "{{BaseURL}}/get-video-type",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "引导页",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {},
+        "url": "{{BaseURL}}/link-page",
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "name": "账号注册",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "account",
+              "value": "ab3456",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "123456",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/account-reg",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "发送注册邮件",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "email",
+              "value": "260381980@qq.com",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/reg-send-email",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "验证注册邮箱",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "email",
+              "value": "260381980@qq.com",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "code",
+              "value": "123456",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/email-reg",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "发送注册验证码",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "mobile",
+              "value": "13025447440",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/reg-send-sms",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "手机号码注册",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "mobile",
+              "value": "13025447440",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "code",
+              "value": "123456",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/mobile-reg",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "账号登录",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "ed51ee6f-b11b-429d-b99e-2c7ff34eb8b6",
+            "type": "text/javascript",
+            "exec": [
+              "jsonData =JSON.parse(responseBody);",
+              "postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "account",
+              "value": "ab3456",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "123456",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/account-login",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "发送登录短信",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "mobile",
+              "value": "13025447441",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/login-send-sms",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "手机验证码登录",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5f60717c-66fb-4967-9a34-6527a9458df0",
+            "type": "text/javascript",
+            "exec": [
+              "jsonData =JSON.parse(responseBody);",
+              "postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "mobile",
+              "value": "13025447441",
+              "type": "text"
+            },
+            {
+              "key": "code",
+              "value": "123456",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/sms-login",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "微信登录",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "code",
+              "value": "123123",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "http://robotapi.qzd.com/api/wx-login",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "设置账号",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {},
+        "url": "{{BaseURL}}/set-account",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "绑定设备",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "sno",
+              "value": "sQdL1WoqMY",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "name",
+              "value": "1234",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/bind-device",
+        "description": " Code    Message\r\n    0         注册成功\r\n    1        注册用户名不合法\r\n    2       注册用户名已存在\r\n    3      手机号码不合法\r\n    4      地址不合法\r\n    5      密码不合法\r\n   6      邮箱验证码输入不合法\r\n  7      验证邮箱不一致                \r\n   8  邮箱验证码不一致\r\n  9    邮箱验证码超时          "
+      },
+      "response": []
+    },
+    {
+      "name": "授权设备",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "sno",
+              "value": "sQdL1WoqMY",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "account",
+              "value": "ab3456",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "enable",
+              "value": "1",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/auth-device",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "解绑设备",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "sno",
+              "value": "sQdL1WoqMY",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "account",
+              "value": "ab3456",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/unbind-device",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "设置日常提醒",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "data",
+              "value": "{\"SHX520AlarmClock\":[\n       {\n          \"H\":12,\n          \"S\":30,\n          \"Index\":1,\n          \"Mode\":1,\n          \"Remark\":\"中午吃饭了\"\n      }\n]}",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "sno",
+              "value": "sQdL1WoqMY",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/set-alarmclock",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "获取日常提醒",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "sno",
+              "value": "sQdL1WoqMY",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/get-alarmclock",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "获取设备绑定用户",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "sno",
+              "value": "sQdL1WoqMY",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/get-device-binder",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "获取用户绑定设备",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "sno",
+              "value": "sQdL1WoqMY",
+              "description": "",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/get-user-device",
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "name": "获取视频分类",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {},
+        "url": "{{BaseURL}}/get-video-type",
+        "description": ""
+      },
+      "response": []
+    },
+    {
+      "name": "查询视频",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {},
+        "url": "{{BaseURL}}/get-videos",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "获取视频资源",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {},
+        "url": "{{BaseURL}}/get-video-src",
+        "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "获取上传视频token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {},
+        "url": "{{BaseURL}}/get-video-upload-token",
+        "description": null
+      },
+      "response": []
+    }
+  ]
 }
