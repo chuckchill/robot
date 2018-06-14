@@ -32,16 +32,16 @@ class AuthController extends BaseController
         $password = $request->get('password');
         $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
         if (!$account) {
-            $this->codeException("code.login.account_notnull");
+            code_exception("code.login.account_notnull");
         }
         if (!$password) {
-            $this->codeException("code.login.password_notnull");
+            code_exception("code.login.password_notnull");
         }
         if (!$userAuth) {
-            $this->codeException("code.login.account_notexist");
+            code_exception("code.login.account_notexist");
         }
         if (!Hash::check($password, $userAuth->credential)) {
-            $this->codeException("code.login.password_invalid");
+            code_exception("code.login.password_invalid");
         }
         return $this->response->array([
             'code' => 0,
@@ -61,13 +61,13 @@ class AuthController extends BaseController
         $code = $request->get('code');
 
         if (!$mobile) {
-            $this->codeException('code.login.mobile_notnull');
+            code_exception('code.login.mobile_notnull');
         }
         $sms = new Sms($mobile);
         $sms->checkLoginSms($code);
         $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
         if (!$userAuth) {
-            $this->codeException("code.login.mobile_notexist");
+            code_exception("code.login.mobile_notexist");
         }
         return $this->response->array([
             'code' => 0,
@@ -85,11 +85,11 @@ class AuthController extends BaseController
     {
         $mobile = $request->get('mobile');
         if (!$mobile) {
-            $this->codeException('code.login.mobile_notnull');
+            code_exception('code.login.mobile_notnull');
         }
         $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
         if (!$userAuth) {
-            $this->codeException("code.login.mobile_notexist");
+            code_exception("code.login.mobile_notexist");
         }
         $sms = new Sms($mobile);
         $sms->sendLoginSms();

@@ -186,3 +186,10 @@ if (!function_exists('get_api_body')) {
         return array_get($item, "request.body." . $mode, []);
     }
 }
+if (!function_exists('code_exception')) {
+
+    function code_exception($codes)
+    {
+        app('App\Services\Helper')->codeException($codes);
+    }
+}

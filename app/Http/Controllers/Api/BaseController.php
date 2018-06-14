@@ -57,12 +57,4 @@ class BaseController extends Controller
         $this->response->errorBadRequest($validator->errors()->first());
     }
 
-    /**
-     * @param $codes
-     * @throws CodeException
-     */
-    protected function codeException($codes)
-    {
-        throw new CodeException(config($codes));
-    }
 }

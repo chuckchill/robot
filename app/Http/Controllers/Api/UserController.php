@@ -42,18 +42,18 @@ class UserController extends BaseController
         $password = $request->get("password");
         $user = \JWTAuth::authenticate();
         if (!Helper::isUserName($account)) {
-            $this->codeException("code.reg.account_invalid");
+            code_exception("code.reg.account_invalid");
         }
         if (!Helper::isPassword($password)) {
-            $this->codeException("code.reg.password_invalid");
+            code_exception("code.reg.password_invalid");
         }
         $userAuth = UsersAuth::where(["uid" => $user->id, 'identity_type' => 'sys'])->first();
         if ($userAuth) {
-            $this->codeException("code.reg.account_cannot_change");
+            code_exception("code.reg.account_cannot_change");
         }
         $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
         if ($userAuth) {
-            $this->codeException("code.reg.acount_exist");
+            code_exception("code.reg.acount_exist");
         }
         $this->userInfo->registerData("sys", $account, Hash::make($password), $user->id);
         return $this->response->array(['code' => 0, 'message' => '设置成功']);
@@ -73,22 +73,22 @@ class UserController extends BaseController
         $user = \JWTAuth::authenticate();
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {
-            $this->codeException('code.login.device_sno_notexist');
+            code_exception('code.login.device_sno_notexist');
         }
         if (!$name) {
-            $this->codeException('code.login.device_name_notnull');
+            code_exception('code.login.device_name_notnull');
         }
         $userAuth = UsersAuth::where(['identity_type' => 'sys', 'uid' => $user->id])->first();
         if (!$userAuth) {//用户是否存在
-            $this->codeException("code.login.device_require_account");
+            code_exception("code.login.device_require_account");
         }
         $deviceBind = DeviceBind::where(["device_id" => $device->id, "is_master" => 1])->first();
         if ($deviceBind) {
             if ($deviceBind->uid == $user->id) {//已绑定
-                $this->codeException('code.login.device_bindforyou');
+                code_exception('code.login.device_bindforyou');
             }
             //其他人绑定
-            $this->codeException('code.login.device_bindforother');
+            code_exception('code.login.device_bindforother');
         }
         $deviceBind = new DeviceBind();
         $deviceBind->uid = $user->id;
@@ -117,11 +117,11 @@ class UserController extends BaseController
         $enable = $request->get("is_enable");
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {//设备是否存在
-            $this->codeException('code.login.device_sno_notexist');
+            code_exception('code.login.device_sno_notexist');
         }
         $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
         if (!$userAuth) {//用户是否存在
-            $this->codeException("code.login.account_notexist");
+            code_exception("code.login.account_notexist");
         }
         $deviceBind = DeviceBind::where([
             "device_id" => $device->id,
@@ -129,10 +129,10 @@ class UserController extends BaseController
             "is_master" => 1
         ])->first();
         if (!$deviceBind) {//当前用户是否为master
-            $this->codeException('code.login.device_notmaster_change');
+            code_exception('code.login.device_notmaster_change');
         }
         if ($deviceBind->uid == $userAuth->uid) {//master不能修改
-            $this->codeException('code.login.device_master_connot_change');
+            code_exception('code.login.device_master_connot_change');
         }
         $newBind = DeviceBind::where(["device_id" => $device->id, "uid" => $userAuth->uid])->first();
         if (!$newBind) {
@@ -160,11 +160,11 @@ class UserController extends BaseController
             $user = \JWTAuth::authenticate();
             $device = Devices::where(["sno" => $sno])->first();
             if (!$device) {
-                $this->codeException('code.login.device_sno_notexist');
+                code_exception('code.login.device_sno_notexist');
             }
             $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
             if (!$userAuth) {//判断账号是否存在
-                $this->codeException("code.login.account_notexist");
+                code_exception("code.login.account_notexist");
             }
             $deviceBind = DeviceBind::where([
                 "device_id" => $device->id,
@@ -175,20 +175,20 @@ class UserController extends BaseController
                 if ($userAuth->uid == $user->id) {//解绑所有
                     DeviceBind::where(["device_id" => $deviceBind->device_id])->delete();
                     Logger::info("设备" . $deviceBind->sno . "解除所有绑定", "device_bind");
-                    $this->codeException("code.login.device_unbind_all");
+                    code_exception("code.login.device_unbind_all");
                 } else {//解绑他人
                     DeviceBind::where(["device_id" => $device->id, "uid" => $userAuth->uid])->delete();
                     Logger::info("设备" . $deviceBind->sno . "解绑" . $userAuth->uid, "device_bind");
-                    $this->codeException('code.login.device_unbind_auth');
+                    code_exception('code.login.device_unbind_auth');
                 }
 
             } else {//非主
                 if ($userAuth->uid != $user->id) {//无法解绑
-                    $this->codeException('code.login.device_connot_unbind');
+                    code_exception('code.login.device_connot_unbind');
                 } else {//解绑
                     DeviceBind::where(["device_id" => $device->id, "uid" => $userAuth->uid])->delete();
                     Logger::info("设备" . $device->sno . "解绑" . $userAuth->uid, "device_bind");
-                    $this->codeException('code.login.device_unbind_own');
+                    code_exception('code.login.device_unbind_own');
                 }
             }
         } catch (CodeException $e) {
@@ -209,11 +209,11 @@ class UserController extends BaseController
             $data = $request->get("data");
             $user = \JWTAuth::authenticate();
             if (!$sno) {
-                $this->codeException("code.login.device_sno_notnull");
+                code_exception("code.login.device_sno_notnull");
             }
             $device = Devices::where(["sno" => $sno])->first();
             if (!$device) {
-                $this->codeException('code.login.device_sno_notexist');
+                code_exception('code.login.device_sno_notexist');
             }
             $deviceBind = DeviceBind::where([
                 "device_id" => $device->id,
@@ -221,7 +221,7 @@ class UserController extends BaseController
                 'uid' => $user->id
             ])->first();
             if (!$deviceBind) {
-                $this->codeException('code.login.device_unbind');
+                code_exception('code.login.device_unbind');
             }
             $path = "alarmclock/" . ($user->id % 20) . "/" . $user->id . "/";
             $path = Helper::mkDir($path) . md5($sno) . ".clock";
@@ -243,7 +243,7 @@ class UserController extends BaseController
         $user = \JWTAuth::authenticate();
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {
-            $this->codeException('code.login.device_sno_notexist');
+            code_exception('code.login.device_sno_notexist');
         }
         $path = "alarmclock/" . ($user->id % 20) . "/" . $user->id . "/";
         $path = Helper::mkDir($path) . md5($sno) . ".clock";
@@ -262,11 +262,11 @@ class UserController extends BaseController
         $data = $request->get("data");
         $user = \JWTAuth::authenticate();
         if (!$sno) {
-            $this->codeException("code.login.device_sno_notnull");
+            code_exception("code.login.device_sno_notnull");
         }
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {
-            $this->codeException('code.login.device_sno_notexist');
+            code_exception('code.login.device_sno_notexist');
         }
         $deviceBind = DeviceBind::where([
             "device_id" => $device->id,
@@ -274,7 +274,7 @@ class UserController extends BaseController
             'uid' => $user->id
         ])->first();
         if (!$deviceBind) {
-            $this->codeException('code.login.device_unbind');
+            code_exception('code.login.device_unbind');
         }
         $path = "phonebook/" . ($user->id % 20) . "/" . $user->id . "/";
         $path = Helper::mkDir($path) . md5($sno) . ".pb";
@@ -294,7 +294,7 @@ class UserController extends BaseController
         $user = \JWTAuth::authenticate();
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {
-            $this->codeException('code.login.device_sno_notexist');
+            code_exception('code.login.device_sno_notexist');
         }
         $path = "alarmclock/" . ($user->id % 20) . "/" . $user->id . "/";
         $path = Helper::mkDir($path) . md5($sno) . ".pb";
@@ -313,7 +313,7 @@ class UserController extends BaseController
         $sno = $request->get("sno");
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {
-            $this->codeException('code.login.device_sno_notexist');
+            code_exception('code.login.device_sno_notexist');
         }
         $deviceBind = DeviceBind::where(['device_id' => $device->id])
             ->leftJoin("app_users_auth", 'app_users_auth.uid', '=', 'devices_bind.uid')

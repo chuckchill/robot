@@ -9,10 +9,15 @@
 namespace App\Services;
 
 
+use App\Exceptions\CodeException;
 use App\Facades\Logger;
 
 class Helper
 {
+    /**
+     * @param $dirpath
+     * @return bool
+     */
     public static function mkDir($dirpath)
     {
         if (!file_exists($dirpath)) {
@@ -26,6 +31,10 @@ class Helper
         return $dirpath;
     }
 
+    /**
+     * @param $user
+     * @return bool
+     */
     public static function isUserName($user)
     {
         if (preg_match("/^[a-zA-Z]{1}([a-zA-Z0-9]){5,9}$/", $user)) {
@@ -35,6 +44,10 @@ class Helper
         }
     }
 
+    /**
+     * @param $password
+     * @return bool
+     */
     public static function isPassword($password)
     {
         if (preg_match("/^[a-zA-Z0-9]{6,16}$/", $password)) {
@@ -44,14 +57,28 @@ class Helper
         }
     }
 
+    /**
+     * @return mixed
+     */
     public static function mustSendSms()
     {
         return config('other.email_action');
     }
 
+    /**
+     * @return mixed
+     */
     public static function mustSendEmail()
     {
         return config('other.mobile_action');
     }
 
+    /**
+     * @param $codes
+     * @throws CodeException
+     */
+    public function codeException($postfix)
+    {
+        throw new CodeException(config($postfix));
+    }
 }

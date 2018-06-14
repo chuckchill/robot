@@ -42,15 +42,15 @@ class RegisterController extends BaseController
         $account = $request->get("account");
         $password = $request->get("password");
         if (!Helper::isUserName($account)) {
-            $this->codeException("code.reg.account_invalid");
+            code_exception("code.reg.account_invalid");
         }
         if (!Helper::isPassword($password)) {
-            $this->codeException("code.reg.password_invalid");
+            code_exception("code.reg.password_invalid");
         }
 
         $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
         if ($userAuth) {
-            $this->codeException("code.reg.acount_exist");
+            code_exception("code.reg.acount_exist");
         }
         $user = new User();
         $user->save();
@@ -73,7 +73,7 @@ class RegisterController extends BaseController
         $sms->checkRegSms($code);
         $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
         if ($userAuth) {
-            $this->codeException("code.reg.mobile_exist");
+            code_exception("code.reg.mobile_exist");
         }
 
         $user = new User();
@@ -97,7 +97,7 @@ class RegisterController extends BaseController
         $mail->validateCode($code);
         $userAuth = UsersAuth::where(["identifier" => $email, 'identity_type' => 'email'])->first();
         if ($userAuth) {
-            $this->codeException("code.reg.email_exist");
+            code_exception("code.reg.email_exist");
         }
         $user = new User();
         $user->save();
@@ -115,11 +115,11 @@ class RegisterController extends BaseController
     {
         $email = $request->get('email');
         if (!$email) {
-            $this->codeException('code.reg.email_notnull');
+            code_exception('code.reg.email_notnull');
         }
         $userAuth = UsersAuth::where(["identifier" => $email, 'identity_type' => 'email'])->first();
         if ($userAuth) {
-            $this->codeException("code.reg.email_exist");
+            code_exception("code.reg.email_exist");
         }
         $mail = new Email($email);
         $mail->sendRandCode();
@@ -137,10 +137,10 @@ class RegisterController extends BaseController
         $mobile = $request->get('mobile');
         $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
         if (!$mobile) {
-            $this->codeException('code.reg.mobile_notnull');
+            code_exception('code.reg.mobile_notnull');
         }
         if ($userAuth) {
-            $this->codeException("code.reg.mobile_exist");
+            code_exception("code.reg.mobile_exist");
         }
         $sms = new Sms($mobile);
         $sms->sendRegSms();
