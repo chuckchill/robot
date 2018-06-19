@@ -134,7 +134,7 @@ class StartupPageController extends BaseController
             $path = $file->getRealPath();
 
             //要保存的文件名 时间+扩展名
-            $filename = date('Y-m-d-H-i-s') . '_' . uniqid() . '.' . $kuoname;
+            $filename = "startup_" . time() . '_' . uniqid() . '.' . $kuoname;
             //保存文件          配置文件存放文件的名字  ，文件名，路径
             $bool = $file->move(public_path("/upload/startup"), $filename);
         }

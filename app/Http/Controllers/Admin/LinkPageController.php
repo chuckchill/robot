@@ -136,7 +136,7 @@ class LinkPageController extends BaseController
                 //获取文件的绝对路径，但是获取到的在本地不能打开
                 $path = $file->getRealPath();
                 //要保存的文件名 时间+扩展名
-                $filename = time() . '_' . uniqid() . '.' . $kuoname;
+                $filename = "link_".time() . '_' . uniqid() . '.' . $kuoname;
                 //保存文件          配置文件存放文件的名字  ，文件名，路径
                 $bool = $file->move(public_path("/upload/link"), $filename);
             }
