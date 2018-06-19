@@ -48,7 +48,7 @@
           "urlencoded": [
             {
               "key": "account",
-              "value": "ab3456",
+              "value": "ab34561",
               "type": "text",
               "description": "账号"
             },
@@ -541,6 +541,44 @@
         "body": {},
         "url": "{{BaseURL}}/get-video-upload-token",
         "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "修改用户信息",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "nick_name",
+              "value": "test",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "birthday",
+              "value": "2018-02-01",
+              "description": "",
+              "type": "text"
+            },
+            {
+              "key": "gender",
+              "value": "男",
+              "description": "",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{BaseURL}}/edit-user",
+        "description": ""
       },
       "response": []
     }

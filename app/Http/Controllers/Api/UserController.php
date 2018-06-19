@@ -367,4 +367,19 @@ class UserController extends BaseController
         });
         return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => $data]);
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws CodeException
+     */
+    public function editUser(Request $request)
+    {
+        $user = \JWTAuth::authenticate();
+        $user->nick_name = $request->get('nick_name');
+        $user->birthday = $request->get('birthday');
+        $user->gender = $request->get('gender');
+        $user->save();
+        return $this->response->array(['code' => 0, 'message' => '修改成功']);
+    }
 }
