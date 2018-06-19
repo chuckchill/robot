@@ -35,7 +35,7 @@
                                    @endif
                                    id="inputChekbox{{$vv['id']}}" type="Checkbox" value="{{$vv['id']}}"
                                    name="permissions[]"> <label for="inputChekbox{{$vv['id']}}">
-                                {{$vv['label']}}
+                                {{$vv['label']}}{!! $vv['is_menu']==1? "(<span style='color:#ff0084'>菜单</span>)":"" !!}
                             </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </span>
                                 </div>
