@@ -64,9 +64,12 @@ class BootPageController extends BaseController
             $startup->$field = $request->get($field, $this->fields[$field]);
         }
         $file = $request->file('imgsrc');
-        if (!$file || count($file) > 5) {
-            return redirect()->back()
-                ->withErrors("图片不能为空或者超过5张");
+        if ($file) {
+            if (count($file) > 5) {
+                return redirect()->back()
+                    ->withErrors("图片不能为空或者超过5张");
+            }
+            $startup->imgsrc = $this->uploadFile($file);
         }
         $startup->status = (int)$startup->status;
         $startup->imgsrc = $this->uploadFile($file);
@@ -136,6 +139,6 @@ class BootPageController extends BaseController
             }
             $filenames[] = $filename;
         }
-        return implode("@",$filenames);
+        return implode("@", $filenames);
     }
 }
