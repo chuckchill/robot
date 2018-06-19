@@ -15,6 +15,8 @@ use App\Models\Api\UsersAuth;
 use App\Services\ModelService\UserInfo;
 use App\Services\Sms;
 use App\Services\Wechat;
+use Dingo\Api\Routing\Helpers;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -147,6 +149,13 @@ class AuthController extends BaseController
             'birthday' => array_get($user, "birthday", ""),
             'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
         ];
+    }
+
+
+    public function logout()
+    {
+        \JWTAuth::invalidate(\JWTAuth::getToken());
+        return $this->response->array(['code' => 0, 'message' => '退出登录成功']);
     }
 
 }

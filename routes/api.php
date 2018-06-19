@@ -21,6 +21,7 @@ $api->post('wx-login', ['uses' => 'AuthController@wxLogin']);//微信登录
 
 $api->group(['middleware' => ['api.auth']], function ($api) {
     $api->get('test', ['uses' => 'IndexController@index']);
+    $api->post('logout', ['uses' => 'AuthController@logout']);//退出登录
 
     $api->post('set-account', ['uses' => 'UserController@bindAccount']);//设置账户
     $api->post('set-alarmclock', ['uses' => 'UserController@setAlarmclock']);//设置账户

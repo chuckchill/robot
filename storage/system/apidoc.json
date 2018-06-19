@@ -29,7 +29,7 @@
         "header": [],
         "body": {},
         "url": "{{BaseURL}}/link-page",
-        "description": ""
+        "description": null
       },
       "response": []
     },
@@ -49,12 +49,14 @@
             {
               "key": "account",
               "value": "ab3456",
-              "type": "text"
+              "type": "text",
+              "description": "账号"
             },
             {
               "key": "password",
               "value": "123456",
-              "type": "text"
+              "type": "text",
+              "description": "密码"
             }
           ]
         },
@@ -79,7 +81,8 @@
             {
               "key": "email",
               "value": "260381980@qq.com",
-              "type": "text"
+              "type": "text",
+              "description": "邮箱"
             }
           ]
         },
@@ -99,13 +102,13 @@
             {
               "key": "email",
               "value": "260381980@qq.com",
-              "description": "",
+              "description": "邮箱",
               "type": "text"
             },
             {
               "key": "code",
               "value": "123456",
-              "description": "",
+              "description": "验证码",
               "type": "text"
             }
           ]
@@ -131,7 +134,7 @@
             {
               "key": "mobile",
               "value": "13025447440",
-              "description": "",
+              "description": "手机号",
               "type": "text"
             }
           ]
@@ -157,13 +160,13 @@
             {
               "key": "mobile",
               "value": "13025447440",
-              "description": "",
+              "description": "手机号",
               "type": "text"
             },
             {
               "key": "code",
               "value": "123456",
-              "description": "",
+              "description": "验证码",
               "type": "text"
             }
           ]
@@ -197,12 +200,14 @@
             {
               "key": "account",
               "value": "ab3456",
-              "type": "text"
+              "type": "text",
+              "description": "账号"
             },
             {
               "key": "password",
               "value": "123456",
-              "type": "text"
+              "type": "text",
+              "description": "密码"
             }
           ]
         },
@@ -227,7 +232,7 @@
             {
               "key": "mobile",
               "value": "13025447441",
-              "description": "",
+              "description": "手机号",
               "type": "text"
             }
           ]
@@ -261,17 +266,35 @@
             {
               "key": "mobile",
               "value": "13025447441",
-              "type": "text"
+              "type": "text",
+              "description": "手机号"
             },
             {
               "key": "code",
               "value": "123456",
-              "type": "text"
+              "type": "text",
+              "description": "验证码"
             }
           ]
         },
         "url": "{{BaseURL}}/sms-login",
         "description": null
+      },
+      "response": []
+    },
+    {
+      "name": "退出登录",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "value": "bearer{{auth_token}}"
+          }
+        ],
+        "body": {},
+        "url": "{{BaseURL}}/logout",
+        "description": ""
       },
       "response": []
     },
@@ -291,7 +314,7 @@
             {
               "key": "code",
               "value": "123123",
-              "description": "",
+              "description": "微信授权后返回的code",
               "type": "text"
             }
           ]
@@ -315,9 +338,25 @@
             "value": "application/x-www-form-urlencoded"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "account",
+              "value": "ab1233",
+              "description": "账号",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "",
+              "description": "密码",
+              "type": "text"
+            }
+          ]
+        },
         "url": "{{BaseURL}}/set-account",
-        "description": null
+        "description": "当用户是用手机注册时，需要引导用户设置账号和密码"
       },
       "response": []
     },
@@ -337,13 +376,13 @@
             {
               "key": "sno",
               "value": "sQdL1WoqMY",
-              "description": "",
+              "description": "设备号",
               "type": "text"
             },
             {
               "key": "name",
               "value": "1234",
-              "description": "",
+              "description": "名称",
               "type": "text"
             }
           ]
@@ -369,19 +408,19 @@
             {
               "key": "sno",
               "value": "sQdL1WoqMY",
-              "description": "",
+              "description": "设备号",
               "type": "text"
             },
             {
               "key": "account",
               "value": "ab3456",
-              "description": "",
+              "description": "账号",
               "type": "text"
             },
             {
               "key": "enable",
               "value": "1",
-              "description": "",
+              "description": "是否激活",
               "type": "text"
             }
           ]
@@ -407,7 +446,7 @@
             {
               "key": "sno",
               "value": "sQdL1WoqMY",
-              "description": "",
+              "description": "设备号",
               "type": "text"
             },
             {
@@ -443,13 +482,13 @@
             {
               "key": "data",
               "value": "{\"SHX520AlarmClock\":[\n       {\n          \"H\":12,\n          \"S\":30,\n          \"Index\":1,\n          \"Mode\":1,\n          \"Remark\":\"中午吃饭了\"\n      }\n]}",
-              "description": "",
+              "description": "数据",
               "type": "text"
             },
             {
               "key": "sno",
               "value": "sQdL1WoqMY",
-              "description": "",
+              "description": "设备号",
               "type": "text"
             }
           ]
@@ -475,7 +514,7 @@
             {
               "key": "sno",
               "value": "sQdL1WoqMY",
-              "description": "",
+              "description": "设备号",
               "type": "text"
             }
           ]
@@ -501,7 +540,8 @@
             {
               "key": "sno",
               "value": "sQdL1WoqMY",
-              "type": "text"
+              "type": "text",
+              "description": "设备号"
             }
           ]
         },
@@ -530,14 +570,14 @@
             {
               "key": "sno",
               "value": "sQdL1WoqMY",
-              "description": "",
+              "description": "设备号",
               "type": "text",
               "disabled": true
             }
           ]
         },
         "url": "{{BaseURL}}/get-user-device",
-        "description": ""
+        "description": null
       },
       "response": []
     },
@@ -569,7 +609,7 @@
         ],
         "body": {},
         "url": "{{BaseURL}}/get-videos",
-        "description": null
+        "description": ""
       },
       "response": []
     },
@@ -583,9 +623,19 @@
             "value": "bearer{{auth_token}}"
           }
         ],
-        "body": {},
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "key",
+              "value": "12312",
+              "description": "key值",
+              "type": "text"
+            }
+          ]
+        },
         "url": "{{BaseURL}}/get-video-src",
-        "description": null
+        "description": ""
       },
       "response": []
     },
