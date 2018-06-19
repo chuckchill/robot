@@ -51,5 +51,6 @@ return [
         'device_master_connot_change' => ['code' => 10035, 'message' => '主监护人的状态不允许被修改'],
         'device_require_account' => ['code' => 10036, 'message' => '绑定设备前请设置账号'],
         'wechat_auth_error' => ['code' => 10037, 'message' => '微信授权登录失败'],
+        'mobile_error' => ['code' => 10038, 'message' => '请填写正确的手机号码'],
     ],
 ];

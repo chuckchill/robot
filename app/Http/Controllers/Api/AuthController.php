@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Exceptions\CodeException;
 use App\Models\Api\User;
 use App\Models\Api\UsersAuth;
+use App\Services\Helper;
 use App\Services\ModelService\UserInfo;
 use App\Services\Sms;
 use App\Services\Wechat;
@@ -69,8 +70,8 @@ class AuthController extends BaseController
         $mobile = $request->get('mobile');
         $code = $request->get('code');
 
-        if (!$mobile) {
-            code_exception('code.login.mobile_notnull');
+        if (!Helper::isMobile($mobile)) {
+            code_exception('code.login.mobile_error');
         }
         $sms = new Sms($mobile);
         $sms->checkLoginSms($code);

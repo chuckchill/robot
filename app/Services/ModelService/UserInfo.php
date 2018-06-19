@@ -24,7 +24,6 @@ class UserInfo
             'account' => array_get($account, 'sys.identifier', ""),
             'mobile' => array_get($account, 'mobile.identifier', ""),
             'email' => array_get($account, 'email.identifier', ""),
-            'nike' => array_get($account, 'email.identifier', ""),
             'nick_name' => array_get($user, "nick_name", ""),
             'gender' => array_get($user, "gender", ""),
             'birthday' => array_get($user, "birthday", ""),

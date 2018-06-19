@@ -56,7 +56,18 @@ class Helper
             return false;
         }
     }
-
+    /**
+     * @param $password
+     * @return bool
+     */
+    public static function isMobile($mobile)
+    {
+        if (preg_match("/^1[3|4|5|6|7|8|9]\d{9}$/", $mobile)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     /**
      * @return mixed
      */
