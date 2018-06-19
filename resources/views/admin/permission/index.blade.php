@@ -37,7 +37,10 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="box">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    权限列表:
+                </div>
                 @include('admin.partials.errors')
                 @include('admin.partials.success')
                 <div class="box-body">
@@ -59,8 +62,6 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <div class="modal fade" id="modal-delete" tabIndex="-1">
         <div class="modal-dialog modal-warning">
@@ -146,28 +147,28 @@
                         columnDefs: [
                             {
                                 'targets': -1, "render": function (data, type, row) {
-                                    //var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.permission.edit') ? 1 : 0}};
-                                    //var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.permission.destroy') ? 1 :0}};
-                                    var str = '';
+                                //var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.permission.edit') ? 1 : 0}};
+                                //var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.permission.destroy') ? 1 :0}};
+                                var str = '';
 
-                                    //下级菜单
-                                    if (cid == 0) {
-                                        str += '<a style="margin:3px;"  href="/admin/permission/' + row['id'] + '" class="X-Small btn-xs text-success "><i class="fa fa-adn"></i>下级菜单</a>';
-                                    }
-
-                                  /*  //编辑
-                                    if (row_edit) {
-                                        str += '<a style="margin:3px;" href="/admin/permission/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
-                                    }
-
-                                    //删除
-                                    if (row_delete) {
-                                        str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 删除</a>';
-                                    }*/
-
-                                    return str;
-
+                                //下级菜单
+                                if (cid == 0) {
+                                    str += '<a style="margin:3px;"  href="/admin/permission/' + row['id'] + '" class="X-Small btn-xs text-success "><i class="fa fa-adn"></i>下级菜单</a>';
                                 }
+
+                                /*  //编辑
+                                 if (row_edit) {
+                                 str += '<a style="margin:3px;" href="/admin/permission/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                 }
+
+                                 //删除
+                                 if (row_delete) {
+                                 str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 删除</a>';
+                                 }*/
+
+                                return str;
+
+                            }
                             }
                         ]
                     });

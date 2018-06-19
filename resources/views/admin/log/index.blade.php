@@ -21,8 +21,10 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <div class="box">
-
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    操作日志:
+                </div>
                 @include('admin.partials.errors')
                 @include('admin.partials.success')
                 <div class="box-body">
@@ -51,7 +53,7 @@
             <script>
                 $(function () {
                     var table = $("#tags-table").DataTable({
-                        ordering:false,
+                        ordering: false,
                         language: {
                             "sProcessing": "处理中...",
                             "sLengthMenu": "显示 _MENU_ 项结果",
@@ -95,20 +97,20 @@
                         columnDefs: [
                             {
                                 'targets': 2, "render": function (data, type, row) {
-                                    switch (data) {
-                                        case '1':
-                                            return "新增";
-                                            break;
-                                        case '2':
-                                            return "删除";
-                                            break;
-                                        case '3':
-                                            return "更新";
-                                            break;
-                                        default:
-                                            return "未知操作";
-                                    }
+                                switch (data) {
+                                    case '1':
+                                        return "新增";
+                                        break;
+                                    case '2':
+                                        return "删除";
+                                        break;
+                                    case '3':
+                                        return "更新";
+                                        break;
+                                    default:
+                                        return "未知操作";
                                 }
+                            }
                             }
                         ]
                     });
