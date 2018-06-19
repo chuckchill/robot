@@ -9,8 +9,8 @@
 @section('content')
     <div class="row page-title-row" id="dangqian" style="margin:5px;">
         <div class="col-md-12 text-right">
-            @if(Gate::forUser(auth('admin')->user())->check('admin.startup-page.create'))
-                <a href="/admin/boot-page/create" class="btn btn-success btn-md"><i
+            @if(Gate::forUser(auth('admin')->user())->check('admin.link-page.create'))
+                <a href="/admin/link-page/create" class="btn btn-success btn-md"><i
                             class="fa fa-plus-circle"></i> 添加启动页 </a>
             @endif
         </div>
@@ -71,7 +71,7 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <form class="deleteForm" method="POST" action="/boot-page/list">
+                    <form class="deleteForm" method="POST" action="/link-page/list">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -118,7 +118,7 @@
                 order: [[1, "desc"]],
                 serverSide: true,
                 ajax: {
-                    url: '/admin/boot-page/index',
+                    url: '/admin/link-page/index',
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -154,19 +154,19 @@
                             imgs = data.split("@");
                             str = "";
                             for (i = 0; i < imgs.length; i++) {
-                                str += "<img style='width:30px;float: left;margin: 2px' src='/upload/boot/" + imgs[i] + "'>"
+                                str += "<img style='width:30px;float: left;margin: 2px' src='/upload/link/" + imgs[i] + "'>"
                             }
                             return str;
                         }
                     },
                     {
                         'targets': -1, "render": function (data, type, row) {
-                        var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.edit') ? 1 : 0}};
-                        var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.startup-page.destroy') ? 1 :0}};
+                        var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.link-page.edit') ? 1 : 0}};
+                        var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.link-page.destroy') ? 1 :0}};
                         var str = '';
                         //编辑
                         if (row_edit) {
-                            str += '<a style="margin:3px;" href="/admin/boot-page/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                            str += '<a style="margin:3px;" href="/admin/link-page/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
                         }
                         //删除
                         if (row_delete) {
@@ -195,7 +195,7 @@
             }).draw();
             $("table").delegate('.delBtn', 'click', function () {
                 var id = $(this).attr('attr');
-                $('.deleteForm').attr('action', '/admin/startup-page/' + id);
+                $('.deleteForm').attr('action', '/admin/link-page/' + id);
                 $("#modal-delete").modal();
             });
         });

@@ -24,7 +24,7 @@
                             <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="/admin/boot-page">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="cove_image"/>
-                                @include('admin.bootpage._form')
+                                @include('admin.linkpage._form')
                                 <div class="form-group">
                                     <div class="col-md-7 col-md-offset-3">
                                         <button type="submit" class="btn btn-primary btn-md">

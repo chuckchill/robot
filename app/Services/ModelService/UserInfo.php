@@ -13,6 +13,25 @@ use App\Models\Api\UsersAuth;
  */
 class UserInfo
 {
+    public function getLoginData($uid)
+    {
+        $user = User::find($uid);
+        $token = \JWTAuth::fromUser($user);
+        $userService = new UserInfo();
+        $account = $userService->getAllAccount($uid);
+        return [
+            'token' => $token,
+            'account' => array_get($account, 'sys.identifier', ""),
+            'mobile' => array_get($account, 'mobile.identifier', ""),
+            'email' => array_get($account, 'email.identifier', ""),
+            'nike' => array_get($account, 'email.identifier', ""),
+            'nick_name' => array_get($user, "nick_name", ""),
+            'gender' => array_get($user, "gender", ""),
+            'birthday' => array_get($user, "birthday", ""),
+            'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
+        ];
+    }
+
     public function getAllAccount($uid)
     {
         $account = UsersAuth::select('identity_type', 'identifier')

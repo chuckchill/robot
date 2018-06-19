@@ -43,7 +43,7 @@
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">描述</label>
     <div class="col-md-6">
-        <input type="text" class="form-control" name="remakr" id="tag" value="{{ $remarks }}" autofocus>
+        <input type="text" class="form-control" name="remarks" id="tag" value="{{ $remarks }}" autofocus>
     </div>
 </div>
 

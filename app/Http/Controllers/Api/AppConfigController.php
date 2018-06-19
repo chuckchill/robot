@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 
-use App\Models\Common\BootPage;
+use App\Models\Common\LinkPage;
 use App\Models\Common\StartupPage;
 use DeepCopy\f006\B;
 use function PHPSTORM_META\map;
@@ -34,10 +34,10 @@ class AppConfigController extends BaseController
 
     public function linkPage()
     {
-        $boot = BootPage::where(['status' => 1])
+        $link = LinkPage::where(['status' => 1])
             ->orderBy('id', SORT_DESC)
             ->first();
-        $url = $boot ? $boot->imgsrc : "";
+        $url = $link ? $link->imgsrc : "";
         $urls = explode("@", $url);
         $urls = array_map(function ($url) {
             return link_img($url);

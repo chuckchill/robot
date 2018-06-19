@@ -55,7 +55,11 @@ class RegisterController extends BaseController
         $user = new User();
         $user->save();
         $this->userInfo->registerData("sys", $account, Hash::make($password), $user->id);
-        return $this->response->array(['code' => 0, 'message' => '注册成功']);
+        return $this->response->array([
+            'code' => 0,
+            'message' => '注册成功',
+            "data" => $this->userInfo->getLoginData($user->id)
+        ]);
     }
 
 
@@ -79,7 +83,11 @@ class RegisterController extends BaseController
         $user = new User();
         $user->save();
         $this->userInfo->registerData("mobile", $mobile, "", $user->id);
-        return $this->response->array(['code' => 0, 'message' => '注册成功']);
+        return $this->response->array([
+            'code' => 0,
+            'message' => '注册成功',
+            "data" => $this->userInfo->getLoginData($user->id)
+        ]);
 
     }
 
@@ -102,7 +110,11 @@ class RegisterController extends BaseController
         $user = new User();
         $user->save();
         $this->userInfo->registerData("email", $email, "", $user->id);
-        return $this->response->array(['code' => 0, 'message' => '注册成功']);
+        return $this->response->array([
+            'code' => 0,
+            'message' => '注册成功',
+            "data" => $this->userInfo->getLoginData($user->id)
+        ]);
 
     }
 

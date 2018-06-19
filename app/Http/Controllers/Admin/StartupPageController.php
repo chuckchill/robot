@@ -63,7 +63,9 @@ class StartupPageController extends BaseController
     {
         $startup = new StartupPage();
         foreach (array_keys($this->fields) as $field) {
-            $startup->$field = $request->get($field, $this->fields[$field]);
+            if ($request->has($field)) {
+                $startup->$field = $request->get($field, $this->fields[$field]);
+            }
         }
         $file = $request->file('imgsrc');
         if (!$file) {
@@ -92,15 +94,15 @@ class StartupPageController extends BaseController
     {
         $startup = StartupPage::find((int)$id);
         foreach (array_keys($this->fields) as $field) {
-            $startup->$field = $request->get($field);
+            if ($request->has($field)) {
+                $startup->$field = $request->get($field);
+            }
         }
         $file = $request->file('imgsrc');
-        if (!$file) {
-            return redirect()->back()
-                ->withErrors("图片不能为空");
+        if ($file) {
+            $startup->imgsrc = $this->uploadFile($file);
         }
         $startup->status = (int)$startup->status;
-        $startup->imgsrc = $this->uploadFile($file);
         $startup->save();
         event(new \App\Events\userActionEvent('\App\Models\Admin\StartupPage', $startup->id, 3, '编辑了启动页：' . $startup->name));
         return redirect('/admin/startup-page')->withSuccess('修改成功！');

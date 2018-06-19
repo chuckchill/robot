@@ -4,7 +4,7 @@ namespace App\Models\Common;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BootPage extends Model
+class LinkPage extends Model
 {
     protected $table = 'boot_page';
 

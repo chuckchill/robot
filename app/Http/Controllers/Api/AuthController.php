@@ -22,6 +22,13 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends BaseController
 {
+    public $userInfo;
+
+    public function __construct(UserInfo $userInfo)
+    {
+        $this->userInfo = $userInfo;
+    }
+
     /**
      * @param Request $request
      * @return mixed
@@ -48,7 +55,7 @@ class AuthController extends BaseController
         return $this->response->array([
             'code' => 0,
             'message' => '登录成功',
-            'data' => $this->getLoginData($userAuth->uid)
+            'data' => $this->userInfo->getLoginData($userAuth->uid)
         ]);
     }
 
@@ -74,7 +81,7 @@ class AuthController extends BaseController
         return $this->response->array([
             'code' => 0,
             'message' => '登录成功',
-            'data' => $this->getLoginData($userAuth->uid)
+            'data' => $this->userInfo->getLoginData($userAuth->uid)
         ]);
     }
 
@@ -98,6 +105,11 @@ class AuthController extends BaseController
         return $this->response->array(['code' => 0, 'message' => '发送成功']);
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     * @throws CodeException
+     */
     public function wxLogin(Request $request)
     {
         $code = $request->get("code");
@@ -124,33 +136,9 @@ class AuthController extends BaseController
         return $this->response->array([
             'code' => 0,
             'message' => '登录成功',
-            'data' => $this->getLoginData($userAuth->uid)
+            'data' => $this->userInfo->getLoginData($userAuth->uid)
         ]);
     }
-
-    /**
-     * @param $uid
-     * @return array
-     */
-    public function getLoginData($uid)
-    {
-        $user = User::find($uid);
-        $token = \JWTAuth::fromUser($user);
-        $userService = new UserInfo();
-        $account = $userService->getAllAccount($uid);
-        return [
-            'token' => $token,
-            'account' => array_get($account, 'sys.identifier', ""),
-            'mobile' => array_get($account, 'mobile.identifier', ""),
-            'email' => array_get($account, 'email.identifier', ""),
-            'nike' => array_get($account, 'email.identifier', ""),
-            'nick_name' => array_get($user, "nick_name", ""),
-            'gender' => array_get($user, "gender", ""),
-            'birthday' => array_get($user, "birthday", ""),
-            'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
-        ];
-    }
-
 
     public function logout()
     {

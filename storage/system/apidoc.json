@@ -17,7 +17,7 @@
           }
         ],
         "body": {},
-        "url": "{{BaseURL}}/get-video-type",
+        "url": "{{BaseURL}}/startup-page",
         "description": null
       },
       "response": []
@@ -61,117 +61,6 @@
           ]
         },
         "url": "{{BaseURL}}/account-reg",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "发送注册邮件",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "email",
-              "value": "260381980@qq.com",
-              "type": "text",
-              "description": "邮箱"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/reg-send-email",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "验证注册邮箱",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "email",
-              "value": "260381980@qq.com",
-              "description": "邮箱",
-              "type": "text"
-            },
-            {
-              "key": "code",
-              "value": "123456",
-              "description": "验证码",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/email-reg",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "发送注册验证码",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "mobile",
-              "value": "13025447440",
-              "description": "手机号",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/reg-send-sms",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "手机号码注册",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "mobile",
-              "value": "13025447440",
-              "description": "手机号",
-              "type": "text"
-            },
-            {
-              "key": "code",
-              "value": "123456",
-              "description": "验证码",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/mobile-reg",
         "description": null
       },
       "response": []

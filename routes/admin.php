@@ -56,9 +56,9 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::resource('startup-page', 'StartupPageController', ['names' => ['update' => 'admin.startup-page.edit', 'store' => 'admin.startup-page.create']]);
 
     //App引导页配置
-    Route::get('boot-page/index', ['as' => 'admin.boot-page.index', 'uses' => 'BootPageController@index']);  //用户管理
-    Route::post('boot-page/index', ['as' => 'admin.boot-page.index', 'uses' => 'BootPageController@index']);  //
-    Route::resource('boot-page', 'BootPageController', ['names' => ['update' => 'admin.boot-page.edit', 'store' => 'admin.boot-page.create']]);
+    Route::get('link-page/index', ['as' => 'admin.link-page.index', 'uses' => 'LinkPageController@index']);  //用户管理
+    Route::post('link-page/index', ['as' => 'admin.link-page.index', 'uses' => 'LinkPageController@index']);  //
+    Route::resource('link-page', 'LinkPageController', ['names' => ['update' => 'admin.link-page.edit', 'store' => 'admin.link-page.create']]);
 
     //视频管理
     Route::get('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //用户管理
