@@ -56,5 +56,6 @@ class UserInfo
         $userAuth->credential = $credential;
         $userAuth->ifverified = "YES";
         $userAuth->save();
+        return $userAuth;
     }
 }

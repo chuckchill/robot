@@ -76,7 +76,9 @@ class AuthController extends BaseController
         $sms->checkLoginSms($code);
         $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
         if (!$userAuth) {
-            code_exception("code.login.mobile_notexist");
+            $user = new User();
+            $user->save();
+            $userAuth=$this->userInfo->registerData("mobile", $mobile, "", $user->id);
         }
         return $this->response->array([
             'code' => 0,
@@ -96,10 +98,10 @@ class AuthController extends BaseController
         if (!$mobile) {
             code_exception('code.login.mobile_notnull');
         }
-        $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
+        /*$userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
         if (!$userAuth) {
             code_exception("code.login.mobile_notexist");
-        }
+        }*/
         $sms = new Sms($mobile);
         $sms->sendLoginSms();
         return $this->response->array(['code' => 0, 'message' => '发送成功']);
