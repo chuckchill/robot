@@ -28,7 +28,7 @@
                                 <div class="form-group">
                                     <label for="tag" class="col-md-2 control-label">名称(前端显示的名称)</label>
                                     <div class="col-md-4">
-                                        <input type="text" value="{{$name}}" class="form-control" id="fileName">
+                                        <input type="text" name="name" value="{{$name}}" class="form-control" id="fileName">
                                     </div>
                                 </div>
                                 <div class="form-group">
