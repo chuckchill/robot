@@ -91,7 +91,6 @@
             }
             var observer = {
                 next: function (res) {
-                    console.log(res)
                     var rate = res.total.percent.toFixed(2)
                     setProgressRate(rate)
                 },
