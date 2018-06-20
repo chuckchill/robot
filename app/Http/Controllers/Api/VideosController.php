@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\Common\Videos;
+use App\Services\Helper;
 use App\Services\Qiniu;
 use Illuminate\Http\Request;
 
@@ -55,12 +56,17 @@ class VideosController extends BaseController
             $query->where('name', 'like', $searchName . '%');
         }
         $data = $query->paginate(15)->toArray();
+        $curPage = $data['current_page'];
+        $items = $data['data'];
+        foreach ($items as $key => $item) {
+            $items[$key]['thumb'] = Helper::getVideoThumb($item['key']);
+        }
         return $this->response->array([
             'code' => 0,
             'message' => '查询成功',
             'data' => [
-                'videos' => $data['data'],
-                'current_page' => $data['current_page']
+                'videos' => $items,
+                'current_page' => $curPage
             ]
         ]);
     }

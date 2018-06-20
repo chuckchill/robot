@@ -15,10 +15,20 @@ use Qiniu\Auth;
 use Qiniu\Config;
 use Qiniu\Storage\BucketManager;
 
+/**
+ * Class Qiniu
+ * @package App\Services
+ */
 class Qiniu
 {
+    /**
+     * @var Auth
+     */
     public $Auth;
 
+    /**
+     * Qiniu constructor.
+     */
     public function __construct()
     {
         $accessKey = config('qiniu.accessKey');
@@ -26,11 +36,21 @@ class Qiniu
         $this->Auth = new Auth($accessKey, $secretKey);
     }
 
+    /**获取token
+     * @param $bucket
+     * @param array $policy
+     * @return string
+     */
     public function getToken($bucket, $policy = [])
     {
         return $this->Auth->uploadToken($bucket, null, 3600, $policy, true);
     }
 
+    /**视频播放地址
+     * @param $key
+     * @param int $expires
+     * @return string
+     */
     public function getDownloadUrl($key, $expires = 3600)
     {
         $baseUrl = config('qiniu.bucket.videos.private_url') . '/' . $key;
@@ -38,6 +58,22 @@ class Qiniu
         return $signedUrl;
     }
 
+    /**视频展示图
+     * @param $key
+     * @param int $expires
+     * @return string
+     */
+    public function getVideoThumb($key, $expires = 3600)
+    {
+        $baseUrl = config('qiniu.bucket.videos.private_url') . '/' . $key."?vframe/jpg/offset/5";
+        $signedUrl = $this->Auth->privateDownloadUrl($baseUrl, $expires);
+        return $signedUrl;
+    }
+
+    /**回调验证
+     * @param $url
+     * @return bool
+     */
     public function vertifyCallback($url)
     {
         $contentType = array_get(Request::header(), "content-type.0");
@@ -48,6 +84,9 @@ class Qiniu
         return $this->Auth->verifyCallback($contentType, $authorization, $url, $callbackBody);
     }
 
+    /**
+     * @return BucketManager
+     */
     public function getBucketManager()
     {
         $config = new Config();

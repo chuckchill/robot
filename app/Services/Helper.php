@@ -56,6 +56,7 @@ class Helper
             return false;
         }
     }
+
     /**
      * @param $password
      * @return bool
@@ -68,6 +69,7 @@ class Helper
             return false;
         }
     }
+
     /**
      * @return mixed
      */
@@ -84,12 +86,19 @@ class Helper
         return config('other.mobile_action');
     }
 
-    /**
-     * @param $codes
-     * @throws CodeException
-     */
-    public function codeException($postfix)
+
+    public static function getVideoThumb($key)
     {
-        throw new CodeException(config($postfix));
+        $saveKey = md5($key);
+        $thumbPath = 'upload/video_thumb';
+        $thumbPath = self::mkDir($thumbPath);
+        $dirPath = public_path($thumbPath . "/" . $saveKey . ".jpg");
+        if (!file_exists($dirPath)) {
+            $qn = new Qiniu();
+            $url = $qn->getVideoThumb($key);
+            $content = file_get_contents($url);
+            file_put_contents($dirPath, $content);
+        }
+        return url($thumbPath . "/" . $saveKey . ".jpg");
     }
 }
