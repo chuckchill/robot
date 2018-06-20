@@ -21,7 +21,7 @@
                             @include('admin.partials.errors')
                             @include('admin.partials.success')
 
-                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="/admin/boot-page">
+                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="/admin/link-page">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="cove_image"/>
                                 @include('admin.linkpage._form')

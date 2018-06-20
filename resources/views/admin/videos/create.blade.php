@@ -101,6 +101,7 @@
                 },
                 complete: function (res) {
                     $(".progress").addClass("hidden")
+                    window.location.href="/admin/videos/index";
                 }
             }
             var config = {
