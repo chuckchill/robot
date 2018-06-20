@@ -51,9 +51,15 @@
                             </span>{{$item["name"]}}</h2>
                         <div class="docs-desc-title__url">{{build_api_url($item["request"]["url"])}}</div>
                     </div>
+                    <div class="description">
+                        <p>
+                            {{array_get($item,'request.description')}}
+                        </p>
+                    </div>
                     <div class="docs-desc-body">
                         <div class="pm-markdown"></div>
-                        <div class="docs-request-headers"><h4 class="pm-h4">Headers</h4>
+                        <div class="docs-request-headers">
+                            <h4 class="pm-h4">Headers</h4>
                             <table class="pm-table docs-request-table">
                                 <tbody>
                                 @foreach($item["request"]["header"] as $head)
