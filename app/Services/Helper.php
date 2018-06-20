@@ -12,6 +12,10 @@ namespace App\Services;
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
 
+/**
+ * Class Helper
+ * @package App\Services
+ */
 class Helper
 {
     /**
@@ -86,7 +90,19 @@ class Helper
         return config('other.mobile_action');
     }
 
+    /**
+     * @param $codes
+     * @throws CodeException
+     */
+    public function codeException($postfix)
+    {
+        throw new CodeException(config($postfix));
+    }
 
+    /**
+     * @param $key
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
     public static function getVideoThumb($key)
     {
         $saveKey = md5($key);
