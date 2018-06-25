@@ -91,7 +91,6 @@
             }
             var observer = {
                 next: function (res) {
-                    console.log(res)
                     var rate = res.total.percent.toFixed(2)
                     setProgressRate(rate)
                 },
@@ -101,6 +100,7 @@
                 },
                 complete: function (res) {
                     $(".progress").addClass("hidden")
+                    window.location.href="/admin/videos/index";
                 }
             }
             var config = {
