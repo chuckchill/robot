@@ -102,7 +102,7 @@ class VideosController extends BaseController
             "fsize" => "$(fsize)",
             "fname" => "$(fname)",
             "name" => "$(x:name)",
-            "buid" => "{$user->id}",
+            "uid" => "{$user->id}",
         ];
         $policy = array(
             'callbackUrl' => route('qiniu.user-upload-callback'),

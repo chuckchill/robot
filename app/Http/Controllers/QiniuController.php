@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\Logger;
 use App\Http\Controllers\Controller;
+use App\Models\Common\LiveVideos;
 use App\Models\Common\Videos;
 use App\Services\Qiniu;
 use Illuminate\Http\Request;
@@ -70,5 +71,19 @@ class QiniuController extends Controller
         }
         Logger::info("回调实体:" . json_encode($request->all()), 'qiniu');
         $body = $request->all();
+        $key = array_get($body, 'key');
+        $name = array_get($body, 'name');
+        $fname = array_get($body, 'fname');
+        $uid = array_get($body, 'uid');
+        $status = array_get($body, 'status');
+        $name = $name ? pathinfo($name) : pathinfo($fname);
+
+        $video = new LiveVideos();
+        $video->key = $key;
+        $video->name = array_get($name, 'filename', time());
+        $video->uid = $uid;
+        $video->key = $key;
+        $video->status = (int)$status;
+        $video->save();
     }
 }

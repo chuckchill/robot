@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class VideoOnDemand extends Migration
+class LiveVideos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class VideoOnDemand extends Migration
      */
     public function up()
     {
-        Schema::create('videos_on_demand', function (Blueprint $table) {
+        Schema::create('live_videos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('channel')->comment('渠道')->default('qiniu');
             $table->string('key')->comment('存储key');
             $table->string('uid')->comment('用户id');
             $table->string('name')->comment('name');
+            $table->tinyInteger('status')->comment('状态')->default(1);
             $table->string('remarks')->comment('描述');
             $table->timestamps();
         });
@@ -31,7 +32,7 @@ class VideoOnDemand extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('videos_on_demand', function (Blueprint $table) {
+        Schema::dropIfExists('live_videos', function (Blueprint $table) {
             //
         });
     }
