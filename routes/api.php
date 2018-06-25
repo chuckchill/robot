@@ -36,6 +36,9 @@ $api->group(['middleware' => ['api.auth']], function ($api) {
     $api->post('get-video-type', ['uses' => 'VideosController@getVideosType']);//获取视频分类
     $api->post('get-videos', ['uses' => 'VideosController@getVideos']);//查询视频
     $api->post('get-video-src', ['uses' => 'VideosController@getVideoSrc']);//获取视频地址
+
+
     $api->post('get-video-upload-token', ['uses' => 'VideosController@getUploadToken']);//获取视频地址
+    $api->post('get-live-videos', ['uses' => 'VideosController@getLiveVideos']);//获取视频地址
 
 });

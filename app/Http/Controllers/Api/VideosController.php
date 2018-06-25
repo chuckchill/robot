@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Models\Common\LiveVideos;
 use App\Models\Common\Videos;
 use App\Services\Helper;
 use App\Services\Qiniu;
@@ -55,6 +56,30 @@ class VideosController extends BaseController
         if ($searchName) {
             $query->where('name', 'like', $searchName . '%');
         }
+        $data = $query->paginate(15)->toArray();
+        $curPage = $data['current_page'];
+        $items = $data['data'];
+        foreach ($items as $key => $item) {
+            $items[$key]['thumb'] = Helper::getVideoThumb($item['key']);
+        }
+        return $this->response->array([
+            'code' => 0,
+            'message' => '查询成功',
+            'data' => [
+                'videos' => $items,
+                'current_page' => $curPage
+            ]
+        ]);
+    }
+
+    /**直播
+     * @param Request $request
+     * @return mixed
+     */
+    public function getLiveVideos(Request $request)
+    {
+        $user = \JWTAuth::authenticate();
+        $query = LiveVideos::select("name", "key", "created_at")->where(["uid" => $user->id]);
         $data = $query->paginate(15)->toArray();
         $curPage = $data['current_page'];
         $items = $data['data'];

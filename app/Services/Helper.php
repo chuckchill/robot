@@ -11,6 +11,7 @@ namespace App\Services;
 
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
+use \Exception;
 
 /**
  * Class Helper
@@ -105,16 +106,21 @@ class Helper
      */
     public static function getVideoThumb($key)
     {
-        $saveKey = md5($key);
-        $thumbPath = 'upload/video_thumb';
-        $thumbPath = self::mkDir($thumbPath);
-        $dirPath = public_path($thumbPath . "/" . $saveKey . ".jpg");
-        if (!file_exists($dirPath)) {
-            $qn = new Qiniu();
-            $url = $qn->getVideoThumb($key);
-            $content = file_get_contents($url);
-            file_put_contents($dirPath, $content);
+        try {
+            $saveKey = md5($key);
+            $thumbPath = 'upload/video_thumb';
+            $thumbPath = self::mkDir($thumbPath);
+            $dirPath = public_path($thumbPath . "/" . $saveKey . ".jpg");
+            if (!file_exists($dirPath)) {
+                $qn = new Qiniu();
+                $url = $qn->getVideoThumb($key);
+                $content = file_get_contents($url);
+                file_put_contents($dirPath, $content);
+            }
+            return url($thumbPath . "/" . $saveKey . ".jpg");
+        } catch (Exception $exception) {
+            Logger::info("key：{$key}不存在","qiniu");
+            return "";
         }
-        return url($thumbPath . "/" . $saveKey . ".jpg");
     }
 }
