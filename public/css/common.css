@@ -9,3 +9,7 @@
 .skin-purple .main-sidebar, .skin-purple .sidebar-menu > li.header {
     background-color: #00142a;
 }
+
+.mt-left-5 {
+    margin: 5px;
+}

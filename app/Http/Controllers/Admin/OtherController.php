@@ -12,8 +12,15 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class OtherController
+ * @package App\Http\Controllers\Admin
+ */
 class OtherController extends BaseController
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $keywork = "";
@@ -25,10 +32,15 @@ class OtherController extends BaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     public function keyword(Request $request)
     {
         $keyword = $request->get("keyword");
         Storage::put("hot_keyword.kw", $keyword);
         return ["code" => 200, "message" => "ok"];
     }
+
 }
