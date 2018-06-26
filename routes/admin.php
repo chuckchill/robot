@@ -42,10 +42,10 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::resource('role', 'RoleController', ['names' => ['update' => 'admin.role.edit', 'store' => 'admin.role.create']]);
 
 
-    //用户管理路由
+    //后台用户管理路由
     Route::get('user/index', ['as' => 'admin.user.index', 'uses' => 'BackendUserController@index']);  //用户管理
     Route::post('user/index', ['as' => 'admin.user.index', 'uses' => 'BackendUserController@index']);
-    Route::resource('user', 'BackendUserController', ['names' => ['update' => 'admin.role.edit', 'store' => 'admin.role.create']]);
+    Route::resource('user', 'BackendUserController', ['names' => ['update' => 'admin.user.edit', 'store' => 'admin.user.create']]);
     //操作日志查询
     Route::get('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
     Route::post('log/index', ['as' => 'admin.log.index', 'uses' => 'LogController@index']);  //用户管理
@@ -79,6 +79,10 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
             'show' => 'admin.videos-type.show',
         ]
     ]);
+    //注册用户管理路由
+    Route::get('appuser/index', ['as' => 'admin.appuser.index', 'uses' => 'AppUserController@index']);  //用户管理
+    Route::post('appuser/index', ['as' => 'admin.appuser.index', 'uses' => 'AppUserController@index']);
+    Route::resource('appuser', 'AppUserController', ['names' => ['update' => 'admin.appuser.edit', 'store' => 'admin.appuser.create']]);
     //其他配置
     Route::get('other/index', ['as' => 'admin.other.index', 'uses' => 'OtherController@index']);  //用户管理
     Route::post('other/keyword', ['as' => 'admin.other.keywork', 'uses' => 'OtherController@keyword']);  //

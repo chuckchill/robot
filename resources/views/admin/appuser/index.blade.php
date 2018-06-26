@@ -12,10 +12,10 @@
         <div class="col-md-6">
         </div>
         <div class="col-md-6 text-right">
-            @if(Gate::forUser(auth('admin')->user())->check('admin.user.create'))
-                <a href="/admin/user/create" class="btn btn-success btn-md">
+            @if(Gate::forUser(auth('admin')->user())->check('admin.appuser.create'))
+               {{-- <a href="/admin/appuser/create" class="btn btn-success btn-md">
                     <i class="fa fa-plus-circle"></i> 添加用户
-                </a>
+                </a>--}}
             @endif
         </div>
     </div>
@@ -40,8 +40,11 @@
                         <thead>
                         <tr>
                             <th data-sortable="false" class="hidden-sm"></th>
-                            <th class="hidden-sm">用户名</th>
-                            <th class="hidden-sm">邮箱</th>
+                            <th class="hidden-sm">昵称</th>
+                            <th class="hidden-md">性别</th>
+                            <th class="hidden-md">生日</th>
+                            <th class="hidden-md">账号</th>
+                            <th class="hidden-md">手机</th>
                             <th class="hidden-md">角色创建日期</th>
                             <th class="hidden-md">角色修改日期</th>
                             <th data-sortable="false">操作</th>
@@ -66,11 +69,11 @@
                 <div class="modal-body">
                     <p class="lead">
                         <i class="fa fa-question-circle fa-lg"></i>
-                        确认要删除这个用户吗?
+                        确认要注销这个用户吗?
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <form class="deleteForm" method="POST" action="/admin/user">
+                    <form class="deleteForm" method="POST" action="/admin/appuser">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -115,7 +118,7 @@
                             order: [[1, "desc"]],
                             serverSide: true,
                             ajax: {
-                                url: '/admin/user/index',
+                                url: '/admin/appuser/index',
                                 type: 'POST',
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -123,8 +126,11 @@
                             },
                             "columns": [
                                 {"data": "id"},
-                                {"data": "name"},
-                                {"data": "email"},
+                                {"data": "nick_name"},
+                                {"data": "gender"},
+                                {"data": "birthday"},
+                                {"data": "account"},
+                                {"data": "mobile"},
                                 {"data": "created_at"},
                                 {"data": "updated_at"},
                                 {"data": "action"}
@@ -138,12 +144,12 @@
 
                                     //编辑
                                     if (row_edit) {
-                                        str += '<a style="margin:3px;" href="/admin/user/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                        str += '<a style="margin:3px;" href="/admin/appuser/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
                                     }
 
-                                    //删除
+                                    //注销
                                     if (row_delete) {
-                                        str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 删除</a>';
+                                        str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 注销</a>';
                                     }
 
                                     return str;
@@ -168,7 +174,7 @@
 
                         $("table").delegate('.delBtn', 'click', function () {
                             var id = $(this).attr('attr');
-                            $('.deleteForm').attr('action', '/admin/user/' + id);
+                            $('.deleteForm').attr('action', '/admin/appuser/' + id);
                             $("#modal-delete").modal();
                         });
 

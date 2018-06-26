@@ -19,7 +19,7 @@ class AppUser extends Migration
             $table->string('gender')->comment('性别')->nullable();
             $table->string('birthday')->comment('生日')->nullable();
             $table->string('profile_img')->comment('头像')->nullable();
-            $table->string('status')->comment('生日')->nullable();
+            $table->string('status')->comment('状态')->default(1);
             $table->timestamps();
         });
     }

@@ -57,4 +57,18 @@ class UserInfo
         $userAuth->save();
         return $userAuth;
     }
+
+    public function getRegInfo($uid)
+    {
+        $allIdentifer = $this->getAllAccount($uid);
+        foreach ($allIdentifer as $identifier) {
+            if ($identifier['identity_type'] == "mobile") {
+                $mobile = $identifier['identifier'];
+            }
+            if ($identifier['identity_type'] == "sys") {
+                $account = $identifier['identifier'];
+            }
+        }
+        return compact('mobile', 'account');
+    }
 }
