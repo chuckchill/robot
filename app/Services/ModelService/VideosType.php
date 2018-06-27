@@ -9,11 +9,15 @@
 namespace App\Services\ModelService;
 
 
+use Illuminate\Support\Facades\Cache;
+
 class VideosType
 {
     public static function getTypeTree()
     {
-        $videoType = \App\Models\Common\VideosType::orderBy('pid', SORT_DESC)->get();
+        $videoType = Cache::store('file')->rememberForever('videotype', function () {
+            return \App\Models\Common\VideosType::orderBy('pid', SORT_DESC)->get();
+        });
         $result = [];
         foreach ($videoType as $item) {
             if ($item->pid == 0) {
@@ -25,4 +29,5 @@ class VideosType
         }
         return $result;
     }
+
 }

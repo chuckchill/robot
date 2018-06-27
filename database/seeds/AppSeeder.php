@@ -21,21 +21,22 @@ class AppSeeder extends Seeder
             'sno' => str_random(10),
             'name' => str_random(10),
         ]);
-        $userInfo=new \App\Services\ModelService\UserInfo();
+        $pwd = Hash::make("123456");
+        $userInfo = new \App\Services\ModelService\UserInfo();
         $user = new \App\Models\Api\User();
-        $user->nick_name="测试1";
-        $user->gender="男";
-        $user->birthday="2018-02-05";
+        $user->nick_name = "测试1";
+        $user->gender = "男";
+        $user->birthday = "2018-02-05";
         $user->save();
         $userInfo->registerData("mobile", "13025447440", "", $user->id);
-        $userInfo->registerData("sys", "test1", "", $user->id);
+        $userInfo->registerData("sys", "test1", $pwd, $user->id);
 
         $user = new \App\Models\Api\User();
-        $user->nick_name="测试2";
-        $user->gender="女";
-        $user->birthday="2018-02-05";
+        $user->nick_name = "测试2";
+        $user->gender = "女";
+        $user->birthday = "2018-02-05";
         $user->save();
         $userInfo->registerData("mobile", "13025447440", "", $user->id);
-        $userInfo->registerData("sys", "test2", "", $user->id);
+        $userInfo->registerData("sys", "test2", $pwd, $user->id);
     }
 }

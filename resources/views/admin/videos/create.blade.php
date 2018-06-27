@@ -46,11 +46,7 @@
                                 <div class="form-group">
                                     <label for="tag" class="col-md-2 control-label">类型</label>
                                     <div class="col-md-4">
-                                        <select id="videoType" class="form-control" name="type">
-                                            @foreach(config('admin.videos.type') as $key=>$type)
-                                                <option value="{{$key}}">{{$type}}</option>
-                                            @endforeach
-                                        </select>
+                                        @include('admin.videos.typeselect',['select'=>0])
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -100,7 +96,7 @@
                 },
                 complete: function (res) {
                     $(".progress").addClass("hidden")
-                    window.location.href="/admin/videos/index";
+                    window.location.href = "/admin/videos/index";
                 }
             }
             var config = {
