@@ -28,14 +28,13 @@ class AppUserController extends BaseController
             if (strlen($search['value']) > 0) {
                 $data['recordsFiltered'] = $userModel->count();
                 $data['data'] = $userModel->where(function ($query) use ($search) {
-                    $query->where('a.identity_type', 'LIKE', '%' . $search['value'] . '%')
-                        ->orWhere('b.identity_type', 'like', '%' . $search['value'] . '%');
+                    $query->where('a.identifier', 'LIKE', '%' . $search['value'] . '%')
+                        ->orWhere('b.identifier', 'like', '%' . $search['value'] . '%');
                 })
                     ->where(['status' => 1])
                     ->skip($start)->take($length)
                     ->orderBy('id', SORT_DESC)
                     ->get();
-                dd($data);
             } else {
                 $data['recordsFiltered'] = User::where(['status' => 1])->count();
                 $data['data'] = $userModel->skip($start)->take($length)
