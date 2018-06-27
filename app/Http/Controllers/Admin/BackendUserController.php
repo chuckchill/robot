@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\BaseController;
 class BackendUserController extends BaseController
 {
     protected $fields = [
-        'name'  => '',
+        'name' => '',
         'email' => '',
         'roles' => [],
     ];
@@ -45,8 +45,7 @@ class BackendUserController extends BaseController
                     ->get();
             } else {
                 $data['recordsFiltered'] = User::count();
-                $data['data'] = User::
-                skip($start)->take($length)
+                $data['data'] = User::skip($start)->take($length)
                     ->orderBy('id', SORT_DESC)
                     ->get();
             }

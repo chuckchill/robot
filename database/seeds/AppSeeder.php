@@ -35,7 +35,7 @@ class AppSeeder extends Seeder
         $user->gender="女";
         $user->birthday="2018-02-05";
         $user->save();
-        $userInfo->registerData("mobile", "13025447440", "", $user->id);
+        $userInfo->registerData("mobile", "13025447441", "", $user->id);
         $userInfo->registerData("sys", "test2", "", $user->id);
     }
 }

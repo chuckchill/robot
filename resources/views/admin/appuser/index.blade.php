@@ -144,7 +144,7 @@
 
                                     //编辑
                                     if (row_edit) {
-                                        str += '<a style="margin:3px;" href="/admin/appuser/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                        //str += '<a style="margin:3px;" href="/admin/appuser/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
                                     }
 
                                     //注销
