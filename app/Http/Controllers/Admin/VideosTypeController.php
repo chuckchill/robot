@@ -9,8 +9,10 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Events\videotypeChangeEvent;
 use App\Models\Common\VideosType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 
 /**
  * Class VideosTypeController
@@ -71,6 +73,7 @@ class VideosTypeController extends BaseController
         }
 
         $videosType->save();
+        Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\VideosType', $videosType->id, 1, '添加了视频分类:' . $videosType->name . '(' . $videosType->id . ')'));
         return redirect('/admin/videos-type')->withSuccess('添加成功！');
     }
@@ -88,7 +91,8 @@ class VideosTypeController extends BaseController
             $data[$field] = old($field, $videosType->$field);
         }
         $data['id'] = $id;
-        $data['types'] = VideosType::where(['pid' => 0])->get()->toArray();
+
+        $data['types'] = \App\Services\ModelService\VideosType::getTypeTree();
         return view('admin.videostype.edit', $data);
     }
 
@@ -109,6 +113,7 @@ class VideosTypeController extends BaseController
             $videosType->$field = $request->get($field, $this->fields[$field]);
         }
         $videosType->save();
+        Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\VideosType', $videosType->id, 3, '修改了视频分类:' . $videosType->name . '(' . $videosType->id . ')'));
 
         return redirect('admin/videos-type')->withSuccess('修改成功！');
@@ -123,6 +128,7 @@ class VideosTypeController extends BaseController
         $StartupPage = VideosType::find((int)$id);
         if (!$StartupPage) return redirect()->back()->withErrors("找不到分类!");
         $StartupPage->delete();
+        Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\VideosType', $StartupPage->id, 3, '删除了启动页：' . $StartupPage->id));
         return redirect('admin/videos-type')->withSuccess("删除成功");
     }

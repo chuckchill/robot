@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Common\LiveVideos;
 use App\Models\Common\Videos;
 use App\Services\Helper;
+use App\Services\ModelService\VideosType;
 use App\Services\Qiniu;
 use Illuminate\Http\Request;
 
@@ -26,14 +27,7 @@ class VideosController extends BaseController
      */
     public function getVideosType()
     {
-        $types = config("admin.videos.type");
-        $data = [];
-        foreach ($types as $key => $type) {
-            $data[] = [
-                "type_code" => $key,
-                "type_name" => $type,
-            ];
-        }
+        $data = VideosType::getTypeTree();
         return $this->response->array([
             'code' => 0,
             'message' => '获取成功',

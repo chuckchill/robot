@@ -43,11 +43,7 @@
                                 <div class="form-group">
                                     <label for="tag" class="col-md-2 control-label">类型</label>
                                     <div class="col-md-4">
-                                        <select id="videoType" class="form-control" name="type">
-                                            @foreach(config('admin.videos.type') as $key=>$typeName)
-                                                <option @if($key==$type) selected @endif value="{{$key}}">{{$typeName}}</option>
-                                            @endforeach
-                                        </select>
+                                            @include('admin.videos.typeselect',['select'=>$type])
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -31,7 +31,7 @@
                             <div class="panel-heading">
                                 <a href="/admin/videos-type/{{$item['id']}}/edit">{{$item["name"]}}</a>
                             </div>
-                            @if(count(array_get($item,"children")))
+                            @if(count(array_get($item,"children",[])))
                                 <div class="panel-body">
                                     @foreach(array_get($item,"children") as $child)
                                         <span class="label label-default mt-left-5">
