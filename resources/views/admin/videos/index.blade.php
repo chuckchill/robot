@@ -65,7 +65,7 @@
                 <div class="modal-body">
                     <p class="lead">
                         <i class="fa fa-question-circle fa-lg"></i>
-                        确认要删除这个启动页吗?
+                        确认要删除这个视频吗?
                     </p>
                 </div>
                 <div class="modal-footer">
