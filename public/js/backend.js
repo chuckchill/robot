@@ -1,3 +1,8 @@
+if (typeof String.prototype.startsWith != 'function') {
+    String.prototype.startsWith = function (prefix){
+        return this.slice(0, prefix.length) === prefix;
+    };
+}
 var qiniuError = function (error) {
     switch (error.code){
         case 579:
