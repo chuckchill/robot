@@ -40,7 +40,7 @@ class AppSeeder extends Seeder
         $userInfo->registerData("sys", "test2", "", $user->id);
 
 
-        $liveVideos=new LiveVideos();
+        $liveVideos=new \App\Models\Common\LiveVideos();
         $liveVideos->key="lhH5luCgh6SiTHvqRx2gATtBlUN0";
         $liveVideos->uid=1;
         $liveVideos->type='100';
