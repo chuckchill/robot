@@ -21,7 +21,7 @@ class LiveVideos extends Migration
             $table->string('name')->comment('name');
             $table->string('type')->comment('分类');
             $table->tinyInteger('status')->comment('状态')->default(0);
-            $table->string('remarks')->comment('描述');
+            $table->string('remarks')->nullable()->comment('描述');
             $table->timestamps();
         });
     }
