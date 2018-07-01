@@ -45,6 +45,6 @@ class AppSeeder extends Seeder
         $liveVideos->uid=1;
         $liveVideos->type='100';
         $liveVideos->name="测试视频";
-        $liveVideos->save;
+        $liveVideos->save();
     }
 }
