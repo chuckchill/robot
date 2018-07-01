@@ -19,7 +19,8 @@ class LiveVideos extends Migration
             $table->string('key')->comment('存储key');
             $table->string('uid')->comment('用户id');
             $table->string('name')->comment('name');
-            $table->tinyInteger('status')->comment('状态')->default(1);
+            $table->string('type')->comment('分类');
+            $table->tinyInteger('status')->comment('状态')->default(0);
             $table->string('remarks')->comment('描述');
             $table->timestamps();
         });

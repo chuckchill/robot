@@ -39,5 +39,12 @@ class AppSeeder extends Seeder
         $userInfo->registerData("mobile", "13025447441", "", $user->id);
         $userInfo->registerData("sys", "test2", "", $user->id);
 
+
+        $liveVideos=new LiveVideos();
+        $liveVideos->key="lhH5luCgh6SiTHvqRx2gATtBlUN0";
+        $liveVideos->uid=1;
+        $liveVideos->type='100';
+        $liveVideos->name="测试视频";
+        $liveVideos->save;
     }
 }

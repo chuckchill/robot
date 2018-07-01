@@ -121,6 +121,7 @@ class VideosController extends BaseController
             "fsize" => "$(fsize)",
             "fname" => "$(fname)",
             "name" => "$(x:name)",
+            "type" => "$(x:type)",
             "uid" => "{$user->id}",
         ];
         $policy = array(
