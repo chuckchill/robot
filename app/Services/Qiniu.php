@@ -41,7 +41,7 @@ class Qiniu
      * @param array $policy
      * @return string
      */
-    public function getToken($bucket, $policy = [])
+    public function getToken($bucket, $policy = [], $expires = 3600)
     {
         return $this->Auth->uploadToken($bucket, null, 3600, $policy, true);
     }
@@ -65,7 +65,7 @@ class Qiniu
      */
     public function getVideoThumb($key, $expires = 3600)
     {
-        $baseUrl = config('qiniu.bucket.videos.private_url') . '/' . $key."?vframe/jpg/offset/5";
+        $baseUrl = config('qiniu.bucket.videos.private_url') . '/' . $key . "?vframe/jpg/offset/5";
         $signedUrl = $this->Auth->privateDownloadUrl($baseUrl, $expires);
         return $signedUrl;
     }

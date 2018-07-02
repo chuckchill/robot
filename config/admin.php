@@ -54,6 +54,9 @@ return [
                 ["label" => "admin.videos.index", "name" => "视频管理"],
                 ["label" => "admin.videos.create", "name" => "添加视频"],
                 ["label" => "admin.videos.edit", "name" => "修改视频"],
+                ["label" => "admin.videos.index", "name" => "录播视频管理"],
+                ["label" => "admin.videos.create", "name" => "录播添加视频"],
+                ["label" => "admin.videos.edit", "name" => "录播修改视频"],
                 ["label" => "admin.other.index", "name" => "其他设置"],
                 ["label" => "admin.other.keyword", "name" => "热门关键词"],
             ],
@@ -70,10 +73,8 @@ return [
     ],
     'videos' => [
         'type' => [
-            '100' => '康复指导人员远程康复视频',
-            '200' => '残疾人就业康复实用技术培训视频',
-            '300' => '聋哑残疾人手语视频',
-            '400' => '心理康复视频',
+            '100' => '康复医生康复过程录播',
+            '200' => '残疾人居家自我康复录播',
         ]
     ]
 ];

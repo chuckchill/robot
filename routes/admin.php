@@ -70,6 +70,16 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
             'show' => 'admin.videos.show',
         ]
     ]);
+    //录播视频管理
+    Route::get('live-videos/index', ['as' => 'admin.live-videos.index', 'uses' => 'LiveVideosController@index']);  //用户管理
+    Route::post('live-videos/index', ['as' => 'admin.live-videos.index', 'uses' => 'LiveVideosController@index']);  //
+    Route::resource('live-videos', 'LiveVideosController', [
+        'names' => [
+            'update' => 'admin.live-videos.edit',
+            'store' => 'admin.live-videos.create',
+            'show' => 'admin.live-videos.show',
+        ]
+    ]);
     //视频分类
     Route::get('videos-type/index', ['as' => 'admin.videos-type.index', 'uses' => 'VideosTypeController@index']);  //用户管理
     Route::resource('videos-type', 'VideosTypeController', [

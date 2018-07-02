@@ -129,7 +129,7 @@ class VideosController extends BaseController
             'callbackBody' => json_encode($returnBody),
             'callbackBodyType' => 'application/json'
         );
-        $token = $qn->getToken(config('qiniu.bucket.videos.bucket'), $policy);
+        $token = $qn->getToken(config('qiniu.bucket.videos.bucket'), $policy, 3600 * 24);
         return $this->response->array([
             'code' => 0,
             'message' => '获取成功',
