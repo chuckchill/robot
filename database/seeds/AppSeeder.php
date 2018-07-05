@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Seeder;
 
 /**
@@ -17,6 +18,11 @@ class AppSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\Api\Devices::truncate();
+        \App\Models\Api\User::truncate();
+        \App\Models\Common\LiveVideos::truncate();
+        \App\Models\Api\UsersAuth::truncate();
+
         \App\Models\Api\Devices::insert([
             'sno' => str_random(10),
             'name' => str_random(10),
@@ -40,11 +46,11 @@ class AppSeeder extends Seeder
         $userInfo->registerData("sys", "test2", "", $user->id);
 
 
-        $liveVideos=new \App\Models\Common\LiveVideos();
-        $liveVideos->key="lhH5luCgh6SiTHvqRx2gATtBlUN0";
-        $liveVideos->uid=1;
-        $liveVideos->type='100';
-        $liveVideos->name="测试视频";
+        $liveVideos = new \App\Models\Common\LiveVideos();
+        $liveVideos->key = "lhH5luCgh6SiTHvqRx2gATtBlUN0";
+        $liveVideos->uid = 1;
+        $liveVideos->type = '100';
+        $liveVideos->name = "测试视频";
         $liveVideos->save();
     }
 }

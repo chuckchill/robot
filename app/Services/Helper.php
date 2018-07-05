@@ -12,6 +12,7 @@ namespace App\Services;
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
 use \Exception;
+use Illuminate\Support\Facades\Request;
 
 /**
  * Class Helper
@@ -119,8 +120,27 @@ class Helper
             }
             return url($thumbPath . "/" . $saveKey . ".jpg");
         } catch (Exception $exception) {
-            Logger::info("key：{$key}不存在","qiniu");
+            Logger::info("key：{$key}不存在", "qiniu");
             return "";
         }
+    }
+
+    public static function getIpCIty($ipAddr = '')
+    {
+        if (!$ipAddr) {
+            $ipAddr = Request::getClientIp();
+        }
+        $client = new \GuzzleHttp\Client();
+        $url = "http://ip.taobao.com/service/getIpInfo.php";
+        $response = $client->request('GET', $url, [
+            'query' => [
+                'ip' => $ipAddr
+            ]
+        ]);
+        $result = json_decode($response->getBody()->getContents(), true);
+        return [
+            'province' => array_get($result, 'data.region_id'),
+            'city' => array_get($result, 'data.city_id')
+        ];
     }
 }
