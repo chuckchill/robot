@@ -379,6 +379,8 @@ class UserController extends BaseController
         $user->nick_name = $request->get('nick_name');
         $user->birthday = $request->get('birthday');
         $user->gender = $request->get('gender');
+        $user->city = $request->get('city');
+        $user->province = $request->get('province');
         $user->save();
         return $this->response->array(['code' => 0, 'message' => '修改成功']);
     }

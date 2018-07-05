@@ -125,7 +125,7 @@ class Helper
         }
     }
 
-    public static function getIpCIty($ipAddr = '')
+    public static function getIpArea($ipAddr = '')
     {
         if (!$ipAddr) {
             $ipAddr = Request::getClientIp();
@@ -138,9 +138,26 @@ class Helper
             ]
         ]);
         $result = json_decode($response->getBody()->getContents(), true);
+        if (array_get($result, 'data.city_id') == 'local') {
+            return [
+                'province' => '',
+                'city' => '',
+            ];
+        }
         return [
             'province' => array_get($result, 'data.region_id'),
             'city' => array_get($result, 'data.city_id')
         ];
+    }
+
+    public static function getUserArea($user = null)
+    {
+        if ($user && ($user->province || $user->city)) {
+            return [
+                'province' => $user->province,
+                'city' => $user->city
+            ];
+        }
+        return self::getIpArea();
     }
 }

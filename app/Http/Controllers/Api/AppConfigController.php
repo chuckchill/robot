@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Common\LinkPage;
 use App\Models\Common\StartupPage;
+use App\Services\ModelService\AreaCode;
 
 class AppConfigController extends BaseController
 {
@@ -46,6 +47,18 @@ class AppConfigController extends BaseController
                 'message' => "获取成功",
                 "data" => [
                     'url' => array_filter($urls)
+                ]
+            ]);
+    }
+
+    public function getCityCode()
+    {
+        return $this->response
+            ->array([
+                'code' => 0,
+                'message' => "获取成功",
+                "data" => [
+                    'area_code' => AreaCode::getCityTree()
                 ]
             ]);
     }

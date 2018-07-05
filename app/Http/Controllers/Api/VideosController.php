@@ -73,7 +73,22 @@ class VideosController extends BaseController
     public function getLiveVideos(Request $request)
     {
         $user = \JWTAuth::authenticate();
-        $query = LiveVideos::select("name", "key", "created_at")->where(["uid" => $user->id]);
+        $province = $request->get('province');
+        $city = $request->get('city');
+        if (!$province && !$city) {
+            $userArea = Helper::getUserArea();
+            $province = array_get($userArea, 'province');
+            $city = array_get($userArea, 'city');
+        }
+
+        $query = LiveVideos::select("name", "key", "created_at")
+            ->where(["uid" => $user->id]);
+        if ($province) {
+            $query->where(['province' => $province]);
+        }
+        if ($city) {
+            $query->where(['city' => $city]);
+        }
         $data = $query->paginate(15)->toArray();
         $curPage = $data['current_page'];
         $items = $data['data'];
@@ -115,6 +130,7 @@ class VideosController extends BaseController
     {
         $qn = new Qiniu();
         $user = \JWTAuth::authenticate();
+        $areaCode = Helper::getUserArea($user);
         $returnBody = [
             "key" => "$(key)",
             "hash" => "$(hash)",
@@ -123,6 +139,8 @@ class VideosController extends BaseController
             "name" => "$(x:name)",
             "type" => "$(x:type)",
             "uid" => "{$user->id}",
+            "province" => array_get($areaCode, "province"),
+            "city" => array_get($areaCode, "city"),
         ];
         $policy = array(
             'callbackUrl' => route('qiniu.user-upload-callback'),

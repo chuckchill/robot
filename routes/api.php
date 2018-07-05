@@ -2,6 +2,7 @@
 
 $api->post('startup-page', ['uses' => 'AppConfigController@startupPpage']);//启动页
 $api->post('link-page', ['uses' => 'AppConfigController@linkPage']);//引导页
+$api->post('get-area-code', ['uses' => 'AppConfigController@getCityCode']);//获取城市编码
 
 $api->post('account-reg', ['uses' => 'RegisterController@account']);//账号注册
 

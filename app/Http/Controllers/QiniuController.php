@@ -84,6 +84,8 @@ class QiniuController extends Controller
         $video->uid = $uid;
         $video->key = $key;
         $video->status = (int)$status;
+        $video->province = array_get($body, 'province');
+        $video->city = array_get($body, 'city');
         $video->save();
     }
 }

@@ -1,1387 +1,1446 @@
 {
-  "info": {
-    "name": "robot",
-    "_postman_id": "ac5efbb8-683c-1816-1ea6-496a12b99d11",
-    "description": "",
-    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "启动页",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {},
-        "url": "{{BaseURL}}/startup-page",
-        "description": null
-      },
-      "response": [
-        {
-          "id": "54c5e8b5-cfbb-4a36-85fe-8f6f730dbca6",
-          "name": "启动页",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "body": {},
-            "url": "{{BaseURL}}/startup-page"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 05:47:48 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"c1c56402a23473929dc9fa459b7994bc88b0ab31\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.11.5",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            },
-            {
-              "key": "X-Powered-By",
-              "value": "PHP/5.6.27",
-              "name": "X-Powered-By",
-              "description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-            }
-          ],
-          "cookie": [],
-          "responseTime": 342,
-          "body": "{\"code\":0,\"message\":\"\\u83b7\\u53d6\\u6210\\u529f\",\"data\":{\"url\":\"\"}}"
-        }
-      ]
-    },
-    {
-      "name": "引导页",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {},
-        "url": "{{BaseURL}}/link-page",
-        "description": null
-      },
-      "response": [
-        {
-          "id": "dc845abf-69be-4791-ab8c-c8d35607f80d",
-          "name": "引导页",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {},
-            "url": "{{BaseURL}}/link-page"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 05:51:43 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"31e8a49d1ea8c636c390ac1fd7ba25ebc540c90b\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.14.0",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            }
-          ],
-          "cookie": [],
-          "responseTime": 128,
-          "body": "{\"code\":0,\"message\":\"\\u83b7\\u53d6\\u6210\\u529f\",\"data\":{\"url\":[]}}"
-        }
-      ]
-    },
-    {
-      "name": "账号注册",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "account",
-              "value": "ab34561",
-              "type": "text",
-              "description": "账号"
-            },
-            {
-              "key": "password",
-              "value": "123456",
-              "type": "text",
-              "description": "密码"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/account-reg",
-        "description": null
-      },
-      "response": [
-        {
-          "id": "6692fe43-1630-41fc-a20c-acc0c7f26b7d",
-          "name": "账号注册",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "account",
-                  "value": "ab34561",
-                  "type": "text",
-                  "description": "账号"
-                },
-                {
-                  "key": "password",
-                  "value": "123456",
-                  "type": "text",
-                  "description": "密码"
-                }
-              ]
-            },
-            "url": "{{BaseURL}}/account-reg"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 08:50:48 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"f2f737c2106051a735554833ccbdad237566994a\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.14.0",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            }
-          ],
-          "cookie": [],
-          "responseTime": 202,
-          "body": "{\"code\":0,\"message\":\"\\u6ce8\\u518c\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXcudmlsbHN0b3JlLmNuXC9hcGlcL2FjY291bnQtcmVnIiwiaWF0IjoxNTI5NDg0NjQ4LCJleHAiOjE1Mjk0ODgyNDgsIm5iZiI6MTUyOTQ4NDY0OCwianRpIjoicGNlZlU5Zmg3MzlkTEhRNSIsInN1YiI6MSwicHJ2IjoiNDBhOTdmY2EyZDQyNGU3NzhhMDdhMGEyZjEyZGM1MTdhODVjYmRjMSJ9.nDYypcY954kZ1cuYaMMat6cPy8VwUJEbDOhrfoZpYYs\",\"account\":\"ab34561\",\"mobile\":\"\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
-        }
-      ]
-    },
-    {
-      "name": "账号登录",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "ed51ee6f-b11b-429d-b99e-2c7ff34eb8b6",
-            "type": "text/javascript",
-            "exec": [
-              "jsonData =JSON.parse(responseBody);",
-              "postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "account",
-              "value": "ab34561",
-              "type": "text",
-              "description": "账号"
-            },
-            {
-              "key": "password",
-              "value": "123456",
-              "type": "text",
-              "description": "密码"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/account-login",
-        "description": null
-      },
-      "response": [
-        {
-          "id": "c4dcded2-79be-428e-8432-4d480f761e9d",
-          "name": "账号登录",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "account",
-                  "value": "ab34561",
-                  "type": "text",
-                  "description": "账号"
-                },
-                {
-                  "key": "password",
-                  "value": "123456",
-                  "type": "text",
-                  "description": "密码"
-                }
-              ]
-            },
-            "url": "{{BaseURL}}/account-login"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 08:50:54 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"a713d22e8df05b9bd5a2c2bf0b096479fae5b6d4\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.14.0",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            }
-          ],
-          "cookie": [],
-          "responseTime": 161,
-          "body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXcudmlsbHN0b3JlLmNuXC9hcGlcL2FjY291bnQtbG9naW4iLCJpYXQiOjE1Mjk0ODQ2NTQsImV4cCI6MTUyOTQ4ODI1NCwibmJmIjoxNTI5NDg0NjU0LCJqdGkiOiJQVER2MHh2Z2RFT1Rtc09RIiwic3ViIjoxLCJwcnYiOiI0MGE5N2ZjYTJkNDI0ZTc3OGEwN2EwYTJmMTJkYzUxN2E4NWNiZGMxIn0.NSF1Wrngp4FgqoRaQo1rZsGGsQbr-iNza8zOL1tt2hE\",\"account\":\"ab34561\",\"mobile\":\"\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
-        }
-      ]
-    },
-    {
-      "name": "发送登录短信",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "mobile",
-              "value": "13025447441",
-              "description": "手机号",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/login-send-sms",
-        "description": null
-      },
-      "response": [
-        {
-          "id": "7fcbc6bc-e0b5-48a7-91e1-c3b75e9e4f45",
-          "name": "发送登录短信",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "mobile",
-                  "value": "13025447441",
-                  "description": "手机号",
-                  "type": "text"
-                }
-              ]
-            },
-            "url": "{{BaseURL}}/login-send-sms"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 00:55:00 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"d57c756f51877e892c7e62dab2acc3b661ffad6a\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.11.5",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            },
-            {
-              "key": "X-Powered-By",
-              "value": "PHP/5.6.27",
-              "name": "X-Powered-By",
-              "description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-            }
-          ],
-          "cookie": [],
-          "responseTime": 422,
-          "body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
-        },
-        {
-          "id": "78599dbd-9f5e-4678-ab49-ff768363937d",
-          "name": "发送登录短信",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded",
-                "disabled": false
-              }
-            ],
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "mobile",
-                  "value": "13025447441",
-                  "description": "手机号",
-                  "type": "text"
-                }
-              ]
-            },
-            "url": "{{BaseURL}}/login-send-sms"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 09:29:25 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"d57c756f51877e892c7e62dab2acc3b661ffad6a\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.11.5",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            },
-            {
-              "key": "X-Powered-By",
-              "value": "PHP/5.6.27",
-              "name": "X-Powered-By",
-              "description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-            }
-          ],
-          "cookie": [],
-          "responseTime": 408,
-          "body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
-        }
-      ]
-    },
-    {
-      "name": "手机验证码登录",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "id": "5f60717c-66fb-4967-9a34-6527a9458df0",
-            "type": "text/javascript",
-            "exec": [
-              "jsonData =JSON.parse(responseBody);",
-              "postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "mobile",
-              "value": "13025447441",
-              "type": "text",
-              "description": "手机号"
-            },
-            {
-              "key": "code",
-              "value": "123456",
-              "type": "text",
-              "description": "验证码"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/sms-login",
-        "description": null
-      },
-      "response": [
-        {
-          "id": "db988ce8-25a8-49f9-ac2d-8fa3e4fedfa8",
-          "name": "手机验证码登录",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "mobile",
-                  "value": "13025447441",
-                  "type": "text",
-                  "description": "手机号"
-                },
-                {
-                  "key": "code",
-                  "value": "123456",
-                  "type": "text",
-                  "description": "验证码"
-                }
-              ]
-            },
-            "url": "{{BaseURL}}/sms-login"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 00:55:02 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"1361933ca80bb514cf0b6af58ca5a12b4d2f96ca\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.11.5",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            },
-            {
-              "key": "X-Powered-By",
-              "value": "PHP/5.6.27",
-              "name": "X-Powered-By",
-              "description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-            }
-          ],
-          "cookie": [],
-          "responseTime": 711,
-          "body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ1NjEwMiwiZXhwIjoxNTI5NDU5NzAyLCJuYmYiOjE1Mjk0NTYxMDIsImp0aSI6IlFYYkh0eEdGQW8zejFGeXIiLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.OH5fy5GbCFV_dnHHQ7oqvqEf2rd1myBR6GV4W94S_ao\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
-        },
-        {
-          "id": "dee63bf6-f290-4cbe-9606-94e0398400c0",
-          "name": "手机验证码登录",
-          "originalRequest": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "mobile",
-                  "value": "13025447441",
-                  "type": "text",
-                  "description": "手机号"
-                },
-                {
-                  "key": "code",
-                  "value": "123456",
-                  "type": "text",
-                  "description": "验证码"
-                }
-              ]
-            },
-            "url": "{{BaseURL}}/sms-login"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 09:29:29 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"a1cc16aa9cf36c6c0560a8251a7fc2b194e83a20\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.11.5",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            },
-            {
-              "key": "X-Powered-By",
-              "value": "PHP/5.6.27",
-              "name": "X-Powered-By",
-              "description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-            }
-          ],
-          "cookie": [],
-          "responseTime": 424,
-          "body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ4Njk2OSwiZXhwIjoxNTI5NDkwNTY5LCJuYmYiOjE1Mjk0ODY5NjksImp0aSI6Im9OZ2Npcml2WWlvSE5nNHciLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.yOLPDzkXgyhveum4wXPfNztDmOHUrdgCTyf6_A7Owsw\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
-        }
-      ]
-    },
-    {
-      "name": "退出登录",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {},
-        "url": "{{BaseURL}}/logout",
-        "description": ""
-      },
-      "response": [
-        {
-          "id": "fcce6766-958b-4345-a217-cd63bac5b567",
-          "name": "退出登录",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "authorization",
-                "value": "bearer{{auth_token}}"
-              }
-            ],
-            "body": {},
-            "url": "{{BaseURL}}/logout"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 09:28:02 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"af458e937c10d96569ee20fd519d30963dc493e7\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.11.5",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            },
-            {
-              "key": "X-Powered-By",
-              "value": "PHP/5.6.27",
-              "name": "X-Powered-By",
-              "description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-            }
-          ],
-          "cookie": [],
-          "responseTime": 432,
-          "body": "{\"code\":0,\"message\":\"\\u9000\\u51fa\\u767b\\u5f55\\u6210\\u529f\"}"
-        }
-      ]
-    },
-    {
-      "name": "微信登录",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "code",
-              "value": "123123",
-              "description": "微信授权后返回的code",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "http://robotapi.qzd.com/api/wx-login",
-        "description": null
-      },
-      "response": [
-        {
-          "id": "b9bd1674-edb8-4763-ba0f-6edfa9631b29",
-          "name": "微信登录",
-          "originalRequest": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "key": "code",
-                  "value": "123123",
-                  "description": "微信授权后返回的code",
-                  "type": "text"
-                }
-              ]
-            },
-            "url": "http://robotapi.qzd.com/api/wx-login"
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "_postman_previewtype": "text",
-          "header": [
-            {
-              "key": "Cache-Control",
-              "value": "private, must-revalidate",
-              "name": "Cache-Control",
-              "description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
-            },
-            {
-              "key": "Connection",
-              "value": "keep-alive",
-              "name": "Connection",
-              "description": "Options that are desired for the connection"
-            },
-            {
-              "key": "Content-Type",
-              "value": "application/json",
-              "name": "Content-Type",
-              "description": "The mime type of this content"
-            },
-            {
-              "key": "Date",
-              "value": "Wed, 20 Jun 2018 09:28:08 GMT",
-              "name": "Date",
-              "description": "The date and time that the message was sent"
-            },
-            {
-              "key": "ETag",
-              "value": "\"8d5cdbaf1a5a4d656002476251c20160217140bc\"",
-              "name": "ETag",
-              "description": "An identifier for a specific version of a resource, often a message digest"
-            },
-            {
-              "key": "Server",
-              "value": "nginx/1.11.5",
-              "name": "Server",
-              "description": "A name for the server"
-            },
-            {
-              "key": "Transfer-Encoding",
-              "value": "chunked",
-              "name": "Transfer-Encoding",
-              "description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
-            },
-            {
-              "key": "X-Powered-By",
-              "value": "PHP/5.6.27",
-              "name": "X-Powered-By",
-              "description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
-            }
-          ],
-          "cookie": [],
-          "responseTime": 1920,
-          "body": "{\"code\":10037,\"message\":\"\\u5fae\\u4fe1\\u6388\\u6743\\u767b\\u5f55\\u5931\\u8d25\"}"
-        }
-      ]
-    },
-    {
-      "name": "设置账号",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          },
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "account",
-              "value": "ab1233",
-              "description": "账号",
-              "type": "text"
-            },
-            {
-              "key": "password",
-              "value": "123456",
-              "description": "密码",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/set-account",
-        "description": "当用户是用手机注册时，需要引导用户设置账号和密码"
-      },
-      "response": []
-    },
-    {
-      "name": "绑定设备",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "sno",
-              "value": "sQdL1WoqMY",
-              "description": "设备号",
-              "type": "text"
-            },
-            {
-              "key": "name",
-              "value": "1234",
-              "description": "名称",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/bind-device",
-        "description": " Code    Message\r\n    0         注册成功\r\n    1        注册用户名不合法\r\n    2       注册用户名已存在\r\n    3      手机号码不合法\r\n    4      地址不合法\r\n    5      密码不合法\r\n   6      邮箱验证码输入不合法\r\n  7      验证邮箱不一致                \r\n   8  邮箱验证码不一致\r\n  9    邮箱验证码超时          "
-      },
-      "response": []
-    },
-    {
-      "name": "授权设备",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "sno",
-              "value": "sQdL1WoqMY",
-              "description": "设备号",
-              "type": "text"
-            },
-            {
-              "key": "account",
-              "value": "ab3456",
-              "description": "账号",
-              "type": "text"
-            },
-            {
-              "key": "enable",
-              "value": "1",
-              "description": "是否激活",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/auth-device",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "解绑设备",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "sno",
-              "value": "sQdL1WoqMY",
-              "description": "设备号",
-              "type": "text"
-            },
-            {
-              "key": "account",
-              "value": "ab3456",
-              "description": "",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/unbind-device",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "设置日常提醒",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          },
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "data",
-              "value": "{\"SHX520AlarmClock\":[\n       {\n          \"H\":12,\n          \"S\":30,\n          \"Index\":1,\n          \"Mode\":1,\n          \"Remark\":\"中午吃饭了\"\n      }\n]}",
-              "description": "数据",
-              "type": "text"
-            },
-            {
-              "key": "sno",
-              "value": "sQdL1WoqMY",
-              "description": "设备号",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/set-alarmclock",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "获取日常提醒",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "sno",
-              "value": "sQdL1WoqMY",
-              "description": "设备号",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/get-alarmclock",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "获取设备绑定用户",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "sno",
-              "value": "sQdL1WoqMY",
-              "type": "text",
-              "description": "设备号"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/get-device-binder",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "获取用户绑定设备",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          },
-          {
-            "key": "Content-Type",
-            "value": "application/x-www-form-urlencoded"
-          }
-        ],
-        "body": {
-          "mode": "urlencoded",
-          "urlencoded": [
-            {
-              "key": "sno",
-              "value": "sQdL1WoqMY",
-              "description": "设备号",
-              "type": "text",
-              "disabled": true
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/get-user-device",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "获取视频分类",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {},
-        "url": "{{BaseURL}}/get-video-type",
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "查询视频",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {},
-        "url": "{{BaseURL}}/get-videos",
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "获取视频资源",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "key",
-              "value": "Fl2DfadrP6ViQPR3vGUz3cp_EQ7U",
-              "description": "key值",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/get-video-src",
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "获取上传视频token",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {},
-        "url": "{{BaseURL}}/get-video-upload-token",
-        "description": null
-      },
-      "response": []
-    },
-    {
-      "name": "获取录播视频",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {},
-        "url": "{{BaseURL}}/get-live-videos",
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "修改用户信息",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "authorization",
-            "value": "bearer{{auth_token}}"
-          }
-        ],
-        "body": {
-          "mode": "formdata",
-          "formdata": [
-            {
-              "key": "nick_name",
-              "value": "test1",
-              "description": "",
-              "type": "text"
-            },
-            {
-              "key": "birthday",
-              "value": "2018-02-01",
-              "description": "",
-              "type": "text"
-            },
-            {
-              "key": "gender",
-              "value": "男",
-              "description": "",
-              "type": "text"
-            }
-          ]
-        },
-        "url": "{{BaseURL}}/edit-user",
-        "description": ""
-      },
-      "response": []
-    }
-  ]
+	"info": {
+		"name": "robot",
+		"_postman_id": "ac5efbb8-683c-1816-1ea6-496a12b99d11",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "启动页",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {},
+				"url": "{{BaseURL}}/startup-page",
+				"description": null
+			},
+			"response": [
+				{
+					"id": "319ffce9-e091-4f36-aba4-093c098ec210",
+					"name": "启动页",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {},
+						"url": "{{BaseURL}}/startup-page"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 05:47:48 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"c1c56402a23473929dc9fa459b7994bc88b0ab31\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.11.5",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.6.27",
+							"name": "X-Powered-By",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "342",
+					"body": "{\"code\":0,\"message\":\"\\u83b7\\u53d6\\u6210\\u529f\",\"data\":{\"url\":\"\"}}"
+				}
+			]
+		},
+		{
+			"name": "引导页",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "{{BaseURL}}/link-page",
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "2fd0c3c8-949a-439d-9e7f-0162dfad9046",
+					"name": "引导页",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": "{{BaseURL}}/link-page"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 05:51:43 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"31e8a49d1ea8c636c390ac1fd7ba25ebc540c90b\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.14.0",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "128",
+					"body": "{\"code\":0,\"message\":\"\\u83b7\\u53d6\\u6210\\u529f\",\"data\":{\"url\":[]}}"
+				}
+			]
+		},
+		{
+			"name": "账号注册",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "account",
+							"value": "ab34561",
+							"type": "text",
+							"description": "账号"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text",
+							"description": "密码"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/account-reg",
+				"description": null
+			},
+			"response": [
+				{
+					"id": "d3a3acee-bec2-4874-90e6-213c205ed9db",
+					"name": "账号注册",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "account",
+									"value": "ab34561",
+									"type": "text",
+									"description": "账号"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"description": "密码"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/account-reg"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 08:50:48 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"f2f737c2106051a735554833ccbdad237566994a\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.14.0",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "202",
+					"body": "{\"code\":0,\"message\":\"\\u6ce8\\u518c\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXcudmlsbHN0b3JlLmNuXC9hcGlcL2FjY291bnQtcmVnIiwiaWF0IjoxNTI5NDg0NjQ4LCJleHAiOjE1Mjk0ODgyNDgsIm5iZiI6MTUyOTQ4NDY0OCwianRpIjoicGNlZlU5Zmg3MzlkTEhRNSIsInN1YiI6MSwicHJ2IjoiNDBhOTdmY2EyZDQyNGU3NzhhMDdhMGEyZjEyZGM1MTdhODVjYmRjMSJ9.nDYypcY954kZ1cuYaMMat6cPy8VwUJEbDOhrfoZpYYs\",\"account\":\"ab34561\",\"mobile\":\"\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
+				}
+			]
+		},
+		{
+			"name": "账号登录",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed51ee6f-b11b-429d-b99e-2c7ff34eb8b6",
+						"type": "text/javascript",
+						"exec": [
+							"jsonData =JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "account",
+							"value": "test1",
+							"type": "text",
+							"description": "账号"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text",
+							"description": "密码"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/account-login",
+				"description": null
+			},
+			"response": [
+				{
+					"id": "3d602514-2248-4bb2-9507-1a25d40e9e02",
+					"name": "账号登录",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "account",
+									"value": "ab34561",
+									"type": "text",
+									"description": "账号"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text",
+									"description": "密码"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/account-login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 08:50:54 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"a713d22e8df05b9bd5a2c2bf0b096479fae5b6d4\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.14.0",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "161",
+					"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXcudmlsbHN0b3JlLmNuXC9hcGlcL2FjY291bnQtbG9naW4iLCJpYXQiOjE1Mjk0ODQ2NTQsImV4cCI6MTUyOTQ4ODI1NCwibmJmIjoxNTI5NDg0NjU0LCJqdGkiOiJQVER2MHh2Z2RFT1Rtc09RIiwic3ViIjoxLCJwcnYiOiI0MGE5N2ZjYTJkNDI0ZTc3OGEwN2EwYTJmMTJkYzUxN2E4NWNiZGMxIn0.NSF1Wrngp4FgqoRaQo1rZsGGsQbr-iNza8zOL1tt2hE\",\"account\":\"ab34561\",\"mobile\":\"\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
+				}
+			]
+		},
+		{
+			"name": "发送登录短信",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "mobile",
+							"value": "13025447440",
+							"description": "手机号",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/login-send-sms",
+				"description": null
+			},
+			"response": [
+				{
+					"id": "10576e69-1800-4051-bed7-a271d4c0111c",
+					"name": "发送登录短信",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "mobile",
+									"value": "13025447441",
+									"description": "手机号",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/login-send-sms"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 00:55:00 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"d57c756f51877e892c7e62dab2acc3b661ffad6a\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.11.5",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.6.27",
+							"name": "X-Powered-By",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "422",
+					"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
+				},
+				{
+					"id": "9bf6bf47-4d43-4fa3-89dd-d37d0a097069",
+					"name": "发送登录短信",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "mobile",
+									"value": "13025447441",
+									"description": "手机号",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/login-send-sms"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 09:29:25 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"d57c756f51877e892c7e62dab2acc3b661ffad6a\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.11.5",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.6.27",
+							"name": "X-Powered-By",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "408",
+					"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
+				}
+			]
+		},
+		{
+			"name": "手机验证码登录",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f60717c-66fb-4967-9a34-6527a9458df0",
+						"type": "text/javascript",
+						"exec": [
+							"jsonData =JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"auth_token\", jsonData.data.token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mobile",
+							"value": "13025447440",
+							"type": "text",
+							"description": "手机号"
+						},
+						{
+							"key": "code",
+							"value": "123456",
+							"type": "text",
+							"description": "验证码"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/sms-login",
+				"description": null
+			},
+			"response": [
+				{
+					"id": "f2ea625c-7312-459a-93d3-811f97b8f63f",
+					"name": "手机验证码登录",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "mobile",
+									"value": "13025447441",
+									"type": "text",
+									"description": "手机号"
+								},
+								{
+									"key": "code",
+									"value": "123456",
+									"type": "text",
+									"description": "验证码"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/sms-login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 00:55:02 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"1361933ca80bb514cf0b6af58ca5a12b4d2f96ca\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.11.5",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.6.27",
+							"name": "X-Powered-By",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "711",
+					"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ1NjEwMiwiZXhwIjoxNTI5NDU5NzAyLCJuYmYiOjE1Mjk0NTYxMDIsImp0aSI6IlFYYkh0eEdGQW8zejFGeXIiLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.OH5fy5GbCFV_dnHHQ7oqvqEf2rd1myBR6GV4W94S_ao\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
+				},
+				{
+					"id": "aa629376-7dbf-4eab-b799-ec1f02206088",
+					"name": "手机验证码登录",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "mobile",
+									"value": "13025447441",
+									"type": "text",
+									"description": "手机号"
+								},
+								{
+									"key": "code",
+									"value": "123456",
+									"type": "text",
+									"description": "验证码"
+								}
+							]
+						},
+						"url": "{{BaseURL}}/sms-login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 09:29:29 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"a1cc16aa9cf36c6c0560a8251a7fc2b194e83a20\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.11.5",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.6.27",
+							"name": "X-Powered-By",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "424",
+					"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ4Njk2OSwiZXhwIjoxNTI5NDkwNTY5LCJuYmYiOjE1Mjk0ODY5NjksImp0aSI6Im9OZ2Npcml2WWlvSE5nNHciLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.yOLPDzkXgyhveum4wXPfNztDmOHUrdgCTyf6_A7Owsw\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
+				}
+			]
+		},
+		{
+			"name": "退出登录",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {},
+				"url": "{{BaseURL}}/logout",
+				"description": null
+			},
+			"response": [
+				{
+					"id": "d6758851-635a-45a2-b549-f4c49501ca05",
+					"name": "退出登录",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "bearer{{auth_token}}"
+							}
+						],
+						"body": {},
+						"url": "{{BaseURL}}/logout"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 09:28:02 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"af458e937c10d96569ee20fd519d30963dc493e7\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.11.5",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.6.27",
+							"name": "X-Powered-By",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "432",
+					"body": "{\"code\":0,\"message\":\"\\u9000\\u51fa\\u767b\\u5f55\\u6210\\u529f\"}"
+				}
+			]
+		},
+		{
+			"name": "微信登录",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "code",
+							"value": "123123",
+							"description": "微信授权后返回的code",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://robotapi.qzd.com/api/wx-login",
+				"description": null
+			},
+			"response": [
+				{
+					"id": "dce7fa9e-86b0-455e-a6d1-99d90bfd8447",
+					"name": "微信登录",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "123123",
+									"description": "微信授权后返回的code",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://robotapi.qzd.com/api/wx-login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "private, must-revalidate",
+							"name": "Cache-Control",
+							"description": ""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": ""
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": ""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 20 Jun 2018 09:28:08 GMT",
+							"name": "Date",
+							"description": ""
+						},
+						{
+							"key": "ETag",
+							"value": "\"8d5cdbaf1a5a4d656002476251c20160217140bc\"",
+							"name": "ETag",
+							"description": ""
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.11.5",
+							"name": "Server",
+							"description": ""
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": ""
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/5.6.27",
+							"name": "X-Powered-By",
+							"description": ""
+						}
+					],
+					"cookie": [],
+					"responseTime": "1920",
+					"body": "{\"code\":10037,\"message\":\"\\u5fae\\u4fe1\\u6388\\u6743\\u767b\\u5f55\\u5931\\u8d25\"}"
+				}
+			]
+		},
+		{
+			"name": "设置账号",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "account",
+							"value": "ab12332",
+							"description": "账号",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"description": "密码",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/set-account",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "绑定设备",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"description": "设备号",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "1234",
+							"description": "名称",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/bind-device",
+				"description": " Code    Message\r\n    0         注册成功\r\n    1        注册用户名不合法\r\n    2       注册用户名已存在\r\n    3      手机号码不合法\r\n    4      地址不合法\r\n    5      密码不合法\r\n   6      邮箱验证码输入不合法\r\n  7      验证邮箱不一致                \r\n   8  邮箱验证码不一致\r\n  9    邮箱验证码超时          "
+			},
+			"response": []
+		},
+		{
+			"name": "授权设备",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"description": "设备号",
+							"type": "text"
+						},
+						{
+							"key": "account",
+							"value": "ab3456",
+							"description": "账号",
+							"type": "text"
+						},
+						{
+							"key": "enable",
+							"value": "1",
+							"description": "是否激活",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/auth-device",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "解绑设备",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"description": "设备号",
+							"type": "text"
+						},
+						{
+							"key": "account",
+							"value": "ab3456",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/unbind-device",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "设置日常提醒",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "data",
+							"value": "{\"SHX520AlarmClock\":[\n       {\n          \"H\":12,\n          \"S\":30,\n          \"Index\":1,\n          \"Mode\":1,\n          \"Remark\":\"中午吃饭了\"\n      }\n]}",
+							"description": "数据",
+							"type": "text"
+						},
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"description": "设备号",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/set-alarmclock",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取日常提醒",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"description": "设备号",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-alarmclock",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取设备绑定用户",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"type": "text",
+							"description": "设备号"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-device-binder",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取用户绑定设备",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "sno",
+							"value": "sQdL1WoqMY",
+							"description": "设备号",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-user-device",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取视频分类",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {},
+				"url": "{{BaseURL}}/get-video-type",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查询视频",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "page",
+							"value": "",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "province",
+							"value": "",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "city",
+							"value": "",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-videos",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取视频资源",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "key",
+							"value": "12312",
+							"description": "key值",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-video-src",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取上传视频token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {},
+				"url": "{{BaseURL}}/get-video-upload-token",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取录播视频",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "province",
+							"value": "",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-live-videos",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "修改用户信息",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nick_name",
+							"value": "test1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "2018-02-01",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "男",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "4400010",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "province",
+							"value": "4400000",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/edit-user",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "获取省市编码",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": "{{BaseURL}}/get-area-code",
+				"description": ""
+			},
+			"response": []
+		}
+	]
 }
