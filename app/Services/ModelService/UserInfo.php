@@ -27,6 +27,8 @@ class UserInfo
             'nick_name' => array_get($user, "nick_name", ""),
             'gender' => array_get($user, "gender", ""),
             'birthday' => array_get($user, "birthday", ""),
+            'province' => array_get($user, "province", ""),
+            'city' => array_get($user, "city", ""),
             'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
         ];
     }
