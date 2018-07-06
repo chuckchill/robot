@@ -9,9 +9,11 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Events\ArticleEvent;
 use App\Models\Common\Article;
 use App\Models\Common\ArticleContent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 
 class ArticleController extends BaseController
 {
@@ -76,6 +78,7 @@ class ArticleController extends BaseController
         if (!$contentObj->content) return redirect()->back()->withErrors("文章内容不能为空!");
         $article->save();
         $article->contents()->save($contentObj);
+        Event::fire(new ArticleEvent($article->id));
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 1, '添加了文章:' . $article->title . '(' . $article->id . ')'));
         return redirect('/admin/article/')->withSuccess('添加成功！');
     }
@@ -107,6 +110,7 @@ class ArticleController extends BaseController
 
         $article->save();
         $article->contents->update(['content' => $content]);
+        Event::fire(new ArticleEvent($article->id));
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '编辑了文章：' . $article->name));
         return redirect('/admin/article')->withSuccess('修改成功！');
     }
@@ -115,6 +119,7 @@ class ArticleController extends BaseController
     {
         $article = Article::find((int)$id);
         if (!$article) return redirect()->back()->withErrors("找不到文章!");
+        Event::fire(new ArticleEvent($article->id));
         $article->delete();
         $article->contents->delete();
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '删除了文章：' . $article->id));

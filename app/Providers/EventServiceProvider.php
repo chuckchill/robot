@@ -22,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\videotypeChangeEvent' => [
             'App\Listeners\videotypeChangeListener',
         ],
+        'App\Events\ArticleEvent' => [
+            'App\Listeners\ArticleListener',
+        ],
     ];
 
     /**
