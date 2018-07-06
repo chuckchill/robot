@@ -10,15 +10,15 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Events\videotypeChangeEvent;
-use App\Models\Common\VideosType;
+use App\Models\Common\MediaType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 
 /**
- * Class VideosTypeController
+ * Class MediaTypeController
  * @package App\Http\Controllers\Admin
  */
-class VideosTypeController extends BaseController
+class MediaTypeController extends BaseController
 {
     /**
      * @var array
@@ -35,8 +35,8 @@ class VideosTypeController extends BaseController
      */
     public function index(Request $request, $pid = 0)
     {
-        $tree = \App\Services\ModelService\VideosType::getTypeTree();
-        return view('admin.videostype.index', compact("tree"));
+        $tree = \App\Services\ModelService\MediaType::getTypeTree();
+        return view('admin.mediatype.index', compact("tree"));
     }
 
     /**
@@ -51,8 +51,8 @@ class VideosTypeController extends BaseController
             $data[$field] = old($field, $default);
         }
 
-        $data['types'] = VideosType::where(['pid' => 0])->get()->toArray();
-        return view('admin.videostype.create', $data);
+        $data['types'] = MediaType::where(['pid' => 0])->get()->toArray();
+        return view('admin.mediatype.create', $data);
     }
 
     /**
@@ -63,7 +63,7 @@ class VideosTypeController extends BaseController
      */
     public function store(Request $request)
     {
-        $videosType = new VideosType();
+        $videosType = new MediaType();
         if (!$request->get('name')) {
             return redirect()->back()
                 ->withErrors("名称不能为空");
@@ -74,8 +74,8 @@ class VideosTypeController extends BaseController
 
         $videosType->save();
         Event::fire(new videotypeChangeEvent());
-        event(new \App\Events\userActionEvent('\App\Models\Admin\VideosType', $videosType->id, 1, '添加了视频分类:' . $videosType->name . '(' . $videosType->id . ')'));
-        return redirect('/admin/videos-type')->withSuccess('添加成功！');
+        event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $videosType->id, 1, '添加了视频分类:' . $videosType->name . '(' . $videosType->id . ')'));
+        return redirect('/admin/media-type')->withSuccess('添加成功！');
     }
 
 
@@ -85,15 +85,15 @@ class VideosTypeController extends BaseController
      */
     public function edit($id)
     {
-        $videosType = VideosType::find((int)$id);
+        $videosType = MediaType::find((int)$id);
         if (!$videosType) return redirect()->back()->withErrors("找不到该项目!");
         foreach (array_keys($this->fields) as $field) {
             $data[$field] = old($field, $videosType->$field);
         }
         $data['id'] = $id;
 
-        $data['types'] = \App\Services\ModelService\VideosType::getTypeTree();
-        return view('admin.videostype.edit', $data);
+        $data['types'] = \App\Services\ModelService\MediaType::getTypeTree();
+        return view('admin.mediatype.edit', $data);
     }
 
     /**
@@ -105,7 +105,7 @@ class VideosTypeController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $videosType = VideosType::find((int)$id);
+        $videosType = MediaType::find((int)$id);
         if ($videosType->pid == 0) {
             unset($this->fields['pid']);
         }
@@ -114,9 +114,9 @@ class VideosTypeController extends BaseController
         }
         $videosType->save();
         Event::fire(new videotypeChangeEvent());
-        event(new \App\Events\userActionEvent('\App\Models\Admin\VideosType', $videosType->id, 3, '修改了视频分类:' . $videosType->name . '(' . $videosType->id . ')'));
+        event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $videosType->id, 3, '修改了视频分类:' . $videosType->name . '(' . $videosType->id . ')'));
 
-        return redirect('admin/videos-type')->withSuccess('修改成功！');
+        return redirect('admin/media-type')->withSuccess('修改成功！');
     }
 
     /**
@@ -125,12 +125,12 @@ class VideosTypeController extends BaseController
      */
     public function destroy($id)
     {
-        $StartupPage = VideosType::find((int)$id);
+        $StartupPage = MediaType::find((int)$id);
         if (!$StartupPage) return redirect()->back()->withErrors("找不到分类!");
         $StartupPage->delete();
         Event::fire(new videotypeChangeEvent());
-        event(new \App\Events\userActionEvent('\App\Models\Admin\VideosType', $StartupPage->id, 3, '删除了启动页：' . $StartupPage->id));
-        return redirect('admin/videos-type')->withSuccess("删除成功");
+        event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $StartupPage->id, 3, '删除了启动页：' . $StartupPage->id));
+        return redirect('admin/media-type')->withSuccess("删除成功");
     }
 
 }

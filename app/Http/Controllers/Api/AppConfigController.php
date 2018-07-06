@@ -12,9 +12,17 @@ namespace App\Http\Controllers\Api;
 use App\Models\Common\LinkPage;
 use App\Models\Common\StartupPage;
 use App\Services\ModelService\AreaCode;
+use App\Services\ModelService\MediaType;
 
+/**
+ * Class AppConfigController
+ * @package App\Http\Controllers\Api
+ */
 class AppConfigController extends BaseController
 {
+    /**
+     * @return mixed
+     */
     public function startupPpage()
     {
         $startup = StartupPage::where(['status' => 1])
@@ -31,6 +39,9 @@ class AppConfigController extends BaseController
             ]);
     }
 
+    /**
+     * @return mixed
+     */
     public function linkPage()
     {
         $link = LinkPage::where(['status' => 1])
@@ -51,6 +62,9 @@ class AppConfigController extends BaseController
             ]);
     }
 
+    /**
+     * @return mixed
+     */
     public function getCityCode()
     {
         return $this->response
@@ -61,5 +75,18 @@ class AppConfigController extends BaseController
                     'area_code' => AreaCode::getCityTree()
                 ]
             ]);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMediaType()
+    {
+        $data = MediaType::getTypeTree(true);
+        return $this->response->array([
+            'code' => 0,
+            'message' => '获取成功',
+            'data' => (array)$data
+        ]);
     }
 }

@@ -11,12 +11,20 @@ namespace App\Services\ModelService;
 
 use Illuminate\Support\Facades\Cache;
 
-class VideosType
+/**
+ * Class MediaType
+ * @package App\Services\ModelService
+ */
+class MediaType
 {
-    public static function getTypeTree()
+    /**
+     * @param bool $filter
+     * @return array
+     */
+    public static function getTypeTree($filter = false)
     {
         $videoType = Cache::store('file')->rememberForever('videotype', function () {
-            return \App\Models\Common\VideosType::orderBy('pid', SORT_DESC)->get();
+            return \App\Models\Common\MediaType::orderBy('pid', SORT_DESC)->get();
         });
         $result = [];
         foreach ($videoType as $item) {
@@ -26,6 +34,11 @@ class VideosType
             } else {
                 $result[$item->pid]['children'][] = ["id" => $item->id, "name" => $item->name];
             }
+        }
+        if ($filter) {//过滤没有子菜单的项目
+            $result = array_filter($result, function ($item) {
+                return isset($item['children']);
+            });
         }
         return $result;
     }

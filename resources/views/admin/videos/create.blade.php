@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="tag" class="col-md-2 control-label">类型</label>
                                     <div class="col-md-4">
-                                        @include('admin.videos.typeselect',['select'=>0])
+                                        @include('admin.common.typeselect',['select'=>0])
                                     </div>
                                 </div>
                                 <div class="form-group">

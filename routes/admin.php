@@ -60,6 +60,16 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::post('link-page/index', ['as' => 'admin.link-page.index', 'uses' => 'LinkPageController@index']);  //
     Route::resource('link-page', 'LinkPageController', ['names' => ['update' => 'admin.link-page.edit', 'store' => 'admin.link-page.create']]);
 
+    //文章管理
+    Route::get('article/index', ['as' => 'admin.article.index', 'uses' => 'ArticleController@index']);  //用户管理
+    Route::post('article/index', ['as' => 'admin.article.index', 'uses' => 'ArticleController@index']);  //
+    Route::resource('article', 'ArticleController', [
+        'names' => [
+            'update' => 'admin.article.edit',
+            'store' => 'admin.article.create',
+            'show' => 'admin.article.show',
+        ]
+    ]);
     //视频管理
     Route::get('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //用户管理
     Route::post('videos/index', ['as' => 'admin.videos.index', 'uses' => 'VideosController@index']);  //
@@ -80,13 +90,13 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
             'show' => 'admin.live-videos.show',
         ]
     ]);
-    //视频分类
-    Route::get('videos-type/index', ['as' => 'admin.videos-type.index', 'uses' => 'VideosTypeController@index']);  //用户管理
-    Route::resource('videos-type', 'VideosTypeController', [
+    //媒体分类
+    Route::get('media-type/index', ['as' => 'admin.media-type.index', 'uses' => 'MediaTypeController@index']);  //用户管理
+    Route::resource('media-type', 'MediaTypeController', [
         'names' => [
-            'update' => 'admin.videos-type.edit',
-            'store' => 'admin.videos-type.create',
-            'show' => 'admin.videos-type.show',
+            'update' => 'admin.media-type.edit',
+            'store' => 'admin.media-type.create',
+            'show' => 'admin.media-type.show',
         ]
     ]);
     //注册用户管理路由

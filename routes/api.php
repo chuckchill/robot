@@ -3,6 +3,7 @@
 $api->post('startup-page', ['uses' => 'AppConfigController@startupPpage']);//启动页
 $api->post('link-page', ['uses' => 'AppConfigController@linkPage']);//引导页
 $api->post('get-area-code', ['uses' => 'AppConfigController@getCityCode']);//获取城市编码
+$api->post('get-media-type', ['uses' => 'AppConfigController@getMediaType']);//获取媒体分类
 
 $api->post('account-reg', ['uses' => 'RegisterController@account']);//账号注册
 
@@ -34,7 +35,6 @@ $api->group(['middleware' => ['api.auth']], function ($api) {
     $api->post('get-device-binder', ['uses' => 'UserController@getDeviceBinder']);//获取设备绑定用户
     $api->post('get-user-device', ['uses' => 'UserController@getUserDevice']);//获取用户绑定设备
 
-    $api->post('get-video-type', ['uses' => 'VideosController@getVideosType']);//获取视频分类
     $api->post('get-videos', ['uses' => 'VideosController@getVideos']);//查询视频
     $api->post('get-video-src', ['uses' => 'VideosController@getVideoSrc']);//获取视频地址
 

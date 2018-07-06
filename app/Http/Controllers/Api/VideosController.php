@@ -12,7 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Common\LiveVideos;
 use App\Models\Common\Videos;
 use App\Services\Helper;
-use App\Services\ModelService\VideosType;
+use App\Services\ModelService\MediaType;
 use App\Services\Qiniu;
 use Illuminate\Http\Request;
 
@@ -22,18 +22,6 @@ use Illuminate\Http\Request;
  */
 class VideosController extends BaseController
 {
-    /**
-     * @return mixed
-     */
-    public function getVideosType()
-    {
-        $data = VideosType::getTypeTree();
-        return $this->response->array([
-            'code' => 0,
-            'message' => '获取成功',
-            'data' => (array)$data
-        ]);
-    }
 
     /**
      * @param Request $request
