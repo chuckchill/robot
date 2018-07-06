@@ -55,7 +55,7 @@ class AppUserController extends BaseController
     public function destroy($id)
     {
         $tag = User::find((int)$id);
-        $tag->status = 0;
+        $tag->status = 2;
         $tag->save();
         event(new \App\Events\userActionEvent('\App\Models\Api\User', $tag->id, 2, '注销了用户：' . $tag->nick_name));
         return redirect()->back()

@@ -22,7 +22,7 @@
     <div class="col-md-6">
         <select class="form-control" name="status">
             <option value="1" @if($status==1) selected @endif>激活</option>
-            <option value="0" @if($status==0) selected @endif>不激活</option>
+            <option value="2" @if($status==2) selected @endif>不激活</option>
         </select>
     </div>
 </div>
