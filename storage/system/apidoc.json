@@ -22,7 +22,7 @@
 			},
 			"response": [
 				{
-					"id": "319ffce9-e091-4f36-aba4-093c098ec210",
+					"id": "c5588a23-9dbd-468a-9878-b94ed6d9173c",
 					"name": "启动页",
 					"originalRequest": {
 						"method": "POST",
@@ -38,58 +38,59 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 05:47:48 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"c1c56402a23473929dc9fa459b7994bc88b0ab31\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.11.5",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						},
 						{
 							"key": "X-Powered-By",
 							"value": "PHP/5.6.27",
 							"name": "X-Powered-By",
-							"description": ""
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 						}
 					],
 					"cookie": [],
-					"responseTime": "342",
+					"responseTime": 342,
 					"body": "{\"code\":0,\"message\":\"\\u83b7\\u53d6\\u6210\\u529f\",\"data\":{\"url\":\"\"}}"
 				}
 			]
@@ -101,11 +102,11 @@
 				"header": [],
 				"body": {},
 				"url": "{{BaseURL}}/link-page",
-				"description": ""
+				"description": null
 			},
 			"response": [
 				{
-					"id": "2fd0c3c8-949a-439d-9e7f-0162dfad9046",
+					"id": "83b88afa-238b-4362-9686-67d24cd73010",
 					"name": "引导页",
 					"originalRequest": {
 						"method": "POST",
@@ -116,52 +117,53 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 05:51:43 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"31e8a49d1ea8c636c390ac1fd7ba25ebc540c90b\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.14.0",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						}
 					],
 					"cookie": [],
-					"responseTime": "128",
+					"responseTime": 128,
 					"body": "{\"code\":0,\"message\":\"\\u83b7\\u53d6\\u6210\\u529f\",\"data\":{\"url\":[]}}"
 				}
 			]
@@ -198,7 +200,7 @@
 			},
 			"response": [
 				{
-					"id": "d3a3acee-bec2-4874-90e6-213c205ed9db",
+					"id": "7c25bac0-63cc-4e75-b7bc-38a2af489a87",
 					"name": "账号注册",
 					"originalRequest": {
 						"method": "POST",
@@ -230,52 +232,53 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 08:50:48 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"f2f737c2106051a735554833ccbdad237566994a\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.14.0",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						}
 					],
 					"cookie": [],
-					"responseTime": "202",
+					"responseTime": 202,
 					"body": "{\"code\":0,\"message\":\"\\u6ce8\\u518c\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXcudmlsbHN0b3JlLmNuXC9hcGlcL2FjY291bnQtcmVnIiwiaWF0IjoxNTI5NDg0NjQ4LCJleHAiOjE1Mjk0ODgyNDgsIm5iZiI6MTUyOTQ4NDY0OCwianRpIjoicGNlZlU5Zmg3MzlkTEhRNSIsInN1YiI6MSwicHJ2IjoiNDBhOTdmY2EyZDQyNGU3NzhhMDdhMGEyZjEyZGM1MTdhODVjYmRjMSJ9.nDYypcY954kZ1cuYaMMat6cPy8VwUJEbDOhrfoZpYYs\",\"account\":\"ab34561\",\"mobile\":\"\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 				}
 			]
@@ -320,7 +323,7 @@
 			},
 			"response": [
 				{
-					"id": "3d602514-2248-4bb2-9507-1a25d40e9e02",
+					"id": "13f83446-4c7c-4f8b-98a1-b6c5e25c9f35",
 					"name": "账号登录",
 					"originalRequest": {
 						"method": "POST",
@@ -347,52 +350,53 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 08:50:54 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"a713d22e8df05b9bd5a2c2bf0b096479fae5b6d4\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.14.0",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						}
 					],
 					"cookie": [],
-					"responseTime": "161",
+					"responseTime": 161,
 					"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9uZXcudmlsbHN0b3JlLmNuXC9hcGlcL2FjY291bnQtbG9naW4iLCJpYXQiOjE1Mjk0ODQ2NTQsImV4cCI6MTUyOTQ4ODI1NCwibmJmIjoxNTI5NDg0NjU0LCJqdGkiOiJQVER2MHh2Z2RFT1Rtc09RIiwic3ViIjoxLCJwcnYiOiI0MGE5N2ZjYTJkNDI0ZTc3OGEwN2EwYTJmMTJkYzUxN2E4NWNiZGMxIn0.NSF1Wrngp4FgqoRaQo1rZsGGsQbr-iNza8zOL1tt2hE\",\"account\":\"ab34561\",\"mobile\":\"\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 				}
 			]
@@ -423,7 +427,7 @@
 			},
 			"response": [
 				{
-					"id": "10576e69-1800-4051-bed7-a271d4c0111c",
+					"id": "9c3ad486-ceba-4782-8de0-eba69857446b",
 					"name": "发送登录短信",
 					"originalRequest": {
 						"method": "POST",
@@ -449,62 +453,63 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 00:55:00 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"d57c756f51877e892c7e62dab2acc3b661ffad6a\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.11.5",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						},
 						{
 							"key": "X-Powered-By",
 							"value": "PHP/5.6.27",
 							"name": "X-Powered-By",
-							"description": ""
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 						}
 					],
 					"cookie": [],
-					"responseTime": "422",
+					"responseTime": 422,
 					"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
 				},
 				{
-					"id": "9bf6bf47-4d43-4fa3-89dd-d37d0a097069",
+					"id": "20df46c2-912f-4158-ad63-4223102e8d5f",
 					"name": "发送登录短信",
 					"originalRequest": {
 						"method": "POST",
@@ -531,58 +536,59 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 09:29:25 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"d57c756f51877e892c7e62dab2acc3b661ffad6a\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.11.5",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						},
 						{
 							"key": "X-Powered-By",
 							"value": "PHP/5.6.27",
 							"name": "X-Powered-By",
-							"description": ""
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 						}
 					],
 					"cookie": [],
-					"responseTime": "408",
+					"responseTime": 408,
 					"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
 				}
 			]
@@ -627,7 +633,7 @@
 			},
 			"response": [
 				{
-					"id": "f2ea625c-7312-459a-93d3-811f97b8f63f",
+					"id": "9f4baf1b-ec77-493d-bea9-c38ad4d5873e",
 					"name": "手机验证码登录",
 					"originalRequest": {
 						"method": "POST",
@@ -654,62 +660,63 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 00:55:02 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"1361933ca80bb514cf0b6af58ca5a12b4d2f96ca\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.11.5",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						},
 						{
 							"key": "X-Powered-By",
 							"value": "PHP/5.6.27",
 							"name": "X-Powered-By",
-							"description": ""
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 						}
 					],
 					"cookie": [],
-					"responseTime": "711",
+					"responseTime": 711,
 					"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ1NjEwMiwiZXhwIjoxNTI5NDU5NzAyLCJuYmYiOjE1Mjk0NTYxMDIsImp0aSI6IlFYYkh0eEdGQW8zejFGeXIiLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.OH5fy5GbCFV_dnHHQ7oqvqEf2rd1myBR6GV4W94S_ao\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 				},
 				{
-					"id": "aa629376-7dbf-4eab-b799-ec1f02206088",
+					"id": "558bb7f5-4caf-4ff9-92d9-09e833aee8df",
 					"name": "手机验证码登录",
 					"originalRequest": {
 						"method": "POST",
@@ -736,58 +743,59 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 09:29:29 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"a1cc16aa9cf36c6c0560a8251a7fc2b194e83a20\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.11.5",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						},
 						{
 							"key": "X-Powered-By",
 							"value": "PHP/5.6.27",
 							"name": "X-Powered-By",
-							"description": ""
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 						}
 					],
 					"cookie": [],
-					"responseTime": "424",
+					"responseTime": 424,
 					"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ4Njk2OSwiZXhwIjoxNTI5NDkwNTY5LCJuYmYiOjE1Mjk0ODY5NjksImp0aSI6Im9OZ2Npcml2WWlvSE5nNHciLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.yOLPDzkXgyhveum4wXPfNztDmOHUrdgCTyf6_A7Owsw\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 				}
 			]
@@ -804,11 +812,11 @@
 				],
 				"body": {},
 				"url": "{{BaseURL}}/logout",
-				"description": null
+				"description": ""
 			},
 			"response": [
 				{
-					"id": "d6758851-635a-45a2-b549-f4c49501ca05",
+					"id": "ed5f4e82-74cc-424d-a08a-b1e8b25870d1",
 					"name": "退出登录",
 					"originalRequest": {
 						"method": "POST",
@@ -824,58 +832,59 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 09:28:02 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"af458e937c10d96569ee20fd519d30963dc493e7\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.11.5",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						},
 						{
 							"key": "X-Powered-By",
 							"value": "PHP/5.6.27",
 							"name": "X-Powered-By",
-							"description": ""
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 						}
 					],
 					"cookie": [],
-					"responseTime": "432",
+					"responseTime": 432,
 					"body": "{\"code\":0,\"message\":\"\\u9000\\u51fa\\u767b\\u5f55\\u6210\\u529f\"}"
 				}
 			]
@@ -906,7 +915,7 @@
 			},
 			"response": [
 				{
-					"id": "dce7fa9e-86b0-455e-a6d1-99d90bfd8447",
+					"id": "71c2db44-e2b8-4cb6-8ced-a24aecb798c1",
 					"name": "微信登录",
 					"originalRequest": {
 						"method": "POST",
@@ -932,58 +941,59 @@
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
 					"header": [
 						{
 							"key": "Cache-Control",
 							"value": "private, must-revalidate",
 							"name": "Cache-Control",
-							"description": ""
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
 						},
 						{
 							"key": "Connection",
 							"value": "keep-alive",
 							"name": "Connection",
-							"description": ""
+							"description": "Options that are desired for the connection"
 						},
 						{
 							"key": "Content-Type",
 							"value": "application/json",
 							"name": "Content-Type",
-							"description": ""
+							"description": "The mime type of this content"
 						},
 						{
 							"key": "Date",
 							"value": "Wed, 20 Jun 2018 09:28:08 GMT",
 							"name": "Date",
-							"description": ""
+							"description": "The date and time that the message was sent"
 						},
 						{
 							"key": "ETag",
 							"value": "\"8d5cdbaf1a5a4d656002476251c20160217140bc\"",
 							"name": "ETag",
-							"description": ""
+							"description": "An identifier for a specific version of a resource, often a message digest"
 						},
 						{
 							"key": "Server",
 							"value": "nginx/1.11.5",
 							"name": "Server",
-							"description": ""
+							"description": "A name for the server"
 						},
 						{
 							"key": "Transfer-Encoding",
 							"value": "chunked",
 							"name": "Transfer-Encoding",
-							"description": ""
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
 						},
 						{
 							"key": "X-Powered-By",
 							"value": "PHP/5.6.27",
 							"name": "X-Powered-By",
-							"description": ""
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
 						}
 					],
 					"cookie": [],
-					"responseTime": "1920",
+					"responseTime": 1920,
 					"body": "{\"code\":10037,\"message\":\"\\u5fae\\u4fe1\\u6388\\u6743\\u767b\\u5f55\\u5931\\u8d25\"}"
 				}
 			]
@@ -1256,7 +1266,7 @@
 					}
 				],
 				"body": {},
-				"url": "{{BaseURL}}/get-video-type",
+				"url": "{{BaseURL}}/get-media-type",
 				"description": ""
 			},
 			"response": []
@@ -1322,14 +1332,14 @@
 					"formdata": [
 						{
 							"key": "key",
-							"value": "12312",
+							"value": "Fl2DfadrP6ViQPR3vGUz3cp_EQ7U",
 							"description": "key值",
 							"type": "text"
 						}
 					]
 				},
 				"url": "{{BaseURL}}/get-video-src",
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -1438,6 +1448,48 @@
 				"header": [],
 				"body": {},
 				"url": "{{BaseURL}}/get-area-code",
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "查询文章列表",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {},
+				"url": "{{BaseURL}}/get-article",
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查询文章内容",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "bearer{{auth_token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "article_id",
+							"value": "3",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BaseURL}}/get-article-content",
 				"description": ""
 			},
 			"response": []

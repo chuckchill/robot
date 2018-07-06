@@ -25,7 +25,7 @@ class ArticleController extends BaseController
             $query->where(['type' => $typeCode]);
         }
         if ($searchName) {
-            $query->where('name', 'like', $searchName . '%');
+            $query->where('title', 'like', $searchName . '%');
         }
         $data = $query->paginate(15)->toArray();
         $curPage = $data['current_page'];
