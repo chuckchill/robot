@@ -75,6 +75,7 @@ class QiniuController extends Controller
         $name = array_get($body, 'name');
         $fname = array_get($body, 'fname');
         $uid = array_get($body, 'uid');
+        $type = array_get($body, 'type','100');
         $status = array_get($body, 'status');
         $name = $name ? pathinfo($name) : pathinfo($fname);
 
@@ -82,7 +83,7 @@ class QiniuController extends Controller
         $video->key = $key;
         $video->name = array_get($name, 'filename', time());
         $video->uid = $uid;
-        $video->key = $key;
+        $video->type = $type;
         $video->status = (int)$status;
         $video->province = array_get($body, 'province');
         $video->city = array_get($body, 'city');
