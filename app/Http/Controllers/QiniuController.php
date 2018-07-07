@@ -75,11 +75,14 @@ class QiniuController extends Controller
         $name = array_get($body, 'name');
         $fname = array_get($body, 'fname');
         $uid = array_get($body, 'uid');
-        $type = array_get($body, 'type','100');
+        $type = array_get($body, 'type', '100');
         $status = array_get($body, 'status');
         $name = $name ? pathinfo($name) : pathinfo($fname);
 
-        $video = new LiveVideos();
+        $video = LiveVideos::where(['uid' => $uid, 'key' => $key])->first();
+        if (!$video) {
+            $video = new LiveVideos();
+        }
         $video->key = $key;
         $video->name = array_get($name, 'filename', time());
         $video->uid = $uid;
