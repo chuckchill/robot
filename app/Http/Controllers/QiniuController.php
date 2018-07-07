@@ -64,7 +64,7 @@ class QiniuController extends Controller
     public function userUploadCallback(Request $request)
     {
         $qn = new Qiniu();
-        $url = route('qiniu.backend_video_callback');
+        $url = route('qiniu.user-upload-callback');
         if (!$qn->vertifyCallback($url)) {
             Logger::info('回调鉴权失败', 'qiniu');
             return ['ret' => 'failed'];
