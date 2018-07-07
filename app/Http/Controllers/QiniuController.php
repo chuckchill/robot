@@ -88,5 +88,6 @@ class QiniuController extends Controller
         $video->province = array_get($body, 'province');
         $video->city = array_get($body, 'city');
         $video->save();
+        return ['ret' => 'success'];
     }
 }
