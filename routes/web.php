@@ -12,6 +12,8 @@
 */
 
 Route::get('/', function () {
+
+    dd(\App\Services\ModelService\MediaType::getTypeTree(true));
     return redirect('/admin');
 });
 

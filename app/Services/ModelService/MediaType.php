@@ -9,6 +9,7 @@
 namespace App\Services\ModelService;
 
 
+use App\Services\PHPTreeClass;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -21,26 +22,19 @@ class MediaType
      * @param bool $filter
      * @return array
      */
-    public static function getTypeTree($filter = false)
+    public static function getTypeTree($forceHtml = false)
     {
-        $videoType = Cache::store('file')->rememberForever('videotype', function () {
+        $mediaType = Cache::store('file')->rememberForever('videotype', function () {
             return \App\Models\Common\MediaType::orderBy('pid', SORT_DESC)->get();
         });
-        $result = [];
-        foreach ($videoType as $item) {
-            if ($item->pid == 0) {
-                $result[$item->id]["id"] = $item->id;
-                $result[$item->id]["name"] = $item->name;
-            } else {
-                $result[$item->pid]['children'][] = ["id" => $item->id, "name" => $item->name];
-            }
+        $config = [
+            'primary_key' => 'id',
+            'parent_key' => 'pid',
+        ];
+        if ($forceHtml) {
+            return PHPTreeClass::makeTreeForHtml($mediaType->toArray(), $config);
         }
-        if ($filter) {//过滤没有子菜单的项目
-            $result = array_filter($result, function ($item) {
-                return isset($item['children']);
-            });
-        }
-        return $result;
+        return PHPTreeClass::makeTree($mediaType->toArray(), $config);;
     }
 
 }

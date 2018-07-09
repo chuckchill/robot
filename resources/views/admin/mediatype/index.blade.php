@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title','视频分类')
+@section('title','媒体分类')
 
 @section('pageHeader','控制面板')
 
@@ -26,22 +26,22 @@
                 @include('admin.partials.errors')
                 @include('admin.partials.success')
                 <div class="box-body">
-                    @foreach($tree as $item)
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a href="/admin/media-type/{{$item['id']}}/edit">{{$item["name"]}}</a>
-                            </div>
-                            @if(count(array_get($item,"children",[])))
-                                <div class="panel-body">
-                                    @foreach(array_get($item,"children") as $child)
-                                        <span class="label label-default mt-left-5">
-                                            <a href="/admin/media-type/{{$child['id']}}/edit">{{$child['name']}}</a>
-                                        </span>
-                                    @endforeach
-                                </div>
+                    <ul class="list-group">
+                        @foreach($tree as $item)
+                            @if($item['level']==0)
+                                <li class="list-group-item list-group-item-success">
+                                    {{$item['name']}}
+                                    <a href="/admin/media-type/{{$item['id']}}/edit" class="pull-right label-info label">修改</a>
+                                </li>
+                            @else
+                                <li style="padding-left: {{$item['level']*40}}px"
+                                    class="list-group-item list-group-item-info">
+                                    {{$item['name']}}
+                                    <a href="/admin/media-type/{{$item['id']}}/edit"  class="pull-right label-info label">修改</a>
+                                </li>
                             @endif
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

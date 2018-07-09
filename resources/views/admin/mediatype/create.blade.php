@@ -26,14 +26,7 @@
                                 <div class="form-group">
                                     <label for="tag" class="col-md-3 control-label">上级</label>
                                     <div class="col-md-6">
-                                        <select class="form-control" name="pid">
-                                            <option value="0">顶级分类</option>
-                                            @foreach($types as $type)
-                                                <option value="{{$type['id']}}" @if($pid==$type['id']) selected @endif>
-                                                    {{$type['name']}}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        @include("admin.common.typeselect",["select"=>0,"fname"=>"pid","hasHead"=>true])
                                     </div>
                                 </div>
                                 <div class="form-group">

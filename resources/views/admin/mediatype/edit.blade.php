@@ -26,16 +26,9 @@
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="id" value="{{ $id }}">
                                 <div class="form-group">
-                                    <label for="tag" class="col-md-3 control-label">上级</label>
+                                    <label for="tag" class="col-md-3 control-label">上级分类</label>
                                     <div class="col-md-6">
-                                        <select @if(0==$pid) disabled @endif class="form-control" name="pid">
-                                            <option value="0">顶级分类</option>
-                                            @foreach($types as $type)
-                                                <option value="{{$type['id']}}" @if($pid==$type['id']) selected @endif>
-                                                    {{$type['name']}}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                        @include("admin.common.typeselect",["select"=>$pid,"fname"=>"pid","hasHead"=>true])
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -51,7 +44,7 @@
                                             <i class="fa fa-plus-circle"></i>
                                             保存
                                         </button>
-                                        <button attr="{{$id}}"  type="button" class="btn btn-danger delBtn">
+                                        <button attr="{{$id}}" type="button" class="btn btn-danger delBtn">
                                             <i class="fa fa-plus-circle"></i>
                                             删除
                                         </button>
@@ -78,7 +71,7 @@
                 <div class="modal-body">
                     <p class="lead">
                         <i class="fa fa-question-circle fa-lg"></i>
-                        确认要删除这个视频分类吗?
+                        确认要删除这个媒体分类吗?
                     </p>
                 </div>
                 <div class="modal-footer">
