@@ -107,6 +107,7 @@ class Helper
      */
     public static function getVideoThumb($key)
     {
+        return url("/images/video.jpg");
         try {
             $saveKey = md5($key);
             $thumbPath = 'upload/video_thumb';
@@ -115,14 +116,25 @@ class Helper
             if (!file_exists($dirPath)) {
                 $qn = new Qiniu();
                 $url = $qn->getVideoThumb($key);
+                if (!self::checkThumb($url)) {
+                    return "";
+                }
                 $content = file_get_contents($url);
                 file_put_contents($dirPath, $content);
+
             }
             return url($thumbPath . "/" . $saveKey . ".jpg");
         } catch (Exception $exception) {
             Logger::info("key：{$key}不存在", "qiniu");
             return "";
         }
+    }
+
+    public static function checkThumb($url)
+    {
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', $url);
+        return $response->getStatusCode() != "200";
     }
 
     public static function getIpArea($ipAddr = '')
