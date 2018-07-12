@@ -32,7 +32,12 @@
         @include('admin.common.typeselect',['select'=>$type])
     </div>
 </div>
-
+{{--<div class="form-group">
+    <label for="tag" class="col-md-2 control-label">文件</label>
+    <div class="col-md-6">
+       <input type="file" name="content-file" >
+    </div>
+</div>--}}
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">内容</label>
     <div class="col-md-6">
@@ -42,3 +47,13 @@
     </div>
 </div>
 
+<div class="form-group">
+    <label class="col-md-2 control-label">
+       注意
+    </label>
+    <div class="col-md-6">
+        <label  class="control-label">
+            <span class="label-danger">文件和内容必须选择一个</span>
+        </label>
+    </div>
+</div>

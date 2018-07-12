@@ -14,6 +14,8 @@ use App\Models\Common\Article;
 use App\Models\Common\ArticleContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\Reader\Word2007;
 
 class ArticleController extends BaseController
 {
@@ -73,9 +75,13 @@ class ArticleController extends BaseController
         }
         $article->status = (int)$article->status;
         $contentObj = new ArticleContent(['content' => $request->get('content')]);
-
         if (!$article->title) return redirect()->back()->withErrors("标题不能为空!");
+        $file = $request->file('content-file');
+        if ($file) {
+          
+        }
         if (!$contentObj->content) return redirect()->back()->withErrors("文章内容不能为空!");
+
         $article->save();
         $article->contents()->save($contentObj);
         Event::fire(new ArticleEvent($article->id));
