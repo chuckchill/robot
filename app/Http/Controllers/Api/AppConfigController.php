@@ -82,7 +82,7 @@ class AppConfigController extends BaseController
      */
     public function getMediaType()
     {
-        $data = MediaType::getTypeTree(true);
+        $data = MediaType::getTypeTree(false);
         return $this->response->array([
             'code' => 0,
             'message' => '获取成功',
