@@ -9,10 +9,10 @@
 @section('content')
     <div class="row page-title-row" id="dangqian" style="margin:5px;">
         <div class="col-md-12 text-right">
-            @if(Gate::forUser(auth('admin')->user())->check('admin.livevideo.create'))
+            {{--@if(Gate::forUser(auth('admin')->user())->check('admin.livevideo.create'))
                 <a href="/admin/live-videos/create" class="btn btn-success btn-md"><i
                             class="fa fa-plus-circle"></i> 添加视频 </a>
-            @endif
+            @endif--}}
         </div>
     </div>
     <div class="row page-title-row" style="margin:5px;">
