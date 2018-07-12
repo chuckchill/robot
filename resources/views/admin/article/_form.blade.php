@@ -40,7 +40,7 @@
                         blobCache.add(blobInfo);
 
                         // call the callback and populate the Title field with the file name
-                        cb(blobInfo.blobUri(), { title: file.name });
+                        //cb(blobInfo.blobUri(), { title: file.name });
                     };
                     reader.readAsDataURL(file);
                 };
