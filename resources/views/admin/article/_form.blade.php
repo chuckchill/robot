@@ -32,12 +32,12 @@
         @include('admin.common.typeselect',['select'=>$type])
     </div>
 </div>
-{{--<div class="form-group">
+<div class="form-group">
     <label for="tag" class="col-md-2 control-label">文件</label>
     <div class="col-md-6">
        <input type="file" name="content-file" >
     </div>
-</div>--}}
+</div>
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">内容</label>
     <div class="col-md-6">

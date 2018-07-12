@@ -42,6 +42,9 @@ class PHPTreeClass
      */
     public static function makeTree($data, $options = array())
     {
+        if(!$data){
+            return [];
+        }
         $dataset = self::buildData($data, $options);
         $r = self::makeTreeCore(0, $dataset, 'normal');
         return $r;
@@ -50,7 +53,9 @@ class PHPTreeClass
     /* 生成线性结构, 便于HTML输出, 参数同上 */
     public static function makeTreeForHtml($data, $options = array())
     {
-
+        if(!$data){
+            return [];
+        }
         $dataset = self::buildData($data, $options);
         $r = self::makeTreeCore(0, $dataset, 'linear');
         return $r;

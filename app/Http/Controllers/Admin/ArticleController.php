@@ -78,7 +78,8 @@ class ArticleController extends BaseController
         if (!$article->title) return redirect()->back()->withErrors("标题不能为空!");
         $file = $request->file('content-file');
         if ($file) {
-          
+            if($file->getMimeType()!="text/plain") return redirect()->back()->withErrors("文件格式不正确!");
+            $contentObj->content=file_get_contents($file->getRealPath());
         }
         if (!$contentObj->content) return redirect()->back()->withErrors("文章内容不能为空!");
 
