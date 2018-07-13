@@ -97,8 +97,7 @@ class ArticleController extends BaseController
         $content = $content ? $content : $request->get("content");
         if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
         $article->save();
-        $contentObj->path = \App\Services\ModelService\Article::saveContent($article->id, $content);
-        $article->contents()->save($contentObj);
+        \App\Services\ModelService\Article::saveContent($article->id, $content);
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 1, '添加了文章:' . $article->title . '(' . $article->id . ')'));
         return redirect('/admin/article/')->withSuccess('添加成功！');
     }
@@ -160,7 +159,6 @@ class ArticleController extends BaseController
         if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
 
         $article->save();
-        $article->contents->update(['path' => \App\Services\ModelService\Article::saveContent($article->id, $content)]);
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '编辑了文章：' . $article->name));
         return redirect('/admin/article')->withSuccess('修改成功！');
     }
@@ -175,7 +173,6 @@ class ArticleController extends BaseController
         if (!$article) return redirect()->back()->withErrors("找不到文章!");
         \App\Services\ModelService\Article::deleteContent($article->id);
         $article->delete();
-        $article->contents->delete();
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '删除了文章：' . $article->id));
         return redirect()->back()
             ->withSuccess("删除成功");

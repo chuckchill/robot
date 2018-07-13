@@ -24,13 +24,7 @@ class ArticleAndContent extends Migration
             $table->tinyInteger('status')->comment('状态')->default(1);
             $table->timestamps();
         });
-        //文章内容
-        Schema::create('article_content', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('article_id')->comment('文章id');
-            $table->string('path')->comment('文章目录')->nullable();
-            $table->timestamps();
-        });
+
     }
 
     /**
@@ -41,6 +35,5 @@ class ArticleAndContent extends Migration
     public function down()
     {
         Schema::dropIfExists('article', function (Blueprint $table) {});
-        Schema::dropIfExists('article_content', function (Blueprint $table) {});
     }
 }
