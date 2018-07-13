@@ -4,49 +4,40 @@
         tinymce.init({
             selector: '#content',
             menubar: false,
+            language: "zh_CN",
             convert_urls: false,
-            height: 450,
             plugins: 'image code',
-            // enable automatic uploads of images represented by blob or data URIs
-            automatic_uploads: true,
-            // URL of our upload handler (for more details check: https://www.tinymce.com/docs/configure/file-image-upload/#images_upload_url)
-            // images_upload_url: 'postAcceptor.php',
-            // here we add custom filepicker only to Image dialog
             file_picker_types: 'image',
-            toolbar: ' |link image | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent  | removeformat',
-            file_picker_callback: function(cb, value, meta) {
-                var input = document.createElement('input');
-                input.setAttribute('type', 'file');
-                input.setAttribute('accept', 'image/*');
+            toolbar: ' |link image | undo redo |  formatselect | bold italic backcolor  | bullist numlist outdent indent ',
+            // we override default upload handler to simulate successful upload
+            images_upload_handler: function (blobInfo, success, failure) {
+                var xhr, formData;
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', '{{route('admin.article.upload-img')}}');
+                xhr.setRequestHeader('X-CSRF-TOKEN','{{csrf_token()}}')
+                xhr.onload = function () {
+                    var json;
+                    if (xhr.status != 200) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+                    json = JSON.parse(xhr.responseText);
 
-                // Note: In modern browsers input[type="file"] is functional without
-                // even adding it to the DOM, but that might not be the case in some older
-                // or quirky browsers like IE, so you might want to add it to the DOM
-                // just in case, and visually hide it. And do not forget do remove it
-                // once you do not need it anymore.
-
-                input.onchange = function() {
-                    var file = this.files[0];
-
-                    var reader = new FileReader();
-                    reader.onload = function () {
-                        // Note: Now we need to register the blob in TinyMCEs image blob
-                        // registry. In the next release this part hopefully won't be
-                        // necessary, as we are looking to handle it internally.
-                        var id = 'blobid' + (new Date()).getTime();
-                        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-                        var base64 = reader.result.split(',')[1];
-                        var blobInfo = blobCache.create(id, file, base64);
-                        blobCache.add(blobInfo);
-
-                        // call the callback and populate the Title field with the file name
-                        //cb(blobInfo.blobUri(), { title: file.name });
-                    };
-                    reader.readAsDataURL(file);
+                    if (!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+                    success(json.location);
                 };
+                formData = new FormData();
+                formData.append('file', blobInfo.blob(), blobInfo.filename());
+                xhr.send(formData);
+            },
 
-                input.click();
-            }
+            /*init_instance_callback: function (ed) {
+                ed.execCommand('mceImage');
+            }*/
         });
     </script>
 @endsection
@@ -78,24 +69,24 @@
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">文件</label>
     <div class="col-md-6">
-       <input type="file" name="content-file" >
+        <input type="file" name="content-file">
     </div>
 </div>
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">内容</label>
     <div class="col-md-6">
         <textarea class="form-control" name="content" id="content">
-            {{$content}}
+            {{\App\Services\ModelService\Article::getContent($id)}}
         </textarea>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label">
-       注意
+        注意
     </label>
     <div class="col-md-6">
-        <label  class="control-label">
+        <label class="control-label">
             <span class="label-danger">文件和内容必须选择一个</span>
         </label>
     </div>

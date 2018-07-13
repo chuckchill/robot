@@ -28,7 +28,7 @@ class ArticleAndContent extends Migration
         Schema::create('article_content', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('article_id')->comment('文章id');
-            $table->mediumText('content')->comment('文章内容')->nullable();
+            $table->string('path')->comment('文章目录')->nullable();
             $table->timestamps();
         });
     }

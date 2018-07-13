@@ -23,6 +23,8 @@ class VideoToMedia extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('media_type', function (Blueprint $table) {
+            //
+        });
     }
 }

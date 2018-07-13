@@ -12,21 +12,31 @@ namespace App\Http\Controllers\Admin;
 use App\Events\ArticleEvent;
 use App\Models\Common\Article;
 use App\Models\Common\ArticleContent;
+use App\Services\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Event;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\Reader\Word2007;
 
+/**
+ * Class ArticleController
+ * @package App\Http\Controllers\Admin
+ */
 class ArticleController extends BaseController
 {
+    /**
+     * @var array
+     */
     protected $fields = [
         'title' => '',
         'name' => '',
         'status' => '',
-        'content' => '',
         'type' => '',
     ];
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -56,6 +66,7 @@ class ArticleController extends BaseController
         foreach ($this->fields as $field => $default) {
             $data[$field] = old($field, $default);
         }
+        $data['id'] = 0;
         return view('admin.article.create', $data);
     }
 
@@ -74,22 +85,46 @@ class ArticleController extends BaseController
             }
         }
         $article->status = (int)$article->status;
-        $contentObj = new ArticleContent(['content' => $request->get('content')]);
+        $contentObj = new ArticleContent();
         if (!$article->title) return redirect()->back()->withErrors("标题不能为空!");
-        $file = $request->file('content-file');
-        if ($file) {
-            if($file->getMimeType()!="text/plain") return redirect()->back()->withErrors("文件格式不正确!");
-            $contentObj->content=file_get_contents($file->getRealPath());
-        }
-        if (!$contentObj->content) return redirect()->back()->withErrors("文章内容不能为空!");
 
+        $file = $request->file('content-file');
+        $content = "";
+        if ($file) {
+            if ($file->getMimeType() != "text/plain") return redirect()->back()->withErrors("文件格式不正确!");
+            $content = file_get_contents($file->getRealPath());
+        }
+        $content = $content ? $content : $request->get("content");
+        if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
+        $contentObj->path = \App\Services\ModelService\Article::saveContent($article->id, $content);
         $article->save();
         $article->contents()->save($contentObj);
-        Event::fire(new ArticleEvent($article->id));
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 1, '添加了文章:' . $article->title . '(' . $article->id . ')'));
         return redirect('/admin/article/')->withSuccess('添加成功！');
     }
 
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function postUploadImage(Request $request)
+    {
+        $file = $request->file('file');
+        if ($file) {
+            $path = "/upload/article/" . date("Y-m-d") . "/";
+            $name = time() . "_" . $file->getClientOriginalName();
+            if ($file->move(Helper::mkDir(public_path($path)), $name)) {
+                return ["code" => 0, "location" => url($path . $name)];
+            }
+        }
+        return ["code" => 1, "message" => "上传失败"];
+    }
+
+    /**
+     * @param $id
+     * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $article = Article::find((int)$id);
@@ -97,11 +132,15 @@ class ArticleController extends BaseController
         foreach (array_keys($this->fields) as $field) {
             $data[$field] = old($field, $article->$field);
         }
-        $data['content'] = $article->contents->content;
         $data['id'] = $id;
         return view('admin.article.edit', $data);
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return $this
+     */
     public function update(Request $request, $id)
     {
         $article = Article::find((int)$id);
@@ -111,17 +150,25 @@ class ArticleController extends BaseController
                 $article->$field = $request->get($field);
             }
         }
-        $content = $request->get('content');
-        if (!$article->title) return redirect()->back()->withErrors("标题不能为空!");
+        $file = $request->file('content-file');
+        $content = "";
+        if ($file) {
+            if ($file->getMimeType() != "text/plain") return redirect()->back()->withErrors("文件格式不正确!");
+            $content = file_get_contents($file->getRealPath());
+        }
+        $content = $content ? $content : $request->get("content");
         if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
 
         $article->save();
-        $article->contents->update(['content' => $content]);
-        Event::fire(new ArticleEvent($article->id));
+        $article->contents->update(['path' => \App\Services\ModelService\Article::saveContent($article->id, $content)]);
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '编辑了文章：' . $article->name));
         return redirect('/admin/article')->withSuccess('修改成功！');
     }
 
+    /**
+     * @param $id
+     * @return $this
+     */
     public function destroy($id)
     {
         $article = Article::find((int)$id);

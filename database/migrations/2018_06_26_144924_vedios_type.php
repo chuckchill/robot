@@ -31,5 +31,8 @@ class VediosType extends Migration
         Schema::dropIfExists('videos_type', function (Blueprint $table) {
             //
         });
+        Schema::dropIfExists('media_type', function (Blueprint $table) {
+            //
+        });
     }
 }

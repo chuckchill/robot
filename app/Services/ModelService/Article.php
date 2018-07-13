@@ -10,16 +10,36 @@ namespace App\Services\ModelService;
 
 
 use App\Models\Common\ArticleContent;
+use App\Services\Helper;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class Article
+ * @package App\Services\ModelService
+ */
 class Article
 {
+    /**
+     * @param $articleId
+     */
+    public static function saveContent($articleId, $content)
+    {
+        $path = "article/" . ($articleId % 10) . "/";
+        Storage::put($path . $articleId, $content);
+        return $path;
+    }
+
+    /**
+     * @param $articleId
+     * @return string
+     */
     public static function getContent($articleId)
     {
-        $videoType = Cache::store('file')->rememberForever('article_content_' . $articleId, function () use ($articleId) {
-            return ArticleContent::where(['article_id' => $articleId])->first();
-        });
-
-        return $videoType ? $videoType->content : "";
+        $path = "article/" . ($articleId % 10) . "/" . $articleId;
+        if (Storage::exists($path)) {
+            return Storage::get($path);;
+        }
+        return "";
     }
 }

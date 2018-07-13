@@ -34,7 +34,7 @@ class ArticleController extends BaseController
             'code' => 0,
             'message' => '查询成功',
             'data' => [
-                'videos' => $items,
+                'article' => $items,
                 'current_page' => $curPage
             ]
         ]);
