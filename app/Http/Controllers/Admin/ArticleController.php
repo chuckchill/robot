@@ -157,7 +157,7 @@ class ArticleController extends BaseController
         }
         $content = $content ? $content : $request->get("content");
         if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
-
+        \App\Services\ModelService\Article::saveContent($article->id, $content);
         $article->save();
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '编辑了文章：' . $article->name));
         return redirect('/admin/article')->withSuccess('修改成功！');
