@@ -25,9 +25,9 @@ class Article
      */
     public static function saveContent($articleId, $content)
     {
-        $path = "article/" . ($articleId % 10) . "/";
-        Storage::put($path . $articleId, $content);
-        return $path.$articleId;
+        $path = self::getFilePath($articleId);
+        Storage::put($path, $outstr = iconv('GBK', 'UTF-8', $content));
+        return $path;
     }
 
     /**
@@ -36,10 +36,23 @@ class Article
      */
     public static function getContent($articleId)
     {
-        $path = "article/" . ($articleId % 10) . "/" . $articleId;
+        $path = self::getFilePath($articleId);
         if (Storage::exists($path)) {
-            return Storage::get($path);;
+            return Storage::get($path);
         }
         return "";
+    }
+
+    public static function deleteContent($articleId)
+    {
+        $path = self::getFilePath($articleId);
+        if (Storage::exists($path)) {
+            Storage::delete($path);
+        }
+    }
+
+    public static function getFilePath($articleId)
+    {
+        return "article/" . ($articleId % 10) . "/" . $articleId . ".ar";
     }
 }

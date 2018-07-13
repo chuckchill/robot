@@ -173,7 +173,7 @@ class ArticleController extends BaseController
     {
         $article = Article::find((int)$id);
         if (!$article) return redirect()->back()->withErrors("找不到文章!");
-        Event::fire(new ArticleEvent($article->id));
+        \App\Services\ModelService\Article::deleteContent($article->id);
         $article->delete();
         $article->contents->delete();
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '删除了文章：' . $article->id));
