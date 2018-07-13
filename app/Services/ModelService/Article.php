@@ -36,7 +36,7 @@ class Article
      */
     public static function getContent($articleId)
     {
-        $path = self::getFilePath($articleId);
+        $path = self::getFilePath($articleId) . $articleId . ".ar";
         if (Storage::exists($path)) {
             return Storage::get($path);
         }
@@ -45,7 +45,7 @@ class Article
 
     public static function deleteContent($articleId)
     {
-        $path = self::getFilePath($articleId);
+        $path = self::getFilePath($articleId) . $articleId . ".ar";
         if (Storage::exists($path)) {
             Storage::delete($path);
         }
@@ -53,6 +53,6 @@ class Article
 
     public static function getFilePath($articleId)
     {
-        return "article/" . ($articleId % 10) . "/" . $articleId . ".ar";
+        return "article/" . ($articleId % 10) . "/";
     }
 }

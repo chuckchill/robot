@@ -96,8 +96,8 @@ class ArticleController extends BaseController
         }
         $content = $content ? $content : $request->get("content");
         if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
-        $contentObj->path = \App\Services\ModelService\Article::saveContent($article->id, $content);
         $article->save();
+        $contentObj->path = \App\Services\ModelService\Article::saveContent($article->id, $content);
         $article->contents()->save($contentObj);
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 1, '添加了文章:' . $article->title . '(' . $article->id . ')'));
         return redirect('/admin/article/')->withSuccess('添加成功！');
