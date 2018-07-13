@@ -27,7 +27,7 @@ class Article
     {
         $path = "article/" . ($articleId % 10) . "/";
         Storage::put($path . $articleId, $content);
-        return $path;
+        return $path.$articleId;
     }
 
     /**
