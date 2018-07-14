@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Exceptions\CodeException;
+use App\Models\Api\DeviceBind;
+use App\Models\Api\Devices;
 use App\Models\Api\User;
 use App\Models\Api\UsersAuth;
 use App\Services\Helper;
@@ -79,7 +81,7 @@ class AuthController extends BaseController
         if (!$userAuth) {
             $user = new User();
             $user->save();
-            $userAuth=$this->userInfo->registerData("mobile", $mobile, "", $user->id);
+            $userAuth = $this->userInfo->registerData("mobile", $mobile, "", $user->id);
         }
         return $this->response->array([
             'code' => 0,
@@ -143,6 +145,27 @@ class AuthController extends BaseController
     {
         \JWTAuth::invalidate(\JWTAuth::getToken());
         return $this->response->array(['code' => 0, 'message' => '退出登录成功']);
+    }
+
+    public function deviceAuth(Request $request)
+    {
+        $sno = $request->get('sno');
+        $device = Devices::where(['sno' => $sno])->first();
+        if (!$device) {
+            code_exception('code.login.device_sno_notexist');
+        }
+        $deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
+        if (!$deviceBind) {
+            code_exception('code.login.device_unbind');
+        }
+        $token = \JWTAuth::fromUser($device);
+        return $this->response->array([
+            'code' => 0,
+            'message' => '登录成功',
+            'data' => [
+                'token' => $token
+            ]
+        ]);
     }
 
 }

@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function apiDoc()
     {
         $content = file_get_contents(storage_path("/system/apidoc.json"));
-        $doc = json_decode($content, true);
-        return view('apidoc', compact("doc"));
+        $docs = json_decode($content, true);
+        return view('apidoc', compact("docs"));
     }
 }

@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Models\Api\DeviceBind;
+use App\Models\Api\User;
 use App\Models\Common\LiveVideos;
 use App\Models\Common\Videos;
 use App\Services\Helper;
@@ -69,8 +71,8 @@ class VideosController extends BaseController
             $city = array_get($userArea, 'city');
         }
 
-        $query = LiveVideos::select("name", "key", "created_at")
-            ->where(["uid" => $user->id]);
+        $query = LiveVideos::select("name", "key", "created_at")/*->where(["uid" => $user->id])*/
+        ;
         if ($province) {
             $query->where(['province' => $province]);
         }
@@ -117,7 +119,9 @@ class VideosController extends BaseController
     public function getUploadToken()
     {
         $qn = new Qiniu();
-        $user = \JWTAuth::authenticate();
+        $device = \JWTAuth::authenticate();
+        $deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
+        $user = User::find($deviceBind->uid)->first();
         $areaCode = Helper::getUserArea($user);
         $returnBody = [
             "key" => "$(key)",

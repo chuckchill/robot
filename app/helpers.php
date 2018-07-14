@@ -167,7 +167,8 @@ if (!function_exists('build_api_url')) {
 
     function build_api_url($url)
     {
-        return str_replace("{{BaseURL}}", "http://" . request()->getHttpHost() . "/api", $url);
+        $host = "http://" . request()->getHttpHost()."/api/";
+        return str_replace(["{{BaseAPP}}", "{{BaseDevice}}"], [$host . "app", $host . "device"], $url);
     }
 }
 if (!function_exists('build_api_query')) {
