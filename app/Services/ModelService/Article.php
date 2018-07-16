@@ -25,8 +25,11 @@ class Article
      */
     public static function saveContent($articleId, $content)
     {
+
         $path = self::getFilePath($articleId);
-        Storage::put($path, $outstr = iconv('GBK', 'UTF-8', $content));
+        if ($content) {
+            Storage::put($path, $outstr = iconv('GBK', 'UTF-8', $content));
+        }
         return $path;
     }
 

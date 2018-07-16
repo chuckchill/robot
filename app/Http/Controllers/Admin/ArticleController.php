@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\ArticleEvent;
 use App\Models\Common\Article;
-use App\Models\Common\ArticleContent;
 use App\Services\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -85,18 +84,19 @@ class ArticleController extends BaseController
             }
         }
         $article->status = (int)$article->status;
-        $contentObj = new ArticleContent();
         if (!$article->title) return redirect()->back()->withErrors("标题不能为空!");
 
         $file = $request->file('content-file');
-        $content = "";
-        if ($file) {
-            if ($file->getMimeType() != "text/plain") return redirect()->back()->withErrors("文件格式不正确!");
-            $content = file_get_contents($file->getRealPath());
-        }
-        $content = $content ? $content : $request->get("content");
-        if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
         $article->save();
+        $content = $request->get("content");
+        if ($file) {
+            if ($file->getMimeType() == "text/plain") {
+                $content = file_get_contents($file->getRealPath());
+            } elseif ($file->getMimeType() == "application/msword") {
+                //$path = public_path("upload/article/word/" . ($article->id % 10) . "/");
+                //$file->move($path, $article->id . ".doc");
+            }
+        }
         \App\Services\ModelService\Article::saveContent($article->id, $content);
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 1, '添加了文章:' . $article->title . '(' . $article->id . ')'));
         return redirect('/admin/article/')->withSuccess('添加成功！');
@@ -111,7 +111,7 @@ class ArticleController extends BaseController
     {
         $file = $request->file('file');
         if ($file) {
-            $path = "/upload/article/" . date("Y-m-d") . "/";
+            $path = "/upload/article/images/" . date("Y-m-d") . "/";
             $name = time() . "_" . $file->getClientOriginalName();
             if ($file->move(Helper::mkDir(public_path($path)), $name)) {
                 return ["code" => 0, "location" => url($path . $name)];
@@ -150,13 +150,15 @@ class ArticleController extends BaseController
             }
         }
         $file = $request->file('content-file');
-        $content = "";
+        $content = $request->get("content");
         if ($file) {
-            if ($file->getMimeType() != "text/plain") return redirect()->back()->withErrors("文件格式不正确!");
-            $content = file_get_contents($file->getRealPath());
+            if ($file->getMimeType() == "text/plain") {
+                $content = file_get_contents($file->getRealPath());
+            } elseif ($file->getMimeType() == "application/msword") {
+                //$path = public_path("upload/article/word/" . ($article->id % 10) . "/");
+                //$file->move($path, $article->id . ".doc");
+            }
         }
-        $content = $content ? $content : $request->get("content");
-        if (!$content) return redirect()->back()->withErrors("文章内容不能为空!");
         \App\Services\ModelService\Article::saveContent($article->id, $content);
         $article->save();
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '编辑了文章：' . $article->name));
