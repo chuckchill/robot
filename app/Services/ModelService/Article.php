@@ -63,4 +63,14 @@ class Article
     {
         return "/upload/article/word/" . ($articleId % 10) . "/";
     }
+
+    public static function getArticleSrc($articleId)
+    {
+        $wordPath = self::getWordPath($articleId);
+        if (file_exists(public_path($wordPath . $articleId . ".doc"))) {
+            return url($wordPath . $articleId . ".doc");
+        } else {
+            return url("api/device/get-article-content?article_id=" . $articleId);
+        }
+    }
 }
