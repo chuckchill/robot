@@ -58,4 +58,9 @@ class Article
     {
         return "article/" . ($articleId % 10) . "/" . $articleId . ".ar";
     }
+
+    public static function getWordPath($articleId)
+    {
+        return "/upload/article/word/" . ($articleId % 10) . "/";
+    }
 }

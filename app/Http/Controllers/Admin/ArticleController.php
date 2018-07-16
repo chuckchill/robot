@@ -93,7 +93,7 @@ class ArticleController extends BaseController
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
             } elseif ($file->getMimeType() == "application/msword") {
-                //$path = public_path("upload/article/word/" . ($article->id % 10) . "/");
+                //$path =  public_path(\App\Services\ModelService\Article::getWordPath($articleId));
                 //$file->move($path, $article->id . ".doc");
             }
         }
@@ -155,7 +155,7 @@ class ArticleController extends BaseController
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
             } elseif ($file->getMimeType() == "application/msword") {
-                //$path = public_path("upload/article/word/" . ($article->id % 10) . "/");
+                //$path =  public_path(\App\Services\ModelService\Article::getWordPath($articleId));
                 //$file->move($path, $article->id . ".doc");
             }
         }
