@@ -30,7 +30,7 @@ class Aes
      */
     public function aes256cbcEncrypt($str, $iv, $key)
     {
-        return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $this->addPkcs7Padding($str), MCRYPT_MODE_CBC, $iv));
+        return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $this->padKey($key), $this->addPkcs7Padding($str), MCRYPT_MODE_CBC, self::IV));
     }
 
     /**
@@ -76,16 +76,16 @@ class Aes
      * @param String $key 密钥
      * @return String
      */
-    public function aes256cbcDecrypt($encryptedText, $iv, $key)
+    public function aes256cbcDecrypt($encryptedText, $key)
     {
         $encryptedText = base64_decode($encryptedText);
-        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $encryptedText, MCRYPT_MODE_CBC, $iv));
+        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $encryptedText, MCRYPT_MODE_CBC, self::IV));
     }
 
     public function aes128cbcDecrypt($encryptedText, $iv = self::IV, $key = self::KEY)
     {
         $encryptedText = base64_decode($encryptedText);
-        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $encryptedText, MCRYPT_MODE_CBC, $iv));
+        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $encryptedText, MCRYPT_MODE_CBC, self::IV));
     }
 
     public function hexToStr($hex) //十六进制转字符串
