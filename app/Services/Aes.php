@@ -1,137 +1,128 @@
 <?php
+
 namespace App\Service;
 
 class Aes
 {
-    protected $cipher = MCRYPT_RIJNDAEL_128;
-    protected $mode = MCRYPT_MODE_ECB;
-    protected $pad_method = 'pkcs5';
-    protected $secret_key = 'UITN25LMUQC436IM';
-    protected $iv = '';
+    const KEY = "0123456789ABCDEF";
+    const IV = "0123456789ABCDEF";
 
-    public function set_cipher($cipher)
+    /**
+     * pkcs7补码
+     * @param string $string 明文
+     * @param int $blocksize Blocksize , 以 byte 为单位
+     * @return String
+     */
+    private function addPkcs7Padding($string, $blocksize = 32)
     {
-        $this->cipher = $cipher;
+        $len = strlen($string); //取得字符串长度
+        $pad = $blocksize - ($len % $blocksize); //取得补码的长度
+        $string .= str_repeat(chr($pad), $pad); //用ASCII码为补码长度的字符， 补足最后一段
+        return $string;
     }
 
-    public function set_mode($mode)
+    /**
+     * 加密然后base64转码
+     *
+     * @param String 明文
+     * @param 加密的初始向量（IV的长度必须和Blocksize一样， 且加密和解密一定要用相同的IV）
+     * @param $key 密钥
+     */
+    public function aes256cbcEncrypt($str, $iv, $key)
     {
-        $this->mode = $mode;
+        return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $this->addPkcs7Padding($str), MCRYPT_MODE_CBC, $iv));
     }
 
-    public function set_iv($iv)
+    /**
+     * 除去pkcs7 padding
+     *
+     * @param String 解密后的结果
+     *
+     * @return String
+     */
+    private function stripPkcs7Padding($string)
     {
-        $this->iv = $iv;
-    }
+        $slast = ord(substr($string, -1));
+        $slastc = chr($slast);
+        $pcheck = substr($string, -$slast);
 
-    public function set_key($key)
-    {
-        $this->secret_key = $key;
-    }
-
-    public function require_pkcs5()
-    {
-        $this->pad_method = 'pkcs5';
-    }
-
-    protected function pad_or_unpad($str, $ext)
-    {
-        if ( is_null($this->pad_method) )
-        {
-            return $str;
+        if (preg_match("/$slastc{" . $slast . "}/", $string)) {
+            $string = substr($string, 0, strlen($string) - $slast);
+            return $string;
+        } else {
+            return false;
         }
-        else
-        {
-            $func_name = __CLASS__ . '::' . $this->pad_method . '_' . $ext . 'pad';
-            if ( is_callable($func_name) )
-            {
-                $size = mcrypt_get_block_size($this->cipher, $this->mode);
-                return call_user_func($func_name, $str, $size);
-            }
-        }
-        return $str;
     }
 
-    protected function pad($str)
+    /**
+     *  key长度
+     * @param String
+     *
+     * @return String
+     */
+    private function padKey($key)
     {
-        return $this->pad_or_unpad($str, '');
+        if (strlen($key) < 16) {
+            $key = str_pad($key, 16, "0", STR_PAD_RIGHT);
+        }
+        return $key;
     }
 
-    protected function unpad($str)
+    /**
+     * 解密
+     *
+     * @param String $encryptedText 二进制的密文
+     * @param String $iv 加密时候的IV
+     * @param String $key 密钥
+     * @return String
+     */
+    public function aes256cbcDecrypt($encryptedText, $iv, $key)
     {
-        return $this->pad_or_unpad($str, 'un');
+        $encryptedText = base64_decode($encryptedText);
+        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $encryptedText, MCRYPT_MODE_CBC, $iv));
     }
 
-    public function encrypt($str)
+    public function aes128cbcDecrypt($encryptedText, $iv = self::IV, $key = self::KEY)
     {
-        $str = $this->pad($str);
-        $td = mcrypt_module_open($this->cipher, '', $this->mode, '');
-
-        if ( empty($this->iv) )
-        {
-            $iv = @mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
-        }
-        else
-        {
-            $iv = $this->iv;
-        }
-
-        mcrypt_generic_init($td, $this->secret_key, $iv);
-        $cyper_text = mcrypt_generic($td, $str);
-        $rt=base64_encode($cyper_text);
-        //$rt = bin2hex($cyper_text);
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
-
-        return $rt;
+        $encryptedText = base64_decode($encryptedText);
+        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $encryptedText, MCRYPT_MODE_CBC, $iv));
     }
 
-    public function decrypt($str){
-        $td = mcrypt_module_open($this->cipher, '', $this->mode, '');
+    public function hexToStr($hex) //十六进制转字符串
 
-        if (empty($this->iv))
-        {
-            $iv = @mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
-        }
-        else
-        {
-            $iv = $this->iv;
+    {
+        $string = "";
+        for ($i = 0; $i < strlen($hex) - 1; $i += 2) {
+            $string .= chr(hexdec($hex[$i] . $hex[$i + 1]));
         }
 
-        mcrypt_generic_init($td, $this->secret_key, $iv);
-
-        $decrypted_text = mdecrypt_generic($td, base64_decode($str));
-        $rt = $decrypted_text;
-        mcrypt_generic_deinit($td);
-        mcrypt_module_close($td);
-
-        return $this->unpad($rt);
+        return $string;
     }
 
-    public static function hex2bin($hexdata) {
-        $bindata = '';
-        $length = strlen($hexdata);
-        for ($i=0; $i < $length; $i += 2)
-        {
-            $bindata .= chr(hexdec(substr($hexdata, $i, 2)));
+    public function strToHex($string) //字符串转十六进制
+
+    {
+        $hex = "";
+        $tmp = "";
+        for ($i = 0; $i < strlen($string); $i++) {
+            $tmp = dechex(ord($string[$i]));
+            $hex .= strlen($tmp) == 1 ? "0" . $tmp : $tmp;
         }
-        return $bindata;
+        $hex = strtoupper($hex);
+        return $hex;
     }
 
-    public static function pkcs5_pad($text, $blocksize)
+    public function aes128cbcHexDecrypt($encryptedText, $key = "")
     {
-        $pad = $blocksize - (strlen($text) % $blocksize);
-        return $text . str_repeat(chr($pad), $pad);
+        $str = $this->hexToStr($encryptedText);
+        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $this->padKey($key), $str, MCRYPT_MODE_CBC, self::IV));
     }
 
-    public static function pkcs5_unpad($text)
+    public function aes128cbcEncrypt($str, $key = "")
     {
-        $pad = ord($text{strlen($text) - 1});
-        if ($pad > strlen($text)) return false;
-        if (strspn($text, chr($pad), strlen($text) - $pad) != $pad) return false;
-        return substr($text, 0, -1 * $pad);
+        $base = (mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->padKey($key), $this->addPkcs7Padding($str, 16), MCRYPT_MODE_CBC, self::IV));
+        return $this->strToHex($base);
     }
 }
-
 
 ?>
