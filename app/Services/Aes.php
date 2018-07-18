@@ -4,125 +4,53 @@ namespace App\Service;
 
 class Aes
 {
-    const KEY = "0123456789ABCDEF";
-    const IV = "0123456789ABCDEF";
-
-    /**
-     * pkcs7补码
-     * @param string $string 明文
-     * @param int $blocksize Blocksize , 以 byte 为单位
-     * @return String
-     */
-    private function addPkcs7Padding($string, $blocksize = 32)
+    public function encrypt($input, $key = "")
     {
-        $len = strlen($string); //取得字符串长度
-        $pad = $blocksize - ($len % $blocksize); //取得补码的长度
-        $string .= str_repeat(chr($pad), $pad); //用ASCII码为补码长度的字符， 补足最后一段
-        return $string;
+        $key = md5($key, true);
+        echo $key . PHP_EOL;
+        $size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
+        $input = $this->pkcs5_pad($input, $size);
+        $td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_ECB, '');
+        $iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
+        mcrypt_generic_init($td, $key, $iv);
+        $data = mcrypt_generic($td, $input);
+        mcrypt_generic_deinit($td);
+        mcrypt_module_close($td);
+        return $data;
     }
 
-    /**
-     * 加密然后base64转码
-     *
-     * @param String 明文
-     * @param 加密的初始向量（IV的长度必须和Blocksize一样， 且加密和解密一定要用相同的IV）
-     * @param $key 密钥
-     */
-    public function aes256cbcEncrypt($str, $iv, $key)
+    public function decrypt($sStr, $key = "")
     {
-        return base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $this->padKey($key), $this->addPkcs7Padding($str), MCRYPT_MODE_CBC, self::IV));
+        $key = md5($key, true);
+        $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $sStr, MCRYPT_MODE_ECB);
+        $dec_s = strlen($decrypted);
+        $padding = ord($decrypted[$dec_s - 1]);
+        $decrypted = substr($decrypted, 0, -$padding);
+        return $decrypted;
     }
 
-    /**
-     * 除去pkcs7 padding
-     *
-     * @param String 解密后的结果
-     *
-     * @return String
-     */
-    private function stripPkcs7Padding($string)
+    private function pkcs5_pad($text, $blocksize)
     {
-        $slast = ord(substr($string, -1));
-        $slastc = chr($slast);
-        $pcheck = substr($string, -$slast);
-
-        if (preg_match("/$slastc{" . $slast . "}/", $string)) {
-            $string = substr($string, 0, strlen($string) - $slast);
-            return $string;
-        } else {
-            return false;
-        }
+        $pad = $blocksize - (strlen($text) % $blocksize);
+        return $text . str_repeat(chr($pad), $pad);
     }
 
-    /**
-     *  key长度
-     * @param String
-     *
-     * @return String
-     */
-    private function padKey($key)
-    {
-        if (strlen($key) < 16) {
-            $key = str_pad($key, 16, "0", STR_PAD_RIGHT);
-        }
-        return $key;
-    }
-
-    /**
-     * 解密
-     *
-     * @param String $encryptedText 二进制的密文
-     * @param String $iv 加密时候的IV
-     * @param String $key 密钥
-     * @return String
-     */
-    public function aes256cbcDecrypt($encryptedText, $key)
-    {
-        $encryptedText = base64_decode($encryptedText);
-        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $key, $encryptedText, MCRYPT_MODE_CBC, self::IV));
-    }
-
-    public function aes128cbcDecrypt($encryptedText, $iv = self::IV, $key = self::KEY)
-    {
-        $encryptedText = base64_decode($encryptedText);
-        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, $encryptedText, MCRYPT_MODE_CBC, self::IV));
-    }
-
-    public function hexToStr($hex) //十六进制转字符串
-
-    {
-        $string = "";
-        for ($i = 0; $i < strlen($hex) - 1; $i += 2) {
-            $string .= chr(hexdec($hex[$i] . $hex[$i + 1]));
-        }
-
-        return $string;
-    }
-
-    public function strToHex($string) //字符串转十六进制
-
+    function strToHex($string)
     {
         $hex = "";
-        $tmp = "";
-        for ($i = 0; $i < strlen($string); $i++) {
-            $tmp = dechex(ord($string[$i]));
-            $hex .= strlen($tmp) == 1 ? "0" . $tmp : $tmp;
-        }
+        for ($i = 0; $i < strlen($string); $i++)
+            $hex .= dechex(ord($string[$i]));
         $hex = strtoupper($hex);
         return $hex;
     }
 
-    public function aes128cbcHexDecrypt($encryptedText, $key = "")
+    function hexToStr($hex)
     {
-        $str = $this->hexToStr($encryptedText);
-        return $this->stripPkcs7Padding(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $this->padKey($key), $str, MCRYPT_MODE_CBC, self::IV));
+        $string = "";
+        for ($i = 0; $i < strlen($hex) - 1; $i += 2)
+            $string .= chr(hexdec($hex[$i] . $hex[$i + 1]));
+        return $string;
     }
 
-    public function aes128cbcEncrypt($str, $key = "")
-    {
-        $base = (mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->padKey($key), $this->addPkcs7Padding($str, 16), MCRYPT_MODE_CBC, self::IV));
-        return $this->strToHex($base);
-    }
+
 }
-
-?>
