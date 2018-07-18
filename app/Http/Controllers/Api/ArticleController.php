@@ -28,6 +28,9 @@ class ArticleController extends BaseController
             $query->where('title', 'like', $searchName . '%');
         }
         $data = $query->paginate(15)->toArray();
+        foreach ($data['data'] as $key => $items) {
+            $data['data'][$key]['url']=\App\Services\ModelService\Article::getArticleSrc($items['id']);
+        }
         $curPage = $data['current_page'];
         $items = $data['data'];
         return $this->response->array([
@@ -43,22 +46,7 @@ class ArticleController extends BaseController
     public function getArticleContent(Request $request)
     {
         $articleId = $request->get('article_id');
-        $wordPath = \App\Services\ModelService\Article::getWordPath($articleId);
-        if (file_exists(public_path($wordPath . $articleId . ".doc"))) {
-            $type = "word";
-            $content = url($wordPath . $articleId . ".doc");
-        } else {
-            $type = "web";
-            $content = \App\Services\ModelService\Article::getContent($articleId);
-        }
-
-        return $this->response->array([
-            'code' => 0,
-            'message' => '查询成功',
-            'data' => [
-                'type' => 'web',
-                'content' => $content,
-            ]
-        ]);
+        $content = \App\Services\ModelService\Article::getContent($articleId);
+        return view("article", compact("content"));
     }
 }

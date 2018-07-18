@@ -15,6 +15,7 @@ use App\Services\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 
 /**
  * Class ArticleController
@@ -73,7 +74,7 @@ class ArticleController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param PremissionCreateRequest|Request $request
-     * @return \Illuminate\Http\Response
+     * @return mixed
      */
     public function store(Request $request)
     {
@@ -90,11 +91,14 @@ class ArticleController extends BaseController
         $article->save();
         $content = $request->get("content");
         if ($file) {
+            $extension = $file->getClientOriginalExtension();
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
-            } elseif ($file->getMimeType() == "application/msword") {
-                //$path =  public_path(\App\Services\ModelService\Article::getWordPath($articleId));
-                //$file->move($path, $article->id . ".doc");
+            } elseif ($extension == "doc" || $extension == "docx") {
+                $path = public_path(\App\Services\ModelService\Article::getWordPath($article->id));
+                $file->move($path, $article->id . ".doc");
+            } else {
+                return redirect()->back()->withErrors("不支持的文件类型!");
             }
         }
         \App\Services\ModelService\Article::saveContent($article->id, $content);
@@ -122,7 +126,7 @@ class ArticleController extends BaseController
 
     /**
      * @param $id
-     * @return $this|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return mixed
      */
     public function edit($id)
     {
@@ -135,10 +139,11 @@ class ArticleController extends BaseController
         return view('admin.article.edit', $data);
     }
 
+
     /**
      * @param Request $request
      * @param $id
-     * @return $this
+     * @return mixed
      */
     public function update(Request $request, $id)
     {
@@ -152,11 +157,14 @@ class ArticleController extends BaseController
         $file = $request->file('content-file');
         $content = $request->get("content");
         if ($file) {
+            $extension = $file->getClientOriginalExtension();
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
-            } elseif ($file->getMimeType() == "application/msword") {
-                //$path =  public_path(\App\Services\ModelService\Article::getWordPath($articleId));
-                //$file->move($path, $article->id . ".doc");
+            } elseif ($extension == "doc" || $extension == "docx") {
+                $path = public_path(\App\Services\ModelService\Article::getWordPath($article->id));
+                $file->move($path, $article->id . ".doc");
+            } else {
+                return redirect()->back()->withErrors("不支持的文件类型!");
             }
         }
         \App\Services\ModelService\Article::saveContent($article->id, $content);
@@ -167,7 +175,7 @@ class ArticleController extends BaseController
 
     /**
      * @param $id
-     * @return $this
+     * @return mixed
      */
     public function destroy($id)
     {
