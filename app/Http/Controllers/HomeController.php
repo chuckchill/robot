@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Qiniu;
 use Illuminate\Http\Request;
 use Qiniu\Auth;
 
@@ -32,5 +33,13 @@ class HomeController extends Controller
         $content = file_get_contents(storage_path("/system/apidoc.json"));
         $docs = json_decode($content, true);
         return view('apidoc', compact("docs"));
+    }
+
+    public function getApp(Request $request)
+    {
+        $key = $request->get("key");
+        $qiniu = new Qiniu();
+        $url = $qiniu->getDownloadUrl($key);
+        return redirect($url);
     }
 }
