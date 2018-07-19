@@ -12,8 +12,11 @@
 */
 
 Route::get('/', function () {
+    $host = app("request")->getHost();
+    if ($host == "203.195.176.132") {
+        return redirect('/admin');
+    }
     return view("welcome");
-    return redirect('/admin');
 });
 
 Auth::routes();
@@ -21,4 +24,4 @@ Auth::routes();
 Route::get('/app', 'HomeController@getApp');
 Route::get('/qiniu/index', 'QiniuController@index');
 Route::any('/qiniu/backend-video-callback', ['as' => 'qiniu.backend_video_callback', 'uses' => 'QiniuController@backendVideoCallback']);
-Route::any('/qiniu/user-upload-callback', ['as' => 'qiniu.user-upload-callback','uses' => 'QiniuController@userUploadCallback']);//七牛上传回调
+Route::any('/qiniu/user-upload-callback', ['as' => 'qiniu.user-upload-callback', 'uses' => 'QiniuController@userUploadCallback']);//七牛上传回调
