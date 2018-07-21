@@ -19,7 +19,7 @@
 
                             @include('admin.partials.errors')
                             @include('admin.partials.success')
-                            <form enctype="multipart/form-data"  class="form-horizontal" role="form" method="POST"
+                            <form onsubmit="return checkForm()" enctype="multipart/form-data"  class="form-horizontal" role="form" method="POST"
                                   action="/admin/article/{{ $id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="PUT">

@@ -21,7 +21,7 @@
                             @include('admin.partials.errors')
                             @include('admin.partials.success')
 
-                            <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="/admin/article">
+                            <form onsubmit="return checkForm()" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data" action="/admin/article">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="cove_image"/>
                                 @include('admin.article._form')

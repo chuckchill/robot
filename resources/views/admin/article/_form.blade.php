@@ -15,7 +15,7 @@
                 xhr = new XMLHttpRequest();
                 xhr.withCredentials = false;
                 xhr.open('POST', '{{route('admin.article.upload-img')}}');
-                xhr.setRequestHeader('X-CSRF-TOKEN','{{csrf_token()}}')
+                xhr.setRequestHeader('X-CSRF-TOKEN', '{{csrf_token()}}')
                 xhr.onload = function () {
                     var json;
                     if (xhr.status != 200) {
@@ -36,9 +36,20 @@
             },
 
             /*init_instance_callback: function (ed) {
-                ed.execCommand('mceImage');
-            }*/
+             ed.execCommand('mceImage');
+             }*/
         });
+        var checkForm = function () {
+            var obj_file = $("#contentFile");
+            if (obj_file.val()) {
+                var filesize = obj_file[0].files[0].size;
+                if (filesize > 1024 * 1024 * 2) {
+                    alert("文件不能超过2m");
+                    return false;
+                }
+            }
+        }
+
     </script>
 @endsection
 <div class="form-group">
@@ -69,7 +80,7 @@
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">文件</label>
     <div class="col-md-6">
-        <input type="file" name="content-file">
+        <input type="file" name="content-file" id="contentFile">
     </div>
 </div>
 <div class="form-group">

@@ -91,6 +91,9 @@ class ArticleController extends BaseController
         $article->save();
         $content = $request->get("content");
         if ($file) {
+            if ($file->getClientSize() > 2 * 1024 * 1024) {
+                return redirect()->back()->withErrors("文件不能超过2M!");
+            }
             $extension = strtolower($file->getClientOriginalExtension());
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
@@ -158,6 +161,9 @@ class ArticleController extends BaseController
         $content = $request->get("content");
         if ($file) {
             $extension = strtolower($file->getClientOriginalExtension());
+            if ($file->getClientSize() > 2 * 1024 * 1024) {
+                return redirect()->back()->withErrors("文件不能超过2M!");
+            }
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
             } elseif ($extension == "doc" || $extension == "docx") {
