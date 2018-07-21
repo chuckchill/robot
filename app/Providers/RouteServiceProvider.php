@@ -40,6 +40,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->mapAdminRoutes();
+
+        $this->mapMqtt();
         //
     }
 
@@ -91,6 +93,24 @@ class RouteServiceProvider extends ServiceProvider
         $api = app('Dingo\Api\Routing\Router');
         $api->version('v1', ['namespace' => 'App\Http\Controllers\Api'], function ($api) {
             require base_path('routes/api.php');
+        });
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapMqtt()
+    {
+        Route::group([
+            'middleware' => 'web',
+            'prefix' => 'mqtt',
+            'namespace' => 'App\Http\Controllers\Mqtt',
+        ], function ($router) {
+            require base_path('routes/mqtt.php');
         });
     }
 }

@@ -91,7 +91,7 @@ class ArticleController extends BaseController
         $article->save();
         $content = $request->get("content");
         if ($file) {
-            $extension = $file->getClientOriginalExtension();
+            $extension = strtolower($file->getClientOriginalExtension());
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
             } elseif ($extension == "doc" || $extension == "docx") {
@@ -157,7 +157,7 @@ class ArticleController extends BaseController
         $file = $request->file('content-file');
         $content = $request->get("content");
         if ($file) {
-            $extension = $file->getClientOriginalExtension();
+            $extension = strtolower($file->getClientOriginalExtension());
             if ($file->getMimeType() == "text/plain") {
                 $content = file_get_contents($file->getRealPath());
             } elseif ($extension == "doc" || $extension == "docx") {
