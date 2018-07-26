@@ -4,7 +4,7 @@
  * */
 $api->group(['prefix' => '/device',], function ($api) {
     $api->post('login', ['uses' => 'AuthController@deviceAuth']);//设备登录
-    $api->get('get-article-content', ['uses' => 'ArticleController@getArticleContent']);//文章内容
+    $api->post('get-article-content', ['uses' => 'ArticleController@getArticleContent']);//文章内容
     $api->group(['middleware' => ['api.auth']], function ($api) {
         $api->post('get-videos', ['uses' => 'VideosController@getVideos']);//查询视频
         $api->post('get-video-src', ['uses' => 'VideosController@getVideoSrc']);//获取视频地址
