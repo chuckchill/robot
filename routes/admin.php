@@ -107,6 +107,17 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     //其他配置
     Route::get('other/index', ['as' => 'admin.other.index', 'uses' => 'OtherController@index']);  //用户管理
     Route::post('other/keyword', ['as' => 'admin.other.keywork', 'uses' => 'OtherController@keyword']);  //
+
+    //设备管理
+    Route::get('devices/index', ['as' => 'admin.devices.index', 'uses' => 'DevicesController@index']);  //设备管理
+    Route::post('devices/index', ['as' => 'admin.devices.index', 'uses' => 'DevicesController@index']);  //
+    Route::resource('devices', 'DevicesController', [
+        'names' => [
+            'update' => 'admin.devices.edit',
+            'store' => 'admin.devices.create',
+            'show' => 'admin.devices.show',
+        ]
+    ]);
 });
 
 Route::get('/', function () {

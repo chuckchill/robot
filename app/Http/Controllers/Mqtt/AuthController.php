@@ -13,7 +13,7 @@ class AuthController extends BaseController
 {
     public function auth(Request $request)
     {
-        return response("",404);
+        return response("",200);
     }
 
     public function acl()

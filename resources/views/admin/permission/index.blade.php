@@ -22,10 +22,10 @@
         </div>
 
         <div class="col-md-6 text-right">
-            {{--@if(Gate::forUser(auth('admin')->user())->check('admin.permission.create'))
+            @if(Gate::forUser(auth('admin')->user())->check('admin.permission.create'))
                 <a href="/admin/permission/{{$cid}}/create" class="btn btn-success btn-md"><i
                             class="fa fa-plus-circle"></i> 添加权限 </a>
-            @endif--}}
+            @endif
         </div>
     </div>
     <div class="row page-title-row" style="margin:5px;">

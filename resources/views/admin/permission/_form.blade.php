@@ -41,3 +41,14 @@
     </div>
 </div>
 
+
+<div class="form-group">
+    <label class="col-md-3 control-label">
+        注意
+    </label>
+    <div class="col-md-6">
+        <label class="control-label">
+            <span class="label-danger">仅供开发人员使用</span>
+        </label>
+    </div>
+</div>
