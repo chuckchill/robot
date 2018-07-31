@@ -135,7 +135,7 @@
                                 'targets': 2,
                                 "render": function (data, type, row) {
                                     switch (data) {
-                                        case 0:
+                                        case 2:
                                             return "未激活";
                                             break;
                                         case 1:
@@ -154,6 +154,10 @@
                                     //编辑
                                     if (row_edit) {
                                         str += '<a style="margin:3px;" href="/admin/article/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                    }
+                                    //添加文章内容
+                                    if (1) {
+                                        str += '<a style="margin:3px;" href="/admin/article/upload-media?articleId=' + row['id'] + '" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 添加文件</a>';
                                     }
                                     //删除
                                     if (row_delete) {

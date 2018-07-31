@@ -26,3 +26,4 @@ Route::get('/apidoc', 'HomeController@apiDoc');
 Route::get('/qiniu/index', 'QiniuController@index');
 Route::any('/qiniu/backend-video-callback', ['as' => 'qiniu.backend_video_callback', 'uses' => 'QiniuController@backendVideoCallback']);
 Route::any('/qiniu/user-upload-callback', ['as' => 'qiniu.user-upload-callback', 'uses' => 'QiniuController@userUploadCallback']);//七牛上传回调
+Route::any('/qiniu/common-callback', ['as' => 'qiniu.common-callback', 'uses' => 'QiniuController@commonCallback']);//七牛上传回调

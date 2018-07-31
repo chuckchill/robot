@@ -13,6 +13,10 @@ return [
             'bucket' => env('QINIU_VIDEO_BUCKET', ''),
             'private_url' => env('QINIU_VIDEO_URL', 'http://7xlb8s.com1.z0.glb.clouddn.com'),
         ],
+        'article' => [
+            'bucket' => env('QINIU_APP_BUCKET', 'article'),
+            'private_url' => env('QINIU_VIDEO_URL', 'http://7xlb8s.com1.z0.glb.clouddn.com')
+        ],
         'app' => [
             'bucket' => env('QINIU_APP_BUCKET', 'app'),
             'private_url' => env('QINIU_APP_URL', '')

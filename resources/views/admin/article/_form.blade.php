@@ -1,5 +1,5 @@
 @section('js')
-    <script src="/plugins/tinymce/tinymce.min.js"></script>
+    {{--<script src="/plugins/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
             selector: '#content',
@@ -50,7 +50,7 @@
             }
         }
 
-    </script>
+    </script>--}}
 @endsection
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">标题</label>
@@ -77,6 +77,7 @@
         @include('admin.common.typeselect',['select'=>$type])
     </div>
 </div>
+{{--
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">文件</label>
     <div class="col-md-6">
@@ -92,6 +93,7 @@
     </div>
 </div>
 
+
 <div class="form-group">
     <label class="col-md-2 control-label">
         注意
@@ -102,3 +104,4 @@
         </label>
     </div>
 </div>
+--}}
