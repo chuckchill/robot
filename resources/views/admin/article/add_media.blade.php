@@ -100,7 +100,7 @@
             })
             var uploadFile = function (list, cur) {
                 $("#whichFile").html("上传第" + (cur + 1) + "个文件");
-                fileObj = list.pop();
+                fileObj = list.shift();
                 var observer = {
                     next: function (res) {
                         var rate = res.total.percent.toFixed(2)
