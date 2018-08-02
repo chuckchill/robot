@@ -111,6 +111,7 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     //设备管理
     Route::get('devices/index', ['as' => 'admin.devices.index', 'uses' => 'DevicesController@index']);  //设备管理
     Route::post('devices/index', ['as' => 'admin.devices.index', 'uses' => 'DevicesController@index']);  //
+    Route::post('devices/import-devices', ['as' => 'admin.devices.import-devices', 'uses' => 'DevicesController@importDevices']);  //
     Route::resource('devices', 'DevicesController', [
         'names' => [
             'update' => 'admin.devices.edit',

@@ -148,4 +148,27 @@ class DevicesController extends BaseController
             'deviceBind' => $deviceBind
         ]);
     }
+
+    public function importDevices(Request $request)
+    {
+        $file = $request->file("devices");
+        if (!$file) {
+            return redirect()->back()->withErrors("请选择要上传的文件!");
+        }
+        $content = iconv("GBK", "UTF-8", file_get_contents($file->getRealPath()));
+        $data = explode(PHP_EOL, $content);
+        for ($i = 1; $i < count($data); $i++) {
+            $item = explode(",", $data[$i]);
+            if (array_get($item, "0")) {
+                $device = Devices::where(["sno" => $item[0]])->first();
+                if (!$device) {
+                    $device = new Devices();
+                }
+                $device->sno = $item[1];
+                $device->name = array_get($item, "1", "");
+                $device->save();
+            }
+        }
+        return redirect("/admin/devices");
+    }
 }

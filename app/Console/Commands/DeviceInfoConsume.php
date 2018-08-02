@@ -30,6 +30,7 @@ class DeviceInfoConsume extends Command
 
     public function handle()
     {
+        // $mqtt = new EmqttClient("www.jayrobot.cn", 1883, "123"); //Change client name to something unique
         $mqtt = new EmqttClient("10.80.12.100", 1883, "123"); //Change client name to something unique
 
         if (!$mqtt->connect(true, NULL, "albert", "albert")) {
