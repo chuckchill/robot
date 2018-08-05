@@ -156,9 +156,9 @@
                                         str += '<a style="margin:3px;" href="/admin/article/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
                                     }
                                     //添加文章内容
-                                    if (1) {
+                                   /* if (1) {
                                         str += '<a style="margin:3px;" href="/admin/article/upload-media?articleId=' + row['id'] + '" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 添加文件</a>';
-                                    }
+                                    }*/
                                     //删除
                                     if (row_delete) {
                                         str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 删除</a>';

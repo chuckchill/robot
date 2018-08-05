@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-4 col-md-offset-3">
-                                        <button type="submit" id="uploadBtn" class="btn btn-primary btn-md">
+                                        <button type="button" id="uploadBtn" class="btn btn-primary btn-md">
                                             <i class="fa fa-plus-circle"></i>
                                             保存修改
                                         </button>
@@ -112,7 +112,7 @@
                 //region: "up-z0.qiniup.com"
             };
             $("#uploadBtn").on("click", function () {
-                var fileObj = document.getElementById("videoFile");
+                var fileObj = document.getElementById("videoFile");;
                 if (fileObj.files.length < 1) {
                     $(".form-horizontal").submit()
                     return true;
@@ -127,7 +127,7 @@
                         "x:status": videoStatus,
                         "x:type": videoType
                     },
-                    mimeType: ["video/x-flv", "video/quicktime", "video/3gpp", "video/x-msvideo", "video/x-ms-wmv", "video/mp4"]
+                   // mimeType: ["video/x-flv", "video/quicktime", "video/3gpp", "video/x-msvideo", "video/x-ms-wmv", "video/mp4"]
                 };
                 setProgressRate(0)
                 $(".progress").removeClass("hidden")

@@ -88,24 +88,6 @@ class ArticleController extends BaseController
         $article->status = (int)$article->status;
         if (!$article->title) return redirect()->back()->withErrors("标题不能为空!");
         $article->save();
-        /*$file = $request->file('content-file');
-        $article->save();
-        $content = $request->get("content");
-        if ($file) {
-            if ($file->getClientSize() > 2 * 1024 * 1024) {
-                return redirect()->back()->withErrors("文件不能超过2M!");
-            }
-            $extension = strtolower($file->getClientOriginalExtension());
-            if ($file->getMimeType() == "text/plain") {
-                $content = file_get_contents($file->getRealPath());
-            } elseif ($extension == "doc" || $extension == "docx") {
-                $path = public_path(\App\Services\ModelService\Article::getWordPath($article->id));
-                $file->move($path, $article->id . ".doc");
-            } else {
-                return redirect()->back()->withErrors("不支持的文件类型!");
-            }
-        }
-        \App\Services\ModelService\Article::saveContent($article->id, $content);*/
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 1, '添加了文章:' . $article->title . '(' . $article->id . ')'));
         return redirect('/admin/article/upload-media?articleId=' . $article->id);
     }
@@ -158,23 +140,6 @@ class ArticleController extends BaseController
                 $article->$field = $request->get($field);
             }
         }
-        /* $file = $request->file('content-file');
-         $content = $request->get("content");
-         if ($file) {
-             $extension = strtolower($file->getClientOriginalExtension());
-             if ($file->getClientSize() > 2 * 1024 * 1024) {
-                 return redirect()->back()->withErrors("文件不能超过2M!");
-             }
-             if ($file->getMimeType() == "text/plain") {
-                 $content = file_get_contents($file->getRealPath());
-             } elseif ($extension == "doc" || $extension == "docx") {
-                 $path = public_path(\App\Services\ModelService\Article::getWordPath($article->id));
-                 $file->move($path, $article->id . ".doc");
-             } else {
-                 return redirect()->back()->withErrors("不支持的文件类型!");
-             }
-         }
-         \App\Services\ModelService\Article::saveContent($article->id, $content);*/
         $article->save();
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '编辑了文章：' . $article->name));
         return redirect('/admin/article')->withSuccess('修改成功！');
