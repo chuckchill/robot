@@ -10,6 +10,7 @@ $api->group(['prefix' => '/device',], function ($api) {
         $api->post('get-video-src', ['uses' => 'VideosController@getVideoSrc']);//获取视频地址
 
         $api->post('get-article', ['uses' => 'ArticleController@getArticle']);//查询文章列表
+        $api->post('get-article-src', ['uses' => 'ArticleController@getArticleSrc']);//查询文章列表
 
 
         $api->post('get-video-upload-token', ['uses' => 'VideosController@getUploadToken']);//获取视频地址

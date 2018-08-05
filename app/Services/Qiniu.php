@@ -51,9 +51,13 @@ class Qiniu
      * @param int $expires
      * @return string
      */
-    public function getDownloadUrl($key, $expires = 3600)
+    public function getDownloadUrl($key, $expires = 3600, $type = 'video')
     {
-        $baseUrl = config('qiniu.bucket.videos.private_url') . '/' . $key;
+        if ($type == 'video') {
+            $baseUrl = config('qiniu.bucket.videos.private_url') . '/' . $key;
+        } elseif ($type == 'article') {
+            $baseUrl = config('qiniu.bucket.article.private_url') . '/' . $key;
+        }
         $signedUrl = $this->Auth->privateDownloadUrl($baseUrl, $expires);
         return $signedUrl;
     }

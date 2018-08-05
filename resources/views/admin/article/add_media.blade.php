@@ -23,28 +23,28 @@
                                     <div class="col-md-6">
                                         <div class="kv-avatar">
                                             <div class="file-loading">
-                                                <input accept="application/pdf" type="file" id="pdfFile" class="file"/>
+                                                <input accept="*.prad" type="file" id="pdfFile" class="file"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="tag" class="col-md-2 control-label">语音文件</label>
-                                    <div class="col-md-6">
-                                        <div class="kv-avatar">
-                                            <div class="file-loading">
-                                                <input accept="audio/*" type="file" multiple id="voiceFile"
-                                                       class="file"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tag" class="col-md-2 control-label">注意</label>
-                                    <div class="col-md-6">
-                                        <label class="control-label">语音文件名称必须是有序的数字(如1.jpg,2.jpg)</label>
-                                    </div>
-                                </div>
+                                {{--  <div class="form-group">
+                                      <label for="tag" class="col-md-2 control-label">语音文件</label>
+                                      <div class="col-md-6">
+                                          <div class="kv-avatar">
+                                              <div class="file-loading">
+                                                  <input accept="audio/*" type="file" multiple id="voiceFile"
+                                                         class="file"/>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>--}}
+                                {{-- <div class="form-group">
+                                     <label for="tag" class="col-md-2 control-label">注意</label>
+                                     <div class="col-md-6">
+                                         <label class="control-label">语音文件名称必须是有序的数字(如1.jpg,2.jpg)</label>
+                                     </div>
+                                 </div>--}}
                                 <div class="form-group">
                                     <div class="col-md-4 col-md-offset-2">
                                         <div class="progress progress-striped active hidden">
@@ -83,54 +83,43 @@
                 $("div[role='progressbar']").css("width", rate + "%");
                 $(".process-remarks").html(rate + "%");
             }
-            var subscription = {};
+            var observer = {
+                next: function (res) {
+                    var rate = res.total.percent.toFixed(2)
+                    setProgressRate(rate)
+                },
+                error: function (err) {
+                    qiniuError(err)
+                    $(".progress").addClass("hidden")
+                },
+                complete: function (res) {
+                    $(".progress").addClass("hidden")
+                    window.location.href = "/admin/articles";
+                }
+            }
+            var config = {};
             $("#uploadBtn").on("click", function () {
-                var pdfFile = document.getElementById("pdfFile");
-                var voiceFile = document.getElementById("voiceFile");
-                if (pdfFile.files.length < 1 || voiceFile.files.length < 1) {
+                var fileObj = document.getElementById("pdfFile");
+                var key = "prad_" + articleId;
+                if (fileObj.files.length != 1) {
                     alert("请选择上传文件");
                 }
-                var fileList = [];
-                fileList[0] = pdfFile.files[0];
-                for (var i = 0; i < voiceFile.files.length; i++) {
-                    fileList[i + 1] = voiceFile.files[i];
+                var putExtra = {
+                    fname: fileObj.files[0].name,
+                };
+                if (getFileExtra(putExtra.fname) !== 'prad') {
+                    alert("文件格式不正确");
+                    return;
                 }
+                setProgressRate(0)
                 $(".progress").removeClass("hidden")
-                uploadFile(fileList, 0)
+                var observable = qiniu.upload(fileObj.files[0], key, "{{$token}}", putExtra, config)
+                var subscription = observable.subscribe(observer) // 上传开始
             })
-            var uploadFile = function (list, cur) {
-                $("#whichFile").html("上传第" + (cur + 1) + "个文件");
-                fileObj = list.shift();
-                var observer = {
-                    next: function (res) {
-                        var rate = res.total.percent.toFixed(2)
-                        setProgressRate(rate)
-                    },
-                    error: function (err) {
-                        setProgressRate(0)
-                        if (list.length > 0) {
-                            uploadFile(list, cur + 1)
-                        }
-                    },
-                    complete: function (res) {
-                        setProgressRate(0)
-                        if (list.length > 0) {
-                            uploadFile(list, cur + 1)
-                        } else {
-                            window.location.href = "/admin/article";
-                        }
-                    }
-                }
-                if (cur == 0) {
-                    key = "pdf_" + articleId;
-                } else {
-                    key = "voice_" + articleId + "_" + parseInt(GetFileNameNoExt(fileObj.name));
-                }
-                var observable = qiniu.upload(fileObj, key, "{{$token}}", null, null)
-                subscription = observable.subscribe(observer) // 上传开始     //在这里运行代码
-            }
-            var GetFileNameNoExt = function (filepath) {
-                return filepath.replace(/(.*\/)*([^.]+).*/ig, "$2");
+            var getFileExtra = function (upFileName) {
+                var index1 = upFileName.lastIndexOf(".");
+                var index2 = upFileName.length;
+                return upFileName.substring(index1 + 1, index2);
             }
         })
     </script>

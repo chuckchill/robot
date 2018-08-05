@@ -11,6 +11,7 @@ namespace App\Services\ModelService;
 
 use App\Models\Common\ArticleContent;
 use App\Services\Helper;
+use App\Services\Qiniu;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
@@ -66,11 +67,10 @@ class Article
 
     public static function getArticleSrc($articleId)
     {
-        $wordPath = self::getWordPath($articleId);
-        if (file_exists(public_path($wordPath . $articleId . ".doc"))) {
-            return url($wordPath . $articleId . ".doc");
-        } else {
-            return url("api/device/get-article-content?article_id=" . $articleId);
+        if (!$articleId) {
+            code_exception("code.device.article_notfound");
         }
+        $qiniu = new Qiniu();
+        return $qiniu->getDownloadUrl('prad_' . $articleId, 3600, 'article');
     }
 }

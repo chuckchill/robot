@@ -53,4 +53,7 @@ return [
         'wechat_auth_error' => ['code' => 10037, 'message' => '微信授权登录失败'],
         'mobile_error' => ['code' => 10038, 'message' => '请填写正确的手机号码'],
     ],
+    'device' => [
+        'article_notfound' => ['code' => 10039, 'message' => '夜话文章不存在'],
+    ]
 ];
