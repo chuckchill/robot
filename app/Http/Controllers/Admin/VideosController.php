@@ -79,11 +79,30 @@ class VideosController extends BaseController
     public function edit($id)
     {
         $video = Videos::find($id);
+        $uid = auth('admin')->user()->id;
         if (!$video) return redirect()->back()->withErrors("找不到该视频!");
         foreach (array_keys($this->fields) as $field) {
             $data[$field] = old($field, $video->$field);
         }
         $data['id'] = $id;
+        $returnBody = [
+            "key" => "$(key)",
+            "hash" => "$(hash)",
+            "fsize" => "$(fsize)",
+            "fname" => "$(fname)",
+            "name" => "$(x:name)",
+            "status" => "$(x:status)",
+            "type" => "$(x:type)",
+            "videoId" => "{$id}",
+            "buid" => "{$uid}",
+        ];
+        $policy = array(
+            'callbackUrl' => route('qiniu.backend_video_callback'),
+            'callbackBody' => json_encode($returnBody),
+            'callbackBodyType' => 'application/json'
+        );
+        $qn = new Qiniu();
+        $data['token'] = $qn->getToken(config('qiniu.bucket.videos.bucket'), $policy);
         return view('admin.videos.edit', $data);
     }
 
@@ -112,9 +131,9 @@ class VideosController extends BaseController
 
     public function show($key)
     {
-        $qn=new Qiniu();
+        $qn = new Qiniu();
         return view('admin.videos.show', [
-            'video_url'=>$qn->getDownloadUrl($key)
+            'video_url' => $qn->getDownloadUrl($key)
         ]);
     }
 }

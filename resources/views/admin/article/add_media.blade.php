@@ -19,7 +19,7 @@
                         <div class="panel-body">
                             <form enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="tag" class="col-md-2 control-label">pdf文件</label>
+                                    <label for="tag" class="col-md-2 control-label">资源文件</label>
                                     <div class="col-md-6">
                                         <div class="kv-avatar">
                                             <div class="file-loading">
