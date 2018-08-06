@@ -71,7 +71,8 @@ class MediaTypeController extends BaseController
         foreach (array_keys($this->fields) as $field) {
             $videosType->$field = $request->get($field, $this->fields[$field]);
         }
-
+        $pType=MediaType::find((int)$videosType->pid);
+        $videosType->type=$pType->type;
         $videosType->save();
         Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $videosType->id, 1, '添加了媒体分类:' . $videosType->name . '(' . $videosType->id . ')'));
@@ -107,6 +108,8 @@ class MediaTypeController extends BaseController
         foreach (array_keys($this->fields) as $field) {
             $videosType->$field = $request->get($field, $this->fields[$field]);
         }
+        $pType=MediaType::find((int)$videosType->pid);
+        $videosType->type=$pType->type;
         $videosType->save();
         Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $videosType->id, 3, '修改了媒体分类:' . $videosType->name . '(' . $videosType->id . ')'));

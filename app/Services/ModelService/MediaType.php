@@ -22,11 +22,14 @@ class MediaType
      * @param bool $filter
      * @return array
      */
-    public static function getTypeTree($forceHtml = false)
+    public static function getTypeTree($forceHtml = false, $type = '')
     {
         $mediaType = Cache::store('file')->rememberForever('videotype', function () {
             return \App\Models\Common\MediaType::orderBy('pid', SORT_DESC)->get();
         });
+        if ($type) {
+            $mediaType = $mediaType->where('type', $type);
+        }
         $config = [
             'primary_key' => 'id',
             'parent_key' => 'pid',

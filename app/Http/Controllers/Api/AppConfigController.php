@@ -13,6 +13,7 @@ use App\Models\Common\LinkPage;
 use App\Models\Common\StartupPage;
 use App\Services\ModelService\AreaCode;
 use App\Services\ModelService\MediaType;
+use Illuminate\Http\Request;
 
 /**
  * Class AppConfigController
@@ -80,9 +81,10 @@ class AppConfigController extends BaseController
     /**
      * @return mixed
      */
-    public function getMediaType()
+    public function getMediaType(Request $request)
     {
-        $data = MediaType::getTypeTree(false);
+        $type = $request->get('type');
+        $data = MediaType::getTypeTree(false, $type);
         return $this->response->array([
             'code' => 0,
             'message' => '获取成功',

@@ -74,7 +74,7 @@
 <div class="form-group">
     <label for="tag" class="col-md-2 control-label">分类</label>
     <div class="col-md-6">
-        @include('admin.common.typeselect',['select'=>$type])
+        @include('admin.common.typeselect',['select'=>$type,'tt'=>'article'])
     </div>
 </div>
 {{--

@@ -24,7 +24,7 @@
 					},
 					"response": [
 						{
-							"id": "2f9bddb9-1641-4967-b7d7-619c6590b17d",
+							"id": "41b08bc4-612b-4504-8744-5b4d5704e0b1",
 							"name": "启动页",
 							"originalRequest": {
 								"method": "POST",
@@ -110,7 +110,7 @@
 					},
 					"response": [
 						{
-							"id": "fa3a0d1b-e19f-4c46-a0c0-9e55351cfdb8",
+							"id": "24758913-4e77-4ce9-a158-b63699129611",
 							"name": "引导页",
 							"originalRequest": {
 								"method": "POST",
@@ -206,7 +206,7 @@
 					},
 					"response": [
 						{
-							"id": "dc774efd-bfe3-4ddd-9c4d-78bdbf794ab3",
+							"id": "26931422-2651-43a5-98ab-e8f4891f05ae",
 							"name": "账号注册",
 							"originalRequest": {
 								"method": "POST",
@@ -328,7 +328,7 @@
 					},
 					"response": [
 						{
-							"id": "c2e6ab69-a713-46f9-bdee-eaadaff17c77",
+							"id": "d94d1c9e-2b20-46ad-a5da-c2757c1763cb",
 							"name": "账号登录",
 							"originalRequest": {
 								"method": "POST",
@@ -431,7 +431,7 @@
 					},
 					"response": [
 						{
-							"id": "b2598279-75f7-4526-b1bd-ba2bffc01314",
+							"id": "8a9d370b-ca2b-44d0-bbe0-d48e01fb5337",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -513,7 +513,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
 						},
 						{
-							"id": "10bc981f-67d9-422c-8dc2-0a49007e300a",
+							"id": "4be68fc9-1a76-4d56-814f-09c6de5a1281",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -635,7 +635,7 @@
 					},
 					"response": [
 						{
-							"id": "912d24d0-82e6-4c0f-8e23-96bcc414890a",
+							"id": "52590574-0f6f-46a5-bd00-680ce015fc2e",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -718,7 +718,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ1NjEwMiwiZXhwIjoxNTI5NDU5NzAyLCJuYmYiOjE1Mjk0NTYxMDIsImp0aSI6IlFYYkh0eEdGQW8zejFGeXIiLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.OH5fy5GbCFV_dnHHQ7oqvqEf2rd1myBR6GV4W94S_ao\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 						},
 						{
-							"id": "f0a617c8-e20d-4568-9256-12fc5c8274de",
+							"id": "1c1c1060-ceab-4937-8176-98cf407dde90",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -821,7 +821,7 @@
 					},
 					"response": [
 						{
-							"id": "0790f234-b6e3-4a34-bcde-9adce9ca7260",
+							"id": "4fda9c86-2c5d-4ec5-8a40-2ab8c2c80ac9",
 							"name": "退出登录",
 							"originalRequest": {
 								"method": "POST",
@@ -922,7 +922,7 @@
 					},
 					"response": [
 						{
-							"id": "1baafe62-56cf-41d5-b585-d2542b68d217",
+							"id": "d7db8500-2f66-4f47-8084-4ee87e60e50d",
 							"name": "微信登录",
 							"originalRequest": {
 								"method": "POST",
@@ -1299,7 +1299,7 @@
 					"response": []
 				},
 				{
-					"name": "获取视频分类",
+					"name": "获取媒体分类",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1308,7 +1308,17 @@
 								"value": "bearer{{auth_token}}"
 							}
 						],
-						"body": {},
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "type",
+									"value": "video",
+									"description": "类别video article",
+									"type": "text"
+								}
+							]
+						},
 						"url": "{{BaseDevice}}/get-media-type"
 					},
 					"response": []
