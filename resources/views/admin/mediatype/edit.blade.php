@@ -28,7 +28,7 @@
                                 <div class="form-group">
                                     <label for="tag" class="col-md-3 control-label">上级分类</label>
                                     <div class="col-md-6">
-                                        @include("admin.common.typeselect",["select"=>$pid,"fname"=>"pid","hasHead"=>true])
+                                        @include("admin.common.typeselect",["select"=>$pid,"fname"=>"pid","hasHead"=>true,"tt"=>""])
                                     </div>
                                 </div>
                                 <div class="form-group">
