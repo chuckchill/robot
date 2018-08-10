@@ -13,6 +13,7 @@ use App\Events\videotypeChangeEvent;
 use App\Models\Common\MediaType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
+use App\Services\Helper;
 
 /**
  * Class MediaTypeController
@@ -71,9 +72,10 @@ class MediaTypeController extends BaseController
         foreach (array_keys($this->fields) as $field) {
             $videosType->$field = $request->get($field, $this->fields[$field]);
         }
-        $pType=MediaType::find((int)$videosType->pid);
-        $videosType->type=$pType->type;
+        $pType = MediaType::find((int)$videosType->pid);
+        $videosType->type = $pType->type;
         $videosType->save();
+        $this->saveThumbImg($request->file('thumbImg'), $videosType->id);
         Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $videosType->id, 1, '添加了媒体分类:' . $videosType->name . '(' . $videosType->id . ')'));
         return redirect('/admin/media-type')->withSuccess('添加成功！');
@@ -108,9 +110,10 @@ class MediaTypeController extends BaseController
         foreach (array_keys($this->fields) as $field) {
             $videosType->$field = $request->get($field, $this->fields[$field]);
         }
-        $pType=MediaType::find((int)$videosType->pid);
-        $videosType->type=$pType->type;
+        $pType = MediaType::find((int)$videosType->pid);
+        $videosType->type = $pType->type;
         $videosType->save();
+        $this->saveThumbImg($request->file('thumbImg'), $videosType->id);
         Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $videosType->id, 3, '修改了媒体分类:' . $videosType->name . '(' . $videosType->id . ')'));
 
@@ -125,11 +128,24 @@ class MediaTypeController extends BaseController
     {
         $mediaType = MediaType::find((int)$id);
         if (!$mediaType) return redirect()->back()->withErrors("找不到分类!");
-        if (MediaType::where(['pid'=>$id])->count()) return redirect()->back()->withErrors("该分类下面还有子分类!");
+        if (MediaType::where(['pid' => $id])->count()) return redirect()->back()->withErrors("该分类下面还有子分类!");
         $mediaType->delete();
         Event::fire(new videotypeChangeEvent());
         event(new \App\Events\userActionEvent('\App\Models\Admin\MediaType', $mediaType->id, 3, '删除了媒体分类：' . $mediaType->id));
         return redirect('admin/media-type')->withSuccess("删除成功");
     }
 
+    protected function saveThumbImg($file, $id)
+    {
+        if ($file) {
+            $path = Helper::mkDir(public_path("upload/mediatype"));
+            $allowed_extensions = ["png", "jpg", "gif"];
+            $extension = $file->getClientOriginalExtension();
+            $fileName = $id . '.jpg';
+            if (!in_array($extension, $allowed_extensions)) {
+                return false;
+            }
+            $file->move($path, $fileName);
+        }
+    }
 }

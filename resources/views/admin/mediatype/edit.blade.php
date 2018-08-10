@@ -21,7 +21,7 @@
                             @include('admin.partials.errors')
                             @include('admin.partials.success')
                             <form class="form-horizontal" role="form" method="POST"
-                                  action="/admin/media-type/{{ $id }}">
+                                  action="/admin/media-type/{{ $id }}" enctype="multipart/form-data">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="id" value="{{ $id }}">
@@ -36,6 +36,12 @@
                                     <div class="col-md-6">
                                         <input type="text" class="form-control" name="name" id="tag" value="{{ $name }}"
                                                autofocus>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tag" class="col-md-3 control-label">展示图</label>
+                                    <div class="col-md-6">
+                                        <input type="file" class="" accept="image/*" name="thumbImg">
                                     </div>
                                 </div>
                                 <div class="form-group">

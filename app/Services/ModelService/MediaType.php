@@ -30,14 +30,26 @@ class MediaType
         if ($type) {
             $mediaType = $mediaType->where('type', $type);
         }
+        $data = $mediaType->toArray();
+        foreach ($data as $key => $type) {
+            $data[$key]['thumb'] = self::getThumbImg($type['id']);
+        }
         $config = [
             'primary_key' => 'id',
             'parent_key' => 'pid',
         ];
         if ($forceHtml) {
-            return PHPTreeClass::makeTreeForHtml($mediaType->toArray(), $config);
+            return PHPTreeClass::makeTreeForHtml($data, $config);
         }
-        return PHPTreeClass::makeTree($mediaType->toArray(), $config);;
+        return PHPTreeClass::makeTree($data, $config);;
     }
 
+    protected static function getThumbImg($id)
+    {
+        $path = "/upload/mediatype/" . $id . ".jpg";
+        if (file_exists($path)) {
+            return url($path);
+        }
+        return url("/images/video.jpg");
+    }
 }
