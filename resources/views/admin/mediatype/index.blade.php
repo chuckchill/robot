@@ -31,13 +31,16 @@
                             @if($item['level']==0)
                                 <li class="list-group-item list-group-item-success">
                                     {{$item['name']}}
-                                    <a href="/admin/media-type/{{$item['id']}}/edit" class="pull-right label-info label">修改</a>
+                                    <a href="/admin/media-type/{{$item['id']}}/edit"
+                                       class="pull-right label-info label">修改</a>
                                 </li>
                             @else
                                 <li style="padding-left: {{$item['level']*40}}px"
                                     class="list-group-item list-group-item-info">
+                                    <img style="height: 20px" src="{{$item['thumb']}}">
                                     {{$item['name']}}
-                                    <a href="/admin/media-type/{{$item['id']}}/edit"  class="pull-right label-info label">修改</a>
+                                    <a href="/admin/media-type/{{$item['id']}}/edit"
+                                       class="pull-right label-info label">修改</a>
                                 </li>
                             @endif
                         @endforeach
