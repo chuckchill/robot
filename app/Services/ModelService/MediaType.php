@@ -47,9 +47,9 @@ class MediaType
     protected static function getThumbImg($id)
     {
         $path = "/upload/mediatype/" . $id . ".jpg";
-        if (file_exists($path)) {
+        if (file_exists(public_path($path))){
             return url($path);
-        }
+    }
         return url("/images/video.jpg");
     }
 }
