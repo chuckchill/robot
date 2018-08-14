@@ -24,7 +24,7 @@
 					},
 					"response": [
 						{
-							"id": "41b08bc4-612b-4504-8744-5b4d5704e0b1",
+							"id": "e2557b65-f7cd-4d53-8ae1-78d95e99379e",
 							"name": "启动页",
 							"originalRequest": {
 								"method": "POST",
@@ -110,7 +110,7 @@
 					},
 					"response": [
 						{
-							"id": "24758913-4e77-4ce9-a158-b63699129611",
+							"id": "3473b207-7142-4fe7-841d-8b9716861f0b",
 							"name": "引导页",
 							"originalRequest": {
 								"method": "POST",
@@ -190,7 +190,7 @@
 							"formdata": [
 								{
 									"key": "account",
-									"value": "test1",
+									"value": "test1123",
 									"type": "text",
 									"description": "账号"
 								},
@@ -199,6 +199,12 @@
 									"value": "123456",
 									"type": "text",
 									"description": "密码"
+								},
+								{
+									"key": "type",
+									"value": "doctor",
+									"description": "类型(doctor/sicker)",
+									"type": "text"
 								}
 							]
 						},
@@ -206,7 +212,7 @@
 					},
 					"response": [
 						{
-							"id": "26931422-2651-43a5-98ab-e8f4891f05ae",
+							"id": "6dc7c1a3-9a2f-481d-98a9-3f4a62dfc624",
 							"name": "账号注册",
 							"originalRequest": {
 								"method": "POST",
@@ -328,7 +334,7 @@
 					},
 					"response": [
 						{
-							"id": "d94d1c9e-2b20-46ad-a5da-c2757c1763cb",
+							"id": "71bcd859-1bba-4be2-85ba-9b86c4494c79",
 							"name": "账号登录",
 							"originalRequest": {
 								"method": "POST",
@@ -431,7 +437,7 @@
 					},
 					"response": [
 						{
-							"id": "8a9d370b-ca2b-44d0-bbe0-d48e01fb5337",
+							"id": "fe3852f1-312d-4dc1-9b04-d3a3355aaad4",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -513,7 +519,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
 						},
 						{
-							"id": "4be68fc9-1a76-4d56-814f-09c6de5a1281",
+							"id": "22b25de4-2593-4109-b71b-52fdbe38126f",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -635,7 +641,7 @@
 					},
 					"response": [
 						{
-							"id": "52590574-0f6f-46a5-bd00-680ce015fc2e",
+							"id": "9074bced-3ef5-4a7c-9eaf-f1f65b7f2c18",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -718,7 +724,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ1NjEwMiwiZXhwIjoxNTI5NDU5NzAyLCJuYmYiOjE1Mjk0NTYxMDIsImp0aSI6IlFYYkh0eEdGQW8zejFGeXIiLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.OH5fy5GbCFV_dnHHQ7oqvqEf2rd1myBR6GV4W94S_ao\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 						},
 						{
-							"id": "1c1c1060-ceab-4937-8176-98cf407dde90",
+							"id": "b69fab70-5b3e-4bb7-944b-60748653eeea",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -821,7 +827,7 @@
 					},
 					"response": [
 						{
-							"id": "4fda9c86-2c5d-4ec5-8a40-2ab8c2c80ac9",
+							"id": "7a04d92d-a911-4bf9-a1fe-d021465a5b41",
 							"name": "退出登录",
 							"originalRequest": {
 								"method": "POST",
@@ -922,7 +928,7 @@
 					},
 					"response": [
 						{
-							"id": "d7db8500-2f66-4f47-8084-4ee87e60e50d",
+							"id": "91dc74e7-f8d3-4a55-a26f-cd70265f2482",
 							"name": "微信登录",
 							"originalRequest": {
 								"method": "POST",
@@ -1251,6 +1257,52 @@
 							]
 						},
 						"url": "{{BaseAPP}}/get-user-device"
+					},
+					"response": []
+				},
+				{
+					"name": "添加联系人",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "bearer{{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "identifier",
+									"value": "test1123",
+									"description": "手机号或者账号",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BaseAPP}}/add-contacts",
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "获取联系人",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "bearer{{auth_token}}"
+							}
+						],
+						"body": {},
+						"url": "{{BaseAPP}}/get-contacts",
+						"description": ""
 					},
 					"response": []
 				}

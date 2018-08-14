@@ -80,6 +80,7 @@ class AuthController extends BaseController
         $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
         if (!$userAuth) {
             $user = new User();
+            $user->nick_name=str_random(8);
             $user->save();
             $userAuth = $this->userInfo->registerData("mobile", $mobile, "", $user->id);
         }

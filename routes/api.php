@@ -57,5 +57,9 @@ $api->group(['prefix' => '/app'], function ($api) {
         $api->post('get-user-device', ['uses' => 'UserController@getUserDevice']);//获取用户绑定设备
 
 
+        $api->post('add-contacts', ['uses' => 'UserController@addContacts']);//添加联系人
+        $api->post('get-contacts', ['uses' => 'UserController@getContacts']);//获取联系人
+
+
     });
 });

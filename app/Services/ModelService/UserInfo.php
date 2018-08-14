@@ -29,7 +29,7 @@ class UserInfo
             'birthday' => array_get($user, "birthday", ""),
             'province' => array_get($user, "province", ""),
             'city' => array_get($user, "city", ""),
-            'profile_img' => $user->profile_img ? array_get($user, "profile_img") : "",
+            'profile_img' => $user->profile_img ? array_get($user, "profile_img") : self::getAvator(),
         ];
     }
 
@@ -72,5 +72,10 @@ class UserInfo
             }
         }
         return compact('mobile', 'account');
+    }
+
+    public static function getAvator()
+    {
+        return url('/images/robot_head.png');
     }
 }

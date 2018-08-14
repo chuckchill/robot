@@ -52,8 +52,10 @@ return [
         'device_require_account' => ['code' => 10036, 'message' => '绑定设备前请设置账号'],
         'wechat_auth_error' => ['code' => 10037, 'message' => '微信授权登录失败'],
         'mobile_error' => ['code' => 10038, 'message' => '请填写正确的手机号码'],
+        'contacts_must_distinct' => ['code' => 10039, 'message' => '不能添加与当前账号同一类型用户为联系人(医生/患者)'],
+        'contacts_exist' => ['code' => 10040, 'message' => '联系人已经存在'],
     ],
     'device' => [
-        'article_notfound' => ['code' => 10039, 'message' => '夜话文章不存在'],
+        'article_notfound' => ['code' => 10041, 'message' => '夜话文章不存在'],
     ]
 ];

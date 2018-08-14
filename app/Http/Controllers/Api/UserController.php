@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
+use App\Models\Api\AppusersContacts;
 use App\Models\Api\DeviceBind;
 use App\Models\Api\Devices;
 use App\Models\Api\UsersAuth;
@@ -21,10 +22,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers\Api
+ */
 class UserController extends BaseController
 {
+    /**
+     * @var UserInfo
+     */
     public $userInfo;
 
+    /**
+     * UserController constructor.
+     * @param UserInfo $userInfo
+     */
     public function __construct(UserInfo $userInfo)
     {
         $this->userInfo = $userInfo;
@@ -383,5 +395,60 @@ class UserController extends BaseController
         $user->province = $request->get('province');
         $user->save();
         return $this->response->array(['code' => 0, 'message' => '修改成功']);
+    }
+
+    /**添加联系人
+     * @param Request $request
+     * @return mixed
+     */
+    public function addContacts(Request $request)
+    {
+        $user = \JWTAuth::authenticate();
+        $identifier = $request->get('identifier');
+        $userAuth = UsersAuth::select(['app_users.type', 'app_users.id'])
+            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_auth.uid')
+            ->where(['identifier' => $identifier])
+            ->whereIn('identity_type', ['sys', 'mobile'])
+            ->first();
+        if (!$userAuth) {
+            code_exception('code.login.account_notexist');
+        }
+        if ($userAuth->type == $user->type) {
+            code_exception('code.login.contacts_must_distinct');
+        }
+        $userLink = AppusersContacts::where([
+            'contract_uid' => $userAuth->id,
+            'uid' => $user->id
+        ])->first();
+        if ($userLink) {
+            code_exception('code.login.contacts_exist');
+        }
+        $userLink = new AppusersContacts();
+        $userLink->uid = $user->id;
+        $userLink->contract_uid = $userAuth->id;
+        $userLink->save();
+        return $this->response->array(['code' => 0, 'message' => '添加成功']);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContacts()
+    {
+        $contacts = AppusersContacts::select(['app_users.id', 'app_users.nick_name', 'app_users.profile_img'])
+            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.uid')
+            ->get();
+        $data = $contacts->map(function ($item, $key) {
+            return [
+                'nick_name' => $item->nick_name,
+                'id' => $item->id,
+                'profile_img' => UserInfo::getAvator(),
+            ];
+        });
+        return $this->response->array([
+            'code' => 0,
+            'message' => '获取成功',
+            'data' => $data->toArray()
+        ]);
     }
 }

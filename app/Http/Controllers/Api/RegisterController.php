@@ -41,6 +41,7 @@ class RegisterController extends BaseController
     {
         $account = $request->get("account");
         $password = $request->get("password");
+        $type = $request->get("type");
         if (!Helper::isUserName($account)) {
             code_exception("code.reg.account_invalid");
         }
@@ -53,6 +54,8 @@ class RegisterController extends BaseController
             code_exception("code.reg.acount_exist");
         }
         $user = new User();
+        $user->nick_name=str_random(8);
+        $user->type=$type;
         $user->save();
         $this->userInfo->registerData("sys", $account, Hash::make($password), $user->id);
         return $this->response->array([
@@ -72,7 +75,7 @@ class RegisterController extends BaseController
     {
         $mobile = $request->get('mobile');
         $code = $request->get('code');
-
+        $type = $request->get("type");
         $sms = new Sms($mobile);
         $sms->checkRegSms($code);
         $userAuth = UsersAuth::where(["identifier" => $mobile, 'identity_type' => 'mobile'])->first();
@@ -81,6 +84,8 @@ class RegisterController extends BaseController
         }
 
         $user = new User();
+        $user->nick_name=str_random(8);
+        $user->type=$type;
         $user->save();
         $this->userInfo->registerData("mobile", $mobile, "", $user->id);
         return $this->response->array([
@@ -101,6 +106,7 @@ class RegisterController extends BaseController
     {
         $email = $request->get('email');
         $code = $request->get('code');
+        $type = $request->get("type");
         $mail = new Email($email);
         $mail->validateCode($code);
         $userAuth = UsersAuth::where(["identifier" => $email, 'identity_type' => 'email'])->first();
@@ -108,6 +114,8 @@ class RegisterController extends BaseController
             code_exception("code.reg.email_exist");
         }
         $user = new User();
+        $user->nick_name=str_random(8);
+        $user->type=$type;
         $user->save();
         $this->userInfo->registerData("email", $email, "", $user->id);
         return $this->response->array([
