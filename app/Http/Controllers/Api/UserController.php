@@ -355,7 +355,7 @@ class UserController extends BaseController
 
         $user = \JWTAuth::authenticate();
         $deviceBind = DeviceBind::select([
-            "app_users_auth.identifier", "devices_bind.is_master",
+            "devices.sno", "devices_bind.is_master",
             "devices_bind.is_enable", "devices_bind.created_at",
             "devices_bind.role", "devices.name",
         ])
@@ -369,7 +369,7 @@ class UserController extends BaseController
 
         $data = $deviceBind->map(function ($item, $key) {
             return [
-                'account' => $item->identifier,
+                'sno' => $item->sno,
                 'is_master' => (boolean)$item->is_master,
                 'is_enable' => (boolean)$item->is_enable,
                 'bind_time' => $item->created_at->toDateTimeString(),
