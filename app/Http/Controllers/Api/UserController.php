@@ -126,7 +126,7 @@ class UserController extends BaseController
         $account = $request->get("account");
         $role = $request->get("name");
         $user = \JWTAuth::authenticate();
-        $enable = $request->get("is_enable");
+        $enable = $request->get("enable");
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {//设备是否存在
             code_exception('code.login.device_sno_notexist');
