@@ -28,7 +28,7 @@
                                 <tbody>
                                 @foreach($deviceBind as $item)
                                     <tr>
-                                        <td>{{$item->account? $item->account:"未设置"}}</td>
+                                        <td>{{$item->identifier? $item->identifier:"未设置"}}</td>
                                         <td>{{$item->is_master==1? "是":"否"}}</td>
                                         <td>{{$item->is_enable==1? "是":"否"}}</td>
                                         <td>{{$item->created_at}}</td>
