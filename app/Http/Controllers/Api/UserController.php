@@ -434,7 +434,7 @@ class UserController extends BaseController
      */
     public function getContacts()
     {
-        $contacts = AppusersContacts::select(['app_users.id', 'app_users.nick_name', 'app_users.profile_img'])
+        $contacts = AppusersContacts::select(['app_users_contacts.contract_uid', 'app_users.nick_name', 'app_users.profile_img'])
             ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.uid')
             ->get();
         $data = $contacts->map(function ($item, $key) {
