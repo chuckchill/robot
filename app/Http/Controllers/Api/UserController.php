@@ -235,8 +235,9 @@ class UserController extends BaseController
             if (!$deviceBind) {
                 code_exception('code.login.device_unbind');
             }
-            $path = "alarmclock/" . ($device->id % 20) . "/" . md5($sno) . "/";
-            $path = Helper::mkDir($path) . md5($sno) . ".clock";
+            $path = "alarmclock/" . ($device->id % 20) . "/" . $device->id . "/";
+            Helper::mkDir($path);
+            $path .= md5($sno) . ".clock";
             Storage::put($path, $data);
             return $this->response->array(['code' => 0, 'message' => '设置成功']);
         } catch (CodeException $e) {
@@ -256,8 +257,8 @@ class UserController extends BaseController
         if (!$device) {
             code_exception('code.login.device_sno_notexist');
         }
-        $path = "/alarmclock/" . ($device->id % 20) . "/" . md5($sno) . ".clock";
-        $clock = file_exists(storage_path($path)) ? Storage::get($path) : '';
+        $path = "alarmclock/" . ($device->id % 20) . "/" . $device->id . "/" . md5($sno) . ".clock";
+        $clock = Storage::exists($path) ? Storage::get($path) : '';
         return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => $clock]);
     }
 
