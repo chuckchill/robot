@@ -252,13 +252,13 @@ class UserController extends BaseController
     public function getAlarmclock(Request $request)
     {
         $sno = $request->get("sno");
-        $user = \JWTAuth::authenticate();
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {
             code_exception('code.login.device_sno_notexist');
         }
         $path = "/alarmclock/" . ($device->id % 20) . "/" . $device->id . "/" . md5($sno) . ".clock";
-        return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => Storage::get($path)]);
+        $clock = file_exists(storage_path($path)) ? Storage::get($path) : '';
+        return $this->response->array(['code' => 0, 'message' => '获取成功', "data" => $clock]);
     }
 
     /**
@@ -440,7 +440,7 @@ class UserController extends BaseController
         $data = $contacts->map(function ($item, $key) {
             return [
                 'nick_name' => $item->nick_name,
-                'id' => $item->id,
+                'id' => $item->contract_uid,
                 'profile_img' => UserInfo::getAvator(),
             ];
         });
