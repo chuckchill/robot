@@ -235,7 +235,7 @@ class UserController extends BaseController
             if (!$deviceBind) {
                 code_exception('code.login.device_unbind');
             }
-            $path = "alarmclock/" . ($device->id % 20) . "/" . $device->id . "/";
+            $path = "alarmclock/" . ($device->id % 20) . "/" . md5($sno) . "/";
             $path = Helper::mkDir($path) . md5($sno) . ".clock";
             Storage::put($path, $data);
             return $this->response->array(['code' => 0, 'message' => '设置成功']);
