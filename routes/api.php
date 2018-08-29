@@ -59,6 +59,7 @@ $api->group(['prefix' => '/app'], function ($api) {
 
         $api->post('add-contacts', ['uses' => 'UserController@addContacts']);//添加联系人
         $api->post('get-contacts', ['uses' => 'UserController@getContacts']);//获取联系人
+        $api->post('del-contacts', ['uses' => 'UserController@delContacts']);//获取联系人
 
 
     });

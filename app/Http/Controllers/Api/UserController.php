@@ -451,4 +451,21 @@ class UserController extends BaseController
             'data' => $data->toArray()
         ]);
     }
+
+    /**
+     * @return mixed
+     */
+    public function delContacts(Request $request)
+    {
+        $contact_id = $request->get('contact_id');
+        $user = \JWTAuth::authenticate();
+        AppusersContacts::where([
+            'contract_uid' => $contact_id,
+            'uid' => $user->id,
+        ])->delete();
+        return $this->response->array([
+            'code' => 0,
+            'message' => '删除成功',
+        ]);
+    }
 }

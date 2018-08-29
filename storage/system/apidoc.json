@@ -8,7 +8,6 @@
 	"item": [
 		{
 			"name": "App",
-			"description": null,
 			"item": [
 				{
 					"name": "启动页",
@@ -26,7 +25,7 @@
 					},
 					"response": [
 						{
-							"id": "ccb25ddb-399e-4dbf-b3cc-ecab7f5ce179",
+							"id": "5d8b94e9-16bb-4275-9004-fd9b8be68fcd",
 							"name": "启动页",
 							"originalRequest": {
 								"method": "POST",
@@ -45,6 +44,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -107,12 +107,11 @@
 						"method": "POST",
 						"header": [],
 						"body": {},
-						"url": "{{BaseAPP}}/link-page",
-						"description": null
+						"url": "{{BaseAPP}}/link-page"
 					},
 					"response": [
 						{
-							"id": "9ca49471-9549-43b3-8bd7-57b99933af7e",
+							"id": "0ad7ff84-a3a5-4d9d-976a-7a601c9cdbf0",
 							"name": "引导页",
 							"originalRequest": {
 								"method": "POST",
@@ -126,6 +125,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -209,12 +209,11 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/account-reg",
-						"description": null
+						"url": "{{BaseAPP}}/account-reg"
 					},
 					"response": [
 						{
-							"id": "65b387ab-94ee-48cf-a045-afa5893edd73",
+							"id": "05f6b3d7-b44b-41c2-bad1-284825218b71",
 							"name": "账号注册",
 							"originalRequest": {
 								"method": "POST",
@@ -246,6 +245,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -331,12 +331,11 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/account-login",
-						"description": null
+						"url": "{{BaseAPP}}/account-login"
 					},
 					"response": [
 						{
-							"id": "614a3174-d184-4529-926d-d2725fe4c938",
+							"id": "573aa507-5e5d-4e62-9af6-e36a343c6def",
 							"name": "账号登录",
 							"originalRequest": {
 								"method": "POST",
@@ -363,6 +362,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -434,12 +434,11 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/login-send-sms",
-						"description": null
+						"url": "{{BaseAPP}}/login-send-sms"
 					},
 					"response": [
 						{
-							"id": "aa49b8a9-fccb-4010-8701-628fb7efb576",
+							"id": "8b379c2e-c757-45c7-963c-48268a946085",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -465,6 +464,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -520,7 +520,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
 						},
 						{
-							"id": "2eea4879-59f1-4706-a192-9479881ae0f8",
+							"id": "a18c8eb5-7bdc-45ee-87f8-3796fe761447",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -546,6 +546,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -637,12 +638,11 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/sms-login",
-						"description": null
+						"url": "{{BaseAPP}}/sms-login"
 					},
 					"response": [
 						{
-							"id": "98b019c3-7269-4cfd-a2a7-74b141587e8c",
+							"id": "26f3b7d4-f64a-4747-b98a-247070d31194",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -669,6 +669,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -724,7 +725,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ1NjEwMiwiZXhwIjoxNTI5NDU5NzAyLCJuYmYiOjE1Mjk0NTYxMDIsImp0aSI6IlFYYkh0eEdGQW8zejFGeXIiLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.OH5fy5GbCFV_dnHHQ7oqvqEf2rd1myBR6GV4W94S_ao\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 						},
 						{
-							"id": "39e3ec4f-9d6d-4827-b460-2e2738594ddb",
+							"id": "37b498fc-ba37-4611-b47a-049663468d22",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -751,6 +752,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -822,12 +824,11 @@
 							}
 						],
 						"body": {},
-						"url": "{{BaseAPP}}/logout",
-						"description": null
+						"url": "{{BaseAPP}}/logout"
 					},
 					"response": [
 						{
-							"id": "f74806df-33ba-41f2-ab11-708a58037e1c",
+							"id": "01689637-62cd-4ae3-ab5d-06d191282cc2",
 							"name": "退出登录",
 							"originalRequest": {
 								"method": "POST",
@@ -846,6 +847,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -906,19 +908,20 @@
 					"name": "微信登录",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
+						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+							"mode": "formdata",
+							"formdata": [
 								{
-									"key": "code",
-									"value": "123123",
-									"description": "微信授权后返回的code",
+									"key": "sno",
+									"value": "sQdL1WoqMY",
+									"description": "设备号",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "1234",
+									"description": "名称",
 									"type": "text"
 								}
 							]
@@ -928,7 +931,7 @@
 					},
 					"response": [
 						{
-							"id": "e3816e6f-648d-4b40-b47e-88be871ccc5f",
+							"id": "5002d7cc-3504-4be0-8507-416024c0b105",
 							"name": "微信登录",
 							"originalRequest": {
 								"method": "POST",
@@ -954,6 +957,7 @@
 							"status": "OK",
 							"code": 200,
 							"_postman_previewlanguage": "json",
+							"_postman_previewtype": "html",
 							"header": [
 								{
 									"key": "Cache-Control",
@@ -1018,10 +1022,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1111,8 +1111,7 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/auth-device",
-						"description": null
+						"url": "{{BaseAPP}}/auth-device"
 					},
 					"response": []
 				},
@@ -1142,8 +1141,7 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/unbind-device",
-						"description": null
+						"url": "{{BaseAPP}}/unbind-device"
 					},
 					"response": []
 				},
@@ -1155,10 +1153,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1204,8 +1198,7 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/get-alarmclock",
-						"description": null
+						"url": "{{BaseAPP}}/get-alarmclock"
 					},
 					"response": []
 				},
@@ -1230,8 +1223,7 @@
 								}
 							]
 						},
-						"url": "{{BaseAPP}}/get-device-binder",
-						"description": null
+						"url": "{{BaseAPP}}/get-device-binder"
 					},
 					"response": []
 				},
@@ -1243,10 +1235,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {},
@@ -1263,10 +1251,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1274,7 +1258,7 @@
 							"formdata": [
 								{
 									"key": "identifier",
-									"value": "test1123",
+									"value": "hello1",
 									"description": "手机号或者账号",
 									"type": "text"
 								}
@@ -1297,7 +1281,33 @@
 						],
 						"body": {},
 						"url": "{{BaseAPP}}/get-contacts",
-						"description": null
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "删除联系人",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "bearer{{auth_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "contact_id",
+									"value": "5",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": "{{BaseAPP}}/del-contacts",
+						"description": ""
 					},
 					"response": []
 				}
@@ -1305,7 +1315,6 @@
 		},
 		{
 			"name": "Device",
-			"description": null,
 			"item": [
 				{
 					"name": "设备登录",
@@ -1367,8 +1376,7 @@
 								}
 							]
 						},
-						"url": "{{BaseDevice}}/get-media-type",
-						"description": null
+						"url": "{{BaseDevice}}/get-media-type"
 					},
 					"response": []
 				},
@@ -1409,8 +1417,7 @@
 								}
 							]
 						},
-						"url": "{{BaseDevice}}/get-videos",
-						"description": null
+						"url": "{{BaseDevice}}/get-videos"
 					},
 					"response": []
 				},
@@ -1435,8 +1442,7 @@
 								}
 							]
 						},
-						"url": "{{BaseDevice}}/get-video-src",
-						"description": null
+						"url": "{{BaseDevice}}/get-video-src"
 					},
 					"response": []
 				},
@@ -1451,8 +1457,7 @@
 							}
 						],
 						"body": {},
-						"url": "{{BaseDevice}}/get-video-upload-token",
-						"description": null
+						"url": "{{BaseDevice}}/get-video-upload-token"
 					},
 					"response": []
 				},
@@ -1487,8 +1492,7 @@
 								}
 							]
 						},
-						"url": "{{BaseDevice}}/get-live-videos",
-						"description": null
+						"url": "{{BaseDevice}}/get-live-videos"
 					},
 					"response": []
 				},
@@ -1532,8 +1536,7 @@
 								}
 							]
 						},
-						"url": "{{BaseDevice}}/edit-user",
-						"description": null
+						"url": "{{BaseDevice}}/edit-user"
 					},
 					"response": []
 				},
@@ -1543,8 +1546,7 @@
 						"method": "POST",
 						"header": [],
 						"body": {},
-						"url": "{{BaseDevice}}/get-area-code",
-						"description": null
+						"url": "{{BaseDevice}}/get-area-code"
 					},
 					"response": []
 				},
@@ -1575,8 +1577,7 @@
 								}
 							]
 						},
-						"url": "{{BaseDevice}}/get-article",
-						"description": null
+						"url": "{{BaseDevice}}/get-article"
 					},
 					"response": []
 				},
@@ -1588,10 +1589,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1618,10 +1615,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
