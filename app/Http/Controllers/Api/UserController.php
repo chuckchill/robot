@@ -403,6 +403,7 @@ class UserController extends BaseController
      */
     public function addContacts(Request $request)
     {
+        Logger::info(json_encode($request->all()),'test');
         $user = \JWTAuth::authenticate();
         $identifier = $request->get('identifier');
         $userAuth = UsersAuth::select(['app_users.type', 'app_users.id'])
@@ -435,8 +436,10 @@ class UserController extends BaseController
      */
     public function getContacts()
     {
+        $user = \JWTAuth::authenticate();
         $contacts = AppusersContacts::select(['app_users_contacts.contract_uid', 'app_users.nick_name', 'app_users.profile_img'])
-            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.uid')
+            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.contract_uid')
+            ->where('app_users_contacts.uid', '=', $user->id)
             ->get();
         $data = $contacts->map(function ($item, $key) {
             return [
