@@ -26,7 +26,7 @@
 					},
 					"response": [
 						{
-							"id": "ccb25ddb-399e-4dbf-b3cc-ecab7f5ce179",
+							"id": "5ed77853-18b5-4e9c-a257-a6091206aa7c",
 							"name": "启动页",
 							"originalRequest": {
 								"method": "POST",
@@ -112,7 +112,7 @@
 					},
 					"response": [
 						{
-							"id": "9ca49471-9549-43b3-8bd7-57b99933af7e",
+							"id": "cf7d2a65-f4c3-4683-b2a0-510ea4184096",
 							"name": "引导页",
 							"originalRequest": {
 								"method": "POST",
@@ -214,7 +214,7 @@
 					},
 					"response": [
 						{
-							"id": "65b387ab-94ee-48cf-a045-afa5893edd73",
+							"id": "9ab8acb0-6e33-402a-ba44-a113942c6b28",
 							"name": "账号注册",
 							"originalRequest": {
 								"method": "POST",
@@ -336,7 +336,7 @@
 					},
 					"response": [
 						{
-							"id": "614a3174-d184-4529-926d-d2725fe4c938",
+							"id": "037a4503-6f0e-4bd6-a97f-478b43e1c1e3",
 							"name": "账号登录",
 							"originalRequest": {
 								"method": "POST",
@@ -439,7 +439,7 @@
 					},
 					"response": [
 						{
-							"id": "aa49b8a9-fccb-4010-8701-628fb7efb576",
+							"id": "10f0e167-c688-4cc0-993b-b0a500e5a290",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -520,7 +520,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u53d1\\u9001\\u6210\\u529f\"}"
 						},
 						{
-							"id": "2eea4879-59f1-4706-a192-9479881ae0f8",
+							"id": "01fae84b-0dfd-4c39-8720-5d6ec99b20d6",
 							"name": "发送登录短信",
 							"originalRequest": {
 								"method": "POST",
@@ -642,7 +642,7 @@
 					},
 					"response": [
 						{
-							"id": "98b019c3-7269-4cfd-a2a7-74b141587e8c",
+							"id": "76373285-05f6-4710-be9e-b0dcdeae3622",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -724,7 +724,7 @@
 							"body": "{\"code\":0,\"message\":\"\\u767b\\u5f55\\u6210\\u529f\",\"data\":{\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9yb2JvdGFwaS5xemQuY29tXC9hcGlcL3Ntcy1sb2dpbiIsImlhdCI6MTUyOTQ1NjEwMiwiZXhwIjoxNTI5NDU5NzAyLCJuYmYiOjE1Mjk0NTYxMDIsImp0aSI6IlFYYkh0eEdGQW8zejFGeXIiLCJzdWIiOjEsInBydiI6IjQwYTk3ZmNhMmQ0MjRlNzc4YTA3YTBhMmYxMmRjNTE3YTg1Y2JkYzEifQ.OH5fy5GbCFV_dnHHQ7oqvqEf2rd1myBR6GV4W94S_ao\",\"account\":\"\",\"mobile\":\"13025447441\",\"email\":\"\",\"nick_name\":\"\",\"gender\":\"\",\"birthday\":\"\",\"profile_img\":\"\"}}"
 						},
 						{
-							"id": "39e3ec4f-9d6d-4827-b460-2e2738594ddb",
+							"id": "14c57d71-d0b6-44b7-9942-53c2d5dbd87f",
 							"name": "手机验证码登录",
 							"originalRequest": {
 								"method": "POST",
@@ -827,7 +827,7 @@
 					},
 					"response": [
 						{
-							"id": "f74806df-33ba-41f2-ab11-708a58037e1c",
+							"id": "8c2b8ec2-dd6a-478a-8d35-08ab3ec405a4",
 							"name": "退出登录",
 							"originalRequest": {
 								"method": "POST",
@@ -906,12 +906,7 @@
 					"name": "微信登录",
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							}
-						],
+						"header": [],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
@@ -928,7 +923,7 @@
 					},
 					"response": [
 						{
-							"id": "e3816e6f-648d-4b40-b47e-88be871ccc5f",
+							"id": "dbd5a581-5930-4cc5-9475-e169e579e8ba",
 							"name": "微信登录",
 							"originalRequest": {
 								"method": "POST",
@@ -1018,10 +1013,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1155,10 +1146,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1243,10 +1230,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {},
@@ -1263,10 +1246,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1274,7 +1253,7 @@
 							"formdata": [
 								{
 									"key": "identifier",
-									"value": "test1123",
+									"value": "hello1",
 									"description": "手机号或者账号",
 									"type": "text"
 								}
@@ -1588,10 +1567,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
@@ -1618,10 +1593,6 @@
 							{
 								"key": "authorization",
 								"value": "bearer{{auth_token}}"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
 							}
 						],
 						"body": {
