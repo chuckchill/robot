@@ -434,8 +434,10 @@ class UserController extends BaseController
      */
     public function getContacts()
     {
+        $user = \JWTAuth::authenticate();
         $contacts = AppusersContacts::select(['app_users_contacts.contract_uid', 'app_users.nick_name', 'app_users.profile_img'])
-            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.uid')
+            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.contract_uid')
+            ->where('app_users_contacts.uid', '=', $user->id)
             ->get();
         $data = $contacts->map(function ($item, $key) {
             return [
