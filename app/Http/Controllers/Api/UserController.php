@@ -403,6 +403,7 @@ class UserController extends BaseController
      */
     public function addContacts(Request $request)
     {
+        Logger::info(json_encode($request->all()),'test');
         $user = \JWTAuth::authenticate();
         $identifier = $request->get('identifier');
         $userAuth = UsersAuth::select(['app_users.type', 'app_users.id'])
