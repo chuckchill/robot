@@ -5,7 +5,7 @@
 $api->group(['prefix' => '/device',], function ($api) {
     $api->post('login', ['uses' => 'AuthController@deviceAuth']);//设备登录
     $api->post('get-article-content', ['uses' => 'ArticleController@getArticleContent']);//文章内容
-    $api->group(['middleware' => ['api.auth']], function ($api) {
+    $api->group(['middleware' => ['api.auth', 'jwt.refresh']], function ($api) {
         $api->post('get-videos', ['uses' => 'VideosController@getVideos']);//查询视频
         $api->post('get-video-src', ['uses' => 'VideosController@getVideoSrc']);//获取视频地址
 
@@ -42,7 +42,7 @@ $api->group(['prefix' => '/app'], function ($api) {
     $api->post('wx-login', ['uses' => 'AuthController@wxLogin']);//微信登录
 
 
-    $api->group(['middleware' => ['api.auth']], function ($api) {
+    $api->group(['middleware' => ['api.auth', 'jwt.refresh']], function ($api) {
         $api->get('test', ['uses' => 'IndexController@index']);
         $api->post('logout', ['uses' => 'AuthController@logout']);//退出登录
 
