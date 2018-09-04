@@ -166,8 +166,6 @@ class ArticleController extends BaseController
             'callbackBody' => json_encode($returnBody),
             'callbackBodyType' => 'application/json',
             'saveKey' => "prad_" . $articleId,
-            'insertOnly' => 0,
-            'scope' => config('qiniu.bucket.article.bucket') . ":" . "prad_" . $articleId
         );
         $token = $qn->getToken(config('qiniu.bucket.article.bucket'), $policy);
         return view('admin.article.add_media', [
@@ -189,6 +187,16 @@ class ArticleController extends BaseController
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '删除了文章：' . $article->id));
         return redirect()->back()
             ->withSuccess("删除成功");
+    }
+
+    public function postDeleteMedia(Request $request)
+    {
+        $key = "prad_" . $request->get('articleId');
+        $qn = new Qiniu();
+        if ($qn->deleteKey(config('qiniu.bucket.article.bucket'), $key)) {
+            return ["code" => 1, "message" => "旧文件删除失败"];
+        }
+        return ["code" => 200, "message" => "删除成功"];
     }
 
 }

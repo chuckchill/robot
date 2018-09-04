@@ -97,10 +97,31 @@
                     window.location.href = "/admin/article";
                 }
             }
+            var deleteOld = function () {
+                var deleteResult = false;
+                $.ajax({
+                    url: "/admin/article/delete-media",
+                    type: "post",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{csrf_token()}}'
+                    },
+                    data: {
+                        articleId: articleId
+                    },
+                    async: false,
+                    success: function (data) {
+                        if (data.code != 200) {
+                            alert(data.message)
+                        } else {
+                            deleteResult = true
+                        }
+                    }
+                });
+                return deleteResult;
+            }
             var config = {};
             $("#uploadBtn").on("click", function () {
                 var fileObj = document.getElementById("pdfFile");
-                var key = "prad_" + articleId;
                 if (fileObj.files.length != 1) {
                     alert("请选择上传文件");
                 }
@@ -111,9 +132,12 @@
                     alert("文件格式不正确");
                     return;
                 }
+                if (!deleteOld()) {
+                    return
+                }
                 setProgressRate(0)
                 $(".progress").removeClass("hidden")
-                var observable = qiniu.upload(fileObj.files[0], key, "{{$token}}", putExtra, config)
+                var observable = qiniu.upload(fileObj.files[0], null, "{{$token}}", putExtra, config)
                 var subscription = observable.subscribe(observer) // 上传开始
             })
             var getFileExtra = function (upFileName) {

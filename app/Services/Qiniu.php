@@ -88,6 +88,12 @@ class Qiniu
         return $this->Auth->verifyCallback($contentType, $authorization, $url, $callbackBody);
     }
 
+    public function deleteKey($bucket, $key)
+    {
+        $bucketmanager = $this->getBucketManager();
+        return $bucketmanager->delete($bucket, $key);
+    }
+
     /**
      * @return BucketManager
      */
@@ -96,5 +102,6 @@ class Qiniu
         $config = new Config();
         return new BucketManager($this->Auth, $config);
     }
+
 
 }
