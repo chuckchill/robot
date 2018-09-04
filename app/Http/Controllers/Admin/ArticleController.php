@@ -185,7 +185,7 @@ class ArticleController extends BaseController
         \App\Services\ModelService\Article::deleteContent($article->id);
         $key = "prad_" . $id;
         $qn = new Qiniu();
-        $qn->deleteKey(config('qiniu.bucket.article.bucket'), $key)
+        $qn->deleteKey(config('qiniu.bucket.article.bucket'), $key);
         $article->delete();
         event(new \App\Events\userActionEvent('\App\Models\Admin\Article', $article->id, 3, '删除了文章：' . $article->id));
         return redirect()->back()
