@@ -165,6 +165,7 @@ class ArticleController extends BaseController
             'callbackUrl' => route('qiniu.common-callback'),
             'callbackBody' => json_encode($returnBody),
             'callbackBodyType' => 'application/json',
+            'saveKey' => "prad_" . $articleId,
             'insertOnly' => 0,
             'scope' => config('qiniu.bucket.article.bucket') . ":" . "prad_" . $articleId
         );
