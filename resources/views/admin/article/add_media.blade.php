@@ -100,7 +100,7 @@
             var config = {};
             $("#uploadBtn").on("click", function () {
                 var fileObj = document.getElementById("pdfFile");
-               // var key = "prad_" + articleId;
+                var key = "prad_" + articleId;
                 if (fileObj.files.length != 1) {
                     alert("请选择上传文件");
                 }
@@ -113,7 +113,7 @@
                 }
                 setProgressRate(0)
                 $(".progress").removeClass("hidden")
-                var observable = qiniu.upload(fileObj.files[0], null, "{{$token}}", putExtra, config)
+                var observable = qiniu.upload(fileObj.files[0], key, "{{$token}}", putExtra, config)
                 var subscription = observable.subscribe(observer) // 上传开始
             })
             var getFileExtra = function (upFileName) {
