@@ -26,10 +26,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /*$data="5252005D04000000002B3230313630395F636F6D2E6D616E62752E736D617274726F626F745F383635313832303331323731333233BAEB72815A47C5C8C3C248C5C29CA4DF5A6ADF37031F50C3B1693EBB9A750F453741F00200000D0A";
-        $package=new Package();
-        $package->unpackData(hex2bin($data));
-        return "";*/
+
+       /* $package = new Package();
+        $content = json_encode([1, 2, 3]);
+        $desc = "3539323838383030303031313231";
+        $src = "676F6E67796F6E67313633636F6D5F636F6D2E6D616E62752E736D617274726F626F745F383635313832303331323731333233";
+        $res = $package->packProtocol(hex2bin($src), hex2bin($desc), $content, 'logOut');
+        $pack = bin2hex($res);
+        dump($package);
+        $unPack = $package->unpackProtocol(hex2bin($pack));
+        dump($unPack);*/
         return view('welcome');
     }
 
