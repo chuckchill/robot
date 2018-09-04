@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'app',
         'passwords' => 'users',
     ],
 
@@ -50,6 +50,14 @@ return [
             'driver' => 'session',
             'provider' => 'admin_users',
         ],
+        'app'=>[
+            'driver' => 'jwt',
+            'provider' => 'appusers',
+        ],
+        'device'=>[
+            'driver' => 'jwt',
+            'provider' => 'deviceusers',
+        ],
     ],
 
     /*
@@ -70,15 +78,18 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'appusers' => [
             'driver' => 'eloquent',
             'model' => \App\Models\Api\User::class,
+        ],
+        'deviceusers' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Api\Devices::class,
         ],
         'admin_users' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin\AdminUser::class,
         ],
-
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
