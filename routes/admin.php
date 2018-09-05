@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
     Route::get('article/index', ['as' => 'admin.article.index', 'uses' => 'ArticleController@index']);  //用户管理
     Route::post('article/index', ['as' => 'admin.article.index', 'uses' => 'ArticleController@index']);  //
     Route::get('article/upload-media', ['as' => 'admin.article.upload-media', 'uses' => 'ArticleController@getUploadMedia']);  //
+    Route::post('article/delete-media', ['as' => 'admin.article.delete-media', 'uses' => 'ArticleController@postDeleteMedia']);  //
     Route::resource('article', 'ArticleController', [
         'names' => [
             'update' => 'admin.article.edit',

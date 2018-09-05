@@ -62,7 +62,6 @@ class VideosController extends BaseController
      */
     public function getLiveVideos(Request $request)
     {
-        $user = \JWTAuth::authenticate();
         $province = $request->get('province');
         $city = $request->get('city');
         if (!$province && !$city) {
@@ -116,10 +115,10 @@ class VideosController extends BaseController
     /**
      * @return mixed
      */
-    public function getUploadToken()
+    public function getUploadToken(Request $request)
     {
         $qn = new Qiniu();
-        $device = \JWTAuth::authenticate();
+        $device = $request->get('device');
         $deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
         $user = User::find($deviceBind->uid)->first();
         $areaCode = Helper::getUserArea($user);
