@@ -33,7 +33,7 @@ class HomeController extends Controller
         $src = "676F6E67796F6E67313633636F6D5F636F6D2E6D616E62752E736D617274726F626F745F383635313832303331323731333233";
         $res = $package->packProtocol(hex2bin($src), hex2bin($desc), $content, 'logOut');
         $pack = bin2hex($res);
-        dump($package);
+        dump($pack);
         $unPack = $package->unpackProtocol(hex2bin($pack));
         dump($unPack);*/
         return view('welcome');

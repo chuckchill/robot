@@ -36,7 +36,7 @@ class Package
     {
         $key = $this->generateKey();//随机key
         $pn = $this->getPackageNo($des);//包序列号
-        $cmd = $this->getCmd($cmd);//指令
+        $cmd = Cmd::getCmdCode($cmd);//指令
         $secretKey = hex2bin($key) . $this->inKey;
         return $key . Aes::opensslEncrypt(gzencode(hex2bin($pn . $cmd . $content)), $secretKey);
     }
@@ -141,24 +141,5 @@ class Package
         }
         Redis::incr($key);
         return str_pad(dechex($pn), 4, '0', STR_PAD_LEFT);
-    }
-
-    /**
-     * @param $type
-     * @return string
-     * @throws \Exception
-     */
-    public function getCmd($type)
-    {
-        switch ($type) {
-            case 'setAc'://日常提醒
-                return '1001';
-                break;
-            case 'logOut':
-                return '1002';
-                break;
-            default:
-                throw new \Exception("未知命令");
-        }
     }
 }
