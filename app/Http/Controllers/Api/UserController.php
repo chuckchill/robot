@@ -429,4 +429,19 @@ class UserController extends BaseController
             'message' => '删除成功',
         ]);
     }
+
+    public function addSicker()
+    {
+
+    }
+
+    public function editSicker()
+    {
+
+    }
+
+    public function delSicker(Request $request)
+    {
+
+    }
 }
