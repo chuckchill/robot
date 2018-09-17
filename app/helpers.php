@@ -146,6 +146,10 @@ if (!function_exists('environment')) {
 
 if (!function_exists('startup_img')) {
 
+    /**
+     * @param $path
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
     function startup_img($path)
     {
         if (is_file(public_path("/upload/startup/" . $path))) {
@@ -156,6 +160,10 @@ if (!function_exists('startup_img')) {
 }
 if (!function_exists('link_img')) {
 
+    /**
+     * @param $path
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
     function link_img($path)
     {
         if (is_file(public_path("/upload/boot/" . $path))) {
@@ -165,14 +173,22 @@ if (!function_exists('link_img')) {
 }
 if (!function_exists('build_api_url')) {
 
+    /**
+     * @param $url
+     * @return mixed
+     */
     function build_api_url($url)
     {
-        $host = "http://" . request()->getHttpHost()."/api/";
+        $host = "http://" . request()->getHttpHost() . "/api/";
         return str_replace(["{{BaseAPP}}", "{{BaseDevice}}"], [$host . "app", $host . "device"], $url);
     }
 }
 if (!function_exists('build_api_query')) {
 
+    /**
+     * @param $data
+     * @return string
+     */
     function build_api_query($data)
     {
         return http_build_query(collect($data)->pluck("value", "key")->toArray());
@@ -181,6 +197,10 @@ if (!function_exists('build_api_query')) {
 
 if (!function_exists('get_api_body')) {
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     function get_api_body($item)
     {
         $mode = array_get($item, "request.body.mode");
@@ -189,8 +209,41 @@ if (!function_exists('get_api_body')) {
 }
 if (!function_exists('code_exception')) {
 
+    /**
+     * @param $codes
+     */
     function code_exception($codes)
     {
         app('App\Services\Helper')->codeException($codes);
     }
+}
+if (!function_exists('scws')) {
+
+    /**
+     * @param $str
+     * @return array
+     */
+    function code_exception($str)
+    {
+        if (!extension_loaded('scws') || strlen($str) <= 2) {
+            return [$str];
+        }
+        $scws = scws_new();
+        $scws->set_charset('utf8'); //指定编码
+        $scws->set_dict('/usr/local/scws/etc/dict.utf8.xdb');//指定词典路径，可以是绝对路径，也可以
+        $text = "精神疾的康复指导";
+        $scws->send_text($text);
+        $result = [];
+        while ($tmp = $scws->get_result()) {
+            foreach ($tmp as $item) {
+                if (strlen(array_get($item, 'word')) >= 2) {
+                    $result[] = array_get($item, 'word');
+                }
+            }
+
+        }
+        $scws->close();
+        return $result;
+    }
+
 }
