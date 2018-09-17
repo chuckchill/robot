@@ -4,6 +4,7 @@
  * */
 $api->group(['prefix' => '/device',], function ($api) {
     $api->post('login', ['uses' => 'AuthController@deviceAuth']);//设备登录
+    $api->post('get-area-code', ['uses' => 'AppConfigController@getCityCode']);//获取城市编码
     $api->post('get-article-content', ['uses' => 'ArticleController@getArticleContent']);//文章内容
     $api->group(['middleware' => ['api.device']], function ($api) {
         $api->post('get-videos', ['uses' => 'VideosController@getVideos']);//查询视频
@@ -24,7 +25,6 @@ $api->group(['prefix' => '/device',], function ($api) {
 $api->group(['prefix' => '/app'], function ($api) {
     $api->post('startup-page', ['uses' => 'AppConfigController@startupPpage']);//启动页
     $api->post('link-page', ['uses' => 'AppConfigController@linkPage']);//引导页
-    $api->post('get-area-code', ['uses' => 'AppConfigController@getCityCode']);//获取城市编码
 
     $api->post('account-reg', ['uses' => 'RegisterController@account']);//账号注册
 
