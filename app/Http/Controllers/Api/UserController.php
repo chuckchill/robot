@@ -72,7 +72,7 @@ class UserController extends BaseController
 
     }
 
-    /**绑定
+    /**绑定设备
      * @param Request $request
      * @return mixed
      * @throws CodeException
@@ -80,27 +80,15 @@ class UserController extends BaseController
     public function BindDevice(Request $request)
     {
         $sno = $request->get("sno");
-        $name = $request->get("name");
         $role = $request->get("role");
         $user = \JWTAuth::authenticate();
         $device = Devices::where(["sno" => $sno])->first();
         if (!$device) {
             code_exception('code.login.device_sno_notexist');
         }
-        if (!$name) {
-            code_exception('code.login.device_name_notnull');
-        }
-        $userAuth = UsersAuth::where(['identity_type' => 'sys', 'uid' => $user->id])->first();
-        if (!$userAuth) {//用户是否存在
-            code_exception("code.login.device_require_account");
-        }
-        $deviceBind = DeviceBind::where(["device_id" => $device->id, "is_master" => 1])->first();
+        $deviceBind = DeviceBind::where(["device_id" => $device->id, 'uid' => $user->id])->first();
         if ($deviceBind) {
-            if ($deviceBind->uid == $user->id) {//已绑定
-                code_exception('code.login.device_bindforyou');
-            }
-            //其他人绑定
-            code_exception('code.login.device_bindforother');
+            code_exception('code.login.device_bindforyou');
         }
         $deviceBind = new DeviceBind();
         $deviceBind->uid = $user->id;
@@ -108,20 +96,19 @@ class UserController extends BaseController
         $deviceBind->role = $role;
         $deviceBind->is_master = 1;
         $deviceBind->is_enable = 1;
-        $device->name = $name;
         $deviceBind->save();
-        $device->save();
         return $this->response->array(['code' => 0, 'message' => '绑定成功']);
     }
 
 
-    /**授权
+    /**授权设备
      * @param Request $request
      * @return mixed
      * @throws CodeException
      */
     public function authDevice(Request $request)
     {
+        //code_exception('code.common.api_blockup');
         $sno = $request->get("sno");
         $account = $request->get("account");
         $role = $request->get("name");
@@ -159,7 +146,7 @@ class UserController extends BaseController
         return $this->response->array(['code' => 0, 'message' => '授权成功']);
     }
 
-    /**解绑
+    /**解绑设备
      * @param Request $request
      * @return mixed
      * @throws CodeException
@@ -168,41 +155,13 @@ class UserController extends BaseController
     {
         try {
             $sno = $request->get("sno");
-            $account = $request->get("account");
             $user = \JWTAuth::authenticate();
             $device = Devices::where(["sno" => $sno])->first();
             if (!$device) {
                 code_exception('code.login.device_sno_notexist');
             }
-            $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
-            if (!$userAuth) {//判断账号是否存在
-                code_exception("code.login.account_notexist");
-            }
-            $deviceBind = DeviceBind::where([
-                "device_id" => $device->id,
-                "uid" => $user->id,
-                'is_master' => 1
-            ])->first();
-            if ($deviceBind) {//主监护人
-                if ($userAuth->uid == $user->id) {//解绑所有
-                    DeviceBind::where(["device_id" => $deviceBind->device_id])->delete();
-                    Logger::info("设备" . $deviceBind->sno . "解除所有绑定", "device_bind");
-                    code_exception("code.login.device_unbind_all");
-                } else {//解绑他人
-                    DeviceBind::where(["device_id" => $device->id, "uid" => $userAuth->uid])->delete();
-                    Logger::info("设备" . $deviceBind->sno . "解绑" . $userAuth->uid, "device_bind");
-                    code_exception('code.login.device_unbind_auth');
-                }
-
-            } else {//非主
-                if ($userAuth->uid != $user->id) {//无法解绑
-                    code_exception('code.login.device_connot_unbind');
-                } else {//解绑
-                    DeviceBind::where(["device_id" => $device->id, "uid" => $userAuth->uid])->delete();
-                    Logger::info("设备" . $device->sno . "解绑" . $userAuth->uid, "device_bind");
-                    code_exception('code.login.device_unbind_own');
-                }
-            }
+            DeviceBind::where(["device_id" => $device->id, "uid" => $user->id])->delete();
+            return $this->response->array(['code' => 0, 'message' => '解绑成功']);
         } catch (CodeException $e) {
             return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
         }

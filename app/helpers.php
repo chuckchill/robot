@@ -223,7 +223,7 @@ if (!function_exists('scws')) {
      * @param $str
      * @return array
      */
-    function code_exception($str)
+    function scws($str)
     {
         if (!extension_loaded('scws') || strlen($str) <= 2) {
             return [$str];
