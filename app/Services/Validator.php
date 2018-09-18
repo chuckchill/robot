@@ -18,4 +18,12 @@ class Validator
             return bad_request($validator->errors()->first());
         }
     }
+
+    public static function checkNull($data, $validators)
+    {
+        $validator = \Validator::make($data, $validators);
+        if ($validator->fails()) {
+            return code_exception('code.common.not_null');
+        }
+    }
 }

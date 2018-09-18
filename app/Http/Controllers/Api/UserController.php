@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
+use App\Http\Controllers\Api\Traits\SikerTrait;
 use App\Models\Api\AppusersContacts;
 use App\Models\Api\DeviceBind;
 use App\Models\Api\Devices;
@@ -28,6 +29,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class UserController extends BaseController
 {
+    use SikerTrait;
     /**
      * @var UserInfo
      */
@@ -428,20 +430,5 @@ class UserController extends BaseController
             'code' => 0,
             'message' => '删除成功',
         ]);
-    }
-
-    public function addSicker()
-    {
-
-    }
-
-    public function editSicker()
-    {
-
-    }
-
-    public function delSicker(Request $request)
-    {
-
     }
 }

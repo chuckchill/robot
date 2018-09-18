@@ -58,7 +58,8 @@ return [
     'device' => [
         'article_notfound' => ['code' => 10041, 'message' => '夜话文章不存在'],
     ],
-    'common'=>[
+    'common' => [
         'api_blockup' => ['code' => 10042, 'message' => '接口已停用'],
+        'not_null' => ['code' => 10043, 'message' => '请填写完整信息'],
     ]
 ];

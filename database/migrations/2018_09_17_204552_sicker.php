@@ -18,11 +18,11 @@ class Sicker extends Migration
             $table->string('provice')->comment('省');
             $table->string('city')->comment('市');
             $table->string('country')->comment('区');
-            $table->string('name')->comment('区');
-            $table->string('doctor')->comment('医生');
+            $table->string('sicker_name')->comment('病人姓名');
+            $table->string('sicker_idcard')->comment('身份证');
+            $table->string('doctor_name')->comment('医生');
             $table->string('doctor_no')->comment('医生工号');
             $table->string('type')->comment('病人类型');
-            $table->string('idcard_no')->comment('身份证');
             $table->tinyInteger('status')->comment('状态')->default(1);
             $table->timestamps();
         });
