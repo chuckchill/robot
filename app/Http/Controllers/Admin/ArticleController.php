@@ -160,7 +160,7 @@ class ArticleController extends BaseController
             "key" => "$(key)",
             "hash" => "$(hash)",
             "fsize" => "$(fsize)",
-            "fname" => "$(x:fname)",
+            "fname" => "$(fname)",
             "ftype" => "$(x:ftype)",
             "article_id" => $articleId,
         ];
