@@ -226,7 +226,7 @@ if (!function_exists('scws')) {
     function scws($str)
     {
         if (!extension_loaded('scws') || strlen($str) <= 2) {
-            return [$str];
+            return $str ? [$str] : [];
         }
         $scws = scws_new();
         $scws->set_charset('utf8'); //指定编码

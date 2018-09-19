@@ -34,12 +34,15 @@ class VideosController extends BaseController
     {
         $typeCode = $request->get('type_code');
         $searchName = $request->get('search');
+        $names = scws($searchName);
         $query = Videos::select("name", "key", "created_at");
         if ($typeCode) {
             $query->where(['type' => $typeCode]);
         }
-        if ($searchName) {
-            $query->where('name', 'like', $searchName . '%');
+        if (count($names) > 0) {
+            foreach ($names as $name) {
+                $query->where('name', 'like', '%' . $name . '%');
+            }
         }
         $data = $query->paginate(15)->toArray();
         $curPage = $data['current_page'];
@@ -122,7 +125,7 @@ class VideosController extends BaseController
         $device = $request->get('device');
         $sickerId = $request->get('sicker_id');
         $sicker = Sicker::find($sickerId);
-        if(!$sicker){
+        if (!$sicker) {
             code_exception('code.common.sicker_notnull');
         }
         //$deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
