@@ -128,7 +128,7 @@
                 var fileExtra = getFileExtra(fileObj.files[0].name);
                 var putExtra = {
                     fname: fileObj.files[0].name,
-                    params: {ftype: fileExtra}
+                    params: {"x:ftype": fileExtra}
                 };
                 if (fileExtra !== 'prad' && fileExtra !== 'pdf') {
                     alert("文件格式不正确,支持prad和pdf格式文件");
