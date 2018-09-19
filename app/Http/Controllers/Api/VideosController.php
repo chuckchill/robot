@@ -35,7 +35,7 @@ class VideosController extends BaseController
     {
         $typeCode = $request->get('type_code');
         $searchName = $request->get('name');
-        $names = scws($searchName);
+        $names = Helper::Participle($searchName);
         $query = Videos::select("name", "key", "created_at");
         if ($typeCode) {
             $query->where(['type' => $typeCode]);

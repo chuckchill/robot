@@ -12,6 +12,7 @@ namespace App\Services;
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
 use \Exception;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -130,6 +131,10 @@ class Helper
         }
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     public static function checkThumb($url)
     {
         $client = new \GuzzleHttp\Client();
@@ -137,6 +142,10 @@ class Helper
         return $response->getStatusCode() != "200";
     }
 
+    /**
+     * @param string $ipAddr
+     * @return array
+     */
     public static function getIpArea($ipAddr = '')
     {
         if (!$ipAddr) {
@@ -162,6 +171,10 @@ class Helper
         ];
     }
 
+    /**
+     * @param null $user
+     * @return array
+     */
     public static function getUserArea($user = null)
     {
         if ($user && ($user->province || $user->city)) {
@@ -173,6 +186,10 @@ class Helper
         return self::getIpArea();
     }
 
+    /**
+     * @param $idCard
+     * @return bool
+     */
     public static function validIdcard($idCard)
     {
         $id = strtoupper($idCard);
@@ -215,6 +232,22 @@ class Helper
                 }
             }
         }
+    }
 
+    public static function Participle($keyword)
+    {
+        $client = new Client();
+        $url = "http://zhannei.baidu.com/api/customsearch/keywords";
+        $response = $client->request('GET', $url, [
+            'query' => [
+                'title' => $keyword,
+            ]
+        ]);
+        $res = json_decode($response->getBody()->getContents(), true);
+        $keywords = array_get($res, 'result.res.keyword_list');
+        if (!$keywords) {
+            return $keyword ? [$keyword] : [];
+        }
+        return $keywords;
     }
 }
