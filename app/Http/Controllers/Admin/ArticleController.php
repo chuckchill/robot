@@ -160,8 +160,8 @@ class ArticleController extends BaseController
             "key" => "$(key)",
             "hash" => "$(hash)",
             "fsize" => "$(fsize)",
-            "fname" => "$(fname)",
-            "ftype" => "$(ftype)",
+            "fname" => "$(x:fname)",
+            "ftype" => "$(x:ftype)",
             "article_id" => $articleId,
         ];
         $policy = array(
