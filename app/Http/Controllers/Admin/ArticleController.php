@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Events\ArticleEvent;
+use App\Facades\Logger;
 use App\Models\Common\Article;
 use App\Services\Helper;
 use App\Services\Qiniu;
@@ -160,9 +161,11 @@ class ArticleController extends BaseController
             "hash" => "$(hash)",
             "fsize" => "$(fsize)",
             "fname" => "$(fname)",
+            "ftype" => "$(ftype)",
+            "article_id" => $articleId,
         ];
         $policy = array(
-            'callbackUrl' => route('qiniu.common-callback'),
+            'callbackUrl' => route('qiniu.article-callback'),
             'callbackBody' => json_encode($returnBody),
             'callbackBodyType' => 'application/json',
             'saveKey' => "prad_" . $articleId,
@@ -196,9 +199,8 @@ class ArticleController extends BaseController
     {
         $key = "prad_" . $request->get('articleId');
         $qn = new Qiniu();
-        if ($qn->deleteKey(config('qiniu.bucket.article.bucket'), $key)) {
-            return ["code" => 1, "message" => "旧文件删除失败"];
-        }
+        $result = $qn->deleteKey(config('qiniu.bucket.article.bucket'), $key);
+        Logger::info(json_encode($result), 'article');
         return ["code" => 200, "message" => "删除成功"];
     }
 

@@ -125,11 +125,13 @@
                 if (fileObj.files.length != 1) {
                     alert("请选择上传文件");
                 }
+                var fileExtra = getFileExtra(fileObj.files[0].name);
                 var putExtra = {
                     fname: fileObj.files[0].name,
+                    ftype: fileExtra
                 };
-                if (getFileExtra(putExtra.fname) !== 'prad') {
-                    alert("文件格式不正确");
+                if (fileExtra !== 'prad' && fileExtra !== 'pdf') {
+                    alert("文件格式不正确,支持prad和pdf格式文件");
                     return;
                 }
                 if (!deleteOld()) {

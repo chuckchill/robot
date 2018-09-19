@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use App\Facades\Logger;
 use App\Http\Controllers\Controller;
+use App\Models\Common\Article;
 use App\Models\Common\LiveVideos;
 use App\Models\Common\Videos;
 use App\Services\Qiniu;
@@ -94,6 +95,24 @@ class QiniuController extends Controller
         $video->province = array_get($body, 'province');
         $video->city = array_get($body, 'city');
         $video->save();
+        return ['ret' => 'success'];
+    }
+
+    public function articleCallback(Request $request)
+    {
+        $qn = new Qiniu();
+        $url = route('qiniu.article-callback');
+        if (!$qn->vertifyCallback($url)) {
+            Logger::info('回调鉴权失败', 'qiniu');
+            return ['ret' => 'failed'];
+        }
+        Logger::info("回调实体:" . json_encode($request->all()), 'qiniu');
+        $article = Article::find($request->get('article_id'));
+        if (!$article) {
+            Logger::info("文章不存在", 'qiniu');
+        }
+        $article->file_type = $request->get('ftype');
+        $article->save();
         return ['ret' => 'success'];
     }
 

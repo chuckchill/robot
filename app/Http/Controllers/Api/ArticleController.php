@@ -27,7 +27,7 @@ class ArticleController extends BaseController
     {
         $typeCode = $request->get('type_code');
         $searchName = $request->get('search');
-        $query = Article::select("title", "id", "created_at");
+        $query = Article::select("title", "id", "created_at", "file_type");
         $query->where(['status' => 1]);
         if ($typeCode) {
             $query->where(['type' => $typeCode]);
