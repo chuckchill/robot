@@ -51,7 +51,8 @@ $api->group(['prefix' => '/app'], function ($api) {
         $api->get('test', ['uses' => 'IndexController@index']);
         $api->post('logout', ['uses' => 'AuthController@logout']);//退出登录
 
-        $api->post('edit-user', ['uses' => 'UserController@editUser']);//修改用户信息
+        $api->post('edit-account', ['uses' => 'UserController@editUser']);//修改用户信息
+        $api->post('change-password', ['uses' => 'UserController@changePassword']);//修改密码
         $api->post('set-account', ['uses' => 'UserController@bindAccount']);//设置账户
         $api->post('set-alarmclock', ['uses' => 'UserController@setAlarmclock']);//设置账户
         $api->post('get-alarmclock', ['uses' => 'UserController@getAlarmclock']);//设置账户

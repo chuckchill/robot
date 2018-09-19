@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
+use App\Http\Controllers\Api\Traits\Contacts;
+use App\Http\Controllers\Api\Traits\Device;
 use App\Http\Controllers\Api\Traits\SikerTrait;
 use App\Models\Api\AppusersContacts;
 use App\Models\Api\DeviceBind;
@@ -29,7 +31,7 @@ use Illuminate\Support\Facades\Storage;
  */
 class UserController extends BaseController
 {
-    use SikerTrait;
+    use SikerTrait, Contacts, Device;
     /**
      * @var UserInfo
      */
@@ -73,102 +75,6 @@ class UserController extends BaseController
         return $this->response->array(['code' => 0, 'message' => '设置成功']);
 
     }
-
-    /**绑定设备
-     * @param Request $request
-     * @return mixed
-     * @throws CodeException
-     */
-    public function BindDevice(Request $request)
-    {
-        $sno = $request->get("sno");
-        $role = $request->get("role");
-        $user = \JWTAuth::authenticate();
-        $device = Devices::where(["sno" => $sno])->first();
-        if (!$device) {
-            code_exception('code.login.device_sno_notexist');
-        }
-        $deviceBind = DeviceBind::where(["device_id" => $device->id, 'uid' => $user->id])->first();
-        if ($deviceBind) {
-            code_exception('code.login.device_bindforyou');
-        }
-        $deviceBind = new DeviceBind();
-        $deviceBind->uid = $user->id;
-        $deviceBind->device_id = $device->id;
-        $deviceBind->role = $role;
-        $deviceBind->is_master = 1;
-        $deviceBind->is_enable = 1;
-        $deviceBind->save();
-        return $this->response->array(['code' => 0, 'message' => '绑定成功']);
-    }
-
-
-    /**授权设备
-     * @param Request $request
-     * @return mixed
-     * @throws CodeException
-     */
-    public function authDevice(Request $request)
-    {
-        //code_exception('code.common.api_blockup');
-        $sno = $request->get("sno");
-        $account = $request->get("account");
-        $role = $request->get("name");
-        $user = \JWTAuth::authenticate();
-        $enable = $request->get("enable");
-        $device = Devices::where(["sno" => $sno])->first();
-        if (!$device) {//设备是否存在
-            code_exception('code.login.device_sno_notexist');
-        }
-        $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
-        if (!$userAuth) {//用户是否存在
-            code_exception("code.login.account_notexist");
-        }
-        $deviceBind = DeviceBind::where([
-            "device_id" => $device->id,
-            "uid" => $user->id,
-            "is_master" => 1
-        ])->first();
-        if (!$deviceBind) {//当前用户是否为master
-            code_exception('code.login.device_notmaster_change');
-        }
-        if ($deviceBind->uid == $userAuth->uid) {//master不能修改
-            code_exception('code.login.device_master_connot_change');
-        }
-        $newBind = DeviceBind::where(["device_id" => $device->id, "uid" => $userAuth->uid])->first();
-        if (!$newBind) {
-            $newBind = new DeviceBind();
-        }
-        $newBind->uid = $userAuth->uid;
-        $newBind->device_id = $device->id;
-        $newBind->role = $role;
-        $newBind->is_master = $user->id == $userAuth->uid ? 1 : 0;
-        $newBind->is_enable = $user->id == $userAuth->uid ? 1 : ($enable ? 1 : 0);
-        $newBind->save();
-        return $this->response->array(['code' => 0, 'message' => '授权成功']);
-    }
-
-    /**解绑设备
-     * @param Request $request
-     * @return mixed
-     * @throws CodeException
-     */
-    public function unBindDevice(Request $request)
-    {
-        try {
-            $sno = $request->get("sno");
-            $user = \JWTAuth::authenticate();
-            $device = Devices::where(["sno" => $sno])->first();
-            if (!$device) {
-                code_exception('code.login.device_sno_notexist');
-            }
-            DeviceBind::where(["device_id" => $device->id, "uid" => $user->id])->delete();
-            return $this->response->array(['code' => 0, 'message' => '解绑成功']);
-        } catch (CodeException $e) {
-            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
-        }
-    }
-
 
     /**
      * @param Request $request
@@ -313,7 +219,6 @@ class UserController extends BaseController
      */
     public function getUserDevice(Request $request)
     {
-
         $user = \JWTAuth::authenticate();
         $deviceBind = DeviceBind::select([
             "devices.sno", "devices_bind.is_master",
@@ -321,7 +226,7 @@ class UserController extends BaseController
             "devices_bind.role", "devices.name",
         ])
             ->leftJoin("app_users_auth", 'app_users_auth.uid', '=', 'devices_bind.uid')
-            ->leftJoin("devices", 'devices.id', '=', 'devices_bind.device_id')
+            ->rightJoin("devices", 'devices.id', '=', 'devices_bind.device_id')
             ->where([
                 'app_users_auth.identity_type' => "sys",
                 'devices_bind.uid' => $user->id
@@ -358,77 +263,24 @@ class UserController extends BaseController
         return $this->response->array(['code' => 0, 'message' => '修改成功']);
     }
 
-    /**添加联系人
+    /**修改密码
      * @param Request $request
      * @return mixed
      */
-    public function addContacts(Request $request)
+    public function changePassword(Request $request)
     {
+        $oldPwd = $request->get('old_password');
+        $newPwd = $request->get('new_password');
         $user = \JWTAuth::authenticate();
-        $identifier = $request->get('identifier');
-        $userAuth = UsersAuth::select(['app_users.type', 'app_users.id'])
-            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_auth.uid')
-            ->where(['identifier' => $identifier])
-            ->whereIn('identity_type', ['sys', 'mobile'])
-            ->first();
+        $userAuth = UsersAuth::where(["uid" => $user->id, 'identity_type' => 'sys'])->first();
         if (!$userAuth) {
             code_exception('code.login.account_notexist');
         }
-        if ($userAuth->type == $user->type) {
-            code_exception('code.login.contacts_must_distinct');
+        if (!Hash::check($oldPwd, $userAuth->credential)) {
+            code_exception("code.login.password_invalid");
         }
-        $userLink = AppusersContacts::where([
-            'contract_uid' => $userAuth->id,
-            'uid' => $user->id
-        ])->first();
-        if ($userLink) {
-            code_exception('code.login.contacts_exist');
-        }
-        $userLink = new AppusersContacts();
-        $userLink->uid = $user->id;
-        $userLink->contract_uid = $userAuth->id;
-        $userLink->save();
-        return $this->response->array(['code' => 0, 'message' => '添加成功']);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getContacts()
-    {
-        $user = \JWTAuth::authenticate();
-        $contacts = AppusersContacts::select(['app_users_contacts.contract_uid', 'app_users.nick_name', 'app_users.profile_img'])
-            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.contract_uid')
-            ->where('app_users_contacts.uid', '=', $user->id)
-            ->get();
-        $data = $contacts->map(function ($item, $key) {
-            return [
-                'nick_name' => $item->nick_name,
-                'id' => $item->contract_uid,
-                'profile_img' => UserInfo::getAvator(),
-            ];
-        });
-        return $this->response->array([
-            'code' => 0,
-            'message' => '获取成功',
-            'data' => $data->toArray()
-        ]);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function delContacts(Request $request)
-    {
-        $contact_id = $request->get('contact_id');
-        $user = \JWTAuth::authenticate();
-        AppusersContacts::where([
-            'contract_uid' => $contact_id,
-            'uid' => $user->id,
-        ])->delete();
-        return $this->response->array([
-            'code' => 0,
-            'message' => '删除成功',
-        ]);
+        $userAuth->credential = Hash::make($newPwd);
+        $userAuth->save();
+        return $this->response->array(['code' => 0, 'message' => '修改成功']);
     }
 }
