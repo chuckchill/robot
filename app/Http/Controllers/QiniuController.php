@@ -107,11 +107,12 @@ class QiniuController extends Controller
             return ['ret' => 'failed'];
         }
         Logger::info("回调实体:" . json_encode($request->all()), 'qiniu');
+        $body = $request->all();
         $article = Article::find($request->get('article_id'));
         if (!$article) {
             Logger::info("文章不存在", 'qiniu');
         }
-        $article->file_type = $request->get('ftype');
+        $article->file_type = array_get($body, 'ftype','pdf');
         $article->save();
         return ['ret' => 'success'];
     }
