@@ -123,7 +123,7 @@ class VideosController extends BaseController
         $sickerId = $request->get('sicker_id');
         $sicker = Sicker::find($sickerId);
         if(!$sicker){
-            code_exception();
+            code_exception('code.common.sicker_notnull');
         }
         $deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
         $user = User::find($deviceBind->uid)->first();

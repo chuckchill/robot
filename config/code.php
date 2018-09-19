@@ -61,6 +61,7 @@ return [
     'common' => [
         'api_blockup' => ['code' => 10042, 'message' => '接口已停用'],
         'not_null' => ['code' => 10043, 'message' => '请填写完整信息'],
-        'not_null' => ['code' => 10044, 'message' => '请填写完整信息'],
+        'sicker_notnull' => ['code' => 10044, 'message' => '请选择病人信息'],
+        'item_notexist' => ['code' => 10044, 'message' => '该信息不存在'],
     ]
 ];
