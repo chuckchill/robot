@@ -13,9 +13,9 @@
         </div>
         <div class="col-md-6 text-right">
             @if(Gate::forUser(auth('admin')->user())->check('admin.appuser.create'))
-               {{-- <a href="/admin/appuser/create" class="btn btn-success btn-md">
-                    <i class="fa fa-plus-circle"></i> 添加用户
-                </a>--}}
+                {{-- <a href="/admin/appuser/create" class="btn btn-success btn-md">
+                     <i class="fa fa-plus-circle"></i> 添加用户
+                 </a>--}}
             @endif
         </div>
     </div>
@@ -45,6 +45,7 @@
                             <th class="hidden-md">生日</th>
                             <th class="hidden-md">账号</th>
                             <th class="hidden-md">手机</th>
+                            <th class="hidden-md">用户类型</th>
                             <th class="hidden-md">角色创建日期</th>
                             <th class="hidden-md">角色修改日期</th>
                             <th data-sortable="false">操作</th>
@@ -131,6 +132,7 @@
                                 {"data": "birthday"},
                                 {"data": "account"},
                                 {"data": "mobile"},
+                                {"data": "type"},
                                 {"data": "created_at"},
                                 {"data": "updated_at"},
                                 {"data": "action"}
@@ -138,22 +140,26 @@
                             columnDefs: [
                                 {
                                     'targets': -1, "render": function (data, type, row) {
-                                    var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.user.edit') ? 1 : 0}};
-                                    var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.user.destroy') ? 1 :0}};
-                                    var str = '';
+                                        var row_edit = {{Gate::forUser(auth('admin')->user())->check('admin.user.edit') ? 1 : 0}};
+                                        var row_delete = {{Gate::forUser(auth('admin')->user())->check('admin.user.destroy') ? 1 :0}};
+                                        var str = '';
 
-                                    //编辑
-                                    if (row_edit) {
-                                        //str += '<a style="margin:3px;" href="/admin/appuser/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                        //编辑
+                                        if (row_edit) {
+                                            //str += '<a style="margin:3px;" href="/admin/appuser/' + row['id'] + '/edit" class="X-Small btn-xs text-success "><i class="fa fa-edit"></i> 编辑</a>';
+                                        }
+
+                                        //注销
+                                        if (row_delete) {
+                                            str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 注销</a>';
+                                        }
+
+                                        return str;
                                     }
-
-                                    //注销
-                                    if (row_delete) {
-                                        str += '<a style="margin:3px;" href="#" attr="' + row['id'] + '" class="delBtn X-Small btn-xs text-danger"><i class="fa fa-times-circle"></i> 注销</a>';
+                                }, {
+                                    'targets': -4, "render": function (data, type, row) {
+                                        return data == 'sicker' ? "病人" : "医生";
                                     }
-
-                                    return str;
-                                }
                                 }
                             ]
                         });
