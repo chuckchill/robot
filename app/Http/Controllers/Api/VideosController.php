@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Facades\Logger;
 use App\Models\Api\DeviceBind;
 use App\Models\Api\User;
 use App\Models\Common\LiveVideos;
@@ -44,6 +45,7 @@ class VideosController extends BaseController
                 $query->where('name', 'like', '%' . $name . '%');
             }
         }
+        Logger::info($query->toSql(),'sql');
         $data = $query->paginate(15)->toArray();
         $curPage = $data['current_page'];
         $items = $data['data'];
