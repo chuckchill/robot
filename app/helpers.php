@@ -230,9 +230,8 @@ if (!function_exists('scws')) {
         }
         $scws = scws_new();
         $scws->set_charset('utf8'); //指定编码
-        $scws->set_dict('/usr/local/scws/etc/dict.utf8.xdb');//指定词典路径，可以是绝对路径，也可以
-        $text = "精神疾的康复指导";
-        $scws->send_text($text);
+        $scws->set_dict('/app/scws/etc/dict.utf8.xdb');//指定词典路径，可以是绝对路径，也可以
+        $scws->send_text($str);
         $result = [];
         while ($tmp = $scws->get_result()) {
             foreach ($tmp as $item) {
