@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Api\DeviceBind;
 use App\Models\Api\User;
 use App\Models\Common\LiveVideos;
+use App\Models\Common\Sicker;
 use App\Models\Common\Videos;
 use App\Services\Helper;
 use App\Services\ModelService\MediaType;
@@ -119,6 +120,11 @@ class VideosController extends BaseController
     {
         $qn = new Qiniu();
         $device = $request->get('device');
+        $sickerId = $request->get('sicker_id');
+        $sicker = Sicker::find($sickerId);
+        if(!$sicker){
+            code_exception();
+        }
         $deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
         $user = User::find($deviceBind->uid)->first();
         $areaCode = Helper::getUserArea($user);

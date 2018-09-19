@@ -61,5 +61,6 @@ return [
     'common' => [
         'api_blockup' => ['code' => 10042, 'message' => '接口已停用'],
         'not_null' => ['code' => 10043, 'message' => '请填写完整信息'],
+        'not_null' => ['code' => 10044, 'message' => '请填写完整信息'],
     ]
 ];

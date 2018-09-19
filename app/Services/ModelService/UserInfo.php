@@ -29,6 +29,7 @@ class UserInfo
             'birthday' => array_get($user, "birthday", ""),
             'province' => array_get($user, "province", ""),
             'city' => array_get($user, "city", ""),
+            'type' => array_get($user, "type"),
             'profile_img' => $user->profile_img ? array_get($user, "profile_img") : self::getAvator(),
         ];
     }

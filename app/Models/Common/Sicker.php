@@ -9,7 +9,20 @@
 namespace App\Models\Common;
 
 
-class Sicker
-{
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Sicker
+ * @package App\Models\Common
+ */
+class Sicker extends Model
+{
+    /**
+     * @var string
+     */
+    protected $table = 'sicker';
+    /**
+     * @var string
+     */
+    protected $dateFormat = 'Y-m-d H:i:s';
 }
