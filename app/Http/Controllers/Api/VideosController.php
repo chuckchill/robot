@@ -33,7 +33,7 @@ class VideosController extends BaseController
     public function getVideos(Request $request)
     {
         $typeCode = $request->get('type_code');
-        $searchName = $request->get('search');
+        $searchName = $request->get('name');
         $names = scws($searchName);
         $query = Videos::select("name", "key", "created_at");
         if ($typeCode) {
