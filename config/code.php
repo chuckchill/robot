@@ -63,5 +63,6 @@ return [
         'not_null' => ['code' => 10043, 'message' => '请填写完整信息'],
         'sicker_notnull' => ['code' => 10044, 'message' => '请选择病人信息'],
         'item_notexist' => ['code' => 10044, 'message' => '该信息不存在'],
+        'idcard_invalid' => ['code' => 10044, 'message' => '身份证格式错误'],
     ]
 ];

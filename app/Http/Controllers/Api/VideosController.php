@@ -125,9 +125,9 @@ class VideosController extends BaseController
         if(!$sicker){
             code_exception('code.common.sicker_notnull');
         }
-        $deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
-        $user = User::find($deviceBind->uid)->first();
-        $areaCode = Helper::getUserArea($user);
+        //$deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
+        //$user = User::find($deviceBind->uid)->first();
+        //$areaCode = Helper::getUserArea($user);
         $returnBody = [
             "key" => "$(key)",
             "hash" => "$(hash)",
@@ -135,9 +135,16 @@ class VideosController extends BaseController
             "fname" => "$(fname)",
             "name" => "$(x:name)",
             "type" => "$(x:type)",
-            "uid" => "{$user->id}",
-            "province" => array_get($areaCode, "province"),
-            "city" => array_get($areaCode, "city"),
+            "device_id" => "{$device->id}",
+            "sicker_id" => $sickerId,
+            "province" => $sicker->province,
+            "city" => $sicker->city,
+            "country" => $sicker->country,
+            "sicker_name" => $sicker->sicker_name,
+            "sicker_idcard" => $sicker->sicker_idcard,
+            "doctor_name" => $sicker->doctor_name,
+            "doctor_no" => $sicker->doctor_no,
+            "sicker_type" => $sicker->type,
         ];
         $policy = array(
             'callbackUrl' => route('qiniu.user-upload-callback'),

@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api\Traits;
 
 use App\Models\Common\Sicker;
+use App\Services\Helper;
 use App\Services\Validator;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,16 @@ use Illuminate\Http\Request;
  */
 trait SikerTrait
 {
+    public function getSicker(Request $request)
+    {
+        $device = $request->get('device');
+        $sicker = Sicker::where(['device_id' => $device->id])->get();
+        return $this->response->array([
+            'code' => 0,
+            'message' => '获取成功',
+            'data' => $sicker->toArray()
+        ]);
+    }
 
     /**添加病人
      * @param Request $request
@@ -26,6 +37,10 @@ trait SikerTrait
     {
         $sicker = new Sicker();
         $this->saveSicker($sicker, $request);
+        return $this->response->array([
+            'code' => 0,
+            'message' => '添加成功',
+        ]);
     }
 
     /**修改病人
@@ -38,6 +53,10 @@ trait SikerTrait
             code_exception('code.common.item_notexist');
         }
         $this->saveSicker($sicker, $request);
+        return $this->response->array([
+            'code' => 0,
+            'message' => '修改成功',
+        ]);
     }
 
     /**删除病人
@@ -46,7 +65,12 @@ trait SikerTrait
      */
     public function delSicker(Request $request)
     {
-        Sicker::where(['id' => $request->get('sicker_id')])->delete();
+        $device = $request->get('device');
+        $sicker = Sicker::where(['id' => $request->get('sicker_id'), 'device_id' => $device->id])->first();
+        if ($sicker) {
+            $sicker->status = 2;
+            $sicker->save();
+        }
         return $this->response->array([
             'code' => 0,
             'message' => '删除成功',
@@ -67,11 +91,16 @@ trait SikerTrait
         $doctor_name = $request->get('doctor_name');
         $doctor_no = $request->get('doctor_no');
         $type = $request->get('type');
+        $device = $request->get('device');
+        if (!Helper::validIdcard($sicker_idcard)) {
+            code_exception('code.common.idcard_invalid');
+        }
         if (!$province || !$city || !$country || !$sicker_name ||
-            !$doctor_name || !$doctor_no || !$type || !$sicker_idcard) {
+            !$doctor_name || !$doctor_no || !$type) {
             code_exception('code.common.not_null');
         }
         $sicker->province = $province;
+        $sicker->device_id = $device->id;
         $sicker->city = $city;
         $sicker->country = $country;
         $sicker->sicker_name = $sicker_name;

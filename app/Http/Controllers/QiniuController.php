@@ -94,6 +94,14 @@ class QiniuController extends Controller
         $video->status = (int)$status;
         $video->province = array_get($body, 'province');
         $video->city = array_get($body, 'city');
+        $video->country = array_get($body, 'country');
+        $video->sicker_name = array_get($body, 'sicker_name');
+        $video->sicker_idcard = array_get($body, 'sicker_idcard');
+        $video->docker_name = array_get($body, 'docker_name');
+        $video->docker_no = array_get($body, 'docker_no');
+        $video->sicker_type = array_get($body, 'sicker_type');
+        $video->sicker_id = array_get($body, 'sicker_id');
+        $video->device_id = array_get($body, 'device_id');
         $video->save();
         return ['ret' => 'success'];
     }

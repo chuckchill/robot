@@ -27,6 +27,8 @@ class MediaTypeChange extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('media_type', function ($table) {
+            $table->dropColumn('type');
+        });
     }
 }

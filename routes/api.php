@@ -18,9 +18,10 @@ $api->group(['prefix' => '/device',], function ($api) {
         $api->post('get-live-videos', ['uses' => 'VideosController@getLiveVideos']);//获取视频地址
         $api->post('get-media-type', ['uses' => 'AppConfigController@getMediaType']);//获取媒体分类
 
-        $api->post('add-sicker', ['uses' => 'UserController@addSicker']);//获取媒体分类
-        $api->post('edit-sicker', ['uses' => 'UserController@editSicker']);//获取媒体分类
-        $api->post('del-sicker', ['uses' => 'UserController@delSicker']);//获取媒体分类
+        $api->post('add-sicker', ['uses' => 'UserController@addSicker']);//添加病人
+        $api->post('edit-sicker', ['uses' => 'UserController@editSicker']);//修改病人
+        $api->post('del-sicker', ['uses' => 'UserController@delSicker']);//删除病人
+        $api->post('get-sicker', ['uses' => 'UserController@getSicker']);//获取病人
     });
 });
 /*

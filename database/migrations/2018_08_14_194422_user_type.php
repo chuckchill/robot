@@ -25,6 +25,8 @@ class UserType extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('app_users', function ($table) {
+            $table->dropColumn('type');
+        });
     }
 }

@@ -15,6 +15,7 @@ class Sicker extends Migration
     {
         Schema::create('sicker', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('device_id')->comment('设备id');
             $table->string('province')->comment('省');
             $table->string('city')->comment('市');
             $table->string('country')->comment('区');

@@ -13,7 +13,6 @@ class AddArticleType extends Migration
      */
     public function up()
     {
-
         Schema::table('article', function (Blueprint $table) {
             $table->string('file_type')->after('type')->comment('文件类型')->default('pdf');
         });
@@ -26,6 +25,8 @@ class AddArticleType extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('article', function ($table) {
+            $table->dropColumn('file_type');
+        });
     }
 }
