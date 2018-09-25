@@ -212,9 +212,9 @@ if (!function_exists('code_exception')) {
     /**
      * @param $codes
      */
-    function code_exception($codes)
+    function code_exception($codes, $content = '')
     {
-        app('App\Services\Helper')->codeException($codes);
+        app('App\Services\Helper')->codeException($codes, $content);
     }
 }
 if (!function_exists('scws')) {

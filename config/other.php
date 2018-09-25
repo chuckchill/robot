@@ -12,5 +12,6 @@ return [
     'wx' => [
         "app_id" => env("WX_OPEN_APPID", "wx465d7ab2c2cca298"),
         "app_secret" => env("WX_OPEN_SECRET", "a3ba292292852255f8d4486d967d8db6")
-    ]
+    ],
+    'feedback_timelimit' => env("FEEDBACK_TIMELIMIT", 3)
 ];

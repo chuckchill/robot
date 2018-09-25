@@ -120,6 +120,9 @@ Route::group(['middleware' => ['auth:admin', 'menu', 'authAdmin']], function () 
             'show' => 'admin.devices.show',
         ]
     ]);
+    //操作日志查询
+    Route::get('feedback/index', ['as' => 'admin.feedback.index', 'uses' => 'FeedbackController@index']);  //用户反馈
+    Route::post('feedback/index', ['as' => 'admin.feedback.index', 'uses' => 'FeedbackController@index']);  //用户反馈
 });
 
 Route::get('/', function () {

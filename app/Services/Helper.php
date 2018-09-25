@@ -97,9 +97,13 @@ class Helper
      * @param $codes
      * @throws CodeException
      */
-    public function codeException($postfix)
+    public function codeException($postfix, $content = '')
     {
-        throw new CodeException(config($postfix));
+        $codes = config($postfix);
+        if ($content) {
+            $codes['message'] = $content;
+        }
+        throw new CodeException($codes);
     }
 
     /**

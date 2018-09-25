@@ -18,6 +18,7 @@ use App\Models\Api\AppusersContacts;
 use App\Models\Api\DeviceBind;
 use App\Models\Api\Devices;
 use App\Models\Api\UsersAuth;
+use App\Models\Common\FeedBack;
 use App\Services\Helper;
 use App\Services\ModelService\UserInfo;
 use Carbon\Carbon;
@@ -282,5 +283,30 @@ class UserController extends BaseController
         $userAuth->credential = Hash::make($newPwd);
         $userAuth->save();
         return $this->response->array(['code' => 0, 'message' => '修改成功']);
+    }
+
+
+    /**用户反馈
+     * @param Request $request
+     * @return mixed
+     */
+    public function addFeedback(Request $request)
+    {
+        $user = \JWTAuth::authenticate();
+        $content = $request->get('content');
+        $len = mb_strlen($content);
+        if ($len > 200 || $len < 10) {
+            code_exception('code.common.lenlimit', '反馈信息长度为10-200个字符串');
+        }
+        $today = Carbon::today()->getTimestamp();
+        $time = FeedBack::where(['uid' => $user->id])->where('created_at', '>', $today)->get();
+        if ($time->count() >= config('other.feedback_timelimit')) {
+            code_exception('code.common.timelimit', '每天只能提交3次反馈信息');
+        }
+        $feeback = new FeedBack();
+        $feeback->uid = $user->id;
+        $feeback->content = $content;
+        $feeback->save();
+        return $this->response->array(['code' => 0, 'message' => '提交成功']);
     }
 }

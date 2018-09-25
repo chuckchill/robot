@@ -31,8 +31,6 @@
                             @if($item['level']==0)
                                 <li class="list-group-item list-group-item-success">
                                     {{$item['name']}}
-                                    <a href="/admin/media-type/{{$item['id']}}/edit"
-                                       class="pull-right label-info label">修改</a>
                                 </li>
                             @else
                                 <li style="padding-left: {{$item['level']*40}}px"

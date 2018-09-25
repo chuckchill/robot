@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title','日志管理')
+@section('title','用户反馈')
 
 @section('pageHeader','控制面板')
 
@@ -33,9 +33,9 @@
                         <tr>
                             <th data-sortable="false" class="hidden-sm"></th>
                             <th class="hidden-sm">用户名</th>
-                            <th class="hidden-sm">类型</th>
-                            <th class="hidden-md">内容</th>
-                            <th class="hidden-md">时间</th>
+                            <th class="hidden-sm">内容</th>
+                            <th class="hidden-md">添加时间</th>
+                            <th class="hidden-md">修改时间·</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -79,7 +79,7 @@
                 order: [[1, "desc"]],
                 serverSide: true,
                 ajax: {
-                    url: '/admin/log/index',
+                    url: '/admin/feedback/index',
                     type: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -88,26 +88,14 @@
                 "columns": [
                     {"data": "id"},
                     {"data": "name"},
-                    {"data": "type"},
-                    {"data": "remarks"},
+                    {"data": "content"},
                     {"data": "created_at"},
+                    {"data": "updated_at"},
                 ],
                 columnDefs: [
                     {
                         'targets': 2, "render": function (data, type, row) {
-                        switch (data) {
-                            case '1':
-                                return "新增";
-                                break;
-                            case '2':
-                                return "删除";
-                                break;
-                            case '3':
-                                return "更新";
-                                break;
-                            default:
-                                return "未知操作";
-                        }
+                        return data
                     }
                     }
                 ]
