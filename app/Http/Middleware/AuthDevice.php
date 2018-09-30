@@ -29,10 +29,10 @@ class AuthDevice
         if (!$device) {
             code_exception('code.login.device_sno_notexist');
         }
-        $deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
+        /*$deviceBind = DeviceBind::where(['device_id' => $device->id, 'is_master' => 1])->first();
         if (!$deviceBind) {
             code_exception('code.login.device_unbind');
-        }
+        }*/
         $request->attributes->add([
             'device' => $device,
             'deviceBind' => $deviceBind,
