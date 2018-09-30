@@ -29,3 +29,8 @@ Route::any('/qiniu/backend-video-callback', ['as' => 'qiniu.backend_video_callba
 Route::any('/qiniu/user-upload-callback', ['as' => 'qiniu.user-upload-callback', 'uses' => 'QiniuController@userUploadCallback']);//七牛上传回调
 Route::any('/qiniu/common-callback', ['as' => 'qiniu.common-callback', 'uses' => 'QiniuController@commonCallback']);//七牛上传回调
 Route::any('/qiniu/article-callback', ['as' => 'qiniu.article-callback', 'uses' => 'QiniuController@articleCallback']);//七牛上传回调
+
+
+Route::group(['middleware' => [], 'prefix' => 'webview'], function () {
+    Route::get('/entry', 'EvaluateController@entry');
+});
