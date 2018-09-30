@@ -32,5 +32,5 @@ Route::any('/qiniu/article-callback', ['as' => 'qiniu.article-callback', 'uses' 
 
 
 Route::group(['middleware' => [], 'prefix' => 'webview'], function () {
-    Route::get('/entry', 'EvaluateController@entry');
+    Route::get('/entry', 'Api\EvaluateController@entry');
 });
