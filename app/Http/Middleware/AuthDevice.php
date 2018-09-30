@@ -35,7 +35,7 @@ class AuthDevice
         }*/
         $request->attributes->add([
             'device' => $device,
-            'deviceBind' => $deviceBind,
+            //'deviceBind' => $deviceBind,
         ]);
         return $next($request);
     }
