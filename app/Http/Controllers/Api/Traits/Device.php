@@ -45,6 +45,26 @@ trait Device
         return $this->response->array(['code' => 0, 'message' => '绑定成功']);
     }
 
+    /**解绑设备
+     * @param Request $request
+     * @return mixed
+     * @throws CodeException
+     */
+    public function unBindDevice(Request $request)
+    {
+        try {
+            $sno = $request->get("sno");
+            $user = \JWTAuth::authenticate();
+            $device = Devices::where(["sno" => $sno])->first();
+            if (!$device) {
+                code_exception('code.login.device_sno_notexist');
+            }
+            DeviceBind::where(["device_id" => $device->id, "uid" => $user->id])->delete();
+            return $this->response->array(['code' => 0, 'message' => '解绑成功']);
+        } catch (CodeException $e) {
+            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+        }
+    }
 
     /**授权设备
      * @param Request $request
@@ -89,27 +109,6 @@ trait Device
         $newBind->is_enable = $user->id == $userAuth->uid ? 1 : ($enable ? 1 : 0);
         $newBind->save();
         return $this->response->array(['code' => 0, 'message' => '授权成功']);
-    }
-
-    /**解绑设备
-     * @param Request $request
-     * @return mixed
-     * @throws CodeException
-     */
-    public function unBindDevice(Request $request)
-    {
-        try {
-            $sno = $request->get("sno");
-            $user = \JWTAuth::authenticate();
-            $device = Devices::where(["sno" => $sno])->first();
-            if (!$device) {
-                code_exception('code.login.device_sno_notexist');
-            }
-            DeviceBind::where(["device_id" => $device->id, "uid" => $user->id])->delete();
-            return $this->response->array(['code' => 0, 'message' => '解绑成功']);
-        } catch (CodeException $e) {
-            return $this->response->array(['code' => $e->getCode(), 'message' => $e->getMessage()]);
-        }
     }
 
 }
