@@ -11,9 +11,11 @@ namespace App\Services;
 
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
+use App\Models\Common\Sicker;
 use \Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class Helper
@@ -253,5 +255,28 @@ class Helper
             return $keyword ? [$keyword] : [];
         }
         return $keywords;
+    }
+
+    public static function getEvaluationTemp(Sicker $sicker)
+    {
+        $temp = file_get_contents(storage_path("/system/evaluation.temp"));
+        return sprintf($temp, $sicker->sicker_name, self::getSex($sicker->sicker_idcard), self::getBirthday($sicker->sicker_idcard));
+    }
+
+    public static function getSex($idcard)
+    {
+        if (empty($idcard)) return null;
+        $sexint = (int)substr($idcard, 16, 1);
+        return $sexint % 2 === 0 ? '女' : '男';
+    }
+
+    public static function getBirthday($idcard)
+    {
+        if (empty($idcard)) return null;
+        $bir = substr($idcard, 6, 8);
+        $year = (int)substr($bir, 0, 4);
+        $month = (int)substr($bir, 4, 2);
+        $day = (int)substr($bir, 6, 2);
+        return $year . "-" . $month . "-" . $day;
     }
 }
