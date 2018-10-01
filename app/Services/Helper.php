@@ -243,18 +243,30 @@ class Helper
     public static function Participle($keyword)
     {
         $client = new Client();
-        $url = "http://zhannei.baidu.com/api/customsearch/keywords";
-        $response = $client->request('GET', $url, [
-            'query' => [
-                'title' => $keyword,
+        $key = 'iM0tRbmsR1YZ4XVcTxgSuUTAa23yPvZgKJjwQGnJoBwD27RiULzAK4ae8vuJJyDW';
+        $url = "http://api01.bitspaceman.com:8000/nlp/segment/bitspaceman?apikey={$key}";
+        $response = $client->request('POST', $url, [
+            'headers' => [
+                'Accept-Encoding' => 'gzip'
+            ],
+            'form_params' => [
+                'text' => $keyword,
+                'industry' => '',
             ]
         ]);
         $res = json_decode($response->getBody()->getContents(), true);
-        $keywords = array_get($res, 'result.res.keyword_list');
-        if (!$keywords) {
+        $keywords = array_get($res, 'wordList', []);
+        $result = [];
+        foreach ($keywords as $keyword) {
+            $word = array_get($keyword, 'word');
+            if (strlen($word) > 1) {
+                $result[] = $word;
+            }
+        }
+        if (!$result) {
             return $keyword ? [$keyword] : [];
         }
-        return $keywords;
+        return $result;
     }
 
     public static function getEvaluationTemp(Sicker $sicker)
