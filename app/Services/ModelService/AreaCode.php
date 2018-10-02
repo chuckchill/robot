@@ -16,9 +16,9 @@ class AreaCode
     public static function getCityTree()
     {
         $areaCode = Cache::store('file')->rememberForever('city_code', function () {
-            return \App\Models\Common\AreaCode::whereIn('arealevel', [1, 2])->get();
+            return \App\Models\Common\AreaCode::whereIn('arealevel', [1, 2, 3])->get();
         });
-        $result=[];
+        $result = [];
         foreach ($areaCode as $key => $area) {
             if ($area->arealevel == 1) {
                 $result[$area->code]["code"] = $area->code;
