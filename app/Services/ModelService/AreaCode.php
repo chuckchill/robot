@@ -9,6 +9,7 @@
 namespace App\Services\ModelService;
 
 
+use App\Services\PHPTreeClass;
 use Illuminate\Support\Facades\Cache;
 
 class AreaCode
@@ -19,6 +20,7 @@ class AreaCode
             return \App\Models\Common\AreaCode::whereIn('arealevel', [1, 2, 3])->get();
         });
         $result = [];
+        return PHPTreeClass::makeAreaTree($areaCode->toArray());
         foreach ($areaCode as $key => $area) {
             if ($area->arealevel == 1) {
                 $result[$area->code]["code"] = $area->code;

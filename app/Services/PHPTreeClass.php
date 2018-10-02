@@ -42,7 +42,7 @@ class PHPTreeClass
      */
     public static function makeTree($data, $options = array())
     {
-        if(!$data){
+        if (!$data) {
             return [];
         }
         $dataset = self::buildData($data, $options);
@@ -53,7 +53,7 @@ class PHPTreeClass
     /* 生成线性结构, 便于HTML输出, 参数同上 */
     public static function makeTreeForHtml($data, $options = array())
     {
-        if(!$data){
+        if (!$data) {
             return [];
         }
         $dataset = self::buildData($data, $options);
@@ -108,6 +108,19 @@ class PHPTreeClass
                 $r = self::$result;
             }
         }
+        return $r;
+    }
+
+    public static function makeAreaTree($data)
+    {
+        if (!$data) {
+            return [];
+        }
+        $dataset = self::buildData($data, [
+            'primary_key'=>'code',
+            'parent_key'=>'parent_code'
+        ]);
+        $r = self::makeTreeCore('000000', $dataset, 'normal');
         return $r;
     }
 }
