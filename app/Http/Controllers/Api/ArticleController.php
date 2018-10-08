@@ -36,7 +36,7 @@ class ArticleController extends BaseController
         }
         if (count($searchName) > 0) {
             foreach ($searchName as $name) {
-                $query->orWhere('name', 'like', '%' . $name . '%');
+                $query->orWhere('title', 'like', '%' . $name . '%');
             }
         }
         $data = $query->paginate(15)->toArray();
