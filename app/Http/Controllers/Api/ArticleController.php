@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Facades\Logger;
 use App\Models\Common\Article;
 use App\Models\Common\ArticleContent;
 use App\Services\Helper;
@@ -29,6 +30,7 @@ class ArticleController extends BaseController
         $typeCode = $request->get('type_code');
         $searchName = $request->get('name');
         $searchName = Helper::Participle($searchName);
+        Logger::info(json_encode($searchName,JSON_UNESCAPED_UNICODE),'particle');
         $query = Article::select("title", "id", "created_at", "file_type");
         $query->where(['status' => 1]);
         if ($typeCode) {
