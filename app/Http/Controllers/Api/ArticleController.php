@@ -29,6 +29,7 @@ class ArticleController extends BaseController
     {
         $typeCode = $request->get('type_code');
         $searchName = $request->get('name');
+        $paginate = $request->get('paginate', 'yes');
         $searchName = Helper::Participle($searchName);
         $query = Article::select("title", "id", "created_at", "file_type");
         $query->where(['status' => 1]);
@@ -42,11 +43,17 @@ class ArticleController extends BaseController
                 }
             });
         }
-        $data = $query->paginate(15)->toArray();
+        if ($paginate == 'no') {
+            $data['data'] = $query->get()->toArray();
+            $curPage = 1;
+        } else {
+            $data = $query->paginate(15)->toArray();
+            $curPage = $data['current_page'];
+        }
         /*foreach ($data['data'] as $key => $items) {
             $data['data'][$key]['url']=\App\Services\ModelService\Article::getArticleSrc($items['id']);
         }*/
-        $curPage = $data['current_page'];
+
         $items = $data['data'];
         return $this->response->array([
             'code' => 0,

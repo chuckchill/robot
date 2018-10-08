@@ -35,6 +35,7 @@ class VideosController extends BaseController
     {
         $typeCode = $request->get('type_code');
         $searchName = $request->get('name');
+        $paginate = $request->get('paginate', 'yes');
         $names = Helper::Participle($searchName);
         $query = Videos::select("name", "key", "created_at");
         if ($typeCode) {
@@ -47,8 +48,13 @@ class VideosController extends BaseController
                 }
             });
         }
-        $data = $query->paginate(15)->toArray();
-        $curPage = $data['current_page'];
+        if ($paginate == 'no') {
+            $data['data'] = $query->get()->toArray();
+            $curPage = 1;
+        } else {
+            $data = $query->paginate(15)->toArray();
+            $curPage = $data['current_page'];
+        }
         $items = $data['data'];
         foreach ($items as $key => $item) {
             $items[$key]['thumb'] = Helper::getVideoThumb($item['key']);
