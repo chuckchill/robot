@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Evaluate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,5 +65,6 @@ class Kernel extends HttpKernel
         'authAdmin' => \App\Http\Middleware\AuthenticateAdmin::class,
         'menu'=>\App\Http\Middleware\GetMenu::class,
         'api.device' => \App\Http\Middleware\AuthDevice::class,
+        'evaluate' => Evaluate::class,
     ];
 }

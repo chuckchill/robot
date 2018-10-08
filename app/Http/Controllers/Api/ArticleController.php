@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Common\Article;
 use App\Models\Common\ArticleContent;
+use App\Services\Helper;
 use Illuminate\Http\Request;
 
 /**
@@ -26,14 +27,17 @@ class ArticleController extends BaseController
     public function getArticle(Request $request)
     {
         $typeCode = $request->get('type_code');
-        $searchName = $request->get('search');
+        $searchName = $request->get('name');
+        $searchName = Helper::Participle($searchName);
         $query = Article::select("title", "id", "created_at", "file_type");
         $query->where(['status' => 1]);
         if ($typeCode) {
             $query->where(['type' => $typeCode]);
         }
-        if ($searchName) {
-            $query->where('title', 'like', $searchName . '%');
+        if (count($searchName) > 0) {
+            foreach ($searchName as $name) {
+                $query->orWhere('name', 'like', '%' . $name . '%');
+            }
         }
         $data = $query->paginate(15)->toArray();
         /*foreach ($data['data'] as $key => $items) {

@@ -11,9 +11,11 @@ namespace App\Services;
 
 use App\Exceptions\CodeException;
 use App\Facades\Logger;
+use App\Models\Common\Sicker;
 use \Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class Helper
@@ -241,17 +243,52 @@ class Helper
     public static function Participle($keyword)
     {
         $client = new Client();
-        $url = "http://zhannei.baidu.com/api/customsearch/keywords";
-        $response = $client->request('GET', $url, [
-            'query' => [
-                'title' => $keyword,
+        $key = 'iM0tRbmsR1YZ4XVcTxgSuUTAa23yPvZgKJjwQGnJoBwD27RiULzAK4ae8vuJJyDW';
+        $url = "http://api01.bitspaceman.com:8000/nlp/segment/bitspaceman?apikey={$key}";
+        $response = $client->request('POST', $url, [
+            'headers' => [
+                'Accept-Encoding' => 'gzip'
+            ],
+            'form_params' => [
+                'text' => $keyword,
+                'industry' => '',
             ]
         ]);
         $res = json_decode($response->getBody()->getContents(), true);
-        $keywords = array_get($res, 'result.res.keyword_list');
-        if (!$keywords) {
+        $keywords = array_get($res, 'wordList', []);
+        $result = [];
+        foreach ($keywords as $keyword) {
+            $word = array_get($keyword, 'word');
+            if (strlen($word) > 1) {
+                $result[] = $word;
+            }
+        }
+        if (!$result) {
             return $keyword ? [$keyword] : [];
         }
-        return $keywords;
+        return $result;
+    }
+
+    public static function getEvaluationTemp(Sicker $sicker)
+    {
+        $temp = file_get_contents(storage_path("/system/evaluation.temp"));
+        return sprintf($temp, $sicker->sicker_name, self::getSex($sicker->sicker_idcard), self::getBirthday($sicker->sicker_idcard));
+    }
+
+    public static function getSex($idcard)
+    {
+        if (empty($idcard)) return null;
+        $sexint = (int)substr($idcard, 16, 1);
+        return $sexint % 2 === 0 ? '女' : '男';
+    }
+
+    public static function getBirthday($idcard)
+    {
+        if (empty($idcard)) return null;
+        $bir = substr($idcard, 6, 8);
+        $year = (int)substr($bir, 0, 4);
+        $month = (int)substr($bir, 4, 2);
+        $day = (int)substr($bir, 6, 2);
+        return $year . "-" . $month . "-" . $day;
     }
 }
