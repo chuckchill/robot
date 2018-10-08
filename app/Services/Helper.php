@@ -242,6 +242,7 @@ class Helper
 
     public static function Participle($keyword)
     {
+        return scws($keyword);
         $client = new Client();
         $key = 'iM0tRbmsR1YZ4XVcTxgSuUTAa23yPvZgKJjwQGnJoBwD27RiULzAK4ae8vuJJyDW';
         $url = "http://api01.bitspaceman.com:8000/nlp/segment/bitspaceman?apikey={$key}";
