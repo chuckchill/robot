@@ -30,16 +30,17 @@ class ArticleController extends BaseController
         $typeCode = $request->get('type_code');
         $searchName = $request->get('name');
         $searchName = Helper::Participle($searchName);
-        Logger::info(json_encode($searchName,JSON_UNESCAPED_UNICODE),'particle');
         $query = Article::select("title", "id", "created_at", "file_type");
         $query->where(['status' => 1]);
         if ($typeCode) {
             $query->where(['type' => $typeCode]);
         }
         if (count($searchName) > 0) {
-            foreach ($searchName as $name) {
-                $query->orWhere('title', 'like', '%' . $name . '%');
-            }
+            $query->where(function ($query) use ($searchName) {
+                foreach ($searchName as $name) {
+                    $query->orWhere('title', 'like', '%' . $name . '%');
+                }
+            });
         }
         $data = $query->paginate(15)->toArray();
         /*foreach ($data['data'] as $key => $items) {
