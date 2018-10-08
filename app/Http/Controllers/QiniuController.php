@@ -82,8 +82,8 @@ class QiniuController extends Controller
         $type = array_get($body, 'type', '100');
         $status = array_get($body, 'status');
         $name = $name ? pathinfo($name) : pathinfo($fname);
-
-        $video = LiveVideos::where(['uid' => $uid, 'key' => $key])->first();
+        $device_id = array_get($body, 'device_id');
+        $video = LiveVideos::where(['device_id' => $device_id, 'key' => $key])->first();
         if (!$video) {
             $video = new LiveVideos();
         }
@@ -101,7 +101,7 @@ class QiniuController extends Controller
         $video->docker_no = array_get($body, 'docker_no');
         $video->sicker_type = array_get($body, 'sicker_type');
         $video->sicker_id = array_get($body, 'sicker_id');
-        $video->device_id = array_get($body, 'device_id');
+        $video->device_id = $device_id;
         $video->save();
         return ['ret' => 'success'];
     }
@@ -120,7 +120,7 @@ class QiniuController extends Controller
         if (!$article) {
             Logger::info("文章不存在", 'qiniu');
         }
-        $article->file_type = array_get($body, 'ftype','pdf');
+        $article->file_type = array_get($body, 'ftype', 'pdf');
         $article->save();
         return ['ret' => 'success'];
     }
