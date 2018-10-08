@@ -140,7 +140,8 @@ class DevicesController extends BaseController
     {
         $device = Devices::find($key);
         if (!$device) return redirect()->back()->withErrors("找不到该设备!");
-        $deviceBind = DeviceBind::where(['device_id' => $device->id])
+        $deviceBind = DeviceBind::select('devices_bind.*')
+            ->where(['device_id' => $device->id])
             ->leftJoin("app_users_auth", 'app_users_auth.uid', '=', 'devices_bind.uid')
             ->where(['app_users_auth.identity_type' => "sys"])
             ->get();
