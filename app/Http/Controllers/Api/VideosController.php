@@ -41,9 +41,11 @@ class VideosController extends BaseController
             $query->where(['type' => $typeCode]);
         }
         if (count($names) > 0) {
-            foreach ($names as $name) {
-                $query->orWhere('name', 'like', '%' . $name . '%');
-            }
+            $query->where(function ($query) use ($names) {
+                foreach ($names as $name) {
+                    $query->orWhere('name', 'like', '%' . $name . '%');
+                }
+            });
         }
         $data = $query->paginate(15)->toArray();
         $curPage = $data['current_page'];
