@@ -39,7 +39,7 @@ class ArticleController extends BaseController
         if (count($searchName) > 0) {
             $query->where(function ($query) use ($searchName) {
                 foreach ($searchName as $name) {
-                    $query->orWhere('title', 'like', '%' . $name . '%');
+                    $query->where('title', 'like', '%' . $name . '%');
                 }
             });
         }

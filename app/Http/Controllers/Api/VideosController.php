@@ -44,7 +44,7 @@ class VideosController extends BaseController
         if (count($names) > 0) {
             $query->where(function ($query) use ($names) {
                 foreach ($names as $name) {
-                    $query->orWhere('name', 'like', '%' . $name . '%');
+                    $query->where('name', 'like', '%' . $name . '%');
                 }
             });
         }
