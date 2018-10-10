@@ -9,6 +9,7 @@
     <style>
         .video {
             max-height: 500px;
+            width: 100%;
         }
     </style>
 @endsection
@@ -23,7 +24,10 @@
                             <h3 class="panel-title">查看视频</h3>
                         </div>
                         <div class="panel-body">
-                            <div id="video"></div>
+                            {{--<div id="video"></div>--}}
+                            <video class="video" src="{{$video_url}}" controls="controls">
+                                您的浏览器不支持 video 标签。
+                            </video>
                         </div>
                     </div>
                 </div>
@@ -34,7 +38,7 @@
 @section("js")
     <script src="/plugins/ckplayer/ckplayer.js"></script>
     <script type="text/javascript">
-        var videoObject = {
+       /* var videoObject = {
             //playerID:'ckplayer01',//播放器ID，第一个字符不能是数字，用来在使用多个播放器时监听到的函数将在所有参数最后添加一个参数用来获取播放器的内容
             container: '#video', //容器的ID或className
             variable: 'player', //播放函数名称
@@ -50,6 +54,6 @@
                 ['{{$video_url}}', 'video/mp4', '中文标清', 0],
             ]
         };
-        var player = new ckplayer(videoObject);
+        var player = new ckplayer(videoObject);*/
     </script>
 @endsection
