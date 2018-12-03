@@ -59,6 +59,7 @@ $api->group(['prefix' => '/app'], function ($api) {
         $api->post('bind-device', ['uses' => 'UserController@BindDevice']);//绑定
         $api->post('auth-device', ['uses' => 'UserController@authDevice']);//授权
         $api->post('unbind-device', ['uses' => 'UserController@unBindDevice']);//解绑
+        $api->post('trans-device', ['uses' => 'UserController@transDevice']);//解绑
         $api->post('get-device-binder', ['uses' => 'UserController@getDeviceBinder']);//获取设备绑定用户
         $api->post('get-user-device', ['uses' => 'UserController@getUserDevice']);//获取用户绑定设备
 

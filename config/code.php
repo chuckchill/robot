@@ -66,5 +66,9 @@ return [
         'idcard_invalid' => ['code' => 10046, 'message' => '身份证格式错误'],
         'lenlimit' => ['code' => 10047, 'message' => '数据长度超过限制'],
         'timelimit' => ['code' => 10048, 'message' => '超过次数限制'],
+        'app_autherror' => ['code' => 10049, 'message' => 'appid或者secret不正确'],
+        'not_master' => ['code' => 10050, 'message' => '非超级管理员不能转让设备'],
+        'transer_must_master' => ['code' => 10051, 'message' => '转入用户必须为管理员'],
+        'transer_not_yourself' => ['code' => 10052, 'message' => '无法将设备转让给自己'],
     ]
 ];
