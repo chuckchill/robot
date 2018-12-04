@@ -41,23 +41,46 @@ class RegisterController extends BaseController
     {
         $account = $request->get("account");
         $password = $request->get("password");
+        $province = $request->get("province");
+        $city = $request->get("city");
+        $county = $request->get("county");
         $type = $request->get("type");
+        $sicker_type = $request->get("sicker_type");
+        $docker_no = $request->get("docker_no");
+        $user = new User();
         if (!Helper::isUserName($account)) {
             code_exception("code.reg.account_invalid");
         }
         if (!Helper::isPassword($password)) {
             code_exception("code.reg.password_invalid");
         }
-
+        if ($type == 'sicker') {//病人必须填写类型
+            if (!$sicker_type) {
+                code_exception("code.common.sicker_type_notnull");
+            } else {
+                $user->sicker_type = $sicker_type;
+            }
+        }
+        if ($type == 'docker') {//医生必须填写编号
+            if (!$docker_no) {
+                code_exception("code.common.dockerno_notnull");
+            } else {
+                $user->docker_no = $docker_no;
+            }
+        }
         $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
         if ($userAuth) {
             code_exception("code.reg.acount_exist");
         }
-        $user = new User();
-        $user->nick_name=str_random(8);
-        $user->type=$type;
+
+        $user->nick_name = str_random(8);
+        $user->type = $type;
+        $user->province = $province;
+        $user->city = $city;
+        $user->county = $county;
         $user->save();
         $this->userInfo->registerData("sys", $account, Hash::make($password), $user->id);
+        $this->userInfo->saveUserExtra($type, $sicker_type, $docker_no);
         return $this->response->array([
             'code' => 0,
             'message' => '注册成功',
@@ -84,8 +107,8 @@ class RegisterController extends BaseController
         }
 
         $user = new User();
-        $user->nick_name=str_random(8);
-        $user->type=$type;
+        $user->nick_name = str_random(8);
+        $user->type = $type;
         $user->save();
         $this->userInfo->registerData("mobile", $mobile, "", $user->id);
         return $this->response->array([
@@ -114,8 +137,8 @@ class RegisterController extends BaseController
             code_exception("code.reg.email_exist");
         }
         $user = new User();
-        $user->nick_name=str_random(8);
-        $user->type=$type;
+        $user->nick_name = str_random(8);
+        $user->type = $type;
         $user->save();
         $this->userInfo->registerData("email", $email, "", $user->id);
         return $this->response->array([

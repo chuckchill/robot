@@ -71,5 +71,7 @@ return [
         'transer_must_master' => ['code' => 10051, 'message' => '转入用户必须为管理员'],
         'transer_not_yourself' => ['code' => 10052, 'message' => '无法将设备转让给自己'],
         'server_error' => ['code' => 10053, 'message' => '服务器错误'],
+        'sicker_type_notnull' => ['code' => 10054, 'message' => '病人类型不能为空'],
+        'dockerno_notnull' => ['code' => 10055, 'message' => '医生编号不能为空'],
     ]
 ];
