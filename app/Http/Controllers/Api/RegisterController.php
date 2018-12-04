@@ -80,7 +80,6 @@ class RegisterController extends BaseController
         $user->county = $county;
         $user->save();
         $this->userInfo->registerData("sys", $account, Hash::make($password), $user->id);
-        $this->userInfo->saveUserExtra($type, $sicker_type, $docker_no);
         return $this->response->array([
             'code' => 0,
             'message' => '注册成功',
