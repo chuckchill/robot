@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Ai\Face\Baidu;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton('face',function(){
+            return new Baidu();
+        });
+
     }
 }

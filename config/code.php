@@ -70,5 +70,6 @@ return [
         'not_master' => ['code' => 10050, 'message' => '非超级管理员不能转让设备'],
         'transer_must_master' => ['code' => 10051, 'message' => '转入用户必须为管理员'],
         'transer_not_yourself' => ['code' => 10052, 'message' => '无法将设备转让给自己'],
+        'server_error' => ['code' => 10053, 'message' => '服务器错误'],
     ]
 ];

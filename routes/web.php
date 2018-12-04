@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+    \App\Facades\Face::getAccessToken();
     $host = app("request")->getHost();
     if ($host == "203.195.176.132") {
         return redirect('/admin');
