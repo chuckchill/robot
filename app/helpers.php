@@ -204,7 +204,11 @@ if (!function_exists('get_api_body')) {
     function get_api_body($item)
     {
         $mode = array_get($item, "request.body.mode");
-        return array_get($item, "request.body." . $mode, []);
+        $body=array_get($item, "request.body." . $mode, []);
+        if(!is_array($body)){
+            $body=[];
+        }
+        return $body;
     }
 }
 if (!function_exists('code_exception')) {
