@@ -15,7 +15,7 @@ class ContactsChange extends Migration
     {
         Schema::table('app_users_contacts', function (Blueprint $table) {
             $table->renameColumn('uid', 'doctor_id');
-            $table->renameColumn('contract_id', 'sicker_id');
+            $table->renameColumn('contract_uid', 'sicker_id');
         });
 
     }
