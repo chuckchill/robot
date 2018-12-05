@@ -133,7 +133,7 @@ class VideosController extends BaseController
         $qn = new Qiniu();
         $device = $request->get('device');
         $sickerId = $request->get('sicker_id');
-        $sicker = Sicker::find($sickerId);
+        $sicker = User::find($sickerId);
         if (!$sicker) {
             code_exception('code.common.sicker_notnull');
         }
@@ -151,7 +151,7 @@ class VideosController extends BaseController
             "sicker_id" => $sickerId,
             "province" => $sicker->province,
             "city" => $sicker->city,
-            "country" => $sicker->country,
+            "country" => $sicker->county,
             "sicker_name" => $sicker->sicker_name,
             "sicker_idcard" => $sicker->sicker_idcard,
             "doctor_name" => $sicker->doctor_name,

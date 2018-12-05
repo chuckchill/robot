@@ -72,8 +72,9 @@ return [
         'transer_not_yourself' => ['code' => 10052, 'message' => '无法将设备转让给自己'],
         'server_error' => ['code' => 10053, 'message' => '服务器错误'],
         'sicker_type_notnull' => ['code' => 10054, 'message' => '病人类型不能为空'],
-        'dockerno_notnull' => ['code' => 10055, 'message' => '医生编号不能为空'],
+        'docrno_notnull' => ['code' => 10055, 'message' => '医生编号不能为空'],
         'face_file_notnull' => ['code' => 10056, 'message' => '人脸数据不能为空'],
         'account_notexist' => ['code' => 10057, 'message' => '用户不存在'],
+        'user_type_error' => ['code' => 10056, 'message' => '用户类型不正确'],
     ]
 ];

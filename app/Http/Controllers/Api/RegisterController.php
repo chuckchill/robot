@@ -46,7 +46,7 @@ class RegisterController extends BaseController
         $county = $request->get("county");
         $type = $request->get("type");
         $sicker_type = $request->get("sicker_type");
-        $docker_no = $request->get("docker_no");
+        $docker_no = $request->get("doctor_no");
         $user = new User();
         if (!Helper::isUserName($account)) {
             code_exception("code.reg.account_invalid");
@@ -61,12 +61,14 @@ class RegisterController extends BaseController
                 $user->sicker_type = $sicker_type;
             }
         }
-        if ($type == 'docker') {//医生必须填写编号
+        if ($type == 'doctor') {//医生必须填写编号
             if (!$docker_no) {
                 code_exception("code.common.dockerno_notnull");
             } else {
-                $user->docker_no = $docker_no;
+                $user->doctor_no = $docker_no;
             }
+        }else{
+            code_exception("code.common.user_type_error");
         }
         $userAuth = UsersAuth::where(["identifier" => $account, 'identity_type' => 'sys'])->first();
         if ($userAuth) {
