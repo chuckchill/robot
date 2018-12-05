@@ -10,9 +10,13 @@ namespace App\Http\Controllers\Api\Traits;
 
 
 use App\Exceptions\CodeException;
+use App\Facades\Face;
 use App\Models\Api\DeviceBind;
 use App\Models\Api\Devices;
+use App\Models\Api\User;
 use App\Models\Api\UsersAuth;
+use App\Services\Aes;
+use App\Services\Helper;
 use App\Services\ModelService\UserInfo;
 use Illuminate\Http\Request;
 
@@ -145,5 +149,37 @@ trait Device
         $fromBind->save();
         $toBind->save();
         return $this->response->array(['code' => 0, 'message' => '转让成功']);
+    }
+
+
+    public function faceVertify(Request $request)
+    {
+        $file = $request->file('face_data');
+        $uid = $request->get('uid');
+        if (!$file) {
+            code_exception('code.common.face_file_notnull');
+        }
+        $srcContent = file_get_contents($file->getRealPath());
+        $srcData = base64_encode($srcContent);
+
+        $user = User::find($uid);
+        if (!$user) {
+            code_exception('code.common.account_notexist');
+        }
+        $localData = Helper::getLocalFace($user->face_src);
+        if (!$localData) {
+            $localData = $srcContent;
+            $user->face_src = 'face/' . ($user->id % 10) . '/' . $user->id . '/face.jpg';
+            Helper::saveLocalFace($user->face_src, $localData);
+        }
+        $localData = base64_encode($localData);
+        if (Face::faceMatch($srcData, $localData)) {
+            $user->save();
+            return $this->response->array([
+                'code' => 0,
+                'message' => '识别成功',
+                'data' => ['token' => Aes::opensslEncrypt($uid, '123')]
+            ]);
+        }
     }
 }

@@ -22,6 +22,8 @@ $api->group(['prefix' => '/device',], function ($api) {
         $api->post('edit-sicker', ['uses' => 'UserController@editSicker']);//修改病人
         $api->post('del-sicker', ['uses' => 'UserController@delSicker']);//删除病人
         $api->post('get-sicker', ['uses' => 'UserController@getSicker']);//获取病人
+
+        $api->post('face-vertify', ['uses' => 'UserController@faceVertify']);//获取病人
     });
 });
 /*

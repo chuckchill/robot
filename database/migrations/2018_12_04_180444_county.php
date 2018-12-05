@@ -15,6 +15,7 @@ class County extends Migration
     {
         Schema::table('app_users', function (Blueprint $table) {
             $table->string('county')->comment('县')->after('city');
+            $table->string('face_src')->comment('人脸')->after('province');
         });
     }
 

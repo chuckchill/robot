@@ -9,7 +9,10 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Http\Controllers\Api\Traits\Contacts;
+use App\Models\Api\AppusersContacts;
 use App\Models\Api\Evaluation;
+use App\Models\Api\User;
 use App\Models\Common\Sicker;
 use App\Services\Helper;
 use Illuminate\Http\Request;
@@ -23,31 +26,40 @@ class EvaluateController extends BaseController
 
     public function listUser(Request $request)
     {
-        $device = $request->get('device');
-        $sicker = Sicker::where(['device_id' => $device->id])->paginate(10);
+        $user = $request->get('user');
+        if($user->type=='sicker'){
+            return redirect('/webview/eva-history?sicker_id='.$user->id);
+        }
+        $sicker = AppusersContacts::select(["app_users_contacts.sicker_id", 'app_users.nick_name as sicker_name',
+                                            'app_users.profile_img','app_users_contacts.created_at'])
+            ->leftJoin('app_users', 'app_users.id', '=', "app_users_contacts.sicker_id")
+            ->where("app_users_contacts.doctor_id", '=', $user->id)
+            ->paginate(10);
         return view('webview.evaluate.list_user', [
-            'sicker' => $sicker
+            'sicker' => $sicker,
+            'doctor' => $user
         ]);
     }
 
     public function history(Request $request)
     {
         $sickerId = $request->get('sicker_id');
-        $sicker = Sicker::find($sickerId);
+        $sicker = User::find($sickerId);
         if (!$sicker) {
             return redirect('webview/error?error=病人不存在');
         }
         $evaluation = Evaluation::where(['sicker_id' => $sickerId])->paginate(10);
         return view('webview.evaluate.history', [
             'evaluation' => $evaluation,
-            'sickerId' => $sickerId
+            'sickerId' => $sickerId,
+            'type' => $request->get('user')->type
         ]);
     }
 
     public function addEvaluation(Request $request)
     {
         $sickerId = $request->get('sicker_id');
-        $sicker = Sicker::find($sickerId);
+        $sicker = User::find($sickerId);
         if (!$sicker) {
             return redirect('webview/error?error=病人不存在');
         }
@@ -60,7 +72,7 @@ class EvaluateController extends BaseController
     public function saveEvaluation(Request $request)
     {
         $sickerId = $request->get('sicker_id');
-        $sicker = Sicker::find($sickerId);
+        $sicker = User::find($sickerId);
         if (!$sicker) {
             return redirect('webview/error?error=病人不存在');
         }

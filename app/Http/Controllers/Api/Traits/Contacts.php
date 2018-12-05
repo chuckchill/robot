@@ -36,15 +36,15 @@ trait Contacts
             code_exception('code.login.contacts_must_distinct');
         }
         $userLink = AppusersContacts::where([
-            'contract_uid' => $userAuth->id,
-            'uid' => $user->id
+            'doctor_id' => $user->type == 'doctor' ? $user->id : $userAuth->id,
+            'sicker_id' => $user->type == 'doctor' ? $userAuth->id : $user->id,
         ])->first();
         if ($userLink) {
             code_exception('code.login.contacts_exist');
         }
         $userLink = new AppusersContacts();
-        $userLink->uid = $user->id;
-        $userLink->contract_uid = $userAuth->id;
+        $userLink->doctor_id = $user->type == 'doctor' ? $user->id : $userAuth->id;
+        $userLink->sicker_id = $user->type == 'doctor' ? $userAuth->id : $user->id;
         $userLink->save();
         return $this->response->array(['code' => 0, 'message' => '添加成功']);
     }
@@ -55,9 +55,11 @@ trait Contacts
     public function getContacts()
     {
         $user = \JWTAuth::authenticate();
-        $contacts = AppusersContacts::select(['app_users_contacts.contract_uid', 'app_users.nick_name', 'app_users.profile_img'])
-            ->leftJoin('app_users', 'app_users.id', '=', 'app_users_contacts.contract_uid')
-            ->where('app_users_contacts.uid', '=', $user->id)
+        $cfield = $user->type == 'doctor' ? 'doctor_id' : 'sicker_id';
+        $field = $user->type == 'doctor' ? 'sicker_id' : 'doctor_id';
+        $contacts = AppusersContacts::select(["app_users_contacts.{$field}", 'app_users.nick_name', 'app_users.profile_img'])
+            ->leftJoin('app_users', 'app_users.id', '=', "app_users_contacts.{$field}")
+            ->where("app_users_contacts.{$cfield}", '=', $user->id)
             ->get();
         $data = $contacts->map(function ($item, $key) {
             return [
@@ -80,10 +82,17 @@ trait Contacts
     {
         $contact_id = $request->get('contact_id');
         $user = \JWTAuth::authenticate();
-        AppusersContacts::where([
-            'contract_uid' => $contact_id,
-            'uid' => $user->id,
-        ])->delete();
+        if ($user->type == 'doctor') {//医生删除病人
+            AppusersContacts::where([
+                "sicker_id" => $contact_id,
+                'doctor_id' => $user->id,
+            ])->delete();
+        } else {
+            AppusersContacts::where([//病人删除医生
+                                     "sicker_id" => $user->id,
+                                     'doctor_id' => $contact_id,
+            ])->delete();
+        }
         return $this->response->array([
             'code' => 0,
             'message' => '删除成功',

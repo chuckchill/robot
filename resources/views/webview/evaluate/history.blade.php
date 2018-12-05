@@ -18,15 +18,18 @@
         .fa-plus {
             margin-bottom: 20px;
         }
-        .item{
+
+        .item {
             margin-bottom: 10px;
         }
     </style>
     <div class="container">
         <a href="/webview/eva-add?sicker_id={{$sickerId}}">
-            <i class="fa fa-plus fa-times-circle">
-                添加检测记录
-            </i>
+            @if($type=='doctor')
+                <i class="fa fa-plus fa-times-circle">
+                    添加检测记录
+                </i>
+            @endif
         </a>
         @if($evaluation->count()<1)
             <h3>没有检测记录</h3>

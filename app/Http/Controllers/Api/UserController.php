@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Exceptions\CodeException;
+use App\Facades\Face;
 use App\Facades\Logger;
 use App\Http\Controllers\Api\Traits\Contacts;
 use App\Http\Controllers\Api\Traits\Device;

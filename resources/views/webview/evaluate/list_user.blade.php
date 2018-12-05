@@ -20,7 +20,6 @@
             <tbody>
             <tr>
                 <th>姓名</th>
-                <th>身份证</th>
                 <th>医生</th>
                 <th>医生工号</th>
                 <th>添加时间</th>
@@ -29,11 +28,10 @@
             @foreach ($sicker as $item)
                 <tr>
                     <td>{{$item->sicker_name}}</td>
-                    <td>{{$item->sicker_idcard}}</td>
-                    <td>{{$item->doctor_name}}</td>
-                    <td>{{$item->doctor_no}}</td>
+                    <td>{{$doctor->nick_name}}</td>
+                    <td>{{$doctor->docker_no}}</td>
                     <td>{{$item->created_at}}</td>
-                    <td><a href="/webview/eva-history?sicker_id={{$item->id}}">选择</a></td>
+                    <td><a href="/webview/eva-history?sicker_id={{$item->sicker_id}}">选择</a></td>
                 </tr>
             @endforeach
             @if($sicker->lastPage()>1)

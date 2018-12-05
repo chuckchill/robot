@@ -270,7 +270,7 @@ class Helper
         return $result;
     }
 
-    public static function getEvaluationTemp(Sicker $sicker)
+    public static function getEvaluationTemp($sicker)
     {
         $temp = file_get_contents(storage_path("/system/evaluation.temp"));
         return sprintf($temp, $sicker->sicker_name, self::getSex($sicker->sicker_idcard), self::getBirthday($sicker->sicker_idcard));
@@ -291,5 +291,19 @@ class Helper
         $month = (int)substr($bir, 4, 2);
         $day = (int)substr($bir, 6, 2);
         return $year . "-" . $month . "-" . $day;
+    }
+
+    public static function getLocalFace($src)
+    {
+        $driver = Storage::disk('local');
+        if ($driver->exists($src)) {
+            return $driver->get($src);
+        }
+        return "";
+    }
+
+    public static function saveLocalFace($src, $data)
+    {
+        Storage::disk('local')->put($src, $data);
     }
 }
